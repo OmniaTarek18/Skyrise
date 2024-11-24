@@ -1,0 +1,1 @@
+// validate user's email, then call change password
