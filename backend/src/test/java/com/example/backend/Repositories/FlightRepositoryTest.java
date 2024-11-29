@@ -1,7 +1,6 @@
 package com.example.backend.Repositories;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +25,7 @@ public class FlightRepositoryTest {
     @Test
     void testFindByDepartureDateCorrectence() {
         // given
-        String[] source = { "New York", "Cairo", "Miami", "New York", "San Fransico", "Cairo" };
-        String[] destination = { "Miami", "Aswan", "New York", "Miami", "Miami", "Alexandria" };
         LocalDate arrivalDate = LocalDate.parse("2024-10-12");
-        LocalTime arrivalTime = LocalTime.parse("10:12:00");
-        LocalTime departureTime = LocalTime.parse("10:12:00");
         int availableBusinessSeats = 10;
         int availableEconomySeats = 50;
         float economyPrice = 200;
@@ -45,12 +40,8 @@ public class FlightRepositoryTest {
 
         for (int i = 0; i < 6; i++) {
             Flight flight = Flight.builder()
-                    .source(source[i])
-                    .destination(destination[i])
                     .departureDate(date[i])
                     .arrivalDate(arrivalDate)
-                    .arrivalTime(arrivalTime)
-                    .departureTime(departureTime)
                     .economyPrice(economyPrice)
                     .businessPrice(businessPrice)
                     .availableEconomySeats(availableEconomySeats)
