@@ -3,10 +3,6 @@ package com.example.backend.Services;
 import static org.mockito.Mockito.verifyNoInteractions;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,8 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.annotation.Rollback;
 
 import com.example.backend.DTOMappers.AdminFlightMapper;
-import com.example.backend.DTOs.AdminFlightDTO;
-import com.example.backend.DTOs.PageResponse;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Repositories.FlightRepository;
 
@@ -38,16 +32,6 @@ public class FlightDisplayServiceTest {
     @BeforeAll
     @Rollback(value = false)
     public void setup() {
-        String[] source = {
-                "New York", "Cairo", "Miami", "New York", "San Fransico", "Cairo",
-                "New York", "Cairo", "Miami", "New York", "San Fransico", "Cairo",
-                "New York", "Cairo", "Miami", "New York", "San Fransico", "Cairo" };
-
-        String[] destination = {
-                "Miami", "Aswan", "New York", "Miami", "Miami", "Alexandria",
-                "Miami", "Aswan", "New York", "Miami", "Miami", "Alexandria",
-                "Miami", "Aswan", "New York", "Miami", "Miami", "Alexandria" };
-
         LocalDate[] date = {
                 LocalDate.parse("2024-10-12"), LocalDate.parse("2024-09-12"),
                 LocalDate.parse("2024-08-12"), LocalDate.parse("2024-10-11"),
@@ -60,8 +44,6 @@ public class FlightDisplayServiceTest {
                 LocalDate.parse("2024-10-12"), LocalDate.parse("2024-10-12") };
 
         LocalDate arrivalDate = LocalDate.parse("2024-10-12");
-        LocalTime arrivalTime = LocalTime.parse("10:12:00");
-        LocalTime departureTime = LocalTime.parse("10:12:00");
         int availableBusinessSeats = 10;
         int availableEconomySeats = 50;
         float economyPrice = 200;
@@ -69,12 +51,8 @@ public class FlightDisplayServiceTest {
 
         for (int i = 0; i < date.length; i++) {
             Flight flight = Flight.builder()
-                    .source(source[i])
-                    .destination(destination[i])
                     .departureDate(date[i])
                     .arrivalDate(arrivalDate)
-                    .arrivalTime(arrivalTime)
-                    .departureTime(departureTime)
                     .economyPrice(economyPrice)
                     .businessPrice(businessPrice)
                     .availableEconomySeats(availableEconomySeats)

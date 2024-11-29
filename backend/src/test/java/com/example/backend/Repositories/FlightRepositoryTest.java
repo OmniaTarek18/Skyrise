@@ -1,7 +1,6 @@
 package com.example.backend.Repositories;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -47,20 +46,16 @@ public class FlightRepositoryTest {
     @Order(2)
     void testFindByDepartureDateCorrectence() {
         // given
-        LocalDate[] date = {
-                LocalDate.parse("2024-10-12"), LocalDate.parse("2024-09-12"),
-                LocalDate.parse("2024-08-12"), LocalDate.parse("2024-10-11"),
-                LocalDate.parse("2025-10-12"), LocalDate.parse("2024-10-12") };
-
         LocalDate arrivalDate = LocalDate.parse("2024-10-12");
-        LocalTime arrivalTime = LocalTime.parse("10:12:00");
-        LocalTime departureTime = LocalTime.parse("10:12:00");
-        String source = "New York";
-        String destination = "Miami";
         int availableBusinessSeats = 10;
         int availableEconomySeats = 50;
         float economyPrice = 200;
         float businessPrice = 2000;
+
+        LocalDate[] date = {
+                LocalDate.parse("2024-10-12"), LocalDate.parse("2024-09-12"),
+                LocalDate.parse("2024-08-12"), LocalDate.parse("2024-10-11"),
+                LocalDate.parse("2025-10-12"), LocalDate.parse("2024-10-12") };
 
         List<Flight> expected = new ArrayList<>();
 
@@ -69,12 +64,8 @@ public class FlightRepositoryTest {
 
         for (int i = 0; i < date.length; i++) {
             Flight flight = Flight.builder()
-                    .source(source)
-                    .destination(destination)
                     .departureDate(date[i])
                     .arrivalDate(arrivalDate)
-                    .arrivalTime(arrivalTime)
-                    .departureTime(departureTime)
                     .economyPrice(economyPrice)
                     .businessPrice(businessPrice)
                     .availableEconomySeats(availableEconomySeats)

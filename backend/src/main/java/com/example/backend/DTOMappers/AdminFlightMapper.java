@@ -2,18 +2,24 @@ package com.example.backend.DTOMappers;
 
 import com.example.backend.DTOs.AdminFlightDTO;
 import com.example.backend.Entities.Flight;
+import com.example.backend.Entities.FlightLeg;
 
 public class AdminFlightMapper {
 
     public static AdminFlightDTO toDTO(Flight entity) {
+
+        int numberOfLegs = entity.getFlightLegs().size();
+        FlightLeg first = entity.getFlightLegs().get(0); 
+        FlightLeg last = entity.getFlightLegs().get(numberOfLegs-1); 
+
         return new AdminFlightDTO(
                 entity.getId(),
-                entity.getSource(),
-                entity.getDestination(),
-                entity.getDepartureDate(),
+                first.getDepartureAirport().getAirportCity(),
+                last.getArrivalAirport().getAirportCity(),
                 entity.getArrivalDate(),
-                entity.getArrivalTime(),
-                entity.getDepartureTime(),
+                entity.getDepartureDate(),
+                last.getArrivalTime(),
+                first.getDepartureTime(),
                 entity.getEconomyPrice(),
                 entity.getBusinessPrice(),
                 entity.getAvailableEconomySeats(),
@@ -24,10 +30,6 @@ public class AdminFlightMapper {
     public static Flight toEntity(AdminFlightDTO dto) {
         Flight entity = Flight.builder()
                 .id(dto.id())
-                .source(dto.source())
-                .destination(dto.destination())
-                .arrivalTime(dto.arrivalTime())
-                .departureTime(dto.departureTime())
                 .departureDate(dto.departureDate())
                 .arrivalDate(dto.arrivalDate())
                 .economyPrice(dto.economyPrice())
@@ -36,7 +38,6 @@ public class AdminFlightMapper {
                 .availableEconomySeats(dto.availableEconomySeats())
                 .isCancel(dto.isCancel())
                 .build();
-
         return entity;
     }
 }
