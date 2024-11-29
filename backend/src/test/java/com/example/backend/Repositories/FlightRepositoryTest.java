@@ -47,27 +47,27 @@ public class FlightRepositoryTest {
     @Order(2)
     void testFindByDepartureDateCorrectence() {
         // given
-        String source = "New York";
-        String destination = "Miami";
-        LocalDate arrivalDate = LocalDate.parse("2024-10-12");
-        LocalTime arrivalTime = LocalTime.parse("10:12:00");
-        LocalTime departureTime = LocalTime.parse("10:12:00");
-        int availableBusinessSeats = 10;
-        int availableEconomySeats = 50;
-        float economyPrice = 200;
-        float businessPrice = 2000;
-
         LocalDate[] date = {
                 LocalDate.parse("2024-10-12"), LocalDate.parse("2024-09-12"),
                 LocalDate.parse("2024-08-12"), LocalDate.parse("2024-10-11"),
                 LocalDate.parse("2025-10-12"), LocalDate.parse("2024-10-12") };
+
+        LocalDate arrivalDate = LocalDate.parse("2024-10-12");
+        LocalTime arrivalTime = LocalTime.parse("10:12:00");
+        LocalTime departureTime = LocalTime.parse("10:12:00");
+        String source = "New York";
+        String destination = "Miami";
+        int availableBusinessSeats = 10;
+        int availableEconomySeats = 50;
+        float economyPrice = 200;
+        float businessPrice = 2000;
 
         List<Flight> expected = new ArrayList<>();
 
         int pageSize = 10;
         int pageNumber = 0;
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < date.length; i++) {
             Flight flight = Flight.builder()
                     .source(source)
                     .destination(destination)
@@ -83,7 +83,7 @@ public class FlightRepositoryTest {
 
             underTest.save(flight);
 
-            if (i == 0 || i == 5)
+            if (DEPARTURE_DATE.equals(date[i]))
                 expected.add(flight);
         }
 
