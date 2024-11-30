@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.example.backend.DTOs.AdminFlightDTO;
 import com.example.backend.DTOs.FeedbackDTO;
 import com.example.backend.DTOs.FeedbackFilterCriteria;
 import com.example.backend.DTOs.PageResponse;
@@ -26,13 +24,15 @@ public class FeedbackDisplayController {
 
     @GetMapping("/feedback")
     public ResponseEntity<PageResponse<FeedbackDTO>> getAllFeedback(@RequestParam(defaultValue = "0") int pageNumber) {
-        return feedbackDisplayService.getAll(pageNumber);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.getAll(pageNumber);
+        return ResponseEntity.ok(page);
     }
 
     @PostMapping("/feedback")
     public ResponseEntity<PageResponse<FeedbackDTO>> getAllFeedback(
             @RequestBody FeedbackFilterCriteria feedbackFilterDTO, @RequestParam(defaultValue = "0") int pageNumber) {
-        return feedbackDisplayService.filterFeedback(feedbackFilterDTO, pageNumber);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterDTO, pageNumber);
+        return ResponseEntity.ok(page);
     }
 
 }
