@@ -6,6 +6,7 @@ import com.example.backend.Repositories.FeedbackRepository;
 import com.example.backend.Specifications.FeedbackSpecifications;
 import com.example.backend.Utilites.Utilities;
 import com.example.backend.Utilites.ValidateInput;
+import com.example.backend.DTOMappers.FeedbackMapper;
 import com.example.backend.DTOMappers.PageResponseMapper;
 import com.example.backend.DTOs.FeedbackDTO;
 import com.example.backend.DTOs.FeedbackFilterCriteria;
@@ -25,16 +26,17 @@ public class FeedbackDisplayService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    public PageResponse<Feedback> getAll(int pageNumber) {
+    public PageResponse<FeedbackDTO> getAll(int pageNumber) {
 
         ValidateInput.validatePageNumber(pageNumber);
         Pageable pageable = PageRequest.of(pageNumber, 10);
         Page<Feedback> page = feedbackRepository.findAll(pageable);
-
-        return PageResponseMapper.toPageResponse(page);
+        Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
+        return PageResponseMapper.toPageResponse(pageDTO);
+    
     }
 
-    public PageResponse<Feedback> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber){
+    public PageResponse<FeedbackDTO> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber){
         ValidateInput.validatePageNumber(pageNumber);
         Specification<Feedback> spec = Specification.where(null);
 
@@ -48,7 +50,7 @@ public class FeedbackDisplayService {
         Sort sort = Utilities.sort(feedbackFilterDTO.direction(), "dateOfCreation");
         Pageable pageable = PageRequest.of(pageNumber, 10, sort);
         Page<Feedback> page = feedbackRepository.findAll(spec, pageable);
-
-        return PageResponseMapper.toPageResponse(page);
+        Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
+        return PageResponseMapper.toPageResponse(pageDTO);
     }
 }
