@@ -1,20 +1,43 @@
 package com.example.backend.Specifications;
 
 import java.time.LocalDate;
-
 import org.springframework.data.jpa.domain.Specification;
-
+import com.example.backend.Entities.Airport;
 import com.example.backend.Entities.Flight;
-
+import com.example.backend.Entities.FlightLeg;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 
 public class FlightSpecifications {
 
     public static Specification<Flight> containsSource(String source) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("source"), source);
+        return (root, query, criteriaBuilder) -> {
+            Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
+            Join<FlightLeg, Airport> flightLegAndAirport = flightAndFlightLeg.join("departureAirport");
+            return criteriaBuilder.and(
+                    criteriaBuilder.equal(flightLegAndAirport.get("airportCity"), source),
+                    criteriaBuilder.equal(flightAndFlightLeg.get("flightLegId"), 1));
+        };
     }
 
     public static Specification<Flight> containsDestination(String destination) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("destination"), destination);
+        return (root, query, criteriaBuilder) -> {
+            Subquery<Integer> subquery = query.subquery(Integer.class);
+            Root<FlightLeg> subRoot = subquery.from(FlightLeg.class);
+    
+            subquery.select(criteriaBuilder.greatest(subRoot.get("flightLegId")))
+                    .where(criteriaBuilder.equal(subRoot.get("flight"), root))
+                    .groupBy(subRoot.get("flight"));
+    
+            Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
+            Join<FlightLeg, Airport> flightLegAndAirport = flightAndFlightLeg.join("arrivalAirport");
+    
+            return criteriaBuilder.and(
+                criteriaBuilder.equal(flightAndFlightLeg.get("flightLegId"), subquery),
+                criteriaBuilder.equal(flightLegAndAirport.get("airportCity"), destination)
+            );
+        };
     }
 
     public static Specification<Flight> containsStatus(String status) {
@@ -22,7 +45,7 @@ public class FlightSpecifications {
             return containsStatusIncomplete();
         else if ("complete".equals(status))
             return containsStatusComplete();
-        else 
+        else
             return containsStatusCancel();
     }
 

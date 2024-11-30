@@ -9,6 +9,9 @@ import com.example.backend.DTOs.AdminFlightDTO;
 import com.example.backend.DTOs.FlightFilterCriteria;
 import com.example.backend.DTOs.PageResponse;
 import com.example.backend.Services.FlightDisplayService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,14 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class FlightDislplayController {
 
     private final FlightDisplayService flightService;
-
-    public FlightDislplayController(FlightDisplayService flightService) {
-        this.flightService = flightService;
-    }
 
     @GetMapping("/flights")
     public ResponseEntity<PageResponse<AdminFlightDTO>> getFlightsByDepartureDate(@RequestParam LocalDate departureDate,

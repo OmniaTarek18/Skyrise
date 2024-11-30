@@ -18,14 +18,13 @@ import com.example.backend.Specifications.FlightSpecifications;
 import com.example.backend.Utilites.Utilities;
 import com.example.backend.Utilites.ValidateInput;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class FlightDisplayService {
 
     private final FlightRepository flightRepository;
-
-    public FlightDisplayService(FlightRepository flightRepository) {
-        this.flightRepository = flightRepository;
-    }
 
     public PageResponse<AdminFlightDTO> getFlights(LocalDate departureDate, int pageNumber) {
 
@@ -44,10 +43,16 @@ public class FlightDisplayService {
 
         ValidateInput.validatePageNumber(pageNumber);
 
-        Specification<Flight> spec = FlightSpecifications.hasDepartureDate(flightFilterDTO.departureDate());
+        Specification<Flight> spec = Specification.where(null);
 
-        spec = spec.and(FlightSpecifications.containsSource(flightFilterDTO.source()));
-        spec = spec.and(FlightSpecifications.containsDestination(flightFilterDTO.destination()));
+        if (flightFilterDTO.departureDate() != null)
+            spec = spec.and(FlightSpecifications.hasDepartureDate(flightFilterDTO.departureDate()));
+
+        if (flightFilterDTO.source() != null)
+            spec = spec.and(FlightSpecifications.containsSource(flightFilterDTO.source()));
+
+        if (flightFilterDTO.destination() != null)
+            spec = spec.and(FlightSpecifications.containsDestination(flightFilterDTO.destination()));
 
         if (flightFilterDTO.status() != null) {
             String status = flightFilterDTO.status().toLowerCase();
