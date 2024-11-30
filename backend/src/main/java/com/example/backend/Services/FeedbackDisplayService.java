@@ -6,6 +6,7 @@ import com.example.backend.Repositories.FeedbackRepository;
 import com.example.backend.Specifications.FeedbackSpecifications;
 import com.example.backend.Utilites.Utilities;
 import com.example.backend.Utilites.ValidateInput;
+import lombok.RequiredArgsConstructor;
 import com.example.backend.DTOMappers.FeedbackMapper;
 import com.example.backend.DTOMappers.PageResponseMapper;
 import com.example.backend.DTOs.FeedbackDTO;
@@ -17,13 +18,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
+@RequiredArgsConstructor
 @Service
 public class FeedbackDisplayService {
 
     private final FeedbackRepository feedbackRepository;
 
-    public FeedbackDisplayService(FeedbackRepository feedbackRepository) {
-        this.feedbackRepository = feedbackRepository;
+    public short getAvergaeRating(){
+        Double averageRating = feedbackRepository.getAvgRating();
+        return averageRating == null ? 0 : averageRating.shortValue();
     }
 
     public PageResponse<FeedbackDTO> getAll(int pageNumber) {

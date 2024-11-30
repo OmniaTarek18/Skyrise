@@ -22,6 +22,12 @@ public class FeedbackDisplayController {
         this.feedbackDisplayService = feedbackDisplayService;
     }
 
+    @GetMapping("/average-rating")
+    public ResponseEntity<Short> getAverageRating() {
+        short averageRating = feedbackDisplayService.getAvergaeRating();
+        return ResponseEntity.ok(averageRating);
+    }
+
     @GetMapping("/feedback")
     public ResponseEntity<PageResponse<FeedbackDTO>> getAllFeedback(@RequestParam(defaultValue = "0") int pageNumber) {
         PageResponse<FeedbackDTO> page = feedbackDisplayService.getAll(pageNumber);
