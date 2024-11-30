@@ -27,6 +27,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
-
     
+    String firstName;
 }
