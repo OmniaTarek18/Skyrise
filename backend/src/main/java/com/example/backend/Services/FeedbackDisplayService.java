@@ -33,10 +33,10 @@ public class FeedbackDisplayService {
         Page<Feedback> page = feedbackRepository.findAll(pageable);
         Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
         return PageResponseMapper.toPageResponse(pageDTO);
-    
+
     }
 
-    public PageResponse<FeedbackDTO> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber){
+    public PageResponse<FeedbackDTO> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber) {
         ValidateInput.validatePageNumber(pageNumber);
         Specification<Feedback> spec = Specification.where(null);
 
@@ -46,9 +46,12 @@ public class FeedbackDisplayService {
         spec = spec.and(FeedbackSpecifications.containsPunctuality(feedbackFilterDTO.punctuality()));
         spec = spec.and(FeedbackSpecifications.containsCleanliness(feedbackFilterDTO.cleanliness()));
         spec = spec.and(FeedbackSpecifications.containsFoodAndBeverage(feedbackFilterDTO.foodAndBeverage()));
-        
+
         Sort sort = Utilities.sort(feedbackFilterDTO.direction(), "dateOfCreation");
-        Pageable pageable = PageRequest.of(pageNumber, 10, sort);
+
+        Pageable pageable = (sort != null) ? PageRequest.of(pageNumber, 10, sort)
+                : PageRequest.of(pageNumber, 10);
+
         Page<Feedback> page = feedbackRepository.findAll(spec, pageable);
         Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
         return PageResponseMapper.toPageResponse(pageDTO);
