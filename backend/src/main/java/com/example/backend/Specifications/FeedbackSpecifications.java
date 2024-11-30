@@ -4,12 +4,11 @@ import org.springframework.data.jpa.domain.Specification;
 
 import com.example.backend.Entities.Feedback;
 import com.example.backend.Enums.QualityRating;
-import com.example.backend.Enums.Stars;
 
 public class FeedbackSpecifications {
 
-    public static Specification<Feedback> containsStars(Stars stars) {
-        return (root, query, criteriaBuilder) -> stars == null ? null : criteriaBuilder.equal(root.get("stars"), stars);
+    public static Specification<Feedback> containsStars(short stars) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("stars"), stars);
     }
 
     public static Specification<Feedback> containsService(QualityRating service) {
