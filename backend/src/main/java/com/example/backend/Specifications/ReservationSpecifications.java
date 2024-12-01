@@ -12,7 +12,11 @@ import com.example.backend.Utilites.ValidateInput;
 import jakarta.persistence.criteria.JoinType;
 
 public class ReservationSpecifications {
-    // Integer flightId,
+    public static Specification<Reservation> containsUserId(Integer userId) {
+        return (root, query, criteriaBuilder) -> {
+            return criteriaBuilder.equal(root.get("userId"), userId);
+        };
+    }
 
     public static Specification<Reservation> containsSource(String source) {
         return (root, query, criteriaBuilder) -> {
@@ -124,10 +128,7 @@ public class ReservationSpecifications {
 
     public static Specification<Reservation> conainsFlightId (Integer flightId) {
         return (root, query, criteriaBuilder) -> {
-
-            var flightJoin = root.join("flight");
-
-            return criteriaBuilder.equal(flightJoin.get("flightId"), flightId);
+            return criteriaBuilder.equal(root.get("flightId"), flightId);
         };
     }
 }

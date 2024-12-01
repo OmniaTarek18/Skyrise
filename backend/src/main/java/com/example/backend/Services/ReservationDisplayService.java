@@ -36,9 +36,11 @@ public class ReservationDisplayService {
     }
 
     public PageResponse<ReservationDTO> filterReserved (ReservationFilterCriteria filterDTO, int pageNumber) {
+        ValidateInput.validateId(filterDTO.userId());
         ValidateInput.validatePageNumber(pageNumber);
 
-        Specification<Reservation> spec = ReservationSpecifications.containsSource(filterDTO.source());
+        Specification<Reservation> spec = ReservationSpecifications.containsUserId(filterDTO.userId());
+        spec = spec.and(ReservationSpecifications.containsSource(filterDTO.source()));
         spec = spec.and(ReservationSpecifications.containsDestination(filterDTO.destination()));
 
         if (filterDTO.departureDate() != null) {
