@@ -32,7 +32,7 @@ public class FlightLeg {
     private Integer flightId;
 
     @ManyToOne
-    @JoinColumn(name = "flight_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "flight_id", insertable = false, updatable = true)
     private Flight flight;
 
     @ManyToOne

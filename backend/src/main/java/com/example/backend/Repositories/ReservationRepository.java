@@ -10,6 +10,4 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface ReservationRepository extends JpaRepository<Reservation, ReservationPK>, JpaSpecificationExecutor<Reservation> {
     Page<Reservation> findByUserId(Integer userId, Pageable pageable);
-
-    Page<Reservation> findByFlightId(Integer flightId, Pageable pageable);
 }
