@@ -68,4 +68,8 @@ public class FlightSpecifications {
     public static Specification<Flight> hasDepartureDate(LocalDate departureDate) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("departureDate"), departureDate);
     }
+
+    public static Specification<Flight> hasArrivalDateLessThan(LocalDate arrivalDate) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get("arrivalDate"), arrivalDate);
+    }
 }
