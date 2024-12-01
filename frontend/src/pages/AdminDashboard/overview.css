@@ -1,0 +1,88 @@
+.dashboard-overview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 20px;
+  background-color: #ffffff;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.overview-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px; 
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 30px; 
+  width: 100%;
+  max-width: 900px; 
+  justify-content: center;
+  flex-grow: 1; 
+}
+
+.overview-card {
+  background-color: #ffffff; 
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.overview-card:hover {
+  transform: translateY(-5px); 
+}
+
+.overview-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px; 
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card-value {
+  font-size: 28px; 
+  font-weight: bold;
+  color: #333;
+}
+
+
+.icon {
+  width: 40px; 
+  height: 40px;
+}
+
+.user-icon {
+  color: #007bff; 
+}
+
+.flight-icon {
+  color: #28a745;
+}
+
+.ticket-icon {
+  color: #6f42c1; 
+}
+
+.star-icon {
+  color: gold; 
+}
