@@ -1,0 +1,7 @@
+.mainRightbar {
+  width: 100%;
+  background-color: #ffffff;
+  height: 100vh; 
+  position: fixed;
+  overflow-wrap: break-word;
+}
