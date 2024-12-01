@@ -1,0 +1,86 @@
+.mainSidebar {
+  width: 270px; 
+  background-color: #05203c;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+
+
+}
+.ulContainer {
+  padding: 0;
+  list-style: none;
+}
+
+.liContainer {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  padding: 1px 3px;  
+}
+
+.link {
+  transition: all 0.3s ease; 
+}
+
+.link:hover {
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.2); 
+  border-radius: 1rem;
+  transform: scale(1.1);
+  backdrop-filter: blur(10px); 
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+
+.link.active {
+  background-color: #0062e3;
+  margin: 0px;
+  border-radius: 1rem;
+  display: flex;
+  color: white;
+  transform: scale(1.1); 
+}
+
+.liContainer p {
+  margin-left: 10px;
+  font-size: 14px;  
+  transition: all 0.2s ease;
+}
+
+.appName {
+  margin-bottom: 20px;
+  font-size: 18px; 
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background-color: white;
+  margin: 10px 0;
+}
+
+.sidebar-icon {
+  color: white;
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+.deleteSection {
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 0;
+}
