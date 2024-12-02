@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/admin")
-public class FlightDislplayController {
+public class FlightDisplayController {
 
     private final FlightDisplayService flightService;
 
