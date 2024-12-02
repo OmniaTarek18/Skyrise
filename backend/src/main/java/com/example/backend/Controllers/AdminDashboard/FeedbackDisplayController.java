@@ -24,7 +24,7 @@ public class FeedbackDisplayController {
 
     @GetMapping("/average-rating")
     public ResponseEntity<Short> getAverageRating() {
-        short averageRating = feedbackDisplayService.getAvergaeRating();
+        short averageRating = feedbackDisplayService.getAverageRating();
         return ResponseEntity.ok(averageRating);
     }
 
