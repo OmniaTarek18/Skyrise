@@ -24,7 +24,7 @@ public class FeedbackDisplayService {
 
     private final FeedbackRepository feedbackRepository;
 
-    public short getAvergaeRating(){
+    public short getAverageRating(){
         Double averageRating = feedbackRepository.getAvgRating();
         return averageRating == null ? 0 : averageRating.shortValue();
     }
