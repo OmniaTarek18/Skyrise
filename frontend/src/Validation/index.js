@@ -3,6 +3,9 @@ import * as yup from "yup";
 var passwordRegex =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
+var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/
+
+
 var nameRegax = /^[a-z ,.'-]+$/i;
 
 // Phone number validation regex (for example: US format: (123) 456-7890)
@@ -18,14 +21,14 @@ const phoneNumberMessage = "Invalid phone number format";
 const nationalIdMessage = "Invalid National ID format";
 const passportNumberMessage = "Invalid Passport Number format";
 const nameMessage = "Please enter a valid name";
-const emailErrorMessage = "Please enter a valid email";
+const emailErrorMessage = "Email should end with @gmail.com";
 const requiredMessage = "Required";
 const passwordMessage = "Please create a stronger password";
 const confirmPasswordMessage = "Passwords must match";
 
 const emailValidation = yup
   .string()
-  .email(emailErrorMessage)
+  .matches( emailRegex ,emailErrorMessage)
   .required(requiredMessage);
 const passwordValidation = yup
   .string()

@@ -49,7 +49,7 @@ const GoogleSignUpComp = ({ handleEmail, handleFirstName, handleLastName }) => {
  * - `handleFirstName`: Function to update the first name state in the parent component.
  * - `handleLastName`: Function to update the last name state in the parent component.
  */
-const GoogleSignUp = ({ handleEmail, handleFirstName, handleLastName }) => {
+const GoogleSignUp = ({ handleEmail, handleFirstName, handleLastName, touched }) => {
   return (
     <GoogleOAuthProvider clientId="838411676468-ove9bo5rm1rtguuks5co7632t8nc5ahm.apps.googleusercontent.com">
       {/* Render the GoogleSignUpComp component with the state handler functions as props */}
@@ -57,6 +57,7 @@ const GoogleSignUp = ({ handleEmail, handleFirstName, handleLastName }) => {
         handleEmail={handleEmail}
         handleFirstName={handleFirstName}
         handleLastName={handleLastName}
+        touched={touched}
       />
     </GoogleOAuthProvider>
   );

@@ -238,6 +238,7 @@ const SignUpForm = () => {
           handleEmail={handleEmail}
           handleFirstName={handleFirstName}
           handleLastName={handleLastName}
+          touched={touched}
         />
       </div>
     </form>
