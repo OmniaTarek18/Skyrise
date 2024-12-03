@@ -74,18 +74,6 @@
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
 }]]></component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="C:\Users\youss\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
-        <option name="reportGuid" value="f11394b6-ba2a-4259-b8f3-dab33967a6b0" />
-        <option name="reportName" value="Skyrise/qodana/2024-12-03" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
-  </component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="C:\Users\youss\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="f11394b6-ba2a-4259-b8f3-dab33967a6b0" reportId="Skyrise/qodana/2024-12-03" />
