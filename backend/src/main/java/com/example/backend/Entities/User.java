@@ -29,4 +29,8 @@ public class User {
     private List<Reservation> reservations;
     
     String firstName;
+
+    String email;
+
+    String password;
 }
