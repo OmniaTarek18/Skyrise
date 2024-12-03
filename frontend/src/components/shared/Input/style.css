@@ -1,0 +1,18 @@
+.mb-3 {
+  margin-top: 2rem;
+  height: 4.5em;
+  width: 24em;
+}
+
+.invalid-feedback{
+  unicode-bidi: none;
+}
+
+.form-control,
+.form-select {
+  padding: 0.7rem;
+}
+
+.form-label {
+  margin-top: 0;
+}

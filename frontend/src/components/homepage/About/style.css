@@ -1,0 +1,42 @@
+.about-container{
+  display: flex;
+  justify-content: space-between;
+  /* background-color: red; */
+  width: 100vw;
+  height: 70vh;
+  border: 2px solid var(--greyish-white);
+  border-radius: 0.5rem;
+}
+
+.img-container{
+  width: 55%;
+  height: 100%;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.about-text-container {
+  /* background-color: black; */
+  height: 100vh;
+  text-align: left;
+  margin: 0 5vw;
+  padding: 17vh 0;
+}
+.about-title {
+  color: var(--navy-blue);
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.about-location {
+  color: var(--navy-blue);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.about-description {
+  color: var(--navy-blue);
+  max-width: 60ch;
+  font-size: 1rem;
+  font-weight: lighter;
+}
