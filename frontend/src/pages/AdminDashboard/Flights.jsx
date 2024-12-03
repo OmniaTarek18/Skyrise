@@ -1,6 +1,7 @@
 import React from "react";
 import "./flights.css";
 
+
 const Flights = () => {
   const flightData = [
     {

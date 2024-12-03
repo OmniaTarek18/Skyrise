@@ -24,7 +24,7 @@
   justify-content: center;
   width: 100%;
   max-width: 800px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .filter-group {
@@ -38,7 +38,7 @@
   gap: 1rem;
 }
 
-.filter-btn {
+.star-filter-btn {
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -46,7 +46,7 @@
   cursor: pointer;
 }
 
-.filter-btn.active {
+.star-filter-btn.active {
   background: #007bff;
   color: white;
 }
@@ -77,3 +77,33 @@
   box-sizing: border-box;
 
 }
+
+.pagination-buttons{
+  display:flex;
+  gap:10px;
+}
+.sort-and-performance-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px; 
+}
+
+.sort-direction {
+  display: flex;
+  gap: 10px;
+}
+
+.performance-filters {
+  display: flex;
+  gap: 10px; 
+}
+
+.filter-btn, .sort-direction label {
+  display: inline-flex;
+  align-items: center; 
+}
+.radio-btn:checked {
+  accent-color: #007bff; 
+}
+

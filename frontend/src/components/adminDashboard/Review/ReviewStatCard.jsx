@@ -21,7 +21,7 @@ const RatingDisplay = ({ rating }) => (
       <span className="stat-label">Average Rating</span>
     </div>
     <div className="stat-value-container">
-      <span className="stat-value">{rating.toFixed(1)}</span>
+      <span className="stat-value">{rating}</span>
       <span className="stat-max">/5</span>
     </div>
   </div>
