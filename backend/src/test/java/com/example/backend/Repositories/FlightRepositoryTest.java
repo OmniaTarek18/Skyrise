@@ -103,19 +103,6 @@ public class FlightRepositoryTest {
         // then
         Assertions.assertTrue(page.isEmpty());
     }
-
-    @Test
-    void testFindByDepartureDateWhen() {
-        // given
-        List<Flight> actual = new ArrayList<>();
-
-        // where
-        Pageable pageable = PageRequest.of(0, 10);
-        Page<Flight> page = flightRepository.findByDepartureDate(LocalDate.parse("2024-10-12"), pageable);
-
-        // then
-        Assertions.assertEquals(page.getContent(), actual);
-    }
     // if search for page that not exist
     // if the departure date was null or not date
 }

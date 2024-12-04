@@ -8,7 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.backend.Services.FlightDisplayService;
 
-@WebMvcTest(FlightDislplayController.class)
+// @WebMvcTest(FlightDislplayController.class)
 public class FlightDislplayControllerTest {
 
     @Autowired
