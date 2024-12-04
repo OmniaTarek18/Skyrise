@@ -2,6 +2,7 @@ package com.example.backend.Entities;
 
 import java.util.List;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,10 +33,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
-    @Column(nullable = false)
     String firstName;
 
-    @Column(nullable = false)
     String lastName;
 
     
