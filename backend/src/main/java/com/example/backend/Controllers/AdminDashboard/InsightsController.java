@@ -2,14 +2,15 @@ package com.example.backend.Controllers.AdminDashboard;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.example.backend.DTOs.InsightsDTO;
 import com.example.backend.Services.InsightsService;
 
 @Controller
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*")
 public class InsightsController {
     
     private final InsightsService insightsService;
