@@ -13,11 +13,7 @@ public class PasswordResetService {
     }
     public boolean processResetPassword(String email) {
 
-        boolean userExists = userRepository.existsByEmail(email);
-        if (!userExists) {
-            return false;
-        }
-        return true;
+        return userRepository.existsByEmail(email) == 1;
     }
 
 }
