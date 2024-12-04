@@ -31,8 +31,22 @@ export const FlightCard = ({ flight, statusStyle }) => {
         </div>
 
         <div className="flight-card-right">
-          <p className="flight-price">L.E. {flight.price}</p>
-          <p className="seats-available">{flight.seatsAvailable} seats left</p>
+          <p className="flight-price">
+            Economy: L.E.{" "}
+            {flight.economyPrice !== undefined ? flight.economyPrice : "N/A"}
+          </p>
+          <p className="seats-available">
+            {`${flight.economySeatsAvailable} economy seats left`
+              }
+          </p>
+          <p className="flight-price">
+            Business: L.E.{" "}
+            {flight.businessPrice !== undefined ? flight.businessPrice : "N/A"}
+          </p>
+          <p className="seats-available">
+            {`${flight.businessSeatsAvailable} business seats left`
+              }
+          </p>
         </div>
       </div>
     </div>

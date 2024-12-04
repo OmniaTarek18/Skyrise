@@ -9,6 +9,7 @@
 }
 
 .flight-header-info {
+  margin-top: 30px;
   display: flex;
   gap: 1rem;
   align-items: center;

@@ -103,21 +103,26 @@ const Flights = () => {
 
       <div className="flights-list">
         {flights.length > 0 ? (
-          flights.map((flight) => (
-            <FlightCard
-              key={flight.id}
-              flight={{
-                flightNumber: flight.id,
-                status: flight.isCancel ? "Cancelled" : "On Time",
-                departureTime: flight.departureTime,
-                arrivalTime: flight.arrivalTime,
-                source: flight.source,
-                destination: flight.destination,
-                price: flight.economyPrice,
-                seatsAvailable: flight.availableEconomySeats,
-              }}
-            />
-          ))
+          flights.map((flight) => {
+            console.log("Flight data:", flight); 
+            return (
+              <FlightCard
+                key={flight.id}
+                flight={{
+                  flightNumber: flight.id,
+                  status: flight.isCancel ? "Cancelled" : "On Time",
+                  departureTime: flight.departureTime,
+                  arrivalTime: flight.arrivalTime,
+                  source: flight.source,
+                  destination: flight.destination,
+                  economyPrice: flight.economyPrice,
+                  economySeatsAvailable: flight.availableEconomySeats,
+                  businessPrice: flight.businessPrice,
+                  businessSeatsAvailable: flight.availableBusinessSeats,
+                }}
+              />
+            );
+          })
         ) : (
           <p className="no-flights-message">
             No flights available for this date.
