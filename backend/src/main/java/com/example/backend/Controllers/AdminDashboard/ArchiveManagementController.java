@@ -9,6 +9,7 @@ import com.example.backend.DTOs.FlightFilterCriteria;
 import com.example.backend.DTOs.PageResponse;
 import com.example.backend.Services.ArchiveDisplayService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ArchiveManagementController {
     private final ArchiveDisplayService archiveDisplayService ;
 

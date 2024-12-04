@@ -1,0 +1,69 @@
+
+.archive-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.flights-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.flight-card {
+  background: linear-gradient(to bottom right, #e0f7fa, #0062e3);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  text-align: left;
+}
+
+.flight-card:hover {
+  transform: scale(1.05);
+}
+
+.flight-card-details p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #333;
+  text-align: left; 
+}
+
+.flight-card-details strong {
+  color: #3b82f6;
+}
+
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.pagination-controls button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls button:not(:disabled):hover {
+  background-color: #1e40af;
+}
