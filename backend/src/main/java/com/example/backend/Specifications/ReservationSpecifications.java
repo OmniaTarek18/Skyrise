@@ -117,6 +117,20 @@ public class ReservationSpecifications {
         };
     }
 
+    public static Specification<Reservation> sortedByFlightId(String direction) {
+        return (root, query, criteriaBuilder) -> {
+                
+            if (direction != null && !direction.isEmpty()) {
+                Sort.Direction sortDirection = Sort.Direction.fromString(direction);
+                query.orderBy(sortDirection == Sort.Direction.ASC 
+                    ? criteriaBuilder.asc(root.get("flightId")) 
+                    : criteriaBuilder.desc(root.get("flightId")));
+            }
+    
+            return criteriaBuilder.conjunction();
+        };
+    }
+
     public static Specification<Reservation> containsArrivalDate (LocalDate arrivalDate) {
         return (root, query, criteriaBuilder) -> {
 

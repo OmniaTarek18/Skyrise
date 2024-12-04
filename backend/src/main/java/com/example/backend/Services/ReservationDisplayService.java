@@ -56,11 +56,12 @@ public class ReservationDisplayService {
         }
 
         if (filterDTO.sortBy() != null && filterDTO.direction() != null) {
-            if (filterDTO.sortBy().toLowerCase().equals("departuredate")) {
-                spec = spec.and(ReservationSpecifications.sortedByDepartureDate(filterDTO.direction()));
-            }
-            else if (filterDTO.sortBy().toLowerCase().equals("arrivaldate")) {
-                spec = spec.and(ReservationSpecifications.sortedByArrivalDate(filterDTO.direction()));
+            switch (filterDTO.sortBy().toLowerCase()) {
+                case "departuredate" -> spec = spec.and(ReservationSpecifications.sortedByDepartureDate(filterDTO.direction()));
+                case "arrivaldate" -> spec = spec.and(ReservationSpecifications.sortedByArrivalDate(filterDTO.direction()));
+                case "flightid" -> spec = spec.and(ReservationSpecifications.sortedByFlightId(filterDTO.direction()));
+                default -> {
+                }
             }
         }
 
