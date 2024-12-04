@@ -4,6 +4,7 @@ package com.example.Entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Getter
@@ -12,7 +13,7 @@ public class Account {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int accountId ;
-   @Column
+   @Column(nullable = false)
    private boolean role ;  //0 if normal user 1 if admin
    @Column(unique = true , nullable = false)
    private  String email ;

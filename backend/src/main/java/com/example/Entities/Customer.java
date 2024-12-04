@@ -9,6 +9,7 @@ import java.util.Date;
 public class Customer {
 
 
+
     private String countryCode ;
     private String phoneNumber ;
     private String nationalId ;
@@ -20,6 +21,22 @@ public class Customer {
     private String passportIssuingCountry ;
     private  String email ;
     private String password;
+
+
+
+    public Customer(String countryCode, String phoneNumber, String nationalId, Date dateOfBirth, String firstName, String lastName, boolean gender, String passportNumber, String passportIssuingCountry, String email, String password) {
+        this.countryCode = countryCode;
+        this.phoneNumber = phoneNumber;
+        this.nationalId = nationalId;
+        this.dateOfBirth = dateOfBirth;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.passportNumber = passportNumber;
+        this.passportIssuingCountry = passportIssuingCountry;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getCountryCode() { return countryCode; }
     public String getPhoneNumber() { return phoneNumber; }

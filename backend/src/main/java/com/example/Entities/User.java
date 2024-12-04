@@ -17,7 +17,7 @@ import jakarta.persistence.*;
         private String countryCode ;
         @Column(nullable = false)
         private String phoneNumber ;
-        @Column(nullable = false)
+        @Column(nullable = false , unique = true)
         private String nationalId ;
         @Column(nullable = false)
         private Date dateOfBirth ;
