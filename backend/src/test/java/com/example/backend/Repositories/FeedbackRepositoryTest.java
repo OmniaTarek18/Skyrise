@@ -12,6 +12,7 @@ import com.example.backend.Entities.Feedback;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Entities.User;
 import com.example.backend.Enums.QualityRating;
+import java.util.Random;
 
 @DataJpaTest
 public class FeedbackRepositoryTest {
@@ -27,57 +28,104 @@ public class FeedbackRepositoryTest {
 
     @BeforeEach
     void setup() {
-        String lastName = "Osama";
-        String[] firstName = { "Ahmed", "Ali", "Mona", "Samia", "Rawan", "Omnia", "Nouran", "Rana" };
-        for (String name : firstName) {
-            User user = User.builder()
-                    .firstName(name)
-                    .lastName(lastName)
-                    .build();
-            userRepository.save(user);
-        }
+        addOneUser();
 
-        Flight flight = Flight.builder()
-                .arrivalDate(LocalDate.of(2024, 12, 5))
-                .departureDate(LocalDate.of(2024, 12, 5))
-                .availableBusinessSeats(20)
-                .availableEconomySeats(30)
-                .businessPrice(200)
-                .economyPrice(50)
-                .build();
-        flightRepository.save(flight);
+        int numOfFlights = 10;
+        addFlights(numOfFlights);
+    }
+
+    @Test
+    void testGetAverageRatingWhenDatabaseIsEmpty() {
+        // given
+        Double expected_avg = 0.0;
+        // where
+        Double actual_avg = feedbackRepository.getAvgRating();
+        // then
+        Assertions.assertEquals(expected_avg, actual_avg);
     }
 
     @Test
     void testGetAverageRatingFunctionality() {
+        // given
         short[] stars = { 2, 3, 4, 5 };
-        for (int i = 0 ; i < stars.length ; i++) {
-            User user = userRepository.findAll().get(i);
-            Flight savedFlight = flightRepository.findAll().get(0);
-            Feedback feedback = Feedback.builder()
-                    .user(user)
-                    .flight(savedFlight)
-                    .cleanliness(QualityRating.FAIR)
-                    .comfort(QualityRating.EXCELLENT)
-                    .service(QualityRating.EXCELLENT)
-                    .punctuality(QualityRating.EXCELLENT)
-                    .foodAndBeverage(QualityRating.EXCELLENT)
-                    .dateOfCreation(LocalDateTime.now())
-                    .stars(stars[i])
-                    .build();
-            feedbackRepository.save(feedback);
+        for (int i = 0; i < stars.length; i++) {
+            User user = userRepository.findAll().get(0);
+            Flight savedFlight = flightRepository.findAll().get(i);
+            addFeedback(user, savedFlight, stars[i]);
         }
-        Double expected_avg = 0.0 ;
-        for(short i : stars) expected_avg += i;
+        Double expected_avg = 0.0;
+        for (short i : stars)
+            expected_avg += i;
         expected_avg /= stars.length;
-        Double actual_avg =  feedbackRepository.getAvgRating();
+        // where
+        Double actual_avg = feedbackRepository.getAvgRating();
+        // then
         Assertions.assertEquals(expected_avg, actual_avg);
     }
 
-    @Test 
-    void testGetAverageRatingWhenDatabaseIsEmpty(){
-        Double expected_avg = 0.0 ;
-        Double actual_avg =  feedbackRepository.getAvgRating();
+    @Test
+    void testGetAverageRatingOnLargeDatabase() {
+        // given
+        int numOfFlights = 1000;
+        addFlights(numOfFlights);
+
+        short[] stars = new short[numOfFlights];
+        Random rd = new Random();
+        for (int i = 0; i < stars.length; i++) {
+            stars[i] = (short) rd.nextInt(6);
+        }
+
+        for (int i = 0; i < stars.length; i++) {
+            User user = userRepository.findAll().get(0);
+            Flight savedFlight = flightRepository.findAll().get(i);
+            addFeedback(user, savedFlight, stars[i]);
+        }
+        Double expected_avg = 0.0;
+        for (short i : stars)
+            expected_avg += i;
+        expected_avg /= stars.length;
+        // where
+        Double actual_avg = feedbackRepository.getAvgRating();
+        // then
         Assertions.assertEquals(expected_avg, actual_avg);
+    }
+
+    private void addFlights(int numOfFlights) {
+        for (int i = 0; i < numOfFlights; i++) {
+            Flight flight = Flight.builder()
+                    .arrivalDate(LocalDate.of(2024, 12, 5))
+                    .departureDate(LocalDate.of(2024, 12, 5))
+                    .availableBusinessSeats(20)
+                    .availableEconomySeats(30)
+                    .businessPrice(200)
+                    .economyPrice(50)
+                    .build();
+            flightRepository.save(flight);
+        }
+    }
+
+    private void addOneUser() {
+        String lastName = "Osama";
+        String firstName = "Ahmed";
+        User user = User.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .build();
+        userRepository.save(user);
+    }
+
+    private void addFeedback(User user, Flight flight, short stars) {
+        Feedback feedback = Feedback.builder()
+                .user(user)
+                .flight(flight)
+                .cleanliness(QualityRating.FAIR)
+                .comfort(QualityRating.EXCELLENT)
+                .service(QualityRating.EXCELLENT)
+                .punctuality(QualityRating.EXCELLENT)
+                .foodAndBeverage(QualityRating.EXCELLENT)
+                .dateOfCreation(LocalDateTime.now())
+                .stars(stars)
+                .build();
+        feedbackRepository.save(feedback);
     }
 }
