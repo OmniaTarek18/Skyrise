@@ -1,17 +1,14 @@
-package com.example.backend.Controllers.PasswordManagement;
+package com.example.backend.Services.PasswordManagement;
 
 import com.example.backend.Entities.User;
 import com.example.backend.Repositories.UserRepository;
 import com.example.backend.Services.PasswordResetService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
