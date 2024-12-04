@@ -8,5 +8,5 @@ import com.example.backend.Entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
-  
+
 }

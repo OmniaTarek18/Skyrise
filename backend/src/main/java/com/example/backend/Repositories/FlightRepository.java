@@ -10,4 +10,6 @@ import com.example.backend.Entities.Flight;
 
 public interface FlightRepository extends JpaRepository<Flight, Integer>, JpaSpecificationExecutor<Flight> {
     Page<Flight> findByDepartureDate(LocalDate departureDate, Pageable pageable);
+
+    long countByArrivalDateGreaterThanEqual(LocalDate date);
 }
