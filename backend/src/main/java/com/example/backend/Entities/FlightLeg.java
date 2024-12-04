@@ -25,14 +25,16 @@ import java.time.LocalTime;
 public class FlightLeg {
     @Id
     @Column(name = "flight_leg_id", nullable = false)
-    private Integer flightLegId; // Matches FlightLegPK.flightLegId
+
+    private Integer flightLegId;
 
     @Id
-    @Column(name = "flight_id", insertable = false, updatable = false) // Matches FlightLegPK.flightId
+    @Column(name = "flight_id", insertable = false, updatable = false)
     private Integer flightId;
 
     @ManyToOne
-    @JoinColumn(name = "flight_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "flight_id", insertable = false, updatable = true)
+
     private Flight flight;
 
     @ManyToOne
