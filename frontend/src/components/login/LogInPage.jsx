@@ -27,7 +27,7 @@ const LogInPage = () => {
               />
             </header>
             <LogInForm navigateTo={setPage}/>
-            {/* <GoogleLogIn /> */}
+            <GoogleLogIn />
             <CallToAction
               action={"Sign up"}
               actionText={"Don't have an account?"}
