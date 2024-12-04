@@ -11,7 +11,7 @@ import com.example.backend.DTOs.PageResponse;
 import com.example.backend.Services.FlightDisplayService;
 
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*")
 public class FlightDislplayController {
 
     private final FlightDisplayService flightService;
