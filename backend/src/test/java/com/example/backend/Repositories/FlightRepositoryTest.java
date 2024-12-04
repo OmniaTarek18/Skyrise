@@ -23,7 +23,7 @@ import com.example.backend.Entities.Flight;
 public class FlightRepositoryTest {
 
     @Autowired
-    private FlightRepository underTest;
+    private FlightRepository flightRepository;
 
     private final LocalDate DEPARTURE_DATE = LocalDate.parse("2024-10-12");
 
@@ -36,7 +36,7 @@ public class FlightRepositoryTest {
 
         // where
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Flight> page = underTest.findByDepartureDate(DEPARTURE_DATE, pageable);
+        Page<Flight> page = flightRepository.findByDepartureDate(DEPARTURE_DATE, pageable);
 
         // then
         Assertions.assertTrue(page.isEmpty());
@@ -73,7 +73,7 @@ public class FlightRepositoryTest {
                     .availableBusinessSeats(availableBusinessSeats)
                     .build();
 
-            underTest.save(flight);
+            flightRepository.save(flight);
 
             if (DEPARTURE_DATE.equals(date[i]))
                 expected.add(flight);
@@ -81,7 +81,7 @@ public class FlightRepositoryTest {
 
         // where
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Flight> page = underTest.findByDepartureDate(LocalDate.parse("2024-10-12"), pageable);
+        Page<Flight> page = flightRepository.findByDepartureDate(LocalDate.parse("2024-10-12"), pageable);
 
         // then
         Assertions.assertEquals(expected, page.getContent());
@@ -98,7 +98,7 @@ public class FlightRepositoryTest {
 
         // where
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Flight> page = underTest.findByDepartureDate(DEPARTURE_DATE, pageable);
+        Page<Flight> page = flightRepository.findByDepartureDate(DEPARTURE_DATE, pageable);
 
         // then
         Assertions.assertTrue(page.isEmpty());

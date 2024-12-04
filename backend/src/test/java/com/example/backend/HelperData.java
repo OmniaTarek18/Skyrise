@@ -59,6 +59,8 @@ public class HelperData {
 
                 for (int i = 1; i < 4; i++) {
                         User user = new User();
+                        user.setFirstName("firstName");
+                        user.setLastName("lastName");
 
                         Flight flight = Flight.builder()
                                         .departureDate(date[i - 1])
