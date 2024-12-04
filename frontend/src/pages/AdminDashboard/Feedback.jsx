@@ -17,7 +17,7 @@ const Feedback = () => {
   const [starFilter, setStarFilter] = useState(null);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [performanceFilter, setPerformanceFilter] = useState("");
-  const [sortDirection, setSortDirection] = useState(""); 
+  const [sortDirection, setSortDirection] = useState("asc"); 
 
   useEffect(() => {
     const filterCriteria = {
