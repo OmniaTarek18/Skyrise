@@ -1,10 +1,9 @@
-package com.example.Entities;
+package com.example.backend.Entities;
 
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Getter

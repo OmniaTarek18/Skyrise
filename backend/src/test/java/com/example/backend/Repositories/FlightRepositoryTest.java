@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 import com.example.backend.Entities.Flight;
 
 @DataJpaTest
-@EntityScan(basePackages = "com.example.backend.Repositories.FlightRepository")
+//@EntityScan(basePackages = "com.example.backend.Repositories.FlightRepository")
 
 public class FlightRepositoryTest {
 

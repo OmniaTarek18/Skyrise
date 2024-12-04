@@ -1,12 +1,12 @@
 package com.example.backend.SignUpLogIn;
 
 
-import com.example.Entities.Account;
-import com.example.Entities.Customer;
-import com.example.Entities.User;
-import com.example.Services.AccountServices;
-import com.example.Services.SignUpLogInModuleServices;
-import com.example.Services.UserServices;
+import com.example.backend.Entities.Account;
+import com.example.backend.Entities.Customer;
+import com.example.backend.Entities.User;
+import com.example.backend.Services.AccountServices;
+import com.example.backend.Services.SignUpLogInModuleServices;
+import com.example.backend.Services.UserServices;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

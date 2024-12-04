@@ -1,8 +1,8 @@
-package com.example.Controllers;
+package com.example.backend.Controllers;
 
-import com.example.Entities.Admin;
-import com.example.Entities.Customer;
-import com.example.Services.SignUpLogInModuleServices ;
+import com.example.backend.Entities.Admin;
+import com.example.backend.Entities.Customer;
+import com.example.backend.Services.SignUpLogInModuleServices;
 
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;

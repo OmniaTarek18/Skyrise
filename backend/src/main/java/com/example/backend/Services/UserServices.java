@@ -1,15 +1,15 @@
-package com.example.Services;
+package com.example.backend.Services;
 
-import com.example.Entities.Account;
-import com.example.Entities.User;
-import com.example.Repositories.UserRepository;
+import com.example.backend.Entities.Account;
+
+import com.example.backend.Entities.User;
+import com.example.backend.Repositories.UserRepository;
 
 
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import java.beans.Transient;
-    import java.util.Date;
+import java.util.Date;
 
     @Service
     public class UserServices {
@@ -24,7 +24,7 @@ import com.example.Repositories.UserRepository;
         public User createUser(Account account , String countryCode, String phoneNumber, String nationalId, Date dateOfBirth,
                                String firstName, String lastName, boolean gender, String passportNumber,
                                String passportIssuingCountry) {
-            return  new User(account , countryCode, phoneNumber, nationalId, dateOfBirth,
+            return  new User( account , countryCode, phoneNumber, nationalId, dateOfBirth,
                     firstName, lastName, gender, passportNumber, passportIssuingCountry);
         }
 

@@ -2,6 +2,7 @@ package com.example.backend.Controllers.AdminDashboard;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
@@ -21,7 +22,8 @@ public class FlightDisplayController {
 
     private final FlightDisplayService flightService;
 
-    public FlightDislplayController(FlightDisplayService flightService) {
+    @Autowired
+    public FlightDisplayController(FlightDisplayService flightService) {
         this.flightService = flightService;
     }
 
