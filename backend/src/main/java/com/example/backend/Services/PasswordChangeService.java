@@ -14,16 +14,11 @@ public class PasswordChangeService {
         this.userRepository = userRepository;
     }
 
-    public boolean changePassword(String email, String currentPassword, String newPassword) {
-
+    public boolean changePassword(String email, String newPassword) {
 
         User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new IllegalArgumentException("User with the provided email does not exist.");
-        }
-
-        if (!currentPassword.equals(user.getPassword())) {
-            throw new IllegalArgumentException("Current password is incorrect.");
         }
 
         user.setPassword(newPassword);

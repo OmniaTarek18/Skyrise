@@ -18,11 +18,10 @@ public class PasswordChangeController {
     @PostMapping("/change")
     public ResponseEntity<String> changePassword(
             @RequestParam String email,
-            @RequestParam String currentPassword,
             @RequestParam String newPassword) {
 
         try {
-            passwordChangeService.changePassword(email, currentPassword, newPassword);
+            passwordChangeService.changePassword(email, newPassword);
             return ResponseEntity.ok("Password has been changed successfully.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
