@@ -21,7 +21,7 @@ import com.example.backend.Entities.Flight;
 import com.example.backend.Entities.FlightLeg;
 
 @DataJpaTest
-public class FlightLegRepoTest {
+public class FlightLegRepositoryTest {
 
     @Autowired
     private FlightLegRepository flightLegRepository;

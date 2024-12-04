@@ -21,7 +21,7 @@ import com.example.backend.HelperData;
 import com.example.backend.Entities.Reservation;
 
 @DataJpaTest
-public class ReservationRepoTest {
+public class ReservationRepositoryTest {
 
     @Autowired
     private ReservationRepository reservationRepository;
