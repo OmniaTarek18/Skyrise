@@ -1,4 +1,4 @@
-package com.example.backend.SignUpLogInModule;
+package com.example.Entities;
 
 import lombok.Getter;
 import lombok.Setter;

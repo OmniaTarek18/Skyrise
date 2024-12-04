@@ -1,11 +1,13 @@
-package com.example.backend.SignUpLogInModule;
+package com.example.Services;
 
 
-import com.example.backend.Account.Account;
-import com.example.backend.Account.AccountServices;
-import com.example.backend.Admin.Admin;
-import com.example.backend.User.User;
-import com.example.backend.User.UserServices;
+
+
+
+import com.example.Entities.Account;
+import com.example.Entities.Admin;
+import com.example.Entities.Customer;
+import com.example.Entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,12 +1,16 @@
-package com.example.backend.SignUpLogInModule;
+package com.example.Controllers;
 
-import com.example.backend.Admin.Admin;
+import com.example.Entities.Admin;
+import com.example.Entities.Customer;
+import com.example.Services.SignUpLogInModuleServices ;
+
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @Controller

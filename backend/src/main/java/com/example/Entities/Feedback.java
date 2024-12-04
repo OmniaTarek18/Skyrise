@@ -1,4 +1,4 @@
-package com.example.backend.Feedback;
+package com.example.Entities;
 
 public class Feedback {
     

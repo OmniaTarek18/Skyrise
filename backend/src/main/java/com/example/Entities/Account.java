@@ -1,6 +1,6 @@
-package com.example.backend.Account;
+package com.example.Entities;
 
-import com.example.backend.User.User;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +22,46 @@ public class Account {
 
 
 
+   public int getAccountId() {
+      return accountId;
+   }
+
+   public void setAccountId(int accountId) {
+      this.accountId = accountId;
+   }
+
+   public boolean isRole() {
+      return role;
+   }
+
+   public void setRole(boolean role) {
+      this.role = role;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public String getPassword() {
+      return password;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
+   }
+
+   public User getUser() {
+      return user;
+   }
+
+   public void setUser(User user) {
+      this.user = user;
+   }
+
    @OneToOne(mappedBy = "account")
    private User user ;
 
@@ -33,4 +73,6 @@ public class Account {
       this.password = password;
       this.role = role;
    }
+
+
 }

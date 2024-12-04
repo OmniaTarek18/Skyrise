@@ -1,7 +1,6 @@
-package com.example.backend.User;
+package com.example.Entities;
 
-    import com.example.backend.Account.Account;
-    import jakarta.persistence.*;
+import jakarta.persistence.*;
     import lombok.Getter;
     import lombok.Setter;
 

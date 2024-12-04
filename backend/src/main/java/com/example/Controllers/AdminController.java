@@ -1,4 +1,6 @@
-package com.example.backend.Admin;
+package com.example.Controllers;
+
+import com.example.Services.AdminServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

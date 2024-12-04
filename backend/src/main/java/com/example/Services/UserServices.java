@@ -1,9 +1,10 @@
-    package com.example.backend.User;
+package com.example.Services;
+
+import com.example.Entities.Account;
+import com.example.Entities.User;
+import com.example.Repositories.UserRepository;
 
 
-    import com.example.backend.Account.Account;
-    import com.example.backend.Account.AccountRepository;
-    import com.example.backend.Account.AccountServices;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
