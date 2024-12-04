@@ -21,7 +21,7 @@ public class FlightDisplayController {
 
     private final FlightDisplayService flightService;
 
-    public FlightDislplayController(FlightDisplayService flightService) {
+    public FlightDisplayController(FlightDisplayService flightService) {
         this.flightService = flightService;
     }
 

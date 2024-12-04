@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import com.example.backend.Entities.Flight;
 
 @DataJpaTest
-@EntityScan(basePackages = "com.example.backend.Repositories.FlightRepository")
-
 public class FlightRepositoryTest {
 
     @Autowired

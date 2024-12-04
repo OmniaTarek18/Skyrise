@@ -35,7 +35,7 @@ public class FeedbackDisplayController {
     }
 
     @PostMapping("/feedback")
-    public ResponseEntity<PageResponse<FeedbackDTO>> getAllFeedback(
+    public ResponseEntity<PageResponse<FeedbackDTO>> filterFeedback(
             @RequestBody FeedbackFilterCriteria feedbackFilterDTO, @RequestParam(defaultValue = "0") int pageNumber) {
         PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterDTO, pageNumber);
         return ResponseEntity.ok(page);
