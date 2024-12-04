@@ -7,7 +7,8 @@ import com.example.backend.Entities.FlightLeg;
 public class FeedbackMapper {
 
     public static FeedbackDTO toDTO(Feedback entity) {
-
+        if (entity == null)
+            throw new NullPointerException("Feedback entity is null!!");
         int numberOfLegs = entity.getFlight().getFlightLegs().size();
         FlightLeg first = entity.getFlight().getFlightLegs().get(0);
         FlightLeg last = entity.getFlight().getFlightLegs().get(numberOfLegs - 1);
@@ -30,6 +31,8 @@ public class FeedbackMapper {
     }
 
     public static Feedback toEntity(FeedbackDTO feedbackDTO) {
+        if (feedbackDTO == null)
+            throw new NullPointerException("FeedbackDTO is null!!");
         Feedback entity = Feedback.builder()
                 .stars(feedbackDTO.stars())
                 .userId(feedbackDTO.userId())
@@ -39,7 +42,6 @@ public class FeedbackMapper {
                 .service(feedbackDTO.service())
                 .punctuality(feedbackDTO.punctuality())
                 .cleanliness(feedbackDTO.cleanliness())
-                .dateOfCreation(feedbackDTO.dateOfCreation())
                 .foodAndBeverage(feedbackDTO.foodAndBeverage())
                 .dateOfCreation(feedbackDTO.dateOfCreation())
                 .build();
