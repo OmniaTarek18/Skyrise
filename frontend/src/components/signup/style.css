@@ -1,0 +1,24 @@
+.signup-container {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.signup-container .Logo {
+  display: flex;
+  margin: 1rem;
+  justify-content: flex-end;
+}
+
+.cta-container .helper-text {
+  margin: 0;
+}
+
+.signup-form-container {
+  justify-content: center;
+  width: 80%;
+  align-self: center;
+  background-color: #fff;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+  border-radius: 0.5em;
+  padding: 4rem;
+}
