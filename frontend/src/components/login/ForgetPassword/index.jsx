@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../../shared/Input";
 import Button from "../../shared/Button";
 import Section from "../../shared/Section";
@@ -17,6 +17,7 @@ const ForgetPassword = () => {
     handleChange,
     handleBlur,
     handleSubmit, // Formik's handleSubmit function
+    status,
   } = useForgotPasswordForm();
 
   // Form submission handling
@@ -26,16 +27,18 @@ const ForgetPassword = () => {
       return; // If validation fails, don't proceed with the form submission
     }
     handleSubmit();
-    console.log(values.errors);
-    if (values.errors) {
+  };
+
+  useEffect(() => {
+    if (status == "success") {
       setPage("continue");
     } else {
-      setAlert(true)
+      setAlert(true);
       setTimeout(() => {
         setAlert(false);
       }, 2000); // 2000 milliseconds = 2 seconds
     }
-  };
+  }, [status]);
 
   return (
     <section className="forget-password-form">
@@ -66,7 +69,9 @@ const ForgetPassword = () => {
           />
         </form>
       )}
-      {page === "continue" && !values.errors && <ResetPassword userEmail={values.email} />}
+      {page === "continue" && (
+        <ResetPassword userEmail={values.email} />
+      )}
     </section>
   );
 };

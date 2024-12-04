@@ -25,13 +25,13 @@ export const useForgotPasswordForm = () => {
         );
 
         // console.log(response.status)
-        values.errors = false
-        console.log(values.errors)
+        // actions.resetForm();
+        actions.setStatus("success");
         // Reset the form after submission
-        actions.resetForm();
-
+        // actions.resetForm();
       } catch (error) {
-        values.errors = true
+        // actions.resetForm();
+        // values.errors = true;
         console.error(
           "Error:",
           error.response ? error.response.data : error.message
@@ -40,7 +40,6 @@ export const useForgotPasswordForm = () => {
         actions.setStatus({
           error: error.response ? error.response.data : error.message,
         });
-        actions.resetForm();
       }
     },
   });
