@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,11 +22,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 
-import com.example.backend.Entities.Airport;
-import com.example.backend.Entities.Flight;
-import com.example.backend.Entities.FlightLeg;
+import com.example.backend.HelperData;
+import com.example.backend.DTOMappers.ReservationMapper;
+import com.example.backend.DTOs.ReservationDTO;
+import com.example.backend.DTOs.ReservationFilterCriteria;
 import com.example.backend.Entities.Reservation;
-import com.example.backend.Entities.User;
 import com.example.backend.Enums.SeatClass;
 import com.example.backend.Repositories.AirportRepository;
 import com.example.backend.Repositories.FlightLegRepository;
@@ -36,111 +37,81 @@ import com.example.backend.Repositories.UserRepository;
 @ExtendWith(MockitoExtension.class)
 public class ReservationDisplayServiceTest {
 
-    @Mock
-    private ReservationRepository reservationRepository;
+        @Mock
+        private ReservationRepository reservationRepository;
 
-    @Mock
-    private UserRepository userRepository;
+        @Mock
+        private UserRepository userRepository;
 
-    @Mock
-    private FlightRepository flightRepository;
+        @Mock
+        private FlightRepository flightRepository;
 
-    @Mock
-    private AirportRepository airportRepository;
+        @Mock
+        private AirportRepository airportRepository;
 
-    @Mock
-    private FlightLegRepository flightLegRepository;
+        @Mock
+        private FlightLegRepository flightLegRepository;
 
-    @InjectMocks
-    private ReservationDisplayService reservationDisplayService;
+        @InjectMocks
+        private ReservationDisplayService reservationDisplayService;
 
-    @BeforeEach
-    public void setup() {
-        
-    }
+        private final List<Reservation> actual = new ArrayList<>();
 
-    @Test
-    @DisplayName("Test 1: get reserved flights by user id returns correct reserved flights")
-    @Rollback(true)
-    void testGetReservationByUserIdCorrectness() {
-
-        Airport departureAirport = Airport.builder()
-                .airportName("JFK International Airport")
-                .airportCountry("USA")
-                .airportCity("New York")
-                .airportCode("JFK")
-                .latitude(40.6413)
-                .longitude(-73.7781)
-                .build();
-        airportRepository.save(departureAirport);
-
-        Airport arrivalAirport = Airport.builder()
-                .airportName("LAX International Airport")
-                .airportCountry("USA")
-                .airportCity("Los Angeles")
-                .airportCode("LAX")
-                .latitude(33.9416)
-                .longitude(-118.4085)
-                .build();
-        airportRepository.save(arrivalAirport);
-
-        List<Reservation> actual = new ArrayList<>();
-        for (int i = 1; i < 4; i++) {
-            User user = new User();
-            userRepository.save(user);
-
-            Flight flight = Flight.builder()
-                    .departureDate(LocalDate.of(2024, 12, 1))
-                    .arrivalDate(LocalDate.of(2024, 12, 1))
-                    .economyPrice(100.0f)
-                    .businessPrice(200.0f)
-                    .availableEconomySeats(100)
-                    .availableBusinessSeats(50)
-                    .isCancel(false)
-                    .build();
-
-            FlightLeg flightLeg = FlightLeg.builder()
-                    .flightLegId(1)
-                    .flightId(i)
-                    .flight(flight)
-                    .departureAirport(departureAirport)
-                    .arrivalAirport(arrivalAirport)
-                    .departureTime(LocalTime.of(10, 30))
-                    .arrivalTime(LocalTime.of(12, 30))
-                    .build();
-            flightLegRepository.save(flightLeg);
-
-            flight.setFlightLegs(List.of(flightLeg));
-            flightRepository.save(flight);
-
-            Reservation reservation = new Reservation();
-            reservation.setUserId(i);
-            reservation.setFlightId(i);
-            reservation.setUser(user);
-            reservation.setFlight(flight);
-            reservation.setSeatClass(SeatClass.ECONOMY);
-            reservation.setReservedSeats(2);
-
-            reservationRepository.save(reservation);
-            if (i == 1) {
-                actual.add(reservation);
-            }
+        @BeforeEach
+        public void setup() {
+                HelperData data = new HelperData(airportRepository, flightRepository, flightLegRepository,
+                                userRepository,
+                                reservationRepository);
+                data.dataGeneration();
+                airportRepository = data.getAirportRepository();
+                flightRepository = data.getFlightRepository();
+                flightLegRepository = data.getFlightLegRepository();
+                userRepository = data.getUserRepository();
+                reservationRepository = data.getReservationRepository();
         }
 
-        Page<Reservation> actualPage = new PageImpl<>(actual);
+        @Test
+        @DisplayName("Test 1: get reserved flights by user id returns correct reserved flights")
+        @Rollback(true)
+        void testGetReservationByUserIdCorrectness() {
+                Page<Reservation> actualPage = new PageImpl<>(actual);
+                Page<ReservationDTO> actualPageDTO = actualPage.map(ReservationMapper::toDTO);
 
-        given(reservationRepository.findByUserId(1, PageRequest.of(0, 10))).willReturn(actualPage);
+                given(reservationRepository.findByUserId(1, PageRequest.of(0, 10))).willReturn(actualPage);
 
-        var result = reservationDisplayService.getReservationByUserId(1, 0);
+                var result = reservationDisplayService.getReservationByUserId(1, 0);
 
-        assertNotNull(result);
-        assertEquals(1, result.content().size());
-    }
+                assertNotNull(result);
+                assertEquals(1, result.content().size());
+                assertThat(actualPageDTO.getContent()).usingRecursiveFieldByFieldElementComparator()
+                                .containsExactlyElementsOf(result.content());
+        }
 
-    // @Test
-    // @DisplayName("Test 2: get reserved flights by user id and filter based on some criteria")
-    // @Rollback(true)
-    // void testFilterReservedCorrectness() {
+        @Test
+        @DisplayName("Test 2: get reserved flights by user id and filter based on some criteria")
+        @Rollback(true)
+        void testFilterReservedCorrectnessAllFields() {
+                ReservationFilterCriteria filterDTO = new ReservationFilterCriteria(
+                                1,
+                                "New York, USA",
+                                "Los Angeles, USA",
+                                null,
+                                null,
+                                null,
+                                null,
+                                null);
 
-    // }
+                List<ReservationDTO> expected = List.of(
+                                new ReservationDTO(1, 1, "New York, USA", "Los Angeles, USA",
+                                                LocalDate.parse("2024-10-12"), LocalTime.of(10, 30),
+                                                LocalDate.parse("2024-09-12"), LocalTime.of(12, 30),
+                                                SeatClass.ECONOMY, 2));
+
+                var result = reservationDisplayService.filterReserved(filterDTO, 0);
+
+                assertNotNull(result);
+                assertEquals(1, result.content().size());
+                assertThat(result.content()).usingRecursiveFieldByFieldElementComparator()
+                                .containsExactlyElementsOf(expected);
+        }
 }

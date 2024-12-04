@@ -52,7 +52,7 @@ public class ReservationDisplayService {
         }
 
         if (filterDTO.flightId() != null) {
-            spec = spec.and(ReservationSpecifications.conainsFlightId(filterDTO.flightId()));
+            spec = spec.and(ReservationSpecifications.containsFlightId(filterDTO.flightId()));
         }
 
         if (filterDTO.sortBy() != null && filterDTO.direction() != null) {

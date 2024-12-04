@@ -126,7 +126,7 @@ public class ReservationSpecifications {
         };
     }
 
-    public static Specification<Reservation> conainsFlightId (Integer flightId) {
+    public static Specification<Reservation> containsFlightId (Integer flightId) {
         return (root, query, criteriaBuilder) -> {
             return criteriaBuilder.equal(root.get("flightId"), flightId);
         };
