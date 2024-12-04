@@ -1,12 +1,12 @@
 package com.example.backend.Entities;
 
 import com.example.backend.Enums.Gender;
+import com.example.backend.Enums.MealSpecification;
+import com.example.backend.Enums.SpecialNeeds;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,12 +18,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"user\"")
-public class User {
+public class Passenger {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer id;
 
     @Column(nullable = false)
     private String countryCode;
@@ -53,14 +52,13 @@ public class User {
     @Column(nullable = false)
     private String passportIssuingCountry;
 
-    @OneToMany(mappedBy = "user")
-    private List<Reservation> reservations;
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "reservation_user_id", referencedColumnName = "user_id"),
+            @JoinColumn(name = "reservation_flight_id", referencedColumnName = "flight_id")
+    })
+    private Reservation reservation;
 
-    @OneToMany(mappedBy = "user")
-    private List<Notification> notifications;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id")
-    private Account account;
-
+    private SpecialNeeds specialNeeds;
+    private MealSpecification measlSpecification;
 }
