@@ -25,6 +25,7 @@ import java.time.LocalTime;
 public class FlightLeg {
     @Id
     @Column(name = "flight_leg_id", nullable = false)
+
     private Integer flightLegId;
 
     @Id
@@ -33,6 +34,7 @@ public class FlightLeg {
 
     @ManyToOne
     @JoinColumn(name = "flight_id", insertable = false, updatable = true)
+
     private Flight flight;
 
     @ManyToOne
