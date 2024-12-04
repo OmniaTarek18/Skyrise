@@ -26,21 +26,11 @@ public class PasswordChangeService {
             throw new IllegalArgumentException("Current password is incorrect.");
         }
 
-        if (!validateNewPassword(newPassword)) {
-            throw new IllegalArgumentException("New password does not meet the security requirements.");
-        }
-
         user.setPassword(newPassword);
         userRepository.save(user);
 
         return true;
     }
 
-    private boolean validateNewPassword(String password) {
-        return password.length() >= 8 &&
-                password.matches(".*[A-Z].*") &&
-                password.matches(".*\\d.*") &&
-                password.matches(".*[@#$%^&+=!].*");
-    }
 }
 

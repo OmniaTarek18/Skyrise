@@ -18,7 +18,7 @@ public class PasswordResetController {
     }
 
     @PostMapping("/reset")
-    public ResponseEntity<String> resetPassword(@RequestParam String email) {
+    public ResponseEntity<String> resetPassword(String email) {
 
         boolean success = passwordResetService.processResetPassword(email);
 
