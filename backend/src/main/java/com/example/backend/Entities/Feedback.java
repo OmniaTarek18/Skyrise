@@ -3,7 +3,6 @@ package com.example.backend.Entities;
 import java.time.LocalDateTime;
 import com.example.backend.Enums.QualityRating;
 import com.example.backend.Entities.CompositeKeys.ReservationPK;
-import com.example.backend.Enums.Stars;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
@@ -47,8 +46,7 @@ public class Feedback {
     LocalDateTime dateOfCreation;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    Stars stars;
+    short stars;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

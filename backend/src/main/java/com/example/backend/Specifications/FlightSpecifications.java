@@ -12,6 +12,7 @@ import jakarta.persistence.criteria.Subquery;
 public class FlightSpecifications {
 
     public static Specification<Flight> containsSource(String source) {
+
         return (root, query, criteriaBuilder) -> {
             Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
             Join<FlightLeg, Airport> flightLegAndAirport = flightAndFlightLeg.join("departureAirport");
@@ -45,7 +46,7 @@ public class FlightSpecifications {
             return containsStatusIncomplete();
         else if ("complete".equals(status))
             return containsStatusComplete();
-        else
+        else 
             return containsStatusCancel();
     }
 
@@ -72,4 +73,5 @@ public class FlightSpecifications {
     public static Specification<Flight> hasArrivalDateLessThan(LocalDate arrivalDate) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get("arrivalDate"), arrivalDate);
     }
+
 }

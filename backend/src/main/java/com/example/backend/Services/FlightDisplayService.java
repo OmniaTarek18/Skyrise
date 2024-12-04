@@ -17,7 +17,6 @@ import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Specifications.FlightSpecifications;
 import com.example.backend.Utilites.Utilities;
 import com.example.backend.Utilites.ValidateInput;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -42,7 +41,6 @@ public class FlightDisplayService {
     public PageResponse<AdminFlightDTO> filterFlights(FlightFilterCriteria flightFilterDTO, int pageNumber) {
 
         ValidateInput.validatePageNumber(pageNumber);
-
         Specification<Flight> spec = Specification.where(null);
 
         if (flightFilterDTO.departureDate() != null)
