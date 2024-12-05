@@ -71,13 +71,13 @@ const Flights = () => {
         <div className="sort-buttons">
           <button
             className="sort-button"
-            onClick={() => handleSort("flightNumber")}
+            onClick={() => handleSort("economyPrice")}
           >
             Sort by Flight Number
           </button>
           <button
             className="sort-button"
-            onClick={() => handleSort("departureDate")}
+            onClick={() => handleSort("businessPrice")}
           >
             Sort by Departure Date
           </button>

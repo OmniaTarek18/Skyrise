@@ -12,6 +12,43 @@
   overflow-y: auto;
 }
 
+.feedback-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.feedback-stat {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 45%;
+}
+
+.feedback-stat {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.filter-header{
+  font-size: 16px; 
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.feedback-rating span {
+  font-size: 28px; 
+  font-weight: bold;
+  color: #333;
+  padding: 1rem;
+}
+
 
 .rating-star.filled {
   color: gold;
@@ -59,6 +96,59 @@
 
 .feedback-list {
   display: flex;
+  flex-wrap: wrap;
+  gap: 30px; 
+  justify-content: center; 
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.feedback-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.feedback-card:hover {
+  transform: scale(1.02);
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedback-stars {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.feedback-stars .filled {
+  color: gold;
+}
+
+.feedback-stars .empty {
+  color: #ccc;
+}
+
+.feedback-comment {
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.feedback-categories {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.feedback-categories div {
+  margin-bottom: 0.5rem;
   flex-wrap: wrap;
   gap: 30px; 
   justify-content: center; 
