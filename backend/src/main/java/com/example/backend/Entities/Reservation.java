@@ -1,10 +1,8 @@
 package com.example.backend.Entities;
 
 import java.util.List;
-
 import com.example.backend.Entities.CompositeKeys.ReservationPK;
 import com.example.backend.Enums.SeatClass;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

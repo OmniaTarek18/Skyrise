@@ -1,5 +1,9 @@
 .App {
+  font-family: "Inter", sans-serif;
+  height: 100vh;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
