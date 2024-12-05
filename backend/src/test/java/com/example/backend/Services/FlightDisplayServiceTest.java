@@ -1,5 +1,6 @@
 package com.example.backend.Services;
 
+<<<<<<< HEAD
 import static org.mockito.Mockito.verifyNoInteractions;
 
 import java.time.LocalDate;
@@ -94,6 +95,14 @@ public class FlightDisplayServiceTest {
 
     }
 
+=======
+import org.junit.jupiter.api.Test;
+
+public class FlightDisplayServiceTest {
+    
+    private FlightDisplayService flightService;
+
+>>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
     @Test
     void testFilterFlights() {
         // given (input)
@@ -101,7 +110,14 @@ public class FlightDisplayServiceTest {
         // then (compare with expected)
     }
 
+<<<<<<< HEAD
     // test if pages or invaild
     // test if any parameter is invaild
     //
+=======
+    @Test
+    void testGetFlights() {
+
+    }
+>>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
 }

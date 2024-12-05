@@ -34,11 +34,19 @@ const DARK_COLORS = {
 
 const getColor = (rating) => {
   switch (rating) {
+<<<<<<< HEAD
     case "Excellent":
       return COLORS.excellent;
     case "Fair":
       return COLORS.fair;
     case "Poor":
+=======
+    case "EXCELLENT":
+      return COLORS.excellent;
+    case "FAIR":
+      return COLORS.fair;
+    case "POOR":
+>>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
       return COLORS.poor;
     default:
       return COLORS.default;
@@ -47,11 +55,19 @@ const getColor = (rating) => {
 
 const getTextColor = (rating) => {
   switch (rating) {
+<<<<<<< HEAD
     case "Excellent":
       return DARK_COLORS.excellent;
     case "Fair":
       return DARK_COLORS.fair;
     case "Poor":
+=======
+    case "EXCELLENT":
+      return DARK_COLORS.excellent;
+    case "FAIR":
+      return DARK_COLORS.fair;
+    case "POOR":
+>>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
       return DARK_COLORS.poor;
     default:
       return DARK_COLORS.default;
