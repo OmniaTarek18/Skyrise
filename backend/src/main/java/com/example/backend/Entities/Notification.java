@@ -1,10 +1,8 @@
 package com.example.backend.Entities;
 
-import java.util.List;
-
-import com.example.backend.Entities.CompositeKeys.ReservationPK;
-import com.example.backend.Enums.SeatClass;
-
+import com.example.backend.Entities.CompositeKeys.NotificationPK;
+import com.example.backend.Enums.MessageTitle;
+import com.example.backend.Enums.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,45 +12,37 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(ReservationPK.class)
 @Entity
-public class Reservation {
-
+@IdClass(NotificationPK.class)
+public class Notification {
     @Id
     private Integer userId;
 
-    @Id
-    private Integer flightId;
+    @Id 
+    private Integer notificationId;
 
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @MapsId("flightId")
-    @JoinColumn(name = "flight_id")
-    private Flight flight;
-
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private SeatClass seatClass;
+    private MessageTitle title;
 
     @Column(nullable = false)
-    private int reservedSeats;
+    private String message;
 
-    @OneToMany(mappedBy = "reservation")
-    private List<Passenger> passengers;
+    @Column(nullable = false)
+    private Status status;
 }
