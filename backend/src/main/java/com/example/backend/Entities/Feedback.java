@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import lombok.AllArgsConstructor;
@@ -27,20 +28,22 @@ import lombok.Setter;
 public class Feedback {
 
     @Id
-    Integer userId;
+    private Integer userId;
 
     @Id
-    Integer flightId;
+    private Integer flightId;
 
     @ManyToOne
     @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
     @MapsId("flightId")
+    @JoinColumn(name = "flight_id")
     private Flight flight;
 
-    String comment;
+    private String comment;
 
     @Column(nullable = false)
     LocalDateTime dateOfCreation;

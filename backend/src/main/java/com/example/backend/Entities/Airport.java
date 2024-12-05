@@ -34,9 +34,7 @@ public class Airport {
     @Column(nullable = false)
     private String airportCode;
 
-    @Column(nullable = false)
     private Double latitude;
 
-    @Column(nullable = false)
     private Double longitude;
 }

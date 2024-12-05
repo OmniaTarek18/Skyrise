@@ -2,6 +2,7 @@ package com.example.backend.Entities.CompositeKeys;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class ReservationPK implements Serializable{
+    @Column(name = "user_id")
     private Integer userId;
     private Integer flightId;
 }

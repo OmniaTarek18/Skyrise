@@ -1,0 +1,49 @@
+.signup-container .row{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+/* Fieldset styling */
+.signup-container fieldset {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Legend styling */
+.signup-container legend {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.signup-container h2 {
+  margin: 1rem;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button-row .btn {
+  margin-right: 2rem;
+}
+
+.signup-container .mb-3 {
+  width: 42%;
+  margin: 0.5em;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button-row .btn {
+  margin-right: 2rem;
+}
