@@ -23,7 +23,7 @@ public class AccountServices {
 
 
 
-    public boolean changePassword(Integer id , String password){
+    public boolean resetPassword(Integer id , String password){
         Optional<Account> optionalAccount = this.accountRepository.findAccountByAccountId(id);
         if (optionalAccount.isEmpty()) {
             return false ;
@@ -53,8 +53,8 @@ public class AccountServices {
             throw new IllegalArgumentException("New password does not meet the security requirements.");
         }
 
+}
     public boolean updateAccountFromCustomerToAdmin(String email){
         int flag  =  this.accountRepository.updateRoleByEmail(email , true) ;
         return flag == 1;
-    }
-}
+    }}
