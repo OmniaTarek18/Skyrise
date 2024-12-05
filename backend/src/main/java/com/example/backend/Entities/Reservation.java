@@ -1,5 +1,7 @@
 package com.example.backend.Entities;
 
+import java.util.List;
+
 import com.example.backend.Entities.CompositeKeys.ReservationPK;
 import com.example.backend.Enums.SeatClass;
 
@@ -9,8 +11,10 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,17 +31,19 @@ import lombok.Setter;
 public class Reservation {
 
     @Id
-    Integer userId;
+    private Integer userId;
 
     @Id
-    Integer flightId;
+    private Integer flightId;
 
     @ManyToOne
     @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
     @MapsId("flightId")
+    @JoinColumn(name = "flight_id")
     private Flight flight;
 
     @Enumerated(EnumType.STRING)
@@ -46,4 +52,7 @@ public class Reservation {
 
     @Column(nullable = false)
     private int reservedSeats;
+
+    @OneToMany(mappedBy = "reservation")
+    private List<Passenger> passengers;
 }

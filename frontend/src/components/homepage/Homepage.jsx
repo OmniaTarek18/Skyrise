@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "../shared/Button";
-import promotionImg from "../../assets/promotion.jpeg"
 import { useNavigate } from "react-router-dom";
 
+
 const Homepage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <Button
@@ -17,6 +17,8 @@ const Homepage = () => {
         btnColor="light"
         handleClick={() => navigate("/login")}
       />
+      {/* <About/> */}
+      {/* <Footer/> */}
     </>
   );
 };
