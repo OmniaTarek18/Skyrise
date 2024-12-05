@@ -22,7 +22,7 @@ public class AccountController {
         this.accountServices = accountServices;
     }
 
-    @PostMapping("changePassword/{id}")
+    @PostMapping("resetPassword/{id}")
     public ResponseEntity<Boolean> changePassword(@PathVariable Integer id, @RequestBody String password) {
         boolean flag = this.accountServices.changePassword(id, password);
         if(flag)
