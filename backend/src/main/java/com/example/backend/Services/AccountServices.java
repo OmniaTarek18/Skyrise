@@ -1,6 +1,7 @@
 package com.example.backend.Services;
 
 import com.example.backend.Entities.Account;
+import com.example.backend.Enums.Role;
 import com.example.backend.Repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +21,13 @@ public class AccountServices {
 
 
 
-    public Account createAccount(String email , String password , boolean role){
+    public Account createAccount(String email , String password , Role role){
         return new Account(email , password , role) ;
     }
 
-    public boolean addAccount(Account account) {
-        try {
+    public Integer addAccount(Account account) {
             this.accountRepository.save(account);
-            return true;
-        } catch (Exception e) {
-            return false ;
-        }
+            return account.getAccountId();
     }
 
     public Account checkEmailExistence(String email){

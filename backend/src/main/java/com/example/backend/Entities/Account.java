@@ -34,5 +34,12 @@ public class Account {
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role; 
+    private Role role;
+
+
+    public Account(String email, String password, Role role) {
+        this.email = email ;
+        this.password = password;
+        this.role= role ;
+    }
 }

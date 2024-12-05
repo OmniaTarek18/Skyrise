@@ -1,20 +1,19 @@
 package com.example.backend.Entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Admin {
 
     private String password ;
     private String email ;
 
-    public Admin(){}
-    public Admin(String email , String password){
-        this.email = email ;
-        this.password = password ;
-    }
     public String getPassword() {
         return password;
     }

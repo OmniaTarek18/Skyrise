@@ -1,162 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="250b3a8f-c991-442d-a8ed-3cfa9247ffcc" name="Changes" comment="signUp logIn module added" />
+    <list default="true" id="49185218-176e-49f0-8285-102029942be8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="nouranKhalil &lt;nouran.ahraf.youssef@gmail.com&gt;" />
-      </list>
-    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="signUp" />
+        <entry key="$PROJECT_DIR$" value="code-refactoring/SCRUM-80-user-registeration-refactoring" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;youssefMohamedTaman&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "youssefMohamedTaman"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/OmniaTarek18/Skyrise.git&quot;,
-    &quot;accountId&quot;: &quot;a8ec1772-68f5-464b-9577-a422dfc8da33&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/OmniaTarek18/Skyrise",
+    "accountId": "a8ec1772-68f5-464b-9577-a422dfc8da33"
   }
-}</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/backend/src/main/java/com/example/backend/Customer/CustomerController.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
-}</component>
-  <component name="ProjectId" id="2pfEsMGXY8EbjLD3uOM6Nvo4qcn" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2pnOmn5c0KpF8NMufieILVzBGLD" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.BackendApplication.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "Application.app.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "SCRUM-62-Basic-Auth-Sign-Up",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/youss/Desktop/Skyrise/backend",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+    "kotlin-language-version-configured": "true"
   }
 }]]></component>
-  <component name="QodanaReportsService">
-    <option name="descriptions">
-      <ReportDescription localRun="true" path="C:\Users\youss\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="f11394b6-ba2a-4259-b8f3-dab33967a6b0" reportId="Skyrise/qodana/2024-12-03" />
-    </option>
-  </component>
-  <component name="RunManager">
-    <configuration name="app" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" show_console_on_std_out="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="23" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.example.backend.BackendApplication" />
-      <module name="backend" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="250b3a8f-c991-442d-a8ed-3cfa9247ffcc" name="Changes" comment="" />
-      <created>1733148936261</created>
+      <changelist id="49185218-176e-49f0-8285-102029942be8" name="Changes" comment="" />
+      <created>1733398534980</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1733148936261</updated>
+      <updated>1733398534980</updated>
     </task>
-    <task id="LOCAL-00001" summary="Add file structure for components folder">
-      <option name="closed" value="true" />
-      <created>1733207363356</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1733207363356</updated>
-    </task>
-    <task id="LOCAL-00002" summary="signUp logIn module added">
-      <option name="closed" value="true" />
-      <created>1733232405781</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1733232405781</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/feat-SCRUM-56-Admin-Dashboard-Frontend" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/main" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
             <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="true" />
-                </map>
-              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/SCRUM-62-Basic-Auth-Sign-Up" />
+                        <option value="origin/code-refactoring/SCRUM-80-user-registeration-refactoring" />
                       </list>
                     </value>
                   </entry>
@@ -167,14 +77,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add file structure for components folder" />
-    <MESSAGE value="sign up and log in implementation" />
-    <MESSAGE value="signUp logIn module added" />
-    <option name="LAST_COMMIT_MESSAGE" value="signUp logIn module added" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Skyrise$app.ic" NAME="app Coverage Results" MODIFIED="1733201212497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>

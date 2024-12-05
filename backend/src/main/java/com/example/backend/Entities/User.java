@@ -62,4 +62,16 @@ public class User {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    public User(Account account , String countryCode, String phoneNumber, String nationalId, Date dateOfBirth, String firstName, String lastName, Gender gender, String passportNumber, String passportIssuingCountry) {
+        this.countryCode = countryCode;
+        this.phoneNumber = phoneNumber;
+        this.nationalId = nationalId;
+        this.dateOfBirth = dateOfBirth;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.passportNumber = passportNumber;
+        this.passportIssuingCountry = passportIssuingCountry;
+        this.account = account;
+    }
 }

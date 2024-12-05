@@ -3,6 +3,7 @@ package com.example.backend.Services;
 import com.example.backend.Entities.Account;
 
 import com.example.backend.Entities.User;
+import com.example.backend.Enums.Gender;
 import com.example.backend.Repositories.UserRepository;
 
 
@@ -22,20 +23,15 @@ import java.util.Date;
 
 
         public User createUser(Account account , String countryCode, String phoneNumber, String nationalId, Date dateOfBirth,
-                               String firstName, String lastName, boolean gender, String passportNumber,
+                               String firstName, String lastName, Gender gender, String passportNumber,
                                String passportIssuingCountry) {
             return  new User( account , countryCode, phoneNumber, nationalId, dateOfBirth,
                     firstName, lastName, gender, passportNumber, passportIssuingCountry);
         }
 
-        public boolean addUser(User user){
-            try{
-                this.userRepository.save(user);
-                return true ;
-            }
-            catch (Exception e){
-               return false;
-            }
+        public Integer addUser(User user){
+            this.userRepository.save(user);
+            return user.getAccount().getAccountId();
         }
 
     }
