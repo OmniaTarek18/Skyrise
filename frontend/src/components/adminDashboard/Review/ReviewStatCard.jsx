@@ -21,7 +21,11 @@ const RatingDisplay = ({ rating }) => (
       <span className="stat-label">Average Rating</span>
     </div>
     <div className="stat-value-container">
+<<<<<<< HEAD
       <span className="stat-value">{rating.toFixed(1)}</span>
+=======
+      <span className="stat-value">{rating}</span>
+>>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
       <span className="stat-max">/5</span>
     </div>
   </div>

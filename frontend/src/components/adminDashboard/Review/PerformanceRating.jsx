@@ -34,11 +34,11 @@ const DARK_COLORS = {
 
 const getColor = (rating) => {
   switch (rating) {
-    case "Excellent":
+    case "EXCELLENT":
       return COLORS.excellent;
-    case "Fair":
+    case "FAIR":
       return COLORS.fair;
-    case "Poor":
+    case "POOR":
       return COLORS.poor;
     default:
       return COLORS.default;
@@ -47,11 +47,11 @@ const getColor = (rating) => {
 
 const getTextColor = (rating) => {
   switch (rating) {
-    case "Excellent":
+    case "EXCELLENT":
       return DARK_COLORS.excellent;
-    case "Fair":
+    case "FAIR":
       return DARK_COLORS.fair;
-    case "Poor":
+    case "POOR":
       return DARK_COLORS.poor;
     default:
       return DARK_COLORS.default;

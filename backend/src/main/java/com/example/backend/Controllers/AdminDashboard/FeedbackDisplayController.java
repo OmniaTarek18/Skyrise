@@ -3,6 +3,7 @@ package com.example.backend.Controllers.AdminDashboard;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import com.example.backend.Services.FeedbackDisplayService;
 
 @Controller
 @RequestMapping("/admin")
+@CrossOrigin(origins = "*")
 public class FeedbackDisplayController {
 
     private final FeedbackDisplayService feedbackDisplayService;
