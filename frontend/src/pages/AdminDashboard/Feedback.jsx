@@ -1,55 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import { Star, Filter, X, StarIcon } from "lucide-react";
-import ReviewCard from "../../components/adminDashboard/Review/ReviewCard";
-import "./feedback.css";
-import { ReviewStatCard } from "../../components/adminDashboard/Review/ReviewStatCard";
-
-const Feedback = () => {
-  // mock data for feedback
-  const feedback = [
-    {
-      id: 1,
-      userName: "nada",
-      source: "alex",
-      destination: "london",
-      date: "2024-11-15",
-      starRating: 4,
-      ratings: {
-        punctuality: "Excellent",
-        comfort: "Fair",
-        service: "Good",
-        foodAndBeverage: "Fair",
-        cleanliness: "Excellent",
-      },
-      comments: "Great experience.",
-    },
-    {
-      id: 2,
-      userName: "akfdls",
-      source: "paris",
-      destination: "tokyo",
-      date: "2024-11-12",
-      starRating: 5,
-      ratings: {
-        punctuality: "Excellent",
-        comfort: "Excellent",
-        service: "Excellent",
-        foodAndBeverage: "Good",
-        cleanliness: "Excellent",
-      },
-      comments:
-        "Would fly again. the food was really good and i enjoyed alot it was such a good experiece",
-    },
-  ];
-
-  // dummy values for averageRating
-  const averageRating = 4.5;
-  const totalReviews = feedback.length;
-
-  const [starFilter, setStarFilter] = useState(null);
-  const [categoryFilter, setCategoryFilter] = useState("");
-=======
 import React, { useState, useEffect } from "react";
 import { Star, X } from "lucide-react";
 import { ReviewStatCard } from "../../components/adminDashboard/Review/ReviewStatCard";
@@ -134,22 +82,10 @@ const Feedback = () => {
 
   const nextPage = () => setPage((prev) => prev + 1);
   const prevPage = () => setPage((prev) => Math.max(prev - 1, 0));
->>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
 
   return (
     <div className="feedback-container">
       {/* average rating and total no of reviews */}
-<<<<<<< HEAD
-      <div>
-        <ReviewStatCard
-          totalReviews={totalReviews}
-          averageRating={averageRating}
-        />
-      </div>
-
-      {/* filter section */}
-      <div className="feedback-filters">
-=======
       <ReviewStatCard
         totalReviews={totalReviews}
         averageRating={averageRating}
@@ -158,7 +94,6 @@ const Feedback = () => {
       {/* filter section */}
       <div className="feedback-filters">
         {/* star filtering */}
->>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
         <div className="filter-group">
           <div className="filter-buttons">
             {[1, 2, 3, 4, 5].map((rating) => (
@@ -167,11 +102,7 @@ const Feedback = () => {
                 onClick={() =>
                   setStarFilter(starFilter === rating ? null : rating)
                 }
-<<<<<<< HEAD
-                className={`filter-btn ${
-=======
                 className={`star-filter-btn ${
->>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
                   starFilter === rating ? "active" : ""
                 }`}
               >
@@ -181,18 +112,11 @@ const Feedback = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
-        <div className="filter-group">
-          <select
-            className="filter-dropdown"
-            onChange={(e) => setCategoryFilter(e.target.value)}
-=======
         {/* category filters*/}
         <div className="filter-group">
           <select
             className="filter-dropdown"
             onChange={(e) => handleCategoryChange(e.target.value)}
->>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
             value={categoryFilter}
           >
             <option value="">All Categories</option>
@@ -205,25 +129,6 @@ const Feedback = () => {
         </div>
       </div>
 
-<<<<<<< HEAD
-      {/* feedback list */}
-      <div className="feedback-list">
-        {feedback.map((item) => (
-          <div key={item.id} className="feedback-card">
-            <ReviewCard
-              userName={item.userName}
-              source={item.source}
-              destination={item.destination}
-              date={item.date}
-              starRating={item.starRating}
-              ratings={item.ratings}
-              comments={item.comments}
-            />
-          </div>
-        ))}
-      </div>
-
-=======
       <div className="sort-and-performance-filters">
         {/* sort radio buttons*/}
         <div className="sort-direction">
@@ -282,7 +187,6 @@ const Feedback = () => {
       <div className="feedback-list">{content}</div>
 
       {/* no feedback message */}
->>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
       {feedback.length === 0 && (
         <div className="no-feedback-container">
           <div className="no-feedback-message">
@@ -291,8 +195,6 @@ const Feedback = () => {
           </div>
         </div>
       )}
-<<<<<<< HEAD
-=======
 
       {/*pagintation*/}
       <nav className="pagination-buttons">
@@ -303,7 +205,6 @@ const Feedback = () => {
           Next
         </button>
       </nav>
->>>>>>> feat-SCRUM-45-Admin-Dashboard-Frontend
     </div>
   );
 };
