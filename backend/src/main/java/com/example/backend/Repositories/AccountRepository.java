@@ -13,12 +13,13 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     Optional<Account> findAccountByEmail(String email) ;
-
-    Optional<Account> findAccountByAccountId(int id);
+    Optional<Account> findAccountByAccountId(Integer id);
+    boolean existsByEmail(String email) ;
 
     @Transactional
     @Modifying
     @Query("UPDATE Account a SET a.role = :role WHERE a.email = :email")
     int updateRoleByEmail(@Param("email") String email, @Param("role") boolean role);
+
 }
 
