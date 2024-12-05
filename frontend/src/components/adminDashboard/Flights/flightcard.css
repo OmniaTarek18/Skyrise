@@ -1,0 +1,111 @@
+.flight-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.flight-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.flight-header-info {
+  margin-top: 30px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.flight-number {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.flight-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.flight-status.complete {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+
+.flight-status.incomplete {
+  background-color: #fef2f2;
+  color: #f87171;
+}
+
+.flight-times {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.flight-card-right {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.flight-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.seats-available {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.flight-time {
+  text-align: center;
+}
+
+.time {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.location {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.flight-path {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flight-path-line {
+  height: 2px;
+  flex-grow: 1;
+  background-color: #e5e7eb;
+}
+
+.plane-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #2563eb;
+}
+
+.flight-status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  color: white;
+}
+
+.flight-status.cancelled {
+  background-color: #f87171;
+}
+
+.flight-status.on-time {
+  background-color: #3b82f6;
+}

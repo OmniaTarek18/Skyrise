@@ -1,0 +1,124 @@
+.stat-card {
+  width: 550px;
+  max-height: 300px;
+  background: linear-gradient(135deg, #0062e3, #05203c);
+  border-radius: 1.5rem;
+  align-items: center;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+
+.decorative-blur {
+  position: absolute;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  filter: blur(24px);
+  transition: transform 0.3s ease;
+}
+
+.decorative-blur.top {
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(25%, -25%);
+}
+
+.decorative-blur.bottom {
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.1);
+  transform: translate(-25%, 25%);
+}
+
+.stat-card:hover .decorative-blur {
+  transform: scale(1.1) translate(25%, -25%);
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.card-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.more-button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.more-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.stat-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.125rem;
+}
+
+.stat-value-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.stat-value {
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-max {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.icon.filled {
+  fill: currentColor;
+}
