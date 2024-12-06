@@ -26,7 +26,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer accountId;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String email;
     
     @Column(nullable = false)
@@ -42,4 +42,6 @@ public class Account {
         this.password = password;
         this.role= role ;
     }
+
+
 }

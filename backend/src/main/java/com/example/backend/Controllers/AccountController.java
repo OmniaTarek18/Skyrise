@@ -17,6 +17,9 @@ public class AccountController {
     public AccountController(AccountServices accountServices) {
         this.accountServices = accountServices;
     }
+
+
+
     @PostMapping("/change")
     public ResponseEntity<String> changePassword(
             @RequestParam String email,
@@ -32,7 +35,7 @@ public class AccountController {
     }
 
     @PostMapping("resetPassword/{id}")
-    public ResponseEntity<Boolean> resetPassword(@PathVariable Integer id, @RequestBody String password) {
+    public ResponseEntity<Boolean> resetPassword(@PathVariable Integer id, @RequestParam String password) {
         boolean flag = this.accountServices.resetPassword(id, password);
         if (flag)
             return new ResponseEntity<>(true, HttpStatus.OK);

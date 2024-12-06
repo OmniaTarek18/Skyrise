@@ -3,7 +3,6 @@ package com.example.backend.Controllers;
 import com.example.backend.DTOs.LogInDTO;
 import com.example.backend.Entities.Admin;
 import com.example.backend.Entities.Customer;
-import com.example.backend.EntityDTOS.LogInDTO;
 import com.example.backend.Enums.Role;
 import com.example.backend.Services.SignUpLogInModuleServices;
 

@@ -29,7 +29,10 @@ public class AccountServices {
             return false ;
         }
         Account account  = optionalAccount.get() ;
-        account.setPassword(bCryptPasswordEncoder.encode(password));
+        String encodedPassword = bCryptPasswordEncoder.encode(password);
+        System.out.println(account.getEmail());
+        System.out.println(encodedPassword);
+        account.setPassword(encodedPassword);
         try {
             this.accountRepository.save(account);
             return true;
@@ -37,15 +40,21 @@ public class AccountServices {
             return  false ;
         }
     }
-    public boolean changePassword(String email, String currentPassword, String newPassword) {
 
+
+
+
+    public boolean changePassword(String email, String currentPassword, String newPassword) {
 
         Optional<Account> optionalAccount = this.accountRepository.findAccountByEmail(email);
         if (optionalAccount.isEmpty()) {
             throw new IllegalArgumentException("User with the provided email does not exist.");
         }
         Account account = optionalAccount.get();
-        if (!this.bCryptPasswordEncoder.matches(currentPassword , account.getPassword())) {
+
+        System.out.println("Stored Password: " + account.getPassword());
+        boolean checker = this.bCryptPasswordEncoder.matches(currentPassword, account.getPassword());
+        if (!checker) {
             throw new IllegalArgumentException("Current password is incorrect.");
         }
 
@@ -53,14 +62,32 @@ public class AccountServices {
             throw new IllegalArgumentException("New password does not meet the security requirements.");
         }
 
-}
+        account.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
+        try {
+            this.accountRepository.save(account);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean validateNewPassword(String password) {
+        return password.length() >= 8 &&
+                password.matches(".*[A-Z].*") &&
+                password.matches(".*\\d.*") &&
+                password.matches(".*[@#$%^&+=!].*");
+    }
     public Account createAccount(String email , String password , Role role){
         return new Account(email , password , role) ;
     }
 
     public Integer addAccount(Account account) {
-        this.accountRepository.save(account);
-        return account.getAccountId();
+        try {
+            this.accountRepository.save(account);
+            return account.getAccountId();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Account checkEmailExistence(String email){

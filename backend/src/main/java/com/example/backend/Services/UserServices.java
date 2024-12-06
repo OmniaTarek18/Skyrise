@@ -30,8 +30,12 @@ import java.util.Date;
         }
 
         public Integer addUser(User user){
-            this.userRepository.save(user);
-            return user.getAccount().getAccountId();
+            try {
+                this.userRepository.save(user);
+                return user.getAccount().getAccountId();
+            } catch (Exception e) {
+                return null;
+            }
         }
 
     }
