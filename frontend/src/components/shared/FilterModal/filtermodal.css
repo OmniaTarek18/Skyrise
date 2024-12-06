@@ -44,18 +44,15 @@
   height: 1.25rem;
 }
 
-
 .modal-content {
   display: flex;
   flex-direction: column;
- 
   gap: 1.5rem;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-
   gap: 0.5rem;
 }
 
@@ -63,55 +60,80 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: #4b5563;
-  display: block; 
-  text-align: left; 
-  margin-bottom: 8px; 
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
 }
-
 
 .select-input {
   width: 100%;
-  padding: 0.75rem;
+  max-width: 200px;
   border-radius: 0.5rem;
   border: 1px solid #d1d5db;
 }
 
-.status-buttons {
+.source-destination-select {
   display: flex;
-  justify-content: space-evenly;
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.status-button {
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid #e5e7eb;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+.status-sortby {
+  display: flex;
+
+  gap: 99px;
 }
 
-.status-button:hover {
+.sort-direction {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5rem;
+}
+.direction-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.direction-button {
+  padding: 8px 12px;
+  margin: 0 5px;
   background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.status-button.active {
+.direction-button.active {
   background-color: #2563eb;
-  color: white;
+  color: #fff;
+  border-color: #2563eb;
 }
 
-.status-button.complete.active {
-  background-color: #eff6ff;
-  color: #3b82f6;
+.direction-button:hover {
+  background-color: #ddd;
 }
 
+.direction-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5); 
+}
 
 .modal-footer {
   margin-top: 2rem;
   display: flex;
   gap: 1rem;
 }
+.clear-button{
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #2563eb;
+}
+.cancel-button,
 
-.cancel-button, .apply-button {
+.apply-button {
   flex: 1;
   padding: 0.75rem;
   border-radius: 0.5rem;
@@ -119,7 +141,8 @@
   transition: background-color 0.3s ease;
 }
 
-.cancel-button:hover, .apply-button:hover {
+.cancel-button:hover,
+.apply-button:hover {
   background-color: #f0f0f0;
 }
 
@@ -128,6 +151,8 @@
   color: white;
 }
 
-.apply-button:hover {
+.apply-button:hover,
+.clear-button:hover 
+{
   background-color: #1d4ed8;
 }
