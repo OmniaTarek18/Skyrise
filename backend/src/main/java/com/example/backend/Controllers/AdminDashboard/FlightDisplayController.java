@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 @CrossOrigin(origins = "*")
-public class FlightDislplayController {
+public class FlightDisplayController {
 
     private final FlightDisplayService flightService;
 

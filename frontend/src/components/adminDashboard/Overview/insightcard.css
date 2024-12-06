@@ -1,0 +1,68 @@
+
+.card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+  background-color: #ffffff;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card__content {
+  position: relative;
+  z-index: 1;
+}
+
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__icon {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.card__body {
+  margin-top: 1.5rem;
+}
+
+.card__value {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.card__divider {
+  height: 2px;
+  width: 3rem;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card__title {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+
+.card--blue {
+  background-color: #3b82f6;
+}
+
+.card--indigo {
+  background-color: #6366f1;
+}
+
+.card--sky {
+  background-color: #0ea5e9;
+}
