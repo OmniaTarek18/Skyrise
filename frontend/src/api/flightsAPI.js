@@ -16,8 +16,10 @@ export const fetchFlightsByDate = async (departureDate, pageNumber = 0) => {
 };
 
 export const filterFlights = async (filterCriteria, pageNumber = 0) => {
+    console.log(filterCriteria)
     const response = await flightsApi.post("/flights", filterCriteria, {
         params: { pageNumber },
     });
+    console.log(response.data)
     return response.data;
 };

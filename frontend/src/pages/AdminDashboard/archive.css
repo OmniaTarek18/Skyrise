@@ -1,0 +1,145 @@
+.archive-page {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.archive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.archive-header h1 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.filter-button {
+  background-color: #007bff;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filter-button:hover {
+  background-color: #0056b3;
+}
+
+.date-picker-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.date-picker-container label {
+  font-size: 1.2rem;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.date-picker-wrapper {
+  position: relative;
+}
+
+.date-picker {
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  font-size: 1.2rem;
+  width: 220px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.date-picker:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.flights-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  text-align: left;
+}
+
+.flights-table thead {
+  background-color: #007bff;
+  color: white;
+}
+
+.flights-table th,
+.flights-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.flights-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.flights-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status-completed {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-cancelled {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-button  {
+  background-color: #f44336;
+  color: white;
+  border:white;
+  border-radius:0.2rem;
+  font-size: 1.5rem;
+}
+
+.delete-button:hover {
+  color: white;
+  background-color: #c9302c;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

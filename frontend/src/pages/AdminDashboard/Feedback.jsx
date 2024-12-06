@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Star, X } from "lucide-react";
 import { ReviewStatCard } from "../../components/adminDashboard/Review/ReviewStatCard";
 import FilterButton from "../../components/shared/Button/FilterButton";
+import "./feedback.css"
 import {
   getFilteredFeedback,
   getAverageRating,
@@ -14,48 +15,43 @@ const Feedback = () => {
   const [feedback, setFeedback] = useState([]);
   const [averageRating, setAverageRating] = useState(0.0);
   const [totalReviews, setTotalReviews] = useState(0);
-  const [starFilter, setStarFilter] = useState(null);
+  const [totalPages, setTotalPages] = useState(0);
+  const [starFilter, setStarFilter] = useState(0); 
   const [categoryFilter, setCategoryFilter] = useState("");
   const [performanceFilter, setPerformanceFilter] = useState("");
-  const [sortDirection, setSortDirection] = useState(""); 
+  const [sortDirection, setSortDirection] = useState("asc");
+
 
   useEffect(() => {
     const filterCriteria = {
       stars: starFilter,
-      direction: sortDirection, 
+      direction: sortDirection,
       ...(categoryFilter &&
-        performanceFilter && {
-          [categoryFilter]: performanceFilter,
-        }),
+        performanceFilter && { [categoryFilter]: performanceFilter }),
     };
 
-    // determining which api to call based on the criteria or no criteria
-    if (
-      starFilter !== null ||
-      (categoryFilter !== "" && performanceFilter !== "") || sortDirection !== ""
-    ) {
-  
-      getFilteredFeedback(filterCriteria, page)
+    const fetchData = () => {
+      const apiCall =
+        starFilter || categoryFilter || performanceFilter || sortDirection
+          ? getFilteredFeedback(filterCriteria, page)
+          : getAllFeedback(page);
+
+      apiCall
         .then((response) => {
-          setFeedback(response.content || []); 
-          setTotalReviews(response.totalElements || 0); 
+          setFeedback(response.content || []);
+          setTotalReviews(response.totalElements || 0);
+          setTotalPages(response.totalPages || 0);
         })
         .catch((error) => {
-          console.error("Fetching filtered feedback failed:", error);
-          setFeedback([]); 
-        });
-    } else {
-      getAllFeedback(page)
-        .then((response) => {
-          setFeedback(response.content || []); 
-          setTotalReviews(response.totalElements || 0); 
-        })
-        .catch((error) => {
-          console.error("Fetching all feedback failed:", error);
+          console.error("Error fetching feedback:", error);
           setFeedback([]);
         });
-    }
-  }, [starFilter, categoryFilter, performanceFilter, page, sortDirection]); 
+    };
+
+    fetchData();
+  }, [starFilter, categoryFilter, performanceFilter, page, sortDirection]);
+
+
   useEffect(() => {
     getAverageRating()
       .then((response) => setAverageRating(response || 0.0))
@@ -65,27 +61,30 @@ const Feedback = () => {
       });
   }, []);
 
+
   const handleCategoryChange = (category) => {
     setCategoryFilter(category);
     setPerformanceFilter(""); 
-    setPage(0); 
-  };
-
-  const handlePerformanceClick = (performance) => {
-    setPerformanceFilter((prev) => (prev === performance ? "" : performance)); 
     setPage(0);
   };
 
+  const handlePerformanceClick = (performance) => {
+    setPerformanceFilter((prev) => (prev === performance ? "" : performance));
+    setPage(0);
+  };
+
+ 
   const content = feedback.map((f) => (
     <Post key={`${f.id}-${f.timestamp}`} post={f} />
   ));
 
-  const nextPage = () => setPage((prev) => prev + 1);
+  
+  const nextPage = () => setPage((prev) => Math.min(prev + 1, totalPages - 1));
   const prevPage = () => setPage((prev) => Math.max(prev - 1, 0));
 
   return (
     <div className="feedback-container">
-      {/* average rating and total no of reviews */}
+      {/* review card */}
       <ReviewStatCard
         totalReviews={totalReviews}
         averageRating={averageRating}
@@ -93,15 +92,15 @@ const Feedback = () => {
 
       {/* filter section */}
       <div className="feedback-filters">
-        {/* star filtering */}
+        {/* star rating */}
         <div className="filter-group">
           <div className="filter-buttons">
             {[1, 2, 3, 4, 5].map((rating) => (
               <button
                 key={rating}
                 onClick={() =>
-                  setStarFilter(starFilter === rating ? null : rating)
-                }
+                  setStarFilter(starFilter === rating ? 0 : rating)
+                } 
                 className={`star-filter-btn ${
                   starFilter === rating ? "active" : ""
                 }`}
@@ -112,7 +111,7 @@ const Feedback = () => {
           </div>
         </div>
 
-        {/* category filters*/}
+        {/* category filter */}
         <div className="filter-group">
           <select
             className="filter-dropdown"
@@ -129,8 +128,9 @@ const Feedback = () => {
         </div>
       </div>
 
+      {/* sort + performance */}
       <div className="sort-and-performance-filters">
-        {/* sort radio buttons*/}
+        {/* direction of sort*/}
         <div className="sort-direction">
           <label>
             <input
@@ -160,7 +160,7 @@ const Feedback = () => {
           </label>
         </div>
 
-        {/* performance filters */}
+        {/* performance filter */}
         <div className="performance-filters">
           <FilterButton
             label="Excellent"
@@ -186,7 +186,6 @@ const Feedback = () => {
       {/* feedback list */}
       <div className="feedback-list">{content}</div>
 
-      {/* no feedback message */}
       {feedback.length === 0 && (
         <div className="no-feedback-container">
           <div className="no-feedback-message">
@@ -196,12 +195,11 @@ const Feedback = () => {
         </div>
       )}
 
-      {/*pagintation*/}
       <nav className="pagination-buttons">
         <button onClick={prevPage} disabled={page === 0}>
           Prev
         </button>
-        <button onClick={nextPage} disabled={feedback.length < 10}>
+        <button onClick={nextPage} disabled={page >= totalPages - 1}>
           Next
         </button>
       </nav>
