@@ -1,41 +1,53 @@
 // Import necessary components and hooks
-import React from "react"; // React library to define the component
+import React, { useEffect, useRef, useState } from "react"; // React library to define the component
 import Button from "../../shared/Button"; // Button component for rendering buttons
 import Input from "../../shared/Input"; // Input component for rendering input fields
 import CallToAction from "../../shared/CallToAction"; // CallToAction component for rendering a call-to-action link
 import { useLoginForm } from "./validation"; // Custom hook to handle form validation
+import { LoginAPI } from "./api";
 import "./style.css"; // Importing the associated CSS for styling
+import { useNavigate } from "react-router-dom";
 
 // LogInForm component definition
 const LogInForm = ({ navigateTo }) => {
-  // onSubmit handler for the form submission
-  const onSubmit = async (values, actions) => {
-    // Log form values and actions to the console for debugging
-    console.log(values);
-    console.log(actions);
-
-    // Simulate an asynchronous operation (e.g., network request) with a delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Reset the form after submission
-    actions.resetForm();
-  };
-
+  const nav = useNavigate();
+  const isFirstRender = useRef(true);
+  const [alert, setAlert] = useState(false);
   // Using the useLoginForm hook to get form values, handlers, and validation states
   const {
     values,
     errors,
     touched,
     isSubmitting,
+    status,
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useLoginForm(); // Use the custom hook for form management
+  } = useLoginForm(LoginAPI); // Use the custom hook for form management
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false; // Skip effect on the first render
+      return;
+    }
+    if (status == "success") {
+      nav("/");
+    } else {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 2000); // 2000 milliseconds = 2 seconds
+    }
+  }, [status]);
 
   return (
     // Form element for user login
     <form onSubmit={handleSubmit}>
-      {/* Email input field */}
+      {alert && (
+        <div className="alert alert-warning" role="alert">
+          Email doesn't exist!
+        </div>
+      )}
       <Input
         label={"Email"} // Label for the email field
         type={"email"} // Type of input (email)

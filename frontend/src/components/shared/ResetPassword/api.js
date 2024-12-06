@@ -1,14 +1,14 @@
-export const changePasswordAPI = async (values, actions) => {
+export const resetPasswordAPI = async (values, actions) => {
   console.log(values); // Log form values to the console
   console.log(actions); // Log actions (such as resetForm) for debugging purposes
-  const url = `http://localhost:8080/password/reset?email=${values.email}`;
+  const url = `http://localhost:8080/password/change?email=${values.email}&newPassword=${values.newPassword}`;
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: ""
+      body: "",
     });
     if (!response.ok) {
       actions.setStatus("fail");

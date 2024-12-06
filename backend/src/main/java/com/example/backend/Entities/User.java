@@ -31,6 +31,12 @@ public class User {
     @Column(name = "id")
     private Integer userId;
 
+    @Column(name = "email", nullable = true)
+    private String email;
+
+    @Column(name = "password", nullable = true)
+    private String password;
+
     @Column(nullable = false)
     private String countryCode;
 
@@ -53,7 +59,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String passportNumber;
 
     @Column(nullable = false)
@@ -61,11 +67,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
-    @Column(name = "email", nullable = false)
-    private String email;
-
-    @Column(name = "password", nullable = false)
-    private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications;

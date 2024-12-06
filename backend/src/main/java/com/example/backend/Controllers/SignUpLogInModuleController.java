@@ -22,13 +22,10 @@ import org.springframework.web.bind.annotation.*;
 public class SignUpLogInModuleController {
     private final SignUpLogInModuleServices signUpLogInModuleServices ;
 
-
     @Autowired
     public SignUpLogInModuleController(SignUpLogInModuleServices signUpLogInModuleServices){
         this.signUpLogInModuleServices=  signUpLogInModuleServices ;
     }
-
-
 
     @PostMapping(path = "signUp/customer")
     public ResponseEntity<Integer> signUp(@RequestBody Customer customer){
@@ -44,8 +41,4 @@ public class SignUpLogInModuleController {
     public ResponseEntity<LogInDTO> logIn(@PathParam(value = "email") String email, @PathParam(value = "password") String password) {
         return this.signUpLogInModuleServices.signInChecker(email, password);
     }
-
-
-
-
 }

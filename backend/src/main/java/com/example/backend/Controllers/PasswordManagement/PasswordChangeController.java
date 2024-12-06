@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 @Controller
+@CrossOrigin
 @RequestMapping("/password")
 public class PasswordChangeController {
 

@@ -1,35 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Input from "../../shared/Input";
 import Button from "../../shared/Button";
 import Section from "../../shared/Section";
 import ResetPassword from "../../shared/ResetPassword";
 import { useForgotPasswordForm } from "./validation";
+import { changePasswordAPI } from "./api";
 import "./style.css";
 
 const ForgetPassword = () => {
   const [page, setPage] = useState("forgetPassword");
   const [alert, setAlert] = useState(false);
+  const isFirstRender = useRef(true)
   const {
     values,
     errors,
     touched,
     isSubmitting,
+    status,
     handleChange,
     handleBlur,
     handleSubmit, // Formik's handleSubmit function
-    status,
-  } = useForgotPasswordForm();
-
-  // Form submission handling
-  const handleFormSubmit = (e) => {
-    e.preventDefault(); // Prevents the default form submission behavior
-    if (!touched.email || errors.email) {
-      return; // If validation fails, don't proceed with the form submission
-    }
-    handleSubmit();
-  };
+  } = useForgotPasswordForm(changePasswordAPI);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false; // Skip effect on the first render
+      return;
+    }
     if (status == "success") {
       setPage("continue");
     } else {
@@ -49,7 +46,7 @@ const ForgetPassword = () => {
       )}
       {page === "forgetPassword" && <Section heading={"Find Your Account"} />}
       {page === "forgetPassword" && (
-        <form className="forget-password-form" onSubmit={handleFormSubmit}>
+        <form className="forget-password-form" onSubmit={handleSubmit}>
           <Input
             label={"Email"}
             type={"email"}
@@ -69,9 +66,7 @@ const ForgetPassword = () => {
           />
         </form>
       )}
-      {page === "continue" && (
-        <ResetPassword userEmail={values.email} />
-      )}
+      {page === "continue" && <ResetPassword userEmail={values.email} />}
     </section>
   );
 };

@@ -11,8 +11,7 @@ public class PasswordResetService {
     public PasswordResetService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public boolean processResetPassword(String email) {
-
+    public boolean processResetPassword(String email){
         return userRepository.existsByEmail(email) == 1;
     }
 
