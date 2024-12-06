@@ -1,14 +1,17 @@
 // Import necessary modules and components
-import React, { useState } from "react"; // React for creating components
+import React, { useEffect } from "react"; // React for creating components
+import { useNavigate } from "react-router-dom";
 import GoogleSignUp from "../GoogleSignUp"; // Google SignUp component
 import Button from "../../shared/Button"; // Button component for form submission
 import Input from "../../shared/Input"; // Input component for form fields
 import { useSignUpForm, countries, countryCodes, gender } from "./validation"; // Form validation logic and options
+import { onSubmit } from "./api";
 import "./style.css"; // CSS file for styling the form
 
 // SignUpForm component handles the user registration form
 const SignUpForm = () => {
-
+  // const nav = useNavigate()
+  const nav = useNavigate();
   // Handlers for updating Formik fields based on user input
   const handleEmail = (email) => setFieldValue("email", email);
   const handleFirstName = (firstName) => setFieldValue("firstName", firstName);
@@ -20,11 +23,16 @@ const SignUpForm = () => {
     errors,
     touched,
     isSubmitting,
+    status,
     handleChange,
     handleBlur,
     handleSubmit,
     setFieldValue,
-  } = useSignUpForm();
+  } = useSignUpForm(onSubmit);
+
+  useEffect(() => {
+    if (status == "success") nav("/");
+  }, [status]);
 
   return (
     // Main form element
@@ -78,13 +86,13 @@ const SignUpForm = () => {
             <Input
               label={"Date of Birth"}
               type={"date"}
-              id={"dob"}
+              id={"dateOfBirth"}
               placeholder={"mm/dd/yyyy"}
               onChange={handleChange}
-              value={values.dob}
+              value={values.dateOfBirth}
               onBlur={handleBlur}
-              showError={errors.dob && touched.dob}
-              errorMessage={errors.dob}
+              showError={errors.dateOfBirth && touched.dateOfBirth}
+              errorMessage={errors.dateOfBirth}
             />
           </div>
           <div className="row">
@@ -210,12 +218,14 @@ const SignUpForm = () => {
             <Input
               label={"Issuing Country"}
               type={"text"}
-              id={"issuingCountry"}
+              id={"passportIssuingCountry"}
               onChange={handleChange}
-              value={values.issuingCountry}
+              value={values.passportIssuingCountry}
               onBlur={handleBlur}
-              showError={errors.issuingCountry && touched.issuingCountry}
-              errorMessage={errors.issuingCountry}
+              showError={
+                errors.passportIssuingCountry && touched.passportIssuingCountry
+              }
+              errorMessage={errors.passportIssuingCountry}
               selectionInput={true}
               defaultSelectionText={"Country"}
               options={countries} // List of countries for selection

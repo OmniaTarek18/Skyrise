@@ -1,7 +1,7 @@
 import LogInPage from "./components/login/LogInPage";
 import "./App.css";
 import SignUpPage from "./components/signup/SignUpPage";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ChangePassword from "./components/userdashboard/ChangePassword";
 import ForgetPassword from "./components/login/ForgetPassword";
 import ResetPassword from "./components/shared/ResetPassword";
@@ -17,11 +17,14 @@ function App() {
   //   "Signup",
   // ];
   // const onClickButton = (onClose) =>{return <LogIn onClose={onClose}>Alert<span> hi</span></LogIn>};
-  const nav = useNavigate()
   return (
     <Routes className="App">
-      <Route path="/" element={<LogInPage />} />
-      <Route path="home" element={<Homepage />} />
+      {/* <NavBar heading="Navigation Menu" items={items}></NavBar>
+      <Button btnText={"Submit"} handleClick={onClickButton}></Button> */}
+      {/* <LogInPage></LogInPage> */}
+      {/* <SignUpPage></SignUpPage> */}
+      {/* <Test/> */}
+      <Route path="/" element={<Homepage />} />
       <Route path="signup" element={<SignUpPage />} />
       <Route path="login" element={<LogInPage />} />
       <Route path="change-password" element={<ChangePassword />}/>
