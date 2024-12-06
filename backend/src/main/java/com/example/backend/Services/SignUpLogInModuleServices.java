@@ -1,6 +1,7 @@
 package com.example.backend.Services;
 
 
+import com.example.backend.DTOs.LogInDTO;
 import com.example.backend.Entities.Account;
 import com.example.backend.Entities.Admin;
 import com.example.backend.Entities.Customer;
@@ -42,14 +43,14 @@ public class SignUpLogInModuleServices {
         return this.accountServices.addAccount(account) ;
     }
 
-    public ResponseEntity<Pair<Integer,Role>> signInChecker(String email  , String password) {
+    public ResponseEntity<LogInDTO> signInChecker(String email  , String password) {
 
         Account account =  this.accountServices.checkEmailExistence(email) ;
         if (Objects.equals(account, null) || !bCryptPasswordEncoder.matches(password, account.getPassword())) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Pair<Integer, Role> id_role = new Pair<>(account.getAccountId(), account.getRole());
-        return new ResponseEntity<>(id_role  , HttpStatus.OK);
+        LogInDTO id_role = new LogInDTO(account.getAccountId(), account.getRole());
+        return new ResponseEntity<>(id_role, HttpStatus.OK);
     }
 
     public ResponseEntity<Integer> signUpCustomer(Customer customer) {
