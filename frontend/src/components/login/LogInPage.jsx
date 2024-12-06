@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const LogInPage = () => {
-  return (
-    <div>LogInPage</div>
-  )
-}
-
-export default LogInPage
-=======
 import React, { useState } from "react";
 import loginImg from "../../assets/loginImg.jpeg";
 import LogInForm from "./LogInForm";
@@ -71,4 +60,3 @@ const LogInPage = () => {
 };
 
 export default LogInPage;
->>>>>>> SCRUM-65-Reset-Password

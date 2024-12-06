@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-// validate user's email, then call change password
-import React from "react";
-
-const index = () => {
-  return <div>index</div>;
-};
-
-export default index;
-=======
 import React, { useState, useEffect } from "react";
 import Input from "../../shared/Input";
 import Button from "../../shared/Button";
@@ -87,4 +77,3 @@ const ForgetPassword = () => {
 };
 
 export default ForgetPassword;
->>>>>>> SCRUM-65-Reset-Password
