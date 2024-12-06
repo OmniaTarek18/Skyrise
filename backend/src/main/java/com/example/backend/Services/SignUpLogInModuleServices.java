@@ -1,13 +1,12 @@
 package com.example.backend.Services;
 
 
+import com.example.backend.DTOs.LogInDTO;
 import com.example.backend.Entities.Account;
 import com.example.backend.Entities.Admin;
 import com.example.backend.Entities.Customer;
 import com.example.backend.Entities.User;
-import com.example.backend.EntityDTOS.LogInDTO;
 import com.example.backend.Enums.Role;
-import lombok.extern.java.Log;
 import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,14 +43,14 @@ public class SignUpLogInModuleServices {
         return this.accountServices.addAccount(account) ;
     }
 
-    public ResponseEntity<LogInDTO> signInChecker(String email  , String password) {
+    public ResponseEntity<Pair<Integer,Role>> signInChecker(String email  , String password) {
 
         Account account =  this.accountServices.checkEmailExistence(email) ;
         if (Objects.equals(account, null) || !bCryptPasswordEncoder.matches(password, account.getPassword())) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        LogInDTO logInDTO = new LogInDTO(account.getAccountId(), account.getRole());
-        return new ResponseEntity<>(logInDTO  , HttpStatus.OK);
+        LogInDTO id_role = new LogInDTO(account.getAccountId(), account.getRole());
+        return new ResponseEntity<>(id_role, HttpStatus.OK);
     }
 
     public ResponseEntity<Integer> signUpCustomer(Customer customer) {

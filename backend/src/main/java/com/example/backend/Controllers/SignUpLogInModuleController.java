@@ -1,5 +1,6 @@
 package com.example.backend.Controllers;
 
+import com.example.backend.DTOs.LogInDTO;
 import com.example.backend.Entities.Admin;
 import com.example.backend.Entities.Customer;
 import com.example.backend.EntityDTOS.LogInDTO;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping()
+@CrossOrigin
 public class SignUpLogInModuleController {
     private final SignUpLogInModuleServices signUpLogInModuleServices ;
 
