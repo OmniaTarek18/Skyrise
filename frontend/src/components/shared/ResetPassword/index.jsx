@@ -1,13 +1,19 @@
 // ResetPassword.js
-import React from "react"; // Importing React library for JSX syntax
+import { React, useState, useEffect, useRef } from "react"; // Importing React library for JSX syntax
 import Input from "../Input"; // Importing the custom Input component for rendering input fields
 import Button from "../Button"; // Importing the custom Button component for rendering buttons
 import Section from "../Section"; // Importing the custom Section component for rendering section headings
 import { useResetPasswordForm } from "./validation"; // Importing the custom hook to handle form logic and validation
 import "./style.css"; // Importing the stylesheet for the ResetPassword component
+import { useNavigate } from "react-router";
+import { changePasswordAPI } from "../../login/ForgetPassword/api";
 
 const ResetPassword = ({ userEmail }) => {
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
+  const isFirstRender = useRef(true);
   // Destructuring the values and methods returned from the useResetPasswordForm custom hook
+
   const {
     values,
     errors,
@@ -16,11 +22,32 @@ const ResetPassword = ({ userEmail }) => {
     handleChange,
     handleBlur,
     handleSubmit,
-  } = useResetPasswordForm(userEmail); // Passing the user's email to the hook
+    status,
+  } = useResetPasswordForm(userEmail, changePasswordAPI); // Passing the user's email to the hook
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false; // Skip effect on the first render
+      return;
+    }
+    if (status == "success") {
+      navigate("/home");
+    } else {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 2000); // 2000 milliseconds = 2 seconds
+    }
+  }, [status]);
 
   return (
     <section className="reset-password-form">
       {/* Section for the heading */}
+      {alert && (
+        <div className="alert alert-warning" role="alert">
+          Password changed Successfully
+        </div>
+      )}
       <Section heading={"Enter New Password"} />
 
       {/* Form for resetting the password */}

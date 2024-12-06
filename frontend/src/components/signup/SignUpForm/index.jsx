@@ -1,5 +1,5 @@
 // Import necessary modules and components
-import React, { useEffect } from "react"; // React for creating components
+import React, { useEffect, useState, useRef } from "react"; // React for creating components
 import { useNavigate } from "react-router-dom";
 import GoogleSignUp from "../GoogleSignUp"; // Google SignUp component
 import Button from "../../shared/Button"; // Button component for form submission
@@ -11,7 +11,9 @@ import "./style.css"; // CSS file for styling the form
 // SignUpForm component handles the user registration form
 const SignUpForm = () => {
   // const nav = useNavigate()
+  const [alert, setAlert] = useState(false);
   const nav = useNavigate();
+  const isFirstRender = useRef(true);
   // Handlers for updating Formik fields based on user input
   const handleEmail = (email) => setFieldValue("email", email);
   const handleFirstName = (firstName) => setFieldValue("firstName", firstName);
@@ -31,12 +33,28 @@ const SignUpForm = () => {
   } = useSignUpForm(onSubmit);
 
   useEffect(() => {
-    if (status == "success") nav("/");
+    if (isFirstRender.current) {
+      isFirstRender.current = false; // Skip effect on the first render
+      return;
+    }
+    if (status == "success") {
+      nav("/");
+    } else {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 2000); // 2000 milliseconds = 2 seconds
+    }
   }, [status]);
 
   return (
     // Main form element
     <form className="" onSubmit={handleSubmit}>
+      {alert && (
+        <div className="alert alert-warning" role="alert">
+          Email doesn't exist!
+        </div>
+      )}
       {/* Essential details section: User's nationality and ID */}
       <section className="essential-details-container">
         <fieldset className="account-details-container">
@@ -248,6 +266,7 @@ const SignUpForm = () => {
           handleEmail={handleEmail}
           handleFirstName={handleFirstName}
           handleLastName={handleLastName}
+          touched={touched}
         />
       </div>
     </form>
