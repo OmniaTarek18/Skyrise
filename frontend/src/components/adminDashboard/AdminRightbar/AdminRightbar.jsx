@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Overview from "../../../pages/AdminDashboard/Overview";
 import Flights from "../../../pages/AdminDashboard/Flights";
 import Feedback from "../../../pages/AdminDashboard/Feedback";
-import Archive from "../../../pages/AdminDashboard/ArchivePage";
 import ChangePassword from "../../../pages/AdminDashboard/ChangePassword";
 import DeleteAccount from "../../../pages/AdminDashboard/DeleteAccount";
 import ArchivePage from "../../../pages/AdminDashboard/ArchivePage";

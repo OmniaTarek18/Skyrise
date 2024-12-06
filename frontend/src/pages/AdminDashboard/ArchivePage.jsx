@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { filterFlights } from "../../api/flightsAPI";
-import { deleteFlight } from "../../api/archiveAPI"; // Import deleteFlight API
+import { deleteFlight } from "../../api/archiveAPI"; 
 import FlightTable from "../../components/adminDashboard/Archive/FlightTable";
 import "./archive.css";
 
