@@ -54,7 +54,25 @@ public class AccountServices {
         }
 
 }
+    public Account createAccount(String email , String password , Role role){
+        return new Account(email , password , role) ;
+    }
+
+    public Integer addAccount(Account account) {
+        this.accountRepository.save(account);
+        return account.getAccountId();
+    }
+
+    public Account checkEmailExistence(String email){
+        Optional<Account>  optionalAccount = this.accountRepository.findAccountByEmail(email);
+        return optionalAccount.orElse(null);
+    }
+
     public boolean updateAccountFromCustomerToAdmin(String email){
         int flag  =  this.accountRepository.updateRoleByEmail(email , true) ;
         return flag == 1;
-    }}
+    }
+
+
+
+}

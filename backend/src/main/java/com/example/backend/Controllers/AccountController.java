@@ -32,8 +32,8 @@ public class AccountController {
     }
 
     @PostMapping("resetPassword/{id}")
-    public ResponseEntity<Boolean> changePassword(@PathVariable Integer id, @RequestBody String password) {
-        boolean flag = this.accountServices.changePassword(id, password);
+    public ResponseEntity<Boolean> resetPassword(@PathVariable Integer id, @RequestBody String password) {
+        boolean flag = this.accountServices.resetPassword(id, password);
         if (flag)
             return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
