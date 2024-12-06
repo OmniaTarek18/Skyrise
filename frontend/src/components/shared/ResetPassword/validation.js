@@ -1,7 +1,6 @@
 // Import necessary hooks and validation schema
 import { useFormik } from "formik";
 import { resetPasswordSchema } from "../../../Validation";
-import axios from "axios";
 // Custom hook for handling the reset password form logic
 export const useResetPasswordForm = (userEmail, onSubmit) => {
   // Initialize Formik with form values, validation schema, and submission handler
