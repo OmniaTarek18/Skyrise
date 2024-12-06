@@ -16,7 +16,7 @@ import com.example.backend.Enums.Role;
 
 
 @Service
-public class SignUpLogInModuleServices {
+public class SignUpLogInModuleServices{
 
     private final UserServices userServices;
     private final AccountServices accountServices;
@@ -69,12 +69,4 @@ public class SignUpLogInModuleServices {
             return new ResponseEntity<>(accountId, HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
     }
-
-    public ResponseEntity<Integer> signUpAdmin(Admin admin) {
-        Integer accountId = this.addAdmin(admin);
-        if (accountId != null)
-            return new ResponseEntity<>(accountId, HttpStatus.CREATED);
-        return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
 }

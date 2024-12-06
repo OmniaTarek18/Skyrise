@@ -32,11 +32,6 @@ public class SignUpLogInModuleController {
         return this.signUpLogInModuleServices.signUpCustomer(customer);
     }
 
-    @PostMapping(path = "signUp/admin")
-    public ResponseEntity<Integer> signUp(@RequestBody Admin admin){
-        return this.signUpLogInModuleServices.signUpAdmin(admin) ;
-    }
-
     @GetMapping("logIn")
     public ResponseEntity<LogInDTO> logIn(@PathParam(value = "email") String email, @PathParam(value = "password") String password) {
         return this.signUpLogInModuleServices.signInChecker(email, password);

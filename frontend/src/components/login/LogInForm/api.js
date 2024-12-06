@@ -2,6 +2,7 @@
 export const LoginAPI = async (values, actions) => {
   console.log(values);
   console.log(actions);
+
   const url = `http://localhost:8080/logIn?email=${values.email}&password=${values.password}`;
   try {
     const response = await fetch(url);

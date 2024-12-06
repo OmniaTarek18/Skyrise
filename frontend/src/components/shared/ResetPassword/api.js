@@ -1,24 +1,29 @@
 export const resetPasswordAPI = async (values, actions) => {
-  console.log(values); // Log form values to the console
-  console.log(actions); // Log actions (such as resetForm) for debugging purposes
-  const url = `http://localhost:8080/password/change?email=${values.email}&newPassword=${values.newPassword}`;
+  console.log(values); // Debugging: Log form values
+  const url = "http://localhost:8080/change"; // API endpoint
+
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: "",
+      body: JSON.stringify({
+        email: values.email,
+        newPassword: values.newPassword,
+      }),
     });
+
     if (!response.ok) {
-      actions.setStatus("fail");
-      throw new Error(`Response status: ${response.status}`);
+      actions.setStatus("fail"); // Set status to fail
+      throw new Error(`Failed with status: ${response.status}`);
     }
+
     const json = await response.json();
-    actions.setStatus("success");
-    console.log(json);
+    actions.setStatus("success"); // Set status to success
+    console.log(json); // Debugging: Log response
   } catch (error) {
-    actions.setStatus("fail");
-    console.error(error.message);
+    actions.setStatus("fail"); // Set status to fail
+    console.error("Error:", error.message);
   }
 };

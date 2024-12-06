@@ -37,7 +37,7 @@ const SignUpForm = () => {
       isFirstRender.current = false; // Skip effect on the first render
       return;
     }
-    if (status == "success") {
+    if (status === "success") {
       nav("/");
     } else {
       setAlert(true);
