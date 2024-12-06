@@ -1,1 +1,0 @@
-// validate user's old password, then call change password

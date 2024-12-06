@@ -8,7 +8,11 @@ export const countries = [
   "South Africa", "Argentina", "Spain", "Netherlands", "Sweden", "Norway", "Finland",
   "Denmark", "Switzerland", "Belgium", "Turkey", "Saudi Arabia", "United Arab Emirates",
   "Singapore", "Malaysia", "Indonesia", "Thailand", "Vietnam", "Philippines", "Egypt",
+<<<<<<< HEAD
   "Nigeria", "Kenya", "Chile", "Colombia", "Peru", "Pakistan", "Bangladesh",
+=======
+  "Nigeria", "Kenya", "Chile", "Colombia", "Peru", "Pakistan", "Bangladesh", "Israel",
+>>>>>>> 78722e824a6e9aefc3894f69d525f449583e134b
   "Greece", "Portugal", "New Zealand", "Ireland", "Czech Republic", "Romania", "Ukraine",
   "Poland", "Hungary", "Croatia", "Slovenia", "Serbia",
 ];
@@ -23,7 +27,11 @@ export const countryCodes = [
   "Poland (+48)", "Turkey (+90)", "Saudi Arabia (+966)", "United Arab Emirates (+971)",
   "Singapore (+65)", "Malaysia (+60)", "Indonesia (+62)", "Thailand (+66)", "Vietnam (+84)",
   "Philippines (+63)", "Egypt (+20)", "Nigeria (+234)", "Kenya (+254)", "Chile (+56)",
+<<<<<<< HEAD
   "Colombia (+57)", "Peru (+51)", "Pakistan (+92)", "Bangladesh (+880)",
+=======
+  "Colombia (+57)", "Peru (+51)", "Pakistan (+92)", "Bangladesh (+880)", "Israel (+972)",
+>>>>>>> 78722e824a6e9aefc3894f69d525f449583e134b
   "Greece (+30)", "Portugal (+351)", "New Zealand (+64)", "Ireland (+353)", "Czech Republic (+420)",
   "Romania (+40)", "Ukraine (+380)", "Hungary (+36)", "Croatia (+385)", "Slovenia (+386)", "Serbia (+381)",
 ];
