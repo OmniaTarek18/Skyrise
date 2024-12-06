@@ -1,6 +1,5 @@
 import React from "react";
 import CallToAction from "../shared/CallToAction";
-import Logo from "../shared/Logo";
 import SignUpForm from "./SignUpForm";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
