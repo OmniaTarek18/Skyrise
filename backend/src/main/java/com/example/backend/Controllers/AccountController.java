@@ -1,33 +1,40 @@
 package com.example.backend.Controllers;
 
-import com.example.backend.Services.AccountServices;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.backend.DTOs.LogInDTO;
+import com.example.backend.Services.AccountServices;
+import com.example.backend.Services.SignUpLogInModuleServices;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 @RequestMapping
 public class AccountController {
 
     private final AccountServices accountServices;
+    private final SignUpLogInModuleServices signUpLogInModuleServices;
 
-    @Autowired
-    public AccountController(AccountServices accountServices) {
-        this.accountServices = accountServices;
+    @GetMapping("/email")
+    public ResponseEntity<LogInDTO> checkEmail(@RequestParam String email) {
+        return signUpLogInModuleServices.signInCheckerByEmail(email);
     }
-
-
-
+    
     @PostMapping("/change")
     public ResponseEntity<String> changePassword(
             @RequestParam String email,
-            @RequestParam String currentPassword,
             @RequestParam String newPassword) {
 
         try {
-            accountServices.changePassword(email, currentPassword, newPassword);
+            accountServices.changePassword(email, newPassword);
             return ResponseEntity.ok("Password has been changed successfully.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

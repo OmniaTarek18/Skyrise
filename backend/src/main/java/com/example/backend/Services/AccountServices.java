@@ -3,7 +3,7 @@ package com.example.backend.Services;
 import com.example.backend.Entities.Account;
 import com.example.backend.Enums.Role;
 import com.example.backend.Repositories.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +12,20 @@ import java.util.Optional;
 @Service
 public class AccountServices {
 
-    private final AccountRepository accountRepository ;
+    private final AccountRepository accountRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     public AccountServices(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository ;
+        this.accountRepository = accountRepository;
         bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 
-
-
-    public boolean resetPassword(Integer id , String password){
+    public boolean resetPassword(Integer id, String password) {
         Optional<Account> optionalAccount = this.accountRepository.findAccountByAccountId(id);
         if (optionalAccount.isEmpty()) {
-            return false ;
+            return false;
         }
-        Account account  = optionalAccount.get() ;
+        Account account = optionalAccount.get();
         String encodedPassword = bCryptPasswordEncoder.encode(password);
         System.out.println(account.getEmail());
         System.out.println(encodedPassword);
@@ -37,26 +34,17 @@ public class AccountServices {
             this.accountRepository.save(account);
             return true;
         } catch (Exception e) {
-            return  false ;
+            return false;
         }
     }
 
-
-
-
-    public boolean changePassword(String email, String currentPassword, String newPassword) {
+    public boolean changePassword(String email, String newPassword) {
 
         Optional<Account> optionalAccount = this.accountRepository.findAccountByEmail(email);
         if (optionalAccount.isEmpty()) {
             throw new IllegalArgumentException("User with the provided email does not exist.");
         }
         Account account = optionalAccount.get();
-
-        System.out.println("Stored Password: " + account.getPassword());
-        boolean checker = this.bCryptPasswordEncoder.matches(currentPassword, account.getPassword());
-        if (!checker) {
-            throw new IllegalArgumentException("Current password is incorrect.");
-        }
 
         if (!validateNewPassword(newPassword)) {
             throw new IllegalArgumentException("New password does not meet the security requirements.");
@@ -77,8 +65,13 @@ public class AccountServices {
                 password.matches(".*\\d.*") &&
                 password.matches(".*[@#$%^&+=!].*");
     }
-    public Account createAccount(String email , String password , Role role){
-        return new Account(email , password , role) ;
+
+    public Account createAccount(String email, String password, Role role) {
+        Account account = new Account();
+        account.setEmail(email);
+        account.setPassword(password);
+        account.setRole(role);
+        return account;
     }
 
     public Integer addAccount(Account account) {
@@ -90,16 +83,14 @@ public class AccountServices {
         }
     }
 
-    public Account checkEmailExistence(String email){
-        Optional<Account>  optionalAccount = this.accountRepository.findAccountByEmail(email);
+    public Account checkEmailExistence(String email) {
+        Optional<Account> optionalAccount = this.accountRepository.findAccountByEmail(email);
         return optionalAccount.orElse(null);
     }
 
-    public boolean updateAccountFromCustomerToAdmin(String email){
-        int flag  =  this.accountRepository.updateRoleByEmail(email , true) ;
+    public boolean updateAccountFromCustomerToAdmin(String email) {
+        int flag = this.accountRepository.updateRoleByEmail(email, true);
         return flag == 1;
     }
-
-
 
 }

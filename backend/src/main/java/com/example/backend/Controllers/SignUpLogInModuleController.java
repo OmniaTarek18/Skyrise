@@ -1,18 +1,19 @@
 package com.example.backend.Controllers;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.example.backend.DTOs.LogInDTO;
 import com.example.backend.Entities.Admin;
 import com.example.backend.Entities.Customer;
-import com.example.backend.Enums.Role;
 import com.example.backend.Services.SignUpLogInModuleServices;
 
 import jakarta.websocket.server.PathParam;
-import org.antlr.v4.runtime.misc.Pair;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
 
 
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 public class SignUpLogInModuleController {
     private final SignUpLogInModuleServices signUpLogInModuleServices ;
 
-    @Autowired
     public SignUpLogInModuleController(SignUpLogInModuleServices signUpLogInModuleServices){
         this.signUpLogInModuleServices=  signUpLogInModuleServices ;
     }

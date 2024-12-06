@@ -36,12 +36,4 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
-    public Account(String email, String password, Role role) {
-        this.email = email ;
-        this.password = password;
-        this.role= role ;
-    }
-
-
 }
