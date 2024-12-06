@@ -2,6 +2,7 @@ package com.example.backend.Controllers;
 
 import com.example.backend.Entities.Admin;
 import com.example.backend.Entities.Customer;
+import com.example.backend.EntityDTOS.LogInDTO;
 import com.example.backend.Enums.Role;
 import com.example.backend.Services.SignUpLogInModuleServices;
 
@@ -39,7 +40,7 @@ public class SignUpLogInModuleController {
     }
 
     @GetMapping("logIn")
-    public ResponseEntity<Pair<Integer , Role>> logIn(@PathParam(value = "email") String email, @PathParam(value = "password") String password) {
+    public ResponseEntity<LogInDTO> logIn(@PathParam(value = "email") String email, @PathParam(value = "password") String password) {
         return this.signUpLogInModuleServices.signInChecker(email, password);
     }
 
