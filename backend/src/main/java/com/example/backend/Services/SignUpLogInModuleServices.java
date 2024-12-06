@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Objects;
 
@@ -43,8 +42,7 @@ public class SignUpLogInModuleServices {
         return this.accountServices.addAccount(account) ;
     }
 
-    public ResponseEntity<Pair<Integer,Role>> signInChecker(String email  , String password) {
-
+    public ResponseEntity<LogInDTO> signInChecker(String email  , String password) {
         Account account =  this.accountServices.checkEmailExistence(email) ;
         if (Objects.equals(account, null) || !bCryptPasswordEncoder.matches(password, account.getPassword())) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
