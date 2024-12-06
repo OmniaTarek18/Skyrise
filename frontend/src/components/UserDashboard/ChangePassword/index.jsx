@@ -1,3 +1,4 @@
+// validate user's old password, then call change password
 import React from 'react'
 
 const index = () => {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import CallToAction from "../shared/CallToAction";
 import SignUpForm from "./SignUpForm";
@@ -25,3 +26,14 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+=======
+import React from 'react'
+
+const SignUpPage = () => {
+  return (
+    <div>SignUpPage</div>
+  )
+}
+
+export default SignUpPage
+>>>>>>> SCRUM-65-Reset-Password

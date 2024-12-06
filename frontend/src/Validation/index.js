@@ -78,11 +78,19 @@ export const signUpSchema = yup.object().shape({
   confirmPassword: confirmPasswordValidation("password"),
   nationality: nationalityValidation,
   nationalId: nationalIdValidation,
+<<<<<<< HEAD
   dateOfBirth: dobValidation,
   countryCode: countryCodeValidation,
   phoneNumber: phoneNumberValidation,
   passportNumber: passportNumberValidation,
   passportIssuingCountry: issuingCountryValidation,
+=======
+  dob: dobValidation,
+  countryCode: countryCodeValidation,
+  phoneNumber: phoneNumberValidation,
+  passportNumber: passportNumberValidation,
+  issuingCountry: issuingCountryValidation,
+>>>>>>> SCRUM-65-Reset-Password
   firstName: nameValidation,
   lastName: nameValidation,
   gender: genderValidation,
