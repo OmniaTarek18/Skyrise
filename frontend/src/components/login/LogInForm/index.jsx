@@ -31,7 +31,7 @@ const LogInForm = ({ navigateTo }) => {
       return;
     }
     if (status == "success") {
-      nav("/home");
+      nav("/");
     } else {
       setAlert(true);
       setTimeout(() => {

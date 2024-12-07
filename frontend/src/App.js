@@ -20,8 +20,7 @@ function App() {
   const nav = useNavigate()
   return (
     <Routes className="App">
-      <Route path="/" element={<LogInPage />} />
-      <Route path="home" element={<Homepage />} />
+      <Route path="/" element={<Homepage />} />
       <Route path="signup" element={<SignUpPage />} />
       <Route path="login" element={<LogInPage />} />
       <Route path="change-password" element={<ChangePassword />}/>

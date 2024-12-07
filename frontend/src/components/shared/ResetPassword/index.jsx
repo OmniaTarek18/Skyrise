@@ -31,7 +31,7 @@ const ResetPassword = ({ userEmail }) => {
       return;
     }
     if (status == "success") {
-      navigate("/home");
+      navigate("/");
     } else {
       setAlert(true);
       setTimeout(() => {

@@ -1,0 +1,29 @@
+.review-container{
+    color: var(--navy-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    margin: auto;
+    height: 60vh;
+    margin-bottom: 4rem;
+    /* background-color: red; */
+    width: 100vw;
+    height: 80vh;
+}
+
+.cards{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.card-header{
+    width: 100%;
+    margin-left: 5em;
+    margin-bottom: 2em;
+    color: var(--navy-blue);
+    margin-top: 5rem;
+}

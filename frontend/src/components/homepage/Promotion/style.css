@@ -1,0 +1,42 @@
+.promotion-container {
+  width: 100vw;
+  height: 35vw;
+  margin: 0;
+  padding: 0;
+}
+
+.promotion-container {
+  color: var(--greyish-white);
+  background-image: url("../../../assets/promotion.jpeg");
+  background-size: cover; /* Ensures the background image covers the whole element */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+}
+
+.promotion-text-container {
+  height: 100%;
+  text-align: left;
+  margin: 0 10%;
+  padding: 10% 0;
+}
+.promotion-title {
+  font-size: 3.5vw;
+  font-weight: 700;
+  letter-spacing: 0%;
+  color: var(--greyish-white);
+}
+
+.location {
+  font-size: 1.2vw;
+  font-weight: 400;
+  letter-spacing: 0%;
+  color: var(--greyish-white);
+}
+
+.description {
+  max-width: 60ch;
+  font-size: 1vw;
+  font-weight: lighter;
+  color: var(--greyish-white);
+  letter-spacing: 0%;
+}
