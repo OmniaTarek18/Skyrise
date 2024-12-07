@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* CSS Reset */
 
 html,
@@ -7,14 +6,13 @@ body {
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden; /* Optional: Prevent horizontal scrolling */
-=======
+}
 .App {
   font-family: "Inter", sans-serif;
   height: 100vh;
   text-align: center;
   justify-content: center;
   align-items: center;
->>>>>>> d445baf (merge flight viewing)
 }
 
 *,
