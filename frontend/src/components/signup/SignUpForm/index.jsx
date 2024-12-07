@@ -45,14 +45,14 @@ const SignUpForm = () => {
         setAlert(false);
       }, 2000); // 2000 milliseconds = 2 seconds
     }
-  }, [status]);
+  }, [status, nav]);
 
   return (
     // Main form element
     <form className="" onSubmit={handleSubmit}>
       {alert && (
         <div className="alert alert-warning" role="alert">
-          Email doesn't exist!
+          Email Or National_ID is used before!
         </div>
       )}
       {/* Essential details section: User's nationality and ID */}

@@ -30,7 +30,7 @@ const ResetPassword = ({ userEmail }) => {
       isFirstRender.current = false; // Skip effect on the first render
       return;
     }
-    if (status == "success") {
+    if (status === "success") {
       navigate("/");
     } else {
       setAlert(true);
@@ -38,7 +38,7 @@ const ResetPassword = ({ userEmail }) => {
         setAlert(false);
       }, 2000); // 2000 milliseconds = 2 seconds
     }
-  }, [status]);
+  }, [status, navigate]);
 
   return (
     <section className="reset-password-form">
