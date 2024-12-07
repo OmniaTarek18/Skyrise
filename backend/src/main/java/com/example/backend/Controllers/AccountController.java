@@ -27,6 +27,7 @@ public class AccountController {
 
     @GetMapping("/email")
     public ResponseEntity<LogInDTO> checkEmail(@RequestParam String email) {
+        System.out.println(email);
         return signUpLogInModuleServices.signInCheckerByEmail(email);
     }
 
@@ -34,11 +35,10 @@ public class AccountController {
     public ResponseEntity<String> changePassword(
             @RequestParam String email,
             @RequestParam String newPassword) {
-        System.out.println(email);
-        System.out.println(newPassword);
+
         try {
             accountServices.changePassword(email, newPassword);
-            return ResponseEntity.ok("Password has been changed successfully.");
+            return ResponseEntity.ok().body("Password has been changed successfully.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

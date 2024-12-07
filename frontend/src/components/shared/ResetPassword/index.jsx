@@ -6,7 +6,7 @@ import Section from "../Section"; // Importing the custom Section component for 
 import { useResetPasswordForm } from "./validation"; // Importing the custom hook to handle form logic and validation
 import "./style.css"; // Importing the stylesheet for the ResetPassword component
 import { useNavigate } from "react-router";
-import { changePasswordAPI } from "../../login/ForgetPassword/api";
+import { resetPasswordAPI } from "./api";
 
 const ResetPassword = ({ userEmail }) => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const ResetPassword = ({ userEmail }) => {
     handleBlur,
     handleSubmit,
     status,
-  } = useResetPasswordForm(userEmail, changePasswordAPI); // Passing the user's email to the hook
+  } = useResetPasswordForm(userEmail, resetPasswordAPI); // Passing the user's email to the hook
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -43,13 +43,12 @@ const ResetPassword = ({ userEmail }) => {
   return (
     <section className="reset-password-form">
       {/* Section for the heading */}
+      <Section heading={"Enter New Password"} />
       {alert && (
         <div className="alert alert-warning" role="alert">
           Password changed Successfully
         </div>
       )}
-      <Section heading={"Enter New Password"} />
-
       {/* Form for resetting the password */}
       <form onSubmit={handleSubmit}>
         {/* Input field for the new password */}

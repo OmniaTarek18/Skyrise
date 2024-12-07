@@ -1,6 +1,6 @@
 export const changePasswordAPI = async (values, actions) => {
   console.log(values); // Log form values to the console
-  console.log(actions); // Log actions (such as resetForm) for debugging purposes
+
   const url = `http://localhost:8080/email?email=${values.email}`;
   try {
     const response = await fetch(url);

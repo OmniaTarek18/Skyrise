@@ -45,7 +45,7 @@ const LogInForm = ({ navigateTo }) => {
     <form onSubmit={handleSubmit}>
       {alert && (
         <div className="alert alert-warning" role="alert">
-          Email doesn't exist!
+          WRONG EMAIL OR PASSWORD!
         </div>
       )}
       <Input

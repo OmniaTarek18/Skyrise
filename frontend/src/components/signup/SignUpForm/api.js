@@ -1,7 +1,7 @@
 // onSubmit function to handle form submission
 export const onSubmit = async (values, actions) => {
   console.log(values);
-  console.log(actions);
+
   const url = "http://localhost:8080/signUp/customer";
   const request = new Request(url, {
     method: "POST",
@@ -14,14 +14,14 @@ export const onSubmit = async (values, actions) => {
   try {
     const response = await fetch(requestCloned);
     if (!response.ok) {
-      actions.setStatus('fail')
+      actions.setStatus("fail");
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    actions.setStatus('success')
+    actions.setStatus("success");
     console.log(json);
   } catch (error) {
-    actions.setStatus('fail')
+    actions.setStatus("fail");
     console.error(error.message);
   }
 };

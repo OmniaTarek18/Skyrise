@@ -2,8 +2,8 @@ import React from "react"; // Import React for JSX and functional component crea
 import Button from "../../shared/Button"; // Import the reusable Button component
 import { FcGoogle } from "react-icons/fc"; // Import the Google icon from react-icons library
 import { GoogleOAuthProvider } from "@react-oauth/google"; // Import the Google OAuth provider for Google login functionality
-import { useLogin } from "./api"; // Import the custom login hook for handling Google login
-
+import { useLogin } from "./validation"; // Import the custom login hook for handling Google login
+import { GoogleLoginAPI } from "./api";
 /**
  * GoogleLogInComp Component
  * A functional component that renders a button for logging in via Google.
@@ -18,7 +18,7 @@ import { useLogin } from "./api"; // Import the custom login hook for handling G
  */
 const GoogleLogInComp = () => {
   // Call the custom login hook to get the login function
-  const login = useLogin();
+  const login = useLogin(GoogleLoginAPI);
 
   return (
     <Button
