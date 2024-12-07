@@ -111,6 +111,10 @@
   background-color: #f44336;
   color: white;
   border:white;
+  max-width: 40px;
+  max-height: 40px;
+  padding: 0px;
+  width: 100%;
   border-radius:0.2rem;
   font-size: 1.5rem;
 }

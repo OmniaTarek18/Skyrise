@@ -4,9 +4,9 @@ import LogInForm from "./LogInForm";
 import GoogleLogIn from "./GoogleLogIn";
 import Section from "../shared/Section";
 import CallToAction from "../shared/CallToAction";
-import ResetPassword from "../shared/ResetPassword";
+
 import ForgetPassword from "./ForgetPassword";
-import ChangePassword from "../userdashboard/ChangePassword";
+
 import { useNavigate } from "react-router-dom";
 import Button from "../shared/Button";
 import "./style.css";

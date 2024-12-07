@@ -54,7 +54,7 @@ export function FlightTable({ flights, onDelete, loading }) {
                   onClick={() => onDelete(flight.id)}
                   className="delete-button"
                 >
-                  <Trash2 size={18} />
+                  <Trash2 size={16} />
                 </Button>
               </td>
             </tr>

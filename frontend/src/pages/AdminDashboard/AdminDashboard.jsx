@@ -7,12 +7,11 @@ import "./admindashboard.css";
 
 export default function AdminDashboard() {
   return (
-    <BrowserRouter>
+ 
       <div className="mainDashboardContainer">
         <Sidebar />
         <AdminRightbar />
       </div>
 
-    </BrowserRouter>
   );
 }

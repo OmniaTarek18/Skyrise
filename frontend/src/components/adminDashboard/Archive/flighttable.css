@@ -96,3 +96,7 @@
   cursor: not-allowed;
 }
 
+.delete-button{
+  align-items: center;
+  justify-content: center;
+}
