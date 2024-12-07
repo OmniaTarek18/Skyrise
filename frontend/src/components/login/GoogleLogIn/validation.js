@@ -36,7 +36,8 @@ export const useLogin = (GoogleLoginAPI) => {
         );
         console.log(res.data); // Log the user data (this could be replaced with backend validation)
         // After successful login, navigate to the home page
-        if (GoogleLoginAPI(res.data.email)) {
+        const isLoggedIn = await GoogleLoginAPI(res.data.email);
+        if (isLoggedIn) {
           navigate("/"); // Redirect user to the home page or a dashboard
         }
       } catch (err) {
