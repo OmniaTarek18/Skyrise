@@ -1,0 +1,72 @@
+.mainSidebar {
+  width: 270px;
+  background-color: #05203c;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ulContainer {
+  padding: 0;
+  list-style: none;
+}
+
+.liContainer {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  padding: 10px 16px;
+}
+
+.link:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transform: scale(1.05);
+  backdrop-filter: blur(10px);
+}
+
+.link.active {
+  background-color: #0062e3;
+  border-radius: 8px;
+  transform: scale(1.05);
+}
+
+.sidebar-icon {
+  font-size: 20px; 
+  margin-right: 10px; 
+}
+
+.liContainer p {
+  margin: 0;
+  font-size: 16px; 
+  line-height: 1.2;
+}
+
+.appName {
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.separator {
+  border: 0;
+  height: 1px;
+  background-color: white;
+  margin: 10px 0;
+}
+
+.deleteSection {
+  margin-top: auto;
+}

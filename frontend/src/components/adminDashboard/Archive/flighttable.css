@@ -1,0 +1,102 @@
+.table-container {
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  overflow: hidden;
+  justify-items: center;
+}
+
+.flights-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.flights-table thead {
+  background-color: #007bff;
+  color: white;
+}
+
+.flights-table th,
+.flights-table td {
+  padding: 15px 20px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.flights-table th {
+  background-color: #0062e3;
+  color: #fff;
+
+}
+
+.flights-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.flights-table tbody tr:hover {
+  background-color: #f4f9ff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flights-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.flights-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.status-badge {
+  padding: 8px 14px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+.status-completed {
+  background-color: #4caf50;
+  color: white;
+}
+
+.status-cancelled {
+  background-color: #f44336;
+  color: white;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.delete-button{
+  align-items: center;
+  justify-content: center;
+}

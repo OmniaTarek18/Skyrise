@@ -1,0 +1,61 @@
+.review-card {
+  width: 100%;
+  max-width: 550px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  padding: 10px;
+}
+
+.review-card:hover {
+  transform: scale(1.02);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  color: #ffffff;
+  font-weight: bold;
+  background-color: blueviolet;
+}
+
+.header-info {
+  margin-left: 16px;
+  flex-grow: 1;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.flight-route {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+
+.rating-label {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+}
+
+.comments-header {
+  margin-top: 5px;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.date {
+  display: block;
+  text-align: right;
+  margin-top: 16px;
+  color: #999;
+}

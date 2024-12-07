@@ -1,0 +1,49 @@
+.login-form-container .logo {
+  margin: 0;
+  padding: 0;
+}
+.login-form-container .helper-text{
+  /* display: flex;
+  padding-right:5rem; */
+}
+
+.login-container {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 4em;
+}
+
+.login-form-container {
+  flex: 1;
+  margin: 1rem;
+  padding: 3em;
+  max-width: 500px;
+  margin: auto;
+}
+
+.login-image-container {
+  display: flex;
+  width: 50%;
+  height: 100%;
+}
+
+.loginImg {
+  width: 100vw;
+  height: 100vh;
+}
+
+@media (max-width: 1200px) {
+  .login-image-container {
+    display: none; /* Hide the image completely on smaller screens */
+  }
+  .login-form-container {
+    background-color: #fff;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+    border-radius: 0.5em;
+  }
+}

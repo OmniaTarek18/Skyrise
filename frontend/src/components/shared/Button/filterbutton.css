@@ -1,0 +1,31 @@
+.filter-button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-button--active {
+  background-color: #3b82f6; 
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.filter-button--disabled {
+  background-color: #f3f4f6; 
+  color: #9ca3af; 
+  cursor: not-allowed;
+}
+
+.filter-button--default {
+  background-color: white;
+  color: #4b5563; 
+  border: 2px solid #d1d5db;
+}
+
+.filter-button--default:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

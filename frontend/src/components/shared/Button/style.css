@@ -1,0 +1,32 @@
+.btn{
+    display: block;
+    margin: 0.5rem auto 0.5rem auto;
+    height: 3.5em;
+    width: 24em;
+    font-weight:bold;
+}
+
+.btn-dark{
+ background-color: var(--navy-blue);
+ border-color: var(--navy-blue);
+}
+
+.btn-light{
+    background-color: var(--greyish-white);
+    border-color: var(--greyish-white);
+    color: var(--navy-blue);
+}
+
+.btn-primary{
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: white;
+}
+
+.btn-link{
+    text-decoration: none;
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+

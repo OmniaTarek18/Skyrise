@@ -1,0 +1,36 @@
+.footer {
+  background-color: var(--navy-blue);
+  color: var(--greyish-white);
+  margin-top: auto;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+}
+
+.footer-contact,
+.footer-socail-media {
+  margin: 1em;
+  display: flex;
+  width: 50vw;
+}
+
+.footer-copywrite {
+  width: 80vw;
+  text-align: center;
+  border-top: 1px solid white;
+  padding-top: 2rem;
+  margin-top: 1em;
+}
+
+.footer-link {
+  margin-left: auto;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
