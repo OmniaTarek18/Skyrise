@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { filterFlights } from "../../api/flightsAPI";
-import { deleteFlight } from "../../api/archiveAPI"; 
+import { deleteFlight } from "../../api/archiveAPI";
 import FlightTable from "../../components/adminDashboard/Archive/FlightTable";
+import { X as NoFlightsIcon} from "lucide-react";
 import "./archive.css";
 
 const ArchivePage = () => {
@@ -35,18 +36,16 @@ const ArchivePage = () => {
   };
 
   useEffect(() => {
-    if (currentDate && currentDate instanceof Date && !isNaN(currentDate)) {
+    if (currentDate) {
       loadFlights(
         { ...filters, departureDate: currentDate.toISOString().split("T")[0] },
         page
       );
-    } else {
-      setFlights([]);
     }
   }, [filters, page, currentDate]);
 
   const handleDateChange = (e) => {
-    const newDate = new Date(e.target.value);
+    const newDate = e.target.value ? new Date(e.target.value) : currentDate;
     setCurrentDate(newDate);
   };
 
@@ -79,14 +78,14 @@ const ArchivePage = () => {
         <h1>Archived Flights</h1>
       </div>
 
-      {/* date */}
+      {/* date picker */}
       <div className="date-picker-container">
         <label htmlFor="flight-date">Departure Date: </label>
         <div className="date-picker-wrapper">
           <input
             type="date"
             id="flight-date"
-            value={currentDate ? currentDate.toISOString().split("T")[0] : ""}
+            value={currentDate.toISOString().split("T")[0]}
             onChange={handleDateChange}
             className="date-picker"
           />
@@ -98,34 +97,43 @@ const ArchivePage = () => {
         {loading ? (
           <p>Loading flights...</p>
         ) : flights.length === 0 ? (
-          <p>No flights available for this date.</p>
+          <div className="no-flights-message">
+            <NoFlightsIcon
+              size={50}
+              fontSize="large"
+              sx={{ color: "#f44336", marginBottom: "1rem" }}
+            />
+            <p>No flights available for this date.</p>
+          </div>
         ) : (
-          <FlightTable
-            flights={flights}
-            onDelete={handleDelete}
-            loading={loading}
-          />
+          <>
+            <FlightTable
+              flights={flights}
+              onDelete={handleDelete}
+              loading={loading}
+            />
+            {/* pagination controls */}
+            <div className="pagination-controls">
+              <button
+                onClick={prevPage}
+                disabled={page === 0}
+                className="pagination-button"
+              >
+                Prev
+              </button>
+              <span className="pagination-info">
+                Page {page + 1} of {totalPages}
+              </span>
+              <button
+                onClick={nextPage}
+                disabled={page === totalPages - 1 || !hasMorePages}
+                className="pagination-button"
+              >
+                Next
+              </button>
+            </div>
+          </>
         )}
-      </div>
-
-      <div className="pagination-controls">
-        <button
-          onClick={prevPage}
-          disabled={page === 0}
-          className="pagination-button"
-        >
-          Prev
-        </button>
-        <span className="pagination-info">
-          Page {page + 1} of {totalPages}
-        </span>
-        <button
-          onClick={nextPage}
-          disabled={page === totalPages - 1 || !hasMorePages}
-          className="pagination-button"
-        >
-          Next
-        </button>
       </div>
     </div>
   );

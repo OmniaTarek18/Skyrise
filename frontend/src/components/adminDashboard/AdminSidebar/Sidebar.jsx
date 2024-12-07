@@ -61,7 +61,7 @@ export default function Sidebar() {
               className={({ isActive }) => (isActive ? "link active" : "link")}
             >
               <UilUser className="sidebar-icon" />
-              <p>UPGRADE USER TO ADMIN</p>
+              <p>UPGRADE USER</p>
             </NavLink>
           </li>
           <li className="liContainer">

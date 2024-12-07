@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Star, X } from "lucide-react";
 import { ReviewStatCard } from "../../components/adminDashboard/Review/ReviewStatCard";
 import FilterButton from "../../components/shared/Button/FilterButton";
-import "./feedback.css"
+import "./feedback.css";
 import {
   getFilteredFeedback,
   getAverageRating,
@@ -16,11 +16,10 @@ const Feedback = () => {
   const [averageRating, setAverageRating] = useState(0.0);
   const [totalReviews, setTotalReviews] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [starFilter, setStarFilter] = useState(0); 
+  const [starFilter, setStarFilter] = useState(0);
   const [categoryFilter, setCategoryFilter] = useState("");
   const [performanceFilter, setPerformanceFilter] = useState("");
   const [sortDirection, setSortDirection] = useState("asc");
-
 
   useEffect(() => {
     const filterCriteria = {
@@ -51,7 +50,6 @@ const Feedback = () => {
     fetchData();
   }, [starFilter, categoryFilter, performanceFilter, page, sortDirection]);
 
-
   useEffect(() => {
     getAverageRating()
       .then((response) => setAverageRating(response || 0.0))
@@ -61,10 +59,9 @@ const Feedback = () => {
       });
   }, []);
 
-
   const handleCategoryChange = (category) => {
     setCategoryFilter(category);
-    setPerformanceFilter(""); 
+    setPerformanceFilter("");
     setPage(0);
   };
 
@@ -73,12 +70,10 @@ const Feedback = () => {
     setPage(0);
   };
 
- 
   const content = feedback.map((f) => (
     <Post key={`${f.id}-${f.timestamp}`} post={f} />
   ));
 
-  
   const nextPage = () => setPage((prev) => Math.min(prev + 1, totalPages - 1));
   const prevPage = () => setPage((prev) => Math.max(prev - 1, 0));
 
@@ -100,7 +95,7 @@ const Feedback = () => {
                 key={rating}
                 onClick={() =>
                   setStarFilter(starFilter === rating ? 0 : rating)
-                } 
+                }
                 className={`star-filter-btn ${
                   starFilter === rating ? "active" : ""
                 }`}
@@ -196,10 +191,18 @@ const Feedback = () => {
       )}
 
       <nav className="pagination-buttons">
-        <button onClick={prevPage} disabled={page === 0}>
+        <button
+          className="pagination-button"
+          onClick={prevPage}
+          disabled={page === 0}
+        >
           Prev
         </button>
-        <button onClick={nextPage} disabled={page >= totalPages - 1}>
+        <button
+          className="pagination-button"
+          onClick={nextPage}
+          disabled={page >= totalPages - 1}
+        >
           Next
         </button>
       </nav>

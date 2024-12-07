@@ -1,13 +1,12 @@
 .review-card {
   width: 100%;
-  max-width: 500px;
-  height: 300px;
+  max-width: 550px;
   margin: auto;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-  padding: 16px;
+  padding: 10px;
 }
 
 .review-card:hover {

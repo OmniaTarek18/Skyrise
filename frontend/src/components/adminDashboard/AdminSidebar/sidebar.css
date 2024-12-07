@@ -1,15 +1,13 @@
 .mainSidebar {
-  width: 270px; 
+  width: 270px;
   background-color: #05203c;
   color: white;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
-
-
 }
+
 .ulContainer {
   padding: 0;
   list-style: none;
@@ -26,44 +24,40 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease;
-  padding: 1px 3px;  
-}
-
-.link {
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
+  padding: 10px 16px;
 }
 
 .link:hover {
   cursor: pointer;
-  background-color: rgba(255,255,255,0.2); 
-  border-radius: 1rem;
-  transform: scale(1.1);
-  backdrop-filter: blur(10px); 
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transform: scale(1.05);
+  backdrop-filter: blur(10px);
 }
 
 .link.active {
   background-color: #0062e3;
-  margin: 0px;
-  border-radius: 1rem;
-  display: flex;
-  color: white;
-  transform: scale(1.1); 
+  border-radius: 8px;
+  transform: scale(1.05);
+}
+
+.sidebar-icon {
+  font-size: 20px; 
+  margin-right: 10px; 
 }
 
 .liContainer p {
-  margin-left: 10px;
-  font-size: 14px;  
-  transition: all 0.2s ease;
+  margin: 0;
+  font-size: 16px; 
+  line-height: 1.2;
 }
 
 .appName {
-  margin-bottom: 20px;
-  font-size: 18px; 
+  margin: 20px 0;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
-  transition: all 0.3s ease;
 }
 
 .separator {
@@ -73,14 +67,6 @@
   margin: 10px 0;
 }
 
-.sidebar-icon {
-  color: white;
-  font-size: 30px;
-  margin-left: 5px;
-}
-
 .deleteSection {
   margin-top: auto;
-  margin-bottom: 20px;
-  padding: 0;
 }

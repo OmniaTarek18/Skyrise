@@ -137,7 +137,7 @@ const Flights = () => {
             />
           ))
         ) : (
-          <p className="no-flights-message">
+          <p className="no-flight-message">
             No flights available for this date.
           </p>
         )}

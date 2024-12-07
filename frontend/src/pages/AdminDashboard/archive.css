@@ -3,6 +3,7 @@
   font-family: Arial, sans-serif;
   background-color: #f7f7f7;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .archive-header {
@@ -13,8 +14,9 @@
 }
 
 .archive-header h1 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #333;
+  font-weight: 600;
 }
 
 .filter-button {
@@ -24,6 +26,8 @@
   color: white;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
 .filter-button:hover {
@@ -35,7 +39,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .date-picker-container label {
@@ -69,17 +73,20 @@
   border-collapse: collapse;
   background: #fff;
   text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .flights-table thead {
   background-color: #007bff;
   color: white;
+  font-weight: bold;
 }
 
 .flights-table th,
 .flights-table td {
   padding: 12px;
   border: 1px solid #ddd;
+  font-size: 1rem;
 }
 
 .flights-table tbody tr:nth-child(even) {
@@ -95,6 +102,7 @@
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 .status-completed {
@@ -107,21 +115,51 @@
   color: white;
 }
 
-.delete-button  {
+.delete-button {
   background-color: #f44336;
   color: white;
-  border:white;
+  border: none;
   max-width: 40px;
   max-height: 40px;
   padding: 0px;
   width: 100%;
-  border-radius:0.2rem;
+  border-radius: 0.2rem;
   font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .delete-button:hover {
   color: white;
   background-color: #c9302c;
+}
+
+.no-flights-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #05203c;
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  height: 50vh;
+  background-color: #8daefb;
+  border: 1px solid #05203c;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.no-flights-message p {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.no-flights-message svg {
+  color: #3665f4;
+  margin-bottom: 1rem;
 }
 
 .pagination-controls {
@@ -137,6 +175,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 1rem;
 }
 
 .pagination-button:hover {
@@ -146,4 +185,10 @@
 .pagination-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.pagination-info {
+  font-size: 1.1rem;
+  margin: 0 10px;
+  color: #333;
 }

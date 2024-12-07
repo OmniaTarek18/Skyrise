@@ -72,7 +72,7 @@ const PerformanceRating = ({ label, icon, rating }) => (
       label={rating}
       sx={{
         backgroundColor: getColor(rating),
-        color: getTextColor(rating), 
+        color: getTextColor(rating),
         marginTop: 0.5,
       }}
       size="small"

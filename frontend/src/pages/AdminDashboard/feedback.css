@@ -108,3 +108,30 @@
 .radio-btn:checked {
   accent-color: #007bff; 
 }
+.pagination-buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 15px;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: white;
+  gap: 10px;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
