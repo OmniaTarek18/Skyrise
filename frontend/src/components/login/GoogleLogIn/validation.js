@@ -1,6 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google"; // Import the useGoogleLogin hook from the Google OAuth library for login functionality
 import axios from "axios"; // Import axios to make HTTP requests
 import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom for navigation after login
+import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
 
 /**
  * useLogin Custom Hook
@@ -19,8 +20,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate from react
  * - `login`: A function that triggers the Google login process when called.
  */
 export const useLogin = (GoogleLoginAPI) => {
-  const navigate = useNavigate(); // Initialize the navigate function to navigate to different pages
-
+  const nav = useNavigate(); // Initialize the navigate function to navigate to different pages
+  const { setUserAuthentication } = useUserAuthenticationStore();
   // Call useGoogleLogin hook to manage Google login process
   const login = useGoogleLogin({
     onSuccess: async (response) => {
@@ -37,8 +38,9 @@ export const useLogin = (GoogleLoginAPI) => {
         console.log(res.data); // Log the user data (this could be replaced with backend validation)
         // After successful login, navigate to the home page
         const isLoggedIn = await GoogleLoginAPI(res.data.email);
-        if (isLoggedIn) {
-          navigate("/"); // Redirect user to the home page or a dashboard
+        if (isLoggedIn != null) {
+          setUserAuthentication(isLoggedIn.id, isLoggedIn.role);
+          nav("/");
         }
       } catch (err) {
         // Handle any errors during the login process

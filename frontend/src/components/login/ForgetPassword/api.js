@@ -9,7 +9,7 @@ export const changePasswordAPI = async (values, actions) => {
       throw new Error(`Response status: ${response.status}`);
     }
     const json = await response.json();
-    actions.setStatus("success");
+    actions.setStatus({status:"success", data:json});
     console.log(json);
   } catch (error) {
     actions.setStatus("fail");

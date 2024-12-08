@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import WhiteLogo from "../../../assets/whiteLogo.svg";
 import "./sidebar.css";
 import {
   UilDashboard,
@@ -11,12 +12,13 @@ import {
   UilSignOutAlt,
   UilTrashAlt,
 } from "@iconscout/react-unicons";
+import Logo from "../../shared/Logo";
 
 export default function Sidebar() {
   return (
     <div className="mainSidebar">
       <div>
-        <h4 className="appName">SKY RISE</h4>
+        <Logo color={WhiteLogo} className="logo"/>
         <hr className="separator" />
         <ul className="ulContainer">
           <li className="liContainer">

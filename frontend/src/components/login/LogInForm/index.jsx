@@ -7,9 +7,11 @@ import { useLoginForm } from "./validation"; // Custom hook to handle form valid
 import { LoginAPI } from "./api";
 import "./style.css"; // Importing the associated CSS for styling
 import { useNavigate } from "react-router-dom";
+import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
 
 // LogInForm component definition
 const LogInForm = ({ navigateTo }) => {
+  const { id, role, setUserAuthentication } = useUserAuthenticationStore();
   const nav = useNavigate();
   const isFirstRender = useRef(true);
   const [alert, setAlert] = useState(false);
@@ -30,7 +32,8 @@ const LogInForm = ({ navigateTo }) => {
       isFirstRender.current = false; // Skip effect on the first render
       return;
     }
-    if (status == "success") {
+    if (status.status == "success") {
+      setUserAuthentication(status.data.id, status.data.role);
       nav("/");
     } else {
       setAlert(true);

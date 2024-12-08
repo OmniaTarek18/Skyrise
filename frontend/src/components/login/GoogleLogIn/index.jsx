@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc"; // Import the Google icon from react-
 import { GoogleOAuthProvider } from "@react-oauth/google"; // Import the Google OAuth provider for Google login functionality
 import { useLogin } from "./validation"; // Import the custom login hook for handling Google login
 import { GoogleLoginAPI } from "./api";
+
 /**
  * GoogleLogInComp Component
  * A functional component that renders a button for logging in via Google.

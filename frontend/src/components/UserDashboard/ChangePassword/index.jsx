@@ -1,10 +1,10 @@
 // validate user's old password, then call change password
 import React from 'react'
 
-const index = () => {
+const ChangePassword = () => {
   return (
     <div>index</div>
   )
 }
 
-export default index
+export default ChangePassword
