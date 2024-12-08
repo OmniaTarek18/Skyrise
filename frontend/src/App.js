@@ -1,34 +1,37 @@
 import LogInPage from "./components/login/LogInPage";
-import "./App.css";
 import SignUpPage from "./components/signup/SignUpPage";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import ChangePassword from "./components/UserDashboard/ChangePassword";
 import ForgetPassword from "./components/login/ForgetPassword";
 import ResetPassword from "./components/shared/ResetPassword";
 import Homepage from "./components/homepage/Homepage";
-import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
+import UserDashboard from "./components/userdashboard/UserDashboard";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import Overview from "./pages/AdminDashboard/Overview";
+import Flights from "./pages/AdminDashboard/Flights";
+import Feedback from "./pages/AdminDashboard/Feedback";
+import ChangePassword from "./pages/AdminDashboard/ChangePassword";
+import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
+import ArchivePage from "./pages/AdminDashboard/ArchivePage";
+import "./App.css";
+
 function App() {
-  // const items = [
-  //   "Home",
-  //   "Search Flights",
-  //   "Reviews",
-  //   "About Us",
-  //   "Contact Us",
-  //   "Login",
-  //   "Signup",
-  // ];
-  // const onClickButton = (onClose) =>{return <LogIn onClose={onClose}>Alert<span> hi</span></LogIn>};
-  // const nav = useNavigate()
   return (
-    <AdminDashboard/>
-    // <Routes className="App">
-    //   <Route path="/" element={<Homepage />} />
-    //   <Route path="signup" element={<SignUpPage />} />
-    //   <Route path="login" element={<LogInPage />} />
-    //   <Route path="change-password" element={<ChangePassword />}/>
-    //   <Route path="forget-password" element={<ForgetPassword />} />
-    //   <Route path="reset-password" element={<ResetPassword />} />
-    // </Routes>
+    <Routes className="App">
+      <Route path="/" element={<Homepage />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="login" element={<LogInPage />} />
+      <Route path="forget-password" element={<ForgetPassword />} />
+      <Route path="reset-password" element={<ResetPassword />} />
+      <Route path="admin-dashboard" element={<AdminDashboard />}>
+        <Route path="overview" element={<Overview />} />
+        <Route path="flights" element={<Flights />} />
+        <Route path="feedback" element={<Feedback />} />
+        <Route path="archive" element={<ArchivePage />} />
+        <Route path="change-password" element={<ChangePassword />} />
+        <Route path="delete-account" element={<DeleteAccount />} />
+      </Route>
+      <Route path="user-dashboard" element={<UserDashboard />} />
+    </Routes>
   );
 }
 

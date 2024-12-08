@@ -5,12 +5,14 @@ import Section from "../../shared/Section";
 import ResetPassword from "../../shared/ResetPassword";
 import { useForgotPasswordForm } from "./validation";
 import { changePasswordAPI } from "./api";
+import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
 import "./style.css";
 
 const ForgetPassword = () => {
   const [page, setPage] = useState("forgetPassword");
   const [alert, setAlert] = useState(false);
-  const isFirstRender = useRef(true)
+  const isFirstRender = useRef(true);
+  const { setUserAuthentication } = useUserAuthenticationStore();
   const {
     values,
     errors,
@@ -27,7 +29,8 @@ const ForgetPassword = () => {
       isFirstRender.current = false; // Skip effect on the first render
       return;
     }
-    if (status == "success") {
+    if (status.status == "success") {
+      setUserAuthentication(status.data.id, status.data.role);
       setPage("continue");
     } else {
       setAlert(true);

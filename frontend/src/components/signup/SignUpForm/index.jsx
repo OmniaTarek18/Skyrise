@@ -6,6 +6,7 @@ import Button from "../../shared/Button"; // Button component for form submissio
 import Input from "../../shared/Input"; // Input component for form fields
 import { useSignUpForm, countries, countryCodes, gender } from "./validation"; // Form validation logic and options
 import { onSubmit } from "./api";
+import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
 import "./style.css"; // CSS file for styling the form
 
 // SignUpForm component handles the user registration form
@@ -18,7 +19,7 @@ const SignUpForm = () => {
   const handleEmail = (email) => setFieldValue("email", email);
   const handleFirstName = (firstName) => setFieldValue("firstName", firstName);
   const handleLastName = (lastName) => setFieldValue("lastName", lastName);
-
+  const {setUserAuthentication} = useUserAuthenticationStore()
   // Formik hook for form state management and validation
   const {
     values,
@@ -37,7 +38,8 @@ const SignUpForm = () => {
       isFirstRender.current = false; // Skip effect on the first render
       return;
     }
-    if (status === "success") {
+    if (status.status === "success") {
+      setUserAuthentication(status.data, "USER")
       nav("/");
     } else {
       setAlert(true);

@@ -7,10 +7,10 @@ export const GoogleLoginAPI = async (email) => {
     if (response.ok) {
       const json = await response.json();
       console.log(json);
-      return true;
+      return json;
     }
   } catch (error) {
     console.error(error.message);
   }
-  return false;
+  return null;
 };

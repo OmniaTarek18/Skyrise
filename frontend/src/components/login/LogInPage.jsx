@@ -20,7 +20,6 @@ const LogInPage = () => {
         {page === "loginForm" && (
           <div className="login-form-container">
             <header>
-              {/* <Logo /> */}
               <Section
                 heading={"Welcome back"}
                 headingText={"Welcome back! Please enter your details."}
@@ -38,7 +37,6 @@ const LogInPage = () => {
         {page === "forgetPasswordForm" && (
           <div className="login-form-container">
             <ForgetPassword />
-            {/* <ChangePassword/> */}
             <Button
               btnText={"Cancel"}
               btnColor="light"

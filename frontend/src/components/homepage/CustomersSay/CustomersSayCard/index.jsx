@@ -8,7 +8,7 @@ const CustomerSayCard = ({ rating, name, review, date }) => {
     return index < rating ? <FaStar style={{color: "var(--navy-blue)"}}/> :  <CiStar style={{color: "var(--navy-blue)"}}/>;
   });
   return (
-    <article className="review-card">
+    <article className="review-card-container">
       <p className="rating">
         {stars.map((star, index) => (
           <span key={index}>{star}</span>
