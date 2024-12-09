@@ -5,6 +5,11 @@ import org.springframework.data.jpa.domain.Specification;
 import com.example.backend.Entities.Airport;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Entities.FlightLeg;
+import com.example.backend.Enums.FlightType;
+import com.example.backend.Enums.SeatClass;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
@@ -23,20 +28,19 @@ public class FlightSpecifications {
 
     public static Specification<Flight> containsDestination(String destination) {
         return (root, query, criteriaBuilder) -> {
-            Subquery<Integer> subquery = query.subquery(Integer.class);
-            Root<FlightLeg> subRoot = subquery.from(FlightLeg.class);
-    
-            subquery.select(criteriaBuilder.greatest(subRoot.get("flightLegId")))
-                    .where(criteriaBuilder.equal(subRoot.get("flight"), root))
-                    .groupBy(subRoot.get("flight"));
-    
+
+            if (query == null) {
+                throw new IllegalArgumentException("Query parameter cannot be null");
+            }
+
+            Subquery<Integer> subquery = createNumberOfLastFlightLegSubquery(root, query, criteriaBuilder);
+
             Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
             Join<FlightLeg, Airport> flightLegAndAirport = flightAndFlightLeg.join("arrivalAirport");
-    
+
             return criteriaBuilder.and(
-                criteriaBuilder.equal(flightAndFlightLeg.get("flightLegId"), subquery),
-                criteriaBuilder.equal(flightLegAndAirport.get("airportCity"), destination)
-            );
+                    criteriaBuilder.equal(flightAndFlightLeg.get("flightLegId"), subquery),
+                    criteriaBuilder.equal(flightLegAndAirport.get("airportCity"), destination));
         };
     }
 
@@ -72,4 +76,107 @@ public class FlightSpecifications {
     public static Specification<Flight> hasArrivalDateLessThan(LocalDate arrivalDate) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get("arrivalDate"), arrivalDate);
     }
+
+    public static Specification<Flight> hasDepartureAirport(Integer id) {
+        return (root, query, criteriaBuilder) -> {
+            Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
+            Join<FlightLeg, Airport> flightLegAndAirport = flightAndFlightLeg.join("departureAirport");
+            return criteriaBuilder.and(
+                    criteriaBuilder.equal(flightLegAndAirport.get("id"), id),
+                    criteriaBuilder.equal(flightAndFlightLeg.get("flightLegId"), 1));
+        };
+    }
+
+    public static Specification<Flight> hasArrivalAirport(Integer id) {
+        return (root, query, criteriaBuilder) -> {
+
+            if (query == null) {
+                throw new IllegalArgumentException("Query parameter cannot be null");
+            }
+
+            Subquery<Integer> subquery = createNumberOfLastFlightLegSubquery(root, query, criteriaBuilder);
+
+            Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
+            Join<FlightLeg, Airport> flightLegAndAirport = flightAndFlightLeg.join("arrivalAirport");
+
+            return criteriaBuilder.and(
+                    criteriaBuilder.equal(flightAndFlightLeg.get("flightLegId"), subquery),
+                    criteriaBuilder.equal(flightLegAndAirport.get("id"), id));
+        };
+    }
+
+    public static Specification<Flight> hasAvailableSeats(SeatClass seatClass, int numberOfTickets) {
+        if (seatClass == null)
+            return null;
+
+        if (seatClass == SeatClass.ECONOMY)
+            return hasEconomySeats(numberOfTickets);
+        else
+            return hasBusinessSeats(numberOfTickets);
+    }
+
+    public static Specification<Flight> hasEconomySeats(int numberOfTickets) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("availableEconomySeats"),
+                numberOfTickets);
+    }
+
+    public static Specification<Flight> hasBusinessSeats(int numberOfTickets) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(
+                root.get("availableBusinessSeats"),
+                numberOfTickets);
+    }
+
+    public static Specification<Flight> hasFlightType(FlightType flightType) {
+        if (flightType == null)
+            return null;
+
+        if (flightType == FlightType.DIRECT)
+            return hasOneFlightLeg();
+        else
+            return hasMoreThanOneFlightLeg();
+    }
+
+    public static Specification<Flight> hasOneFlightLeg() {
+        return (root, query, criteriaBuilder) -> {
+            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, true);
+            return criteriaBuilder.exists(subquery);
+        };
+    }
+
+    public static Specification<Flight> hasMoreThanOneFlightLeg() {
+        return (root, query, criteriaBuilder) -> {
+            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, false);
+            return criteriaBuilder.exists(subquery);
+
+        };
+    }
+
+    private static Subquery<Integer> createNumberOfLastFlightLegSubquery(Root<Flight> root, CriteriaQuery<?> query,
+            CriteriaBuilder criteriaBuilder) {
+        Subquery<Integer> subquery = query.subquery(Integer.class);
+        Root<FlightLeg> subRoot = subquery.from(FlightLeg.class);
+
+        subquery.select(criteriaBuilder.greatest(subRoot.get("flightLegId")))
+                .where(criteriaBuilder.equal(subRoot.get("flight"), root))
+                .groupBy(subRoot.get("flight"));
+
+        return subquery;
+    }
+
+    private static Subquery<Long> createLegCountSubquery(Root<Flight> root, CriteriaQuery<?> query,
+            CriteriaBuilder criteriaBuilder, boolean isDirect) {
+        Subquery<Long> subquery = query.subquery(Long.class);
+        Root<FlightLeg> subRoot = subquery.from(FlightLeg.class);
+
+        subquery.select(criteriaBuilder.count(subRoot.get("flightLegId")))
+                .where(criteriaBuilder.equal(subRoot.get("flight"), root))
+                .groupBy(subRoot.get("flight"));
+
+        if (isDirect)
+            subquery.having(criteriaBuilder.equal(criteriaBuilder.count(subRoot.get("flightLegId")), 1));
+        else
+            subquery.having(criteriaBuilder.greaterThan(criteriaBuilder.count(subRoot.get("flightLegId")), (long) 1));
+        return subquery;
+    }
+
 }

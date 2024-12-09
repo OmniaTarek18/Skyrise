@@ -1,17 +1,21 @@
-package com.example.backend.Services;
+package com.example.backend.Services.AdminDashboard;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.example.backend.DTOMappers.AdminFlightMapper;
 import com.example.backend.DTOMappers.PageResponseMapper;
-import com.example.backend.DTOs.AdminFlightDTO;
-import com.example.backend.DTOs.FlightFilterCriteria;
 import com.example.backend.DTOs.PageResponse;
+import com.example.backend.DTOs.AdminDashboard.AdminFlightDTO;
+import com.example.backend.DTOs.AdminDashboard.FlightFilterCriteria;
+import com.example.backend.DTOs.BookingDTOs.FlightLegDTO;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Specifications.FlightSpecifications;

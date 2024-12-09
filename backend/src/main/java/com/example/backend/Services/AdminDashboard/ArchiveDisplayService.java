@@ -1,4 +1,4 @@
-package com.example.backend.Services;
+package com.example.backend.Services.AdminDashboard;
 
 import java.time.LocalDate;
 
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.backend.DTOMappers.AdminFlightMapper;
 import com.example.backend.DTOMappers.PageResponseMapper;
-import com.example.backend.DTOs.AdminFlightDTO;
-import com.example.backend.DTOs.FlightFilterCriteria;
 import com.example.backend.DTOs.PageResponse;
+import com.example.backend.DTOs.AdminDashboard.AdminFlightDTO;
+import com.example.backend.DTOs.AdminDashboard.FlightFilterCriteria;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Specifications.FlightSpecifications;
@@ -48,7 +48,7 @@ public class ArchiveDisplayService {
 
         if (flightFilterDTO.destination() != null)
             spec = spec.and(FlightSpecifications.containsDestination(flightFilterDTO.destination()));
-        
+
         Pageable pageable = PageRequest.of(pageNumber, 10);
         Page<Flight> page = flightRepository.findAll(spec, pageable);
         Page<AdminFlightDTO> pageDTO = page.map(AdminFlightMapper::toDTO);
