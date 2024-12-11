@@ -2,8 +2,9 @@ import React from "react";
 import "./style.css";
 
 const Input = ({
-  label,
+  label = false,
   type = "text",
+  min = 1, // used with input type number only
   id,
   placeholder = "",
   onChange,
@@ -18,9 +19,12 @@ const Input = ({
 }) => {
   return (
     <div className="mb-3">
-      <label htmlFor={id} className="form-label">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className="form-label">
+          {label}
+        </label>
+      )}
+
       {!selectionInput && (
         <input
           type={type}
@@ -30,6 +34,7 @@ const Input = ({
           onChange={onChange}
           value={value}
           onBlur={onBlur}
+          min={min}
           required={required}
         />
       )}
@@ -52,11 +57,7 @@ const Input = ({
           ))}
         </select>
       )}
-      {showError && (
-        <div className="invalid-feedback">
-          {errorMessage}
-        </div>
-      )}
+      {showError && <div className="invalid-feedback">{errorMessage}</div>}
     </div>
   );
 };
