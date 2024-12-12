@@ -8,8 +8,8 @@ import com.example.backend.Enums.SeatClass;
 public record ReservationDTO(
     Integer flightId,
     Integer userId,
-    String source,           // "City, Country"
-    String destination,      // "City, Country"
+    String source, 
+    String destination,
     LocalDate departureDate,
     LocalTime departureTime,
     LocalDate arrivalDate,
