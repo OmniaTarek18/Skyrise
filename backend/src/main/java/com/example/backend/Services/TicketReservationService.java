@@ -18,6 +18,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TicketReservationService {
     
@@ -25,7 +26,6 @@ public class TicketReservationService {
     private final UserRepository userRepository;
     private final FlightRepository flightRepository;
 
-    @Transactional
     public void reserveTicket(TicketDTO ticketDTO) {
         // Checking for nulls or illegal input
         ValidateInput.validateId(ticketDTO.userId());
@@ -81,5 +81,28 @@ public class TicketReservationService {
         reservation.setReservedSeats(ticketDTO.reservedSeats());
 
         reservationRepository.save(reservation);
+    }
+
+    public void deleteTicket(Integer flightId, Integer userId) {
+        ValidateInput.validateId(userId);
+        ValidateInput.validateId(flightId);
+
+        Optional<Reservation> reservationOptional = reservationRepository.findByFlightIdAndUserId(flightId, userId);
+
+        if (reservationOptional.isEmpty()) {
+            throw new IllegalArgumentException("Reservation does not exist for the provided flight and user.");
+        }
+        Reservation reservation = reservationOptional.get();
+        Flight flight = reservation.getFlight();
+
+        if (reservation.getSeatClass() == SeatClass.BUSINESS) {
+            flight.setAvailableBusinessSeats(flight.getAvailableBusinessSeats() + reservation.getReservedSeats());
+        }
+        else {
+            flight.setAvailableEconomySeats(flight.getAvailableEconomySeats() + reservation.getReservedSeats());
+        }
+        flightRepository.save(flight);
+
+        reservationRepository.delete(reservation);
     }
 }
