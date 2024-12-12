@@ -26,7 +26,7 @@ public class FlightSpecifications {
             Subquery<Integer> subquery = query.subquery(Integer.class);
             Root<FlightLeg> subRoot = subquery.from(FlightLeg.class);
     
-            subquery.select(criteriaBuilder.greatest(subRoot.get("flightLegId")))
+            subquery.select(criteriaBuilder.greatest(subRoot.<Integer>get("flightLegId")))
                     .where(criteriaBuilder.equal(subRoot.get("flight"), root))
                     .groupBy(subRoot.get("flight"));
     
