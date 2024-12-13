@@ -71,8 +71,8 @@ const SearchFlights = () => {
           selectionInput={true}
           defaultSelectionText={"Source"}
           options={countries} // List of countries for selection
-
         />
+
         <Input
           id={"destinationCountry"}
           selectionInput={true}
@@ -84,11 +84,7 @@ const SearchFlights = () => {
           id={"departureDate"}
           placeholder={"Departure Date"}
         />
-        <Input
-          type={"date"}
-          id={"arrivalDate"}
-          placeholder={"Arrival Date"}
-        />
+        <Input type={"date"} id={"arrivalDate"} placeholder={"Arrival Date"} />
         <Input
           type={"number"}
           id={"passengersNumber"}

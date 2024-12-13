@@ -40,3 +40,7 @@
 #sourceCountry{
   border-radius: 9px 0 0 9px;
 }
+
+.search-flights-container ::placeholder{
+  color: black;
+}

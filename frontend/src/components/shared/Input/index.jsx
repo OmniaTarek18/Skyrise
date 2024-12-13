@@ -24,16 +24,29 @@ const Input = ({
           {label}
         </label>
       )}
-
       {!selectionInput && (
         <input
-          type={type}
+          type={type === "date" ? "text" : type}
           className={`form-control ${showError ? "is-invalid" : ""}`} // Add Bootstrap's `is-invalid` class conditionally
           id={id}
           placeholder={placeholder}
           onChange={onChange}
           value={value}
-          onBlur={onBlur}
+          onBlur={
+            type === "date"
+              ? (e) => {
+                  e.target.type = "text"; // Switch back to text on blur
+                  if(onBlur) onBlur(e); // Call Formik's onBlur
+                }
+              : onBlur // Directly call Formik's onBlur for other types
+          }
+          onFocus={
+            type === "date"
+              ? (e) => {
+                  e.target.type = "date"; // Switch to date picker on focus
+                }
+              : undefined // No additional behavior for other types
+          }
           min={min}
           required={required}
         />
@@ -46,8 +59,9 @@ const Input = ({
           onChange={onChange}
           value={value}
           onBlur={onBlur}
+          defaultValue={""}
         >
-          <option value="" defaultValue disabled hidden>
+          <option value="" disabled hidden>
             {defaultSelectionText}
           </option>
           {options.map((option, index) => (
