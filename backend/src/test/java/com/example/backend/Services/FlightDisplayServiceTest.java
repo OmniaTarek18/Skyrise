@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +31,7 @@ public class FlightDisplayServiceTest {
 
     private final LocalDate DEPARTURE_DATE = LocalDate.parse("2024-10-12");
 
-    @BeforeAll
+    @BeforeEach
     @Rollback(value = false)
     public void setup() {
         LocalDate[] date = {
