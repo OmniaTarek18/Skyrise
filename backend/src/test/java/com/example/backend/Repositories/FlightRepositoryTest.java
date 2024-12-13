@@ -7,13 +7,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
-
 import com.example.backend.Entities.Flight;
 
 @DataJpaTest
@@ -88,6 +86,7 @@ public class FlightRepositoryTest {
 
     @Test
     @Order(3)
+    @Rollback(value = true)
     void testFindByDepartureDateWhenPageIsNotFound() {
         // given
         int pageSize = 10;

@@ -119,23 +119,15 @@ public class FlightSpecifications {
 
     public static Specification<Flight> hasFlightType(FlightType flightType) {
         if (flightType == FlightType.DIRECT)
-            return hasOneFlightLeg();
+            return hasLeg(true);
         else
-            return hasMoreThanOneFlightLeg();
+            return hasLeg(false);
     }
 
-    public static Specification<Flight> hasOneFlightLeg() {
+    public static Specification<Flight> hasLeg(boolean isDirect) {
         return (root, query, criteriaBuilder) -> {
-            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, true);
+            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, isDirect);
             return criteriaBuilder.exists(subquery);
-        };
-    }
-
-    public static Specification<Flight> hasMoreThanOneFlightLeg() {
-        return (root, query, criteriaBuilder) -> {
-            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, false);
-            return criteriaBuilder.exists(subquery);
-
         };
     }
 
