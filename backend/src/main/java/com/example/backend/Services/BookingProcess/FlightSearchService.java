@@ -1,7 +1,6 @@
 package com.example.backend.Services.BookingProcess;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,44 +14,38 @@ import com.example.backend.Entities.Flight;
 import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Specifications.FlightSpecifications;
 import com.example.backend.Utilites.Utilities;
-import com.example.backend.Utilites.ValidateInput;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class FlightSearchService {
-    private final FlightRepository flightRepository;
+        private final FlightRepository flightRepository;
 
-    public PageResponse<FlightSearchResponse> getFlights(FlightSearchCriteria flightSearchCriteria, int pageNumber) {
+        public PageResponse<FlightSearchResponse> getFlights(FlightSearchCriteria flightSearchCriteria,
+                        int pageNumber) {
 
-        ValidateInput.validatePageNumber(pageNumber);
-        ValidateInput.validateNumberOfTickets(flightSearchCriteria.numberOfTickets());
+                Specification<Flight> spec = Specification.where(null);
 
-        Specification<Flight> spec = Specification.where(null);
+                spec = spec.and(FlightSpecifications.hasDepartureDate(flightSearchCriteria.departureDate()));
+                spec = spec.and(FlightSpecifications.hasDepartureAirport(flightSearchCriteria.departureAirportId()));
+                spec = spec.and(FlightSpecifications.hasArrivalAirport(flightSearchCriteria.arrivalAirportId()));
+                spec = spec.and(FlightSpecifications.hasAvailableSeats(flightSearchCriteria.seatClass(),
+                                flightSearchCriteria.numberOfTickets()));
 
-        spec = spec.and(FlightSpecifications.hasDepartureDate(flightSearchCriteria.departureDate()));
+                if (flightSearchCriteria.flightType() != null)
+                        spec = spec.and(FlightSpecifications.hasFlightType(flightSearchCriteria.flightType()));
 
-        spec = spec.and(FlightSpecifications.hasDepartureAirport(flightSearchCriteria.departureAirportId()));
+                // fliter and pagination part
+                Sort sort = Utilities.sort(flightSearchCriteria.direction(), flightSearchCriteria.sortby());
 
-        spec = spec.and(FlightSpecifications.hasArrivalAirport(flightSearchCriteria.arrivalAirportId()));
+                Pageable pageable = Utilities.CreatePage(pageNumber, 10, sort);
 
-        spec = spec.and(FlightSpecifications.hasAvailableSeats(flightSearchCriteria.seatClass(),
-                flightSearchCriteria.numberOfTickets()));
+                Page<Flight> page = flightRepository.findAll(spec, pageable);
+                Page<FlightSearchResponse> pageDTO = page.map(
+                                flight -> FlightSearchMapper.toDTO(flight, flightSearchCriteria.seatClass()));
+                return PageResponseMapper.toPageResponse(pageDTO);
 
-        spec = spec.and(FlightSpecifications.hasFlightType(flightSearchCriteria.flightType()));
-
-        // fliter and pagination part
-        Sort sort = Utilities.sort(flightSearchCriteria.direction(), flightSearchCriteria.sortby());
-
-        Pageable pageable = (sort != null) ? PageRequest.of(pageNumber, 10, sort)
-                : PageRequest.of(pageNumber, 10);
-
-        Page<Flight> page = flightRepository.findAll(spec, pageable);
-        Page<FlightSearchResponse> pageDTO = page
-                .map(flight -> FlightSearchMapper.toDTO(flight, flightSearchCriteria.seatClass()));
-        return PageResponseMapper.toPageResponse(pageDTO);
-
-    }
+        }
 
 }

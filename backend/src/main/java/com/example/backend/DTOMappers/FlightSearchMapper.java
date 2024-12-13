@@ -1,6 +1,5 @@
 package com.example.backend.DTOMappers;
 
-import com.example.backend.DTOs.AdminDashboard.AdminFlightDTO;
 import com.example.backend.DTOs.BookingDTOs.FlightSearchResponse;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Entities.FlightLeg;

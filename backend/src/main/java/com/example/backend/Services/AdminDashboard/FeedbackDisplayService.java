@@ -62,7 +62,7 @@ public class FeedbackDisplayService {
         String sortDirection = feedbackFilterDTO.direction();
         Sort sort = Utilities.sort(sortDirection, "dateOfCreation");
 
-        Pageable pageable = PageRequest.of(pageNumber, 10, sort);
+        Pageable pageable = Utilities.CreatePage(pageNumber, 10, sort);
 
         Page<Feedback> page = feedbackRepository.findAll(spec, pageable);
         Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);

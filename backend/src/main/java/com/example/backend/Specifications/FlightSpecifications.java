@@ -7,7 +7,6 @@ import com.example.backend.Entities.Flight;
 import com.example.backend.Entities.FlightLeg;
 import com.example.backend.Enums.FlightType;
 import com.example.backend.Enums.SeatClass;
-
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
@@ -106,30 +105,19 @@ public class FlightSpecifications {
     }
 
     public static Specification<Flight> hasAvailableSeats(SeatClass seatClass, int numberOfTickets) {
-        if (seatClass == null)
-            return null;
-
         if (seatClass == SeatClass.ECONOMY)
-            return hasEconomySeats(numberOfTickets);
+            return hasSeats("availableEconomySeats",numberOfTickets);
         else
-            return hasBusinessSeats(numberOfTickets);
+            return hasSeats("availableBusinessSeats", numberOfTickets);
     }
 
-    public static Specification<Flight> hasEconomySeats(int numberOfTickets) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("availableEconomySeats"),
-                numberOfTickets);
-    }
-
-    public static Specification<Flight> hasBusinessSeats(int numberOfTickets) {
+    public static Specification<Flight> hasSeats(String attributeName, int numberOfTickets) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(
-                root.get("availableBusinessSeats"),
+                root.get(attributeName),
                 numberOfTickets);
     }
 
     public static Specification<Flight> hasFlightType(FlightType flightType) {
-        if (flightType == null)
-            return null;
-
         if (flightType == FlightType.DIRECT)
             return hasOneFlightLeg();
         else
@@ -156,7 +144,7 @@ public class FlightSpecifications {
         Subquery<Integer> subquery = query.subquery(Integer.class);
         Root<FlightLeg> subRoot = subquery.from(FlightLeg.class);
 
-        subquery.select(criteriaBuilder.greatest(subRoot.get("flightLegId")))
+        subquery.select(criteriaBuilder.max(subRoot.get("flightLegId")))
                 .where(criteriaBuilder.equal(subRoot.get("flight"), root))
                 .groupBy(subRoot.get("flight"));
 
