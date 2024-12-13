@@ -17,6 +17,7 @@ import Popup from "./components/shared/Popup";
 import { useState } from "react";
 import Button from "./components/shared/Button";
 import SignUpForm from "./components/signup/SignUpForm";
+import AddFlight from "./pages/AdminDashboard/AddFlight";
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);
@@ -27,7 +28,7 @@ function App() {
         btnText={"show popup"}
         handleClick={() => setShowPopup(true)}
       />
-      {showPopup && <Popup onClose={() => setShowPopup(false)}><ResetPassword/></Popup>}
+      {showPopup && <Popup onClose={() => setShowPopup(false)}><AddFlight/></Popup>}
     </>
 
     // <Routes className="App">

@@ -1,10 +1,11 @@
 .mb-3 {
-  margin-top: 2rem;
-  height: 4.5em;
-  width: 24em;
+  height: auto;
+  width: auto;
+  min-width: 24em;
+  margin: 0 0 0.3rem 0;
 }
 
-.invalid-feedback{
+.invalid-feedback {
   unicode-bidi: none;
 }
 
