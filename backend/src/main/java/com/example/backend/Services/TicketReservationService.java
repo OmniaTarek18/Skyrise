@@ -20,12 +20,12 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class TicketReservationService {
-    
+
     private final ReservationRepository reservationRepository;
     private final UserRepository userRepository;
     private final FlightRepository flightRepository;
 
-    public void reserveTicket(TicketDTO ticketDTO) {
+    public void createReservation(TicketDTO ticketDTO) {
         // Retrieve the user
         Optional<User> optionalUser = userRepository.findById(ticketDTO.userId());
         if (optionalUser.isEmpty()) {
@@ -41,7 +41,8 @@ public class TicketReservationService {
         Flight flight = optionalFlight.get();
 
         // Check if the user already has a reservation for the flight
-        boolean alreadyReserved = reservationRepository.existsByUserIdAndFlightId(ticketDTO.userId(), ticketDTO.flightId());
+        boolean alreadyReserved = reservationRepository.existsByUserIdAndFlightId(ticketDTO.userId(),
+                ticketDTO.flightId());
         if (alreadyReserved) {
             throw new IllegalArgumentException("User has already reserved a seat on this flight.");
         }
@@ -50,23 +51,20 @@ public class TicketReservationService {
         if (ticketDTO.seatClass() == SeatClass.BUSINESS) {
             if (flight.getAvailableBusinessSeats() < ticketDTO.reservedSeats()) {
                 throw new IllegalArgumentException("Not enough seats available for the reservation.");
-            }
-            else {
+            } else {
                 flight.setAvailableBusinessSeats(flight.getAvailableBusinessSeats() - ticketDTO.reservedSeats());
                 flightRepository.save(flight);
             }
-        }
-        else {
+        } else {
             if (flight.getAvailableEconomySeats() < ticketDTO.reservedSeats()) {
                 throw new IllegalArgumentException("Not enough seats available for the reservation.");
-            }
-            else {
+            } else {
                 flight.setAvailableEconomySeats(flight.getAvailableEconomySeats() - ticketDTO.reservedSeats());
                 flightRepository.save(flight);
             }
         }
 
-         // Create and save the reservation
+        // Create and save the reservation
         Reservation reservation = new Reservation();
         reservation.setUser(user);
         reservation.setFlight(flight);
@@ -76,7 +74,7 @@ public class TicketReservationService {
         reservationRepository.save(reservation);
     }
 
-    public void deleteTicket(Integer flightId, Integer userId) {
+    public void cancelReservation(Integer flightId, Integer userId) {
         Optional<Reservation> reservationOptional = reservationRepository.findByFlightIdAndUserId(flightId, userId);
 
         if (reservationOptional.isEmpty()) {
@@ -87,8 +85,7 @@ public class TicketReservationService {
 
         if (reservation.getSeatClass() == SeatClass.BUSINESS) {
             flight.setAvailableBusinessSeats(flight.getAvailableBusinessSeats() + reservation.getReservedSeats());
-        }
-        else {
+        } else {
             flight.setAvailableEconomySeats(flight.getAvailableEconomySeats() + reservation.getReservedSeats());
         }
         flightRepository.save(flight);
