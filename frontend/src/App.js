@@ -30,7 +30,7 @@ function App() {
       />
       {showPopup && (
         <Popup onClose={() => setShowPopup(false)}>
-          <TicketForm />
+          <TicketForm numberOfTickets={5}/>
         </Popup>
       )}
     </>

@@ -41,14 +41,21 @@
 
 /* You can still retain the specific styling for gender, first name, and last name */
 #gender {
-  width: 10vw;
+  width: 9vw;
 }
 
 #firstName,
 #lastName {
-    width: 14vw;
+    width: 13vw;
 }
 
 .inputs-container legend {
   font-weight: 500;
 }
+
+.inputs-container fieldset {
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }

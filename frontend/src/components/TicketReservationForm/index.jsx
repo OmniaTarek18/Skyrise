@@ -7,7 +7,7 @@ import Button from "../shared/Button";
 import Input from "../shared/Input";
 import "./style.css";
 
-const TicketForm = () => {
+const TicketForm = ({numberOfTickets}) => {
   const {
     values,
     errors,
