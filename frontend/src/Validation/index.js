@@ -3,8 +3,7 @@ import * as yup from "yup";
 var passwordRegex =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/
-
+var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
 var nameRegax = /^[a-z ,.'-]+$/i;
 
@@ -28,7 +27,7 @@ const confirmPasswordMessage = "Passwords must match";
 
 const emailValidation = yup
   .string()
-  .matches( emailRegex ,emailErrorMessage)
+  .matches(emailRegex, emailErrorMessage)
   .required(requiredMessage);
 const passwordValidation = yup
   .string()
@@ -68,7 +67,7 @@ const phoneNumberValidation = yup
 const passportNumberValidation = yup
   .string()
   .matches(passportNumberRegex, passportNumberMessage);
-const issuingCountryValidation = yup.string().required(requiredMessage);
+const issuingCountryValidation = yup.string();
 
 export const loginSchema = yup.object().shape({
   email: emailValidation,
@@ -119,4 +118,27 @@ export const resetPasswordSchema = yup.object().shape({
 
 export const forgetPasswordSchema = yup.object().shape({
   email: emailValidation,
+});
+
+export const ticketReservationSchema = yup.object().shape({
+  nationalId: nationalIdValidation,
+  dateOfBirth: dobValidation,
+  countryCode: yup.string().notRequired(),
+  phoneNumber: yup
+    .string()
+    .matches(phoneNumberRegex, phoneNumberMessage)
+    .min(11)
+    .notRequired(),
+  passportNumber: yup
+    .string()
+    .matches(passportNumberRegex, passportNumberMessage)
+    .required("Passport Number is a required field"),
+  passportIssuingCountry: yup
+    .string()
+    .required("Passport issuing country is a required field"),
+  firstName: nameValidation,
+  lastName: nameValidation,
+  gender: genderValidation,
+  specialNeeds: yup.string(),
+  mealSpecification: yup.string(),
 });

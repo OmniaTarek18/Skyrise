@@ -182,7 +182,7 @@ const SignUpForm = () => {
         <h2>Additional Details</h2>
         <fieldset className="personal-info-container">
           <legend>Personal Information</legend>
-          <div className="row threeInputRow">
+          <div className="row three-input-row">
             {/* Input field for gender selection */}
             <Input
               label={"Gender"}

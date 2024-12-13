@@ -1,0 +1,54 @@
+.inputs-container {
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Custom Scrollbar Styling */
+.inputs-container::-webkit-scrollbar {
+  width: 10px; /* Set the width of the vertical scrollbar */
+}
+
+.inputs-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Scrollbar thumb color */
+  border-radius: 10px; /* Rounded edges for the scrollbar thumb */
+}
+
+.inputs-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Scrollbar thumb color on hover */
+}
+
+.inputs-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+/* Override for .mb-3 inside .threeInputRow */
+.three-input-row .mb-3{
+  min-width: unset; /* Removes the min-width for this specific case */
+
+}
+.three-input-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* You can still retain the specific styling for gender, first name, and last name */
+#gender {
+  width: 10vw;
+}
+
+#firstName,
+#lastName {
+    width: 14vw;
+}
+
+.inputs-container legend {
+  font-weight: 500;
+}
