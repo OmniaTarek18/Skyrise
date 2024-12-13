@@ -11,6 +11,7 @@ import com.example.backend.DTOs.PageResponse;
 import com.example.backend.DTOs.BookingDTOs.FlightSearchCriteria;
 import com.example.backend.DTOs.BookingDTOs.FlightSearchResponse;
 import com.example.backend.Entities.Flight;
+import com.example.backend.Enums.SeatClass;
 import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Specifications.FlightSpecifications;
 import com.example.backend.Utilites.Utilities;
@@ -37,7 +38,9 @@ public class FlightSearchService {
                         spec = spec.and(FlightSpecifications.hasFlightType(flightSearchCriteria.flightType()));
 
                 // fliter and pagination part
-                Sort sort = Utilities.sort(flightSearchCriteria.direction(), flightSearchCriteria.sortby());
+                Sort sort = handleSorting(flightSearchCriteria.sortby(),
+                                flightSearchCriteria.direction(),
+                                flightSearchCriteria.seatClass());
 
                 Pageable pageable = Utilities.CreatePage(pageNumber, 10, sort);
 
@@ -46,6 +49,22 @@ public class FlightSearchService {
                                 flight -> FlightSearchMapper.toDTO(flight, flightSearchCriteria.seatClass()));
                 return PageResponseMapper.toPageResponse(pageDTO);
 
+        }
+
+        private Sort handleSorting(String sortby, String direction, SeatClass seatClass) {
+                if (sortby == null)
+                        return null;
+
+                if (direction == null)
+                        direction = "asc";
+                else
+                        direction = direction.toLowerCase();
+
+                if ("price".equals(sortby))
+                        sortby = (seatClass == SeatClass.ECONOMY) ? "economyPrice" : "businessPrice";
+                else
+                        return null;
+                return Sort.by(Sort.Direction.fromString(direction), sortby);
         }
 
 }
