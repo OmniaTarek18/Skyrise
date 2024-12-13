@@ -13,27 +13,26 @@ import ChangePassword from "./pages/AdminDashboard/ChangePassword";
 import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
 import ArchivePage from "./pages/AdminDashboard/ArchivePage";
 import "./App.css";
-import SearchFlights from "./components/homepage/SearchFlights";
+
 
 function App() {
   return (
-    <SearchFlights/>
-    // <Routes className="App">
-    //   <Route path="/" element={<Homepage />} />
-    //   <Route path="signup" element={<SignUpPage />} />
-    //   <Route path="login" element={<LogInPage />} />
-    //   <Route path="forget-password" element={<ForgetPassword />} />
-    //   <Route path="reset-password" element={<ResetPassword />} />
-    //   <Route path="admin-dashboard" element={<AdminDashboard />}>
-    //     <Route path="overview" element={<Overview />} />
-    //     <Route path="flights" element={<Flights />} />
-    //     <Route path="feedback" element={<Feedback />} />
-    //     <Route path="archive" element={<ArchivePage />} />
-    //     <Route path="change-password" element={<ChangePassword />} />
-    //     <Route path="delete-account" element={<DeleteAccount />} />
-    //   </Route>
-    //   <Route path="user-dashboard" element={<UserDashboard />} />
-    // </Routes>
+    <Routes className="App">
+      <Route path="/" element={<Homepage />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="login" element={<LogInPage />} />
+      <Route path="forget-password" element={<ForgetPassword />} />
+      <Route path="reset-password" element={<ResetPassword />} />
+      <Route path="admin-dashboard" element={<AdminDashboard />}>
+        <Route path="overview" element={<Overview />} />
+        <Route path="flights" element={<Flights />} />
+        <Route path="feedback" element={<Feedback />} />
+        <Route path="archive" element={<ArchivePage />} />
+        <Route path="change-password" element={<ChangePassword />} />
+        <Route path="delete-account" element={<DeleteAccount />} />
+      </Route>
+      <Route path="user-dashboard" element={<UserDashboard />} />
+    </Routes>
   );
 }
 
