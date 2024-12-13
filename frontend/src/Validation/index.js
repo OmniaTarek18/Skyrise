@@ -3,8 +3,7 @@ import * as yup from "yup";
 var passwordRegex =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/
-
+var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
 var nameRegax = /^[a-z ,.'-]+$/i;
 
@@ -26,9 +25,18 @@ const requiredMessage = "Required";
 const passwordMessage = "Please create a stronger password";
 const confirmPasswordMessage = "Passwords must match";
 
+const priceValidation = yup
+  .number()
+  .required("Price is required")
+  .min(0, "Price must be a positive number");
+
+const seatNumberValidation = yup
+  .number()
+  .required("Seats number is required")
+  .min(0, "Seats number must be a positive number");
 const emailValidation = yup
   .string()
-  .matches( emailRegex ,emailErrorMessage)
+  .matches(emailRegex, emailErrorMessage)
   .required(requiredMessage);
 const passwordValidation = yup
   .string()
@@ -119,4 +127,22 @@ export const resetPasswordSchema = yup.object().shape({
 
 export const forgetPasswordSchema = yup.object().shape({
   email: emailValidation,
+});
+
+export const addFlightSchema = yup.object().shape({
+  arrivalDate: yup.date().required("Arrival date is a required field"),
+  departureDate: yup.date().required("Departure date is a required field"),
+  businessPrice: priceValidation,
+  economyPrice: priceValidation,
+  availableEconomySeats: seatNumberValidation,
+  availableBusinessSeats: seatNumberValidation,
+});
+
+export const addFlightLegsSchema = yup.object().shape({
+  arrivalTime: yup.string().required("Arrival time is a required field"),
+  departureTime: yup.string().required("Departure time is a required filed"),
+  departureAirport: yup
+    .number()
+    .required("Departure airport is a required field"),
+  arrivalAirport: yup.number().required("Arrival airport is a required field"),
 });
