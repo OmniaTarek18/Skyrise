@@ -1,5 +1,7 @@
 package com.example.backend.Services;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,46 +27,42 @@ public class ReservationDisplayService {
         this.reservationRepository = reservationRepository;
     }
 
-    public PageResponse<ReservationDTO> getReservationByUserId (Integer userId, int pageNumber) {
-        ValidateInput.validateId(userId);
-        ValidateInput.validatePageNumber(pageNumber);
-
-        Pageable pageable = PageRequest.of(pageNumber, 10);
-        Page<Reservation> page = reservationRepository.findByUserId(userId, pageable);
-        Page<ReservationDTO> pageDTO = page.map(ReservationMapper :: toDTO);
-        return PageResponseMapper.toPageResponse(pageDTO);
-    }
-
     public PageResponse<ReservationDTO> filterReserved (ReservationFilterCriteria filterDTO, int pageNumber) {
-        ValidateInput.validateId(filterDTO.userId());
         ValidateInput.validatePageNumber(pageNumber);
 
-        Specification<Reservation> spec = ReservationSpecifications.containsUserId(filterDTO.userId());
+        Specification<Reservation> spec = ReservationSpecifications.containsId("userId", filterDTO.userId());
+
+        if (filterDTO.flightId() != null) {
+            spec = spec.and(ReservationSpecifications.containsId("flightId", filterDTO.flightId()));
+        }
         
         if (filterDTO.source() != null) {
-            spec = spec.and(ReservationSpecifications.containsSource(filterDTO.source()));
+            spec = spec.and(ReservationSpecifications.containsLocation("departureAirport", filterDTO.source()));
         }
 
         if (filterDTO.destination() != null) {
-            spec = spec.and(ReservationSpecifications.containsDestination(filterDTO.destination()));
+            spec = spec.and(ReservationSpecifications.containsLocation("arrivalAirport", filterDTO.destination()));
         }
 
         if (filterDTO.departureDate() != null) {
-            spec = spec.and(ReservationSpecifications.containsDepartureDate(filterDTO.departureDate()));
+            spec = spec.and(ReservationSpecifications.containsDate("departureDate", filterDTO.departureDate()));
         }
 
         if (filterDTO.arrivalDate() != null) {
-            spec = spec.and(ReservationSpecifications.containsArrivalDate(filterDTO.arrivalDate()));
+            spec = spec.and(ReservationSpecifications.containsDate("arrivalDate", filterDTO.arrivalDate()));
         }
 
-        if (filterDTO.flightId() != null) {
-            spec = spec.and(ReservationSpecifications.containsFlightId(filterDTO.flightId()));
+        if (filterDTO.pastFlights() != null && filterDTO.pastFlights()) {
+            spec = spec.and(ReservationSpecifications.beforeDate("arrivalDate", LocalDate.now()));
+        }
+        else if (filterDTO.recentFlights() != null && filterDTO.recentFlights()) {
+            spec = spec.and(ReservationSpecifications.afterOrEqualDate("arrivalDate", LocalDate.now()));
         }
 
         if (filterDTO.sortBy() != null && filterDTO.direction() != null) {
             switch (filterDTO.sortBy().toLowerCase()) {
-                case "departuredate" -> spec = spec.and(ReservationSpecifications.sortedByDepartureDate(filterDTO.direction()));
-                case "arrivaldate" -> spec = spec.and(ReservationSpecifications.sortedByArrivalDate(filterDTO.direction()));
+                case "departuredate" -> spec = spec.and(ReservationSpecifications.sortedByDate("departureDate", filterDTO.direction()));
+                case "arrivaldate" -> spec = spec.and(ReservationSpecifications.sortedByDate("arrivalDate", filterDTO.direction()));
                 case "flightid" -> spec = spec.and(ReservationSpecifications.sortedByFlightId(filterDTO.direction()));
                 default -> {
                 }

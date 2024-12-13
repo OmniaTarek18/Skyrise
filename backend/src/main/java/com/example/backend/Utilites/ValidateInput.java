@@ -12,10 +12,4 @@ public class ValidateInput {
         if (input == null)
             throw new NullPointerException("Departure date can't be null");
     }
-
-    public static void validateId(Integer id) {
-        if (id == null || id <= 0) {
-            throw new IllegalArgumentException("Invalid ID: ID must be a positive number.");
-        }
-    }
 }

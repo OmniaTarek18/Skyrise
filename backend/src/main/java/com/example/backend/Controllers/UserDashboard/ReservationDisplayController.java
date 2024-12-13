@@ -8,7 +8,9 @@ import com.example.backend.DTOs.PageResponse;
 import com.example.backend.DTOs.ReservationDTO;
 import com.example.backend.DTOs.ReservationFilterCriteria;
 import com.example.backend.Services.ReservationDisplayService;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,17 +24,9 @@ public class ReservationDisplayController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/reservedFlights")
-    public ResponseEntity<PageResponse<ReservationDTO>> getReservedFlightsByUserId(@RequestParam Integer userId,
-            @RequestParam(defaultValue = "0") int pageNumber) {
-
-        PageResponse<ReservationDTO> page = reservationService.getReservationByUserId(userId, pageNumber);
-        return ResponseEntity.ok(page);
-    }
-
     @PostMapping("/reservedFlights")
     public ResponseEntity<PageResponse<ReservationDTO>> getFilteredReservedFlights(
-            @RequestBody ReservationFilterCriteria filterCriteria,
+            @Valid @RequestBody ReservationFilterCriteria filterCriteria,
             @RequestParam(defaultValue = "0") int pageNumber) {
 
         PageResponse<ReservationDTO> page = reservationService.filterReserved(filterCriteria, pageNumber);
