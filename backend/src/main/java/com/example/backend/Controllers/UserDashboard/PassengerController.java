@@ -4,16 +4,20 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.backend.DTOs.PassengerDTO;
 import com.example.backend.Services.PassengerService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
+@Validated
 @RequestMapping("/user")
 public class PassengerController {
     private final PassengerService passengerService;
@@ -23,7 +27,7 @@ public class PassengerController {
     }
 
     @PostMapping("/passengers")
-    public ResponseEntity<String> addPassengers(@RequestBody List<PassengerDTO> passengers, 
+    public ResponseEntity<String> addPassengers(@RequestBody List<@Valid PassengerDTO> passengers, 
             @RequestParam Integer userId,
             @RequestParam Integer flightId) {
                 
