@@ -12,6 +12,8 @@ import Feedback from "./pages/AdminDashboard/Feedback";
 import ChangePassword from "./pages/AdminDashboard/ChangePassword";
 import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
 import ArchivePage from "./pages/AdminDashboard/ArchivePage";
+import UserInfo from "./pages/UserDashboard/UserInfo";
+import UserFlights from "./pages/UserDashboard/UserFlights";
 import "./App.css";
 
 function App() {
@@ -30,7 +32,12 @@ function App() {
         <Route path="change-password" element={<ChangePassword />} />
         <Route path="delete-account" element={<DeleteAccount />} />
       </Route>
-      <Route path="user-dashboard" element={<UserDashboard />} />
+      <Route path="user-dashboard" element={<UserDashboard />} >
+        <Route path="user-info" element={<UserInfo />} />
+        <Route path="user-Flights" element={<UserFlights />} />
+        <Route path="change-password" element={<ChangePassword />} />
+        <Route path="delete-account" element={<DeleteAccount />} />
+      </Route>
     </Routes>
   );
 }

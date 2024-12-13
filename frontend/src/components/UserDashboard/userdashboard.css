@@ -1,0 +1,102 @@
+.dashboard-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.dashboard-layout {
+  display: flex;
+  height: calc(100vh - 135px); /* 135 is according to the current nav height could be changed if we changed the height of navbar */
+}
+
+.usersidebar {
+  width: 270px; 
+  background-color: #05203c; 
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.usersidebar.collapsed {
+  width: 80px;
+}
+
+.usersidebar-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-container h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+}
+
+.collapse-btn {
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.collapse-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.usersidebar-nav {
+  flex: 1;
+  padding: 1rem 1.5rem;
+}
+
+.user-nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  gap: 1rem;
+}
+
+.user-nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transform: scale(1.05);
+}
+
+.user-nav-link.active {
+  background-color: #0062e3; 
+  border-radius: 8px;
+  transform: scale(1.05);
+}
+
+.user-nav-link span {
+  white-space: nowrap;
+}
+
+.usersidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  background-color: #05203c;
+  color: white;
+}
+
+.usersidebar.collapsed .user-nav-link {
+  justify-content: center; 
+  padding: 5px;
+}
