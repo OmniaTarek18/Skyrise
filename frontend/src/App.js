@@ -18,6 +18,7 @@ import { useState } from "react";
 import Button from "./components/shared/Button";
 import SignUpForm from "./components/signup/SignUpForm";
 import AddFlight from "./pages/AdminDashboard/AddFlight";
+import AddFlightLegs from "./pages/AdminDashboard/AddFlightLegs";
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);
@@ -28,7 +29,7 @@ function App() {
         btnText={"show popup"}
         handleClick={() => setShowPopup(true)}
       />
-      {showPopup && <Popup onClose={() => setShowPopup(false)}><AddFlight/></Popup>}
+      {showPopup && <Popup onClose={() => setShowPopup(false)}><AddFlightLegs/></Popup>}
     </>
 
     // <Routes className="App">
