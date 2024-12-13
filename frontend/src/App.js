@@ -10,7 +10,7 @@ import Overview from "./pages/AdminDashboard/Overview";
 import Flights from "./pages/AdminDashboard/Flights";
 import Feedback from "./pages/AdminDashboard/Feedback";
 import ChangePassword from "./pages/AdminDashboard/ChangePassword";
-import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
+import DeleteAccount from "./components/shared/DeleteAccount";
 import ArchivePage from "./pages/AdminDashboard/ArchivePage";
 import "./App.css";
 import Popup from "./components/shared/Popup";
@@ -27,7 +27,7 @@ function App() {
         btnText={"show popup"}
         handleClick={() => setShowPopup(true)}
       />
-      {showPopup && <Popup onClose={() => setShowPopup(false)}><ResetPassword/></Popup>}
+      {showPopup && <Popup onClose={() => setShowPopup(false)}><DeleteAccount/></Popup>}
     </>
 
     // <Routes className="App">
