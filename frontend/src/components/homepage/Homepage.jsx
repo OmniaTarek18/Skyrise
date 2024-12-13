@@ -9,8 +9,6 @@ import CustomerSay from "./CustomersSay/CustomerSay";
 import useUserAuthenticationStore from "../../store/useUserAuthenticationStore";
 import AdminDashboard from "../../pages/AdminDashboard/AdminDashboard";
 
-import "./style.css";
-
 const Homepage = () => {
   const navigate = useNavigate();
   const { id, role, setUserAuthentication } = useUserAuthenticationStore();
