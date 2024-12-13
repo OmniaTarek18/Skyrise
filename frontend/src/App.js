@@ -29,7 +29,7 @@ function App() {
         btnText={"show popup"}
         handleClick={() => setShowPopup(true)}
       />
-      {showPopup && <Popup onClose={() => setShowPopup(false)}><AddFlight/></Popup>}
+      {showPopup && <Popup onClose={() => setShowPopup(false)}><AddFlightLegs/></Popup>}
     </>
 
     // <Routes className="App">

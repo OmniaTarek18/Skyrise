@@ -142,7 +142,7 @@ export const addFlightLegsSchema = yup.object().shape({
   arrivalTime: yup.string().required("Arrival time is a required field"),
   departureTime: yup.string().required("Departure time is a required filed"),
   departureAirport: yup
-    .number()
+    .string()
     .required("Departure airport is a required field"),
-  arrivalAirport: yup.number().required("Arrival airport is a required field"),
+  arrivalAirport: yup.string().required("Arrival airport is a required field"),
 });
