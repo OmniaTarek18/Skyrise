@@ -103,15 +103,10 @@ export const accountDetailsSchema = yup.object().shape({
   email: emailValidation,
   password: passwordValidation,
   confirmPassword: confirmPasswordValidation("password"),
-  // nationality, nationalid, dob
 });
 
-export const contactDetailsSchema = yup.object().shape({
-  // country code, phone number
-});
 
 export const additionalDetailsSchema = yup.object().shape({
-  // first name, last name, passport number, issuing country
   firstName: nameValidation,
   lastName: nameValidation,
 });
