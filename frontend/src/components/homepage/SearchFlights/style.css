@@ -33,11 +33,11 @@
   height: 4rem;
 }
 
-#passengersNumber{
+#passengers{
   border-radius: 0 9px 9px 0;
 }
 
-#sourceCountry{
+#source{
   border-radius: 9px 0 0 9px;
 }
 

@@ -8,7 +8,7 @@ const Input = ({
   id,
   placeholder = "",
   onChange,
-  value,
+  value = "",
   onBlur,
   showError = false, // Renamed for clarity
   errorMessage = null, // Customizable error message
@@ -16,6 +16,7 @@ const Input = ({
   selectionInput = false,
   defaultSelectionText,
   options,
+  disabled= false,
 }) => {
   return (
     <div className="mb-3">
@@ -49,6 +50,7 @@ const Input = ({
           }
           min={min}
           required={required}
+          disabled ={disabled}
         />
       )}
       {selectionInput && (
@@ -59,9 +61,8 @@ const Input = ({
           onChange={onChange}
           value={value}
           onBlur={onBlur}
-          defaultValue={""}
         >
-          <option value="" disabled hidden>
+          <option value=""  disabled hidden>
             {defaultSelectionText}
           </option>
           {options.map((option, index) => (
