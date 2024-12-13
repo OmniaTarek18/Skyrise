@@ -12,7 +12,6 @@ import com.example.backend.Enums.SeatClass;
 import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Repositories.ReservationRepository;
 import com.example.backend.Repositories.UserRepository;
-import com.example.backend.Utilites.ValidateInput;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +26,6 @@ public class TicketReservationService {
     private final FlightRepository flightRepository;
 
     public void reserveTicket(TicketDTO ticketDTO) {
-        // Checking for nulls or illegal input
-        ValidateInput.validateId(ticketDTO.userId());
-        ValidateInput.validateId(ticketDTO.flightId());
-        ValidateInput.validateSeatClass(ticketDTO.seatClass());
-        ValidateInput.validateNumOfSeats(ticketDTO.reservedSeats());
-
         // Retrieve the user
         Optional<User> optionalUser = userRepository.findById(ticketDTO.userId());
         if (optionalUser.isEmpty()) {
@@ -84,9 +77,6 @@ public class TicketReservationService {
     }
 
     public void deleteTicket(Integer flightId, Integer userId) {
-        ValidateInput.validateId(userId);
-        ValidateInput.validateId(flightId);
-
         Optional<Reservation> reservationOptional = reservationRepository.findByFlightIdAndUserId(flightId, userId);
 
         if (reservationOptional.isEmpty()) {

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.backend.DTOs.TicketDTO;
 import com.example.backend.Services.TicketReservationService;
 
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,7 @@ public class TicketReservationController {
     }
 
     @PostMapping("/bookTicket")
-    public ResponseEntity<String> addReservation(@RequestBody TicketDTO ticketDTO) {
+    public ResponseEntity<String> addReservation(@Valid @RequestBody TicketDTO ticketDTO) {
         ticketReservationService.reserveTicket(ticketDTO);
 
         return ResponseEntity.ok("Booking tickets is done successfully.");

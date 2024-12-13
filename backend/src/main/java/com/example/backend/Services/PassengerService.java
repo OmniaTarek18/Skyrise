@@ -29,6 +29,11 @@ public class PassengerService {
         }
         Reservation reservation = optionalReservation.get();
 
+        List<Passenger> existingPassengers = passengerRepository.findByReservation(reservation);
+        if (existingPassengers.size() >= reservation.getReservedSeats()) {
+            throw new IllegalArgumentException("Passengers already exist for this reservation. Cannot add more.");
+        }
+
         if (passengersDTOs.size() != reservation.getReservedSeats()) {
             throw new IllegalArgumentException("Number of passengers doesn't match the reserved seats.");
         }
