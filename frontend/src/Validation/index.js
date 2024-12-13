@@ -120,3 +120,8 @@ export const resetPasswordSchema = yup.object().shape({
 export const forgetPasswordSchema = yup.object().shape({
   email: emailValidation,
 });
+
+
+export const upgradeUserSchema = yup.object().shape({
+  email: emailValidation,
+});
