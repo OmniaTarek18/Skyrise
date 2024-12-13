@@ -9,7 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import Overview from "./pages/AdminDashboard/Overview";
 import Flights from "./pages/AdminDashboard/Flights";
 import Feedback from "./pages/AdminDashboard/Feedback";
-import ChangePassword from "./pages/AdminDashboard/ChangePassword";
+import ChangePassword from "./components/userdashboard/ChangePassword";
 import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
 import ArchivePage from "./pages/AdminDashboard/ArchivePage";
 import "./App.css";
@@ -27,7 +27,7 @@ function App() {
         btnText={"show popup"}
         handleClick={() => setShowPopup(true)}
       />
-      {showPopup && <Popup onClose={() => setShowPopup(false)}><ResetPassword/></Popup>}
+      {showPopup && <Popup onClose={() => setShowPopup(false)}><ChangePassword/></Popup>}
     </>
 
     // <Routes className="App">
