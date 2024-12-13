@@ -1,32 +1,57 @@
-.btn{
-    display: block;
-    margin: 0.5rem auto 0.5rem auto;
-    height: 3.5em;
-    width: 24em;
-    font-weight:bold;
+.btn {
+  display: block;
+  margin: 0.5rem auto 0.5rem auto;
+  height: 3.5em;
+  width: 24em;
+  font-weight: bold;
 }
 
-.btn-dark{
- background-color: var(--navy-blue);
- border-color: var(--navy-blue);
+.btn-dark {
+  background-color: var(--navy-blue);
+  border-color: var(--navy-blue);
 }
 
-.btn-light{
-    background-color: var(--greyish-white);
-    border-color: var(--greyish-white);
-    color: var(--navy-blue);
+.btn-light {
+  background-color: var(--greyish-white);
+  border-color: var(--greyish-white);
+  color: var(--navy-blue);
 }
 
-.btn-primary{
-    background-color: var(--blue);
-    border-color: var(--blue);
+.btn-primary {
+  background-color: var(--blue);
+  border-color: var(--blue);
+  color: white;
+}
+
+.btn-link {
+  text-decoration: none;
+  display: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-pink {
+  background-color: var(--pink);
+  border-color: var(--pink);
+  color: white;
+  transition: all 0.3s ease; /* Optional for smooth transition */
+}
+
+.btn-black {
+  background-color: black;
+  border-color: black;
+  color: white;
+  transition: all 0.3s ease; /* Optional for smooth transition */
+}
+
+.btn-pink:hover {
+  background-color: rgba(231, 8, 102, 0.7); /* Lighter pink color */
+  border-color: rgba(231, 8, 102, 0.7); /* Lighter pink border */
+  color: white;
+}
+
+.btn-black:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Lighter pink color */
+    border-color: rgba(0, 0, 0, 0.7); /* Lighter pink border */
     color: white;
 }
-
-.btn-link{
-    text-decoration: none;
-    display: none;
-    margin: 0;
-    padding: 0;
-}
-
