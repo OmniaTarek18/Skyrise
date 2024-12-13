@@ -76,6 +76,7 @@ public class FlightSpecifications {
         return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get("arrivalDate"), arrivalDate);
     }
 
+
     public static Specification<Flight> hasDepartureAirport(Integer id) {
         return (root, query, criteriaBuilder) -> {
             Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
@@ -106,7 +107,7 @@ public class FlightSpecifications {
 
     public static Specification<Flight> hasAvailableSeats(SeatClass seatClass, int numberOfTickets) {
         if (seatClass == SeatClass.ECONOMY)
-            return hasSeats("availableEconomySeats",numberOfTickets);
+            return hasSeats("availableEconomySeats", numberOfTickets);
         else
             return hasSeats("availableBusinessSeats", numberOfTickets);
     }
@@ -119,23 +120,15 @@ public class FlightSpecifications {
 
     public static Specification<Flight> hasFlightType(FlightType flightType) {
         if (flightType == FlightType.DIRECT)
-            return hasOneFlightLeg();
+            return haslegs(true);
         else
-            return hasMoreThanOneFlightLeg();
+            return haslegs(false);
     }
 
-    public static Specification<Flight> hasOneFlightLeg() {
+    public static Specification<Flight> haslegs(boolean isDirect) {
         return (root, query, criteriaBuilder) -> {
-            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, true);
+            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, isDirect);
             return criteriaBuilder.exists(subquery);
-        };
-    }
-
-    public static Specification<Flight> hasMoreThanOneFlightLeg() {
-        return (root, query, criteriaBuilder) -> {
-            Subquery<Long> subquery = createLegCountSubquery(root, query, criteriaBuilder, false);
-            return criteriaBuilder.exists(subquery);
-
         };
     }
 
@@ -166,6 +159,4 @@ public class FlightSpecifications {
             subquery.having(criteriaBuilder.greaterThan(criteriaBuilder.count(subRoot.get("flightLegId")), (long) 1));
         return subquery;
     }
-
-    
 }

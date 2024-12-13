@@ -8,11 +8,6 @@ public class ValidateInput {
             throw new IllegalArgumentException("Page number can't be negative");
     }
 
-    public static void validateNumberOfTickets(int numberOfTickets) {
-        if (numberOfTickets < 1)
-            throw new IllegalArgumentException("Number of tickets can't less than or equal zero");
-    }
-
     public static void validateDepartureDate(LocalDate input) {
         if (input == null)
             throw new NullPointerException("Departure date can't be null");
