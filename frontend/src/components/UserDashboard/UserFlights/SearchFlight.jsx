@@ -9,46 +9,31 @@ const SearchFlight = ({
   onSearch,
   onFilterCategory,
 }) => {
-  const [selectedSource, setSelectedSource] = useState(null);
-  const [selectedDestination, setSelectedDestination] = useState(null);
-  const [selectedSourceDate, setSelectedSourceDate] = useState(
-    filters.sourceDate || ""
-  );
-  const [selectedDestinationDate, setSelectedDestinationDate] = useState(
-    filters.destinationDate || ""
-  );
-  const [selectedCategory, setSelectedCategory] = useState(filters.category);
+  const [searchFilters, setSearchFilters] = useState({
+    source: filters.source || null,
+    destination: filters.destination || null,
+    sourceDate: filters.sourceDate || "",
+    destinationDate: filters.destinationDate || "",
+    category: filters.category || "all",
+  });
 
   useEffect(() => {
-    setSelectedSource(filters.source);
-    setSelectedDestination(filters.destination);
-    setSelectedSourceDate(filters.sourceDate);
-    setSelectedDestinationDate(filters.destinationDate);
-    setSelectedCategory(filters.category);
+    setSearchFilters({
+      source: filters.source,
+      destination: filters.destination,
+      sourceDate: filters.sourceDate,
+      destinationDate: filters.destinationDate,
+      category: filters.category,
+    });
   }, [filters]);
 
-  const handleSourceChange = (selectedOption) => {
-    setSelectedSource(selectedOption);
-    onInputChange("source", selectedOption ? selectedOption.value : null);
-  };
-
-  const handleDestinationChange = (selectedOption) => {
-    setSelectedDestination(selectedOption);
-    onInputChange("destination", selectedOption ? selectedOption.value : null);
-  };
-
-  const handleSourceDateChange = (e) => {
-    setSelectedSourceDate(e.target.value);
-    onInputChange("sourceDate", e.target.value);
-  };
-
-  const handleDestinationDateChange = (e) => {
-    setSelectedDestinationDate(e.target.value);
-    onInputChange("destinationDate", e.target.value);
+  const handleChange = (key, value) => {
+    setSearchFilters((prev) => ({ ...prev, [key]: value }));
+    onInputChange(key, value);
   };
 
   const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
+    setSearchFilters((prev) => ({ ...prev, category }));
     onFilterCategory(category);
   };
 
@@ -72,8 +57,13 @@ const SearchFlight = ({
             options={formatOptions(locations.from)}
             isSearchable
             isClearable
-            value={selectedSource}
-            onChange={handleSourceChange}
+            value={searchFilters.source}
+            onChange={(selectedOption) =>
+              handleChange(
+                "source",
+                selectedOption ? selectedOption.value : null
+              )
+            }
             placeholder="Select Source"
           />
         </div>
@@ -84,8 +74,13 @@ const SearchFlight = ({
             options={formatOptions(locations.to)}
             isSearchable
             isClearable
-            value={selectedDestination}
-            onChange={handleDestinationChange}
+            value={searchFilters.destination}
+            onChange={(selectedOption) =>
+              handleChange(
+                "destination",
+                selectedOption ? selectedOption.value : null
+              )
+            }
             placeholder="Select Destination"
           />
         </div>
@@ -94,8 +89,8 @@ const SearchFlight = ({
           <input
             type="date"
             className="datepicker"
-            value={selectedSourceDate}
-            onChange={handleSourceDateChange}
+            value={searchFilters.sourceDate}
+            onChange={(e) => handleChange("sourceDate", e.target.value)}
           />
         </div>
         <div className="filter-item">
@@ -103,8 +98,8 @@ const SearchFlight = ({
           <input
             type="date"
             className="datepicker"
-            value={selectedDestinationDate}
-            onChange={handleDestinationDateChange}
+            value={searchFilters.destinationDate}
+            onChange={(e) => handleChange("destinationDate", e.target.value)}
           />
         </div>
       </div>
@@ -112,7 +107,7 @@ const SearchFlight = ({
       <div className="category-filters">
         <button
           className={`category-button ${
-            selectedCategory === "all" ? "active" : ""
+            searchFilters.category === "all" ? "active" : ""
           }`}
           onClick={() => handleCategoryChange("all")}
         >
@@ -120,7 +115,7 @@ const SearchFlight = ({
         </button>
         <button
           className={`category-button ${
-            selectedCategory === "recent" ? "active" : ""
+            searchFilters.category === "recent" ? "active" : ""
           }`}
           onClick={() => handleCategoryChange("recent")}
         >
@@ -128,7 +123,7 @@ const SearchFlight = ({
         </button>
         <button
           className={`category-button ${
-            selectedCategory === "past" ? "active" : ""
+            searchFilters.category === "past" ? "active" : ""
           }`}
           onClick={() => handleCategoryChange("past")}
         >
