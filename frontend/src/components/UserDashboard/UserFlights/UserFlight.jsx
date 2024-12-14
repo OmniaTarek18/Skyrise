@@ -13,10 +13,6 @@ const UserFlight = ({ flight, onShowDetails }) => {
       </div>
 
       <div className="flight-middle">
-        <div className="duration">
-          <span>🕒</span>
-          <p>Duration: 8h</p>
-        </div>
         <div className="arrow">→</div>
       </div>
 
@@ -30,13 +26,17 @@ const UserFlight = ({ flight, onShowDetails }) => {
       <div className="price-section">
         <h3>L.E. {flight.price}</h3>
         <button className="book-button">Book</button>
-        {/* show details button for viewing all flight legs */}
-        <button
-          className="details-button"
-          onClick={() => onShowDetails(flight.id)}
+        {/* show Details as a link under the Book button */}
+        <a
+          href="#"
+          className="details-link"
+          onClick={(e) => {
+            e.preventDefault();
+            onShowDetails(flight.id);
+          }}
         >
           Show Details
-        </button>
+        </a>
       </div>
     </div>
   );
