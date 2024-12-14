@@ -1,0 +1,66 @@
+.flight-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 700px;
+  font-family: Arial, sans-serif;
+}
+
+.flight-section {
+  text-align: center;
+}
+
+.flight-section .icon {
+  font-size: 24px;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.flight-middle {
+  text-align: center;
+}
+
+.duration {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.arrow {
+  font-size: 24px;
+  color: #007bff;
+}
+
+.price-section {
+  text-align: center;
+}
+
+.price-section h3 {
+  color: #28a745;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.book-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.book-button:hover {
+  background-color: #218838;
+}
+
+.date {
+  font-size: 12px;
+  color: #555;
+}
