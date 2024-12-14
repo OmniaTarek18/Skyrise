@@ -12,6 +12,7 @@ import com.example.backend.DTOs.FeedbackDTO;
 import com.example.backend.DTOs.PageResponse;
 import com.example.backend.DTOs.AdminDashboard.FeedbackFilterCriteria;
 import com.example.backend.Services.AdminDashboard.FeedbackDisplayService;
+import com.example.backend.Utilites.ValidateInput;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,6 +33,8 @@ public class FeedbackDisplayController {
 
     @GetMapping("/feedback")
     public ResponseEntity<PageResponse<FeedbackDTO>> getAllFeedback(@RequestParam(defaultValue = "0") int pageNumber) {
+
+        ValidateInput.validatePageNumber(pageNumber);
         PageResponse<FeedbackDTO> page = feedbackDisplayService.getAll(pageNumber);
         return ResponseEntity.ok(page);
     }
@@ -39,6 +42,8 @@ public class FeedbackDisplayController {
     @PostMapping("/feedback")
     public ResponseEntity<PageResponse<FeedbackDTO>> getAllFeedback(
             @RequestBody FeedbackFilterCriteria feedbackFilterDTO, @RequestParam(defaultValue = "0") int pageNumber) {
+
+        ValidateInput.validatePageNumber(pageNumber);
         PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterDTO, pageNumber);
         return ResponseEntity.ok(page);
     }

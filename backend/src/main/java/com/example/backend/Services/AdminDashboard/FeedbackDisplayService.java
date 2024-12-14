@@ -31,7 +31,6 @@ public class FeedbackDisplayService {
 
     public PageResponse<FeedbackDTO> getAll(int pageNumber) {
 
-        ValidateInput.validatePageNumber(pageNumber);
         Pageable pageable = PageRequest.of(pageNumber, 10);
         Page<Feedback> page = feedbackRepository.findAll(pageable);
         Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
@@ -40,7 +39,6 @@ public class FeedbackDisplayService {
     }
 
     public PageResponse<FeedbackDTO> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber) {
-        ValidateInput.validatePageNumber(pageNumber);
 
         Specification<Feedback> spec = Specification.where(null);
 

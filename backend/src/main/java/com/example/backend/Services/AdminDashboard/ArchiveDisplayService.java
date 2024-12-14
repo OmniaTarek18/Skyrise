@@ -27,7 +27,6 @@ public class ArchiveDisplayService {
     private final FlightRepository flightRepository;
 
     public PageResponse<AdminFlightDTO> getAllPastFlights(int pageNumber) {
-        ValidateInput.validatePageNumber(pageNumber);
 
         LocalDate today = LocalDate.now();
         Pageable pageable = PageRequest.of(pageNumber, 10);
@@ -39,7 +38,6 @@ public class ArchiveDisplayService {
 
     public PageResponse<AdminFlightDTO> filterPastFlights(FlightFilterCriteria flightFilterDTO, int pageNumber) {
 
-        ValidateInput.validatePageNumber(pageNumber);
         LocalDate today = LocalDate.now();
         Specification<Flight> spec = FlightSpecifications.hasArrivalDateLessThan(today);
 
