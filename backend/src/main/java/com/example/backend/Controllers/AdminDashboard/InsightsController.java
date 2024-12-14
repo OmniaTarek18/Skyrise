@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.backend.DTOs.InsightsDTO;
-import com.example.backend.Services.InsightsService;
+import com.example.backend.Services.AdminDashboard.InsightsService;
 
 @Controller
 @RequestMapping("/admin")

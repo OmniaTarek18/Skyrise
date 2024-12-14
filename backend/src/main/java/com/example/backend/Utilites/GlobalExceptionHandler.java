@@ -52,6 +52,7 @@ public class GlobalExceptionHandler {
         List<String> errors = ex.getConstraintViolations().stream()
             .map(violation -> violation.getPropertyPath() + ": " + violation.getMessage())
             .collect(Collectors.toList());
+
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
