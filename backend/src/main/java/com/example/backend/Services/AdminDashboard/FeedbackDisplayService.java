@@ -47,15 +47,20 @@ public class FeedbackDisplayService {
             spec = spec.and(FeedbackSpecifications.containsStars(feedbackFilterDTO.stars()));
         }
 
-        spec = spec.and(FeedbackSpecifications.containsService(feedbackFilterDTO.service()));
+        if (feedbackFilterDTO.service() != null)
+            spec = spec.and(FeedbackSpecifications.containsService(feedbackFilterDTO.service()));
 
-        spec = spec.and(FeedbackSpecifications.containsComfort(feedbackFilterDTO.comfort()));
+        if (feedbackFilterDTO.comfort() != null)
+            spec = spec.and(FeedbackSpecifications.containsComfort(feedbackFilterDTO.comfort()));
 
-        spec = spec.and(FeedbackSpecifications.containsPunctuality(feedbackFilterDTO.punctuality()));
+        if (feedbackFilterDTO.punctuality() != null)
+            spec = spec.and(FeedbackSpecifications.containsPunctuality(feedbackFilterDTO.punctuality()));
 
-        spec = spec.and(FeedbackSpecifications.containsCleanliness(feedbackFilterDTO.cleanliness()));
+        if (feedbackFilterDTO.cleanliness() != null)
+            spec = spec.and(FeedbackSpecifications.containsCleanliness(feedbackFilterDTO.cleanliness()));
 
-        spec = spec.and(FeedbackSpecifications.containsFoodAndBeverage(feedbackFilterDTO.foodAndBeverage()));
+        if (feedbackFilterDTO.foodAndBeverage() != null)
+            spec = spec.and(FeedbackSpecifications.containsFoodAndBeverage(feedbackFilterDTO.foodAndBeverage()));
 
         String sortDirection = feedbackFilterDTO.direction();
         Sort sort = Utilities.sort(sortDirection, "dateOfCreation");
