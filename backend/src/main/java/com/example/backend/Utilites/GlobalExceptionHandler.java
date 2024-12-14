@@ -39,10 +39,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult()
-            .getAllErrors().stream()
-            .map(ObjectError::getDefaultMessage)
-            .collect(Collectors.toList());
-
+                .getAllErrors().stream()
+                .map(ObjectError::getDefaultMessage)
+                .collect(Collectors.toList());
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
