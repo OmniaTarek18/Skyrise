@@ -27,13 +27,11 @@ public class FlightSpecifications {
 
     public static Specification<Flight> containsDestination(String destination) {
         return (root, query, criteriaBuilder) -> {
-
             if (query == null) {
                 throw new IllegalArgumentException("Query parameter cannot be null");
             }
 
             Subquery<Integer> subquery = createNumberOfLastFlightLegSubquery(root, query, criteriaBuilder);
-
             Join<Flight, FlightLeg> flightAndFlightLeg = root.join("flightLegs");
             Join<FlightLeg, Airport> flightLegAndAirport = flightAndFlightLeg.join("arrivalAirport");
 
