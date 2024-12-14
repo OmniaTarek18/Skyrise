@@ -16,7 +16,7 @@ const UpgradeUser = () => {
     status,
     handleChange,
     handleBlur,
-    handleSubmit, // Formik's handleSubmit function
+    handleSubmit,
   } = useUpgradeUserForm(UpgradeUserAPI);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const UpgradeUser = () => {
       setAlert(true);
       setTimeout(() => {
         setAlert(false);
-      }, 2000); // 2000 milliseconds = 2 seconds
+      }, 2000);
     }
   }, [status]);
 
@@ -56,7 +56,7 @@ const UpgradeUser = () => {
         <Button
           btnText={"Continue"}
           btnColor="pink"
-          type="submit" // Ensures the button triggers the form submission
+          type="submit"
           disabled={isSubmitting}
         />
       </form>

@@ -10,6 +10,5 @@ export const useUpgradeUserForm = (onSubmit) => {
     onSubmit,
   });
 
-  // Return the formik object so that it can be used in the ForgetPassword component
   return formik;
 };
