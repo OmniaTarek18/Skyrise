@@ -27,6 +27,7 @@ public class FlightSpecifications {
 
     public static Specification<Flight> containsDestination(String destination) {
         return (root, query, criteriaBuilder) -> {
+
             if (query == null) {
                 throw new IllegalArgumentException("Query parameter cannot be null");
             }

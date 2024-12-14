@@ -1,7 +1,7 @@
 package com.example.backend.Enums;
 
 public enum MealSpecification {
-    VEGEN,
+    VEGAN,
     VEGETARIAN,
     GLUTIN_FREE,
     DIABETIC,
