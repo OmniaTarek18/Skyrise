@@ -22,12 +22,12 @@ const ChangePassword = ({ userEmail }) => {
     status,
     handleChange,
     handleBlur,
-    handleSubmit, // Formik's handleSubmit function
+    handleSubmit,
   } = useChangePasswordForm(changePasswordAPI);
 
   useEffect(() => {
     if (isFirstRender.current) {
-      isFirstRender.current = false; // Skip effect on the first render
+      isFirstRender.current = false;
       return;
     }
     if (status.status == "success") {
@@ -36,7 +36,7 @@ const ChangePassword = ({ userEmail }) => {
       setAlert(true);
       setTimeout(() => {
         setAlert(false);
-      }, 2000); // 2000 milliseconds = 2 seconds
+      }, 2000);
     }
   }, [status]);
 

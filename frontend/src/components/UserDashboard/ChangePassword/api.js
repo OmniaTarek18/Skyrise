@@ -1,5 +1,5 @@
 export const changePasswordAPI = async (values, actions) => {
-  console.log(values); // Log form values to the console
+  console.log(values);
 
   const url = `http://localhost:8080/changePassword/${values.id}?password=${values.password}`;
   try {
