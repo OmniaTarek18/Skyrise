@@ -36,30 +36,32 @@ public class FeedbackDisplayServiceTest {
 
     // @Test
     // void testGetAll() {
-    //     // given
-    //     int pageNumber = 0;
-    //     Pageable pageable = PageRequest.of(pageNumber, 10);
-    //     List<Feedback> feedbackList = createFeedback();
-    //     Page<Feedback> feedbackPage = new PageImpl<>(feedbackList, pageable, feedbackList.size());
+    // // given
+    // int pageNumber = 0;
+    // Pageable pageable = PageRequest.of(pageNumber, 10);
+    // List<Feedback> feedbackList = createFeedback();
+    // Page<Feedback> feedbackPage = new PageImpl<>(feedbackList, pageable,
+    // feedbackList.size());
 
-    //     // mock the calls
-    //     Mockito.when(feedbackRepository.findAll(pageable)).thenReturn(feedbackPage);
-    //     // where
-    //     PageResponse<FeedbackDTO> actualResult = feedbackDisplayService.getAll(pageNumber);
-    //     // then
-    //     Assertions.assertNotNull(actualResult.content().size());
-    //     for(int i = 0 ; i < actualResult.content().size(); i++){
-            
-    //         Assertions.assertEquals(feedbackPage.getContent().get(i).getDateOfCreation(),actualResult.content().get(0).dateOfCreation());
-    //     }
+    // // mock the calls
+    // Mockito.when(feedbackRepository.findAll(pageable)).thenReturn(feedbackPage);
+    // // when
+    // PageResponse<FeedbackDTO> actualResult =
+    // feedbackDisplayService.getAll(pageNumber);
+    // // then
+    // Assertions.assertNotNull(actualResult.content().size());
+    // for(int i = 0 ; i < actualResult.content().size(); i++){
+
+    // Assertions.assertEquals(feedbackPage.getContent().get(i).getDateOfCreation(),actualResult.content().get(0).dateOfCreation());
+    // }
     // }
 
     // @Test
     // void testFilterFeedback() {
-    //     // given
-    //     // mock the calls
-    //     // where
-    //     // then
+    // // given
+    // // mock the calls
+    // // when
+    // // then
     // }
 
     @Test
@@ -68,7 +70,7 @@ public class FeedbackDisplayServiceTest {
         double expectedAvg = 3;
         // mock the calls
         Mockito.when(feedbackRepository.getAvgRating()).thenReturn(expectedAvg);
-        // where
+        // when
         short actualAvg = feedbackDisplayService.getAverageRating();
         // then
         Assertions.assertEquals(expectedAvg, actualAvg);
@@ -100,7 +102,7 @@ public class FeedbackDisplayServiceTest {
                     .punctuality(QualityRating.EXCELLENT)
                     .foodAndBeverage(QualityRating.EXCELLENT)
                     .dateOfCreation(LocalDateTime.now())
-                    .stars((short)5)
+                    .stars((short) 5)
                     .build();
             feedbackList.add(feedback);
         }

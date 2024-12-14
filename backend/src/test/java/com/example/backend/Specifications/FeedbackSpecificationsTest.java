@@ -44,7 +44,7 @@ public class FeedbackSpecificationsTest {
         // given
         int expected_number_of_feedback_excellent = 2;
         int expected_number_of_feedback_poor = 1;
-        // where
+        // when
         Specification<Feedback> spec1 = FeedbackSpecifications.containsCleanliness(QualityRating.EXCELLENT);
         List<Feedback> list_execllent = feedbackRepository.findAll(spec1);
         Specification<Feedback> spec2 = FeedbackSpecifications.containsCleanliness(QualityRating.POOR);
@@ -59,7 +59,7 @@ public class FeedbackSpecificationsTest {
         // given
         int expected_number_of_feedback_excellent = 2;
         int expected_number_of_feedback_poor = 1;
-        // where
+        // when
         Specification<Feedback> spec1 = FeedbackSpecifications.containsCleanliness(QualityRating.EXCELLENT);
         List<Feedback> list_execllent = feedbackRepository.findAll(spec1);
         Specification<Feedback> spec2 = FeedbackSpecifications.containsCleanliness(QualityRating.POOR);
@@ -74,7 +74,7 @@ public class FeedbackSpecificationsTest {
         // given
         int expected_number_of_feedback_excellent = 2;
         int expected_number_of_feedback_fair = 3;
-        // where
+        // when
         Specification<Feedback> spec1 = FeedbackSpecifications.containsFoodAndBeverage(QualityRating.EXCELLENT);
         List<Feedback> list_execllent = feedbackRepository.findAll(spec1);
         Specification<Feedback> spec2 = FeedbackSpecifications.containsFoodAndBeverage(QualityRating.FAIR);
@@ -89,7 +89,7 @@ public class FeedbackSpecificationsTest {
         // given
         int expected_number_of_feedback_excellent = 0;
         int expected_number_of_feedback_poor = 4;
-        // where
+        // when
         Specification<Feedback> spec1 = FeedbackSpecifications.containsPunctuality(QualityRating.EXCELLENT);
         List<Feedback> list_execllent = feedbackRepository.findAll(spec1);
         Specification<Feedback> spec2 = FeedbackSpecifications.containsPunctuality(QualityRating.POOR);
@@ -104,7 +104,7 @@ public class FeedbackSpecificationsTest {
         // given
         int expected_number_of_feedback_excellent = 2;
         int expected_number_of_feedback_poor = 3;
-        // where
+        // when
         Specification<Feedback> spec1 = FeedbackSpecifications.containsService(QualityRating.EXCELLENT);
         List<Feedback> list_execllent = feedbackRepository.findAll(spec1);
         Specification<Feedback> spec2 = FeedbackSpecifications.containsService(QualityRating.POOR);
@@ -119,10 +119,10 @@ public class FeedbackSpecificationsTest {
         // given
         int expected_number_of_feedback_2 = 2;
         int expected_number_of_feedback_5 = 0;
-        // where
-        Specification<Feedback> spec1 = FeedbackSpecifications.containsStars((short)2);
+        // when
+        Specification<Feedback> spec1 = FeedbackSpecifications.containsStars((short) 2);
         List<Feedback> list_execllent = feedbackRepository.findAll(spec1);
-        Specification<Feedback> spec2 = FeedbackSpecifications.containsStars((short)5);
+        Specification<Feedback> spec2 = FeedbackSpecifications.containsStars((short) 5);
         List<Feedback> list_poor = feedbackRepository.findAll(spec2);
         // then
         Assertions.assertEquals(expected_number_of_feedback_2, list_execllent.size());

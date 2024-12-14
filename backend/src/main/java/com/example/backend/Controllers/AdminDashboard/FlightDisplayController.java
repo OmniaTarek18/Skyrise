@@ -26,15 +26,6 @@ public class FlightDisplayController {
 
     private final FlightDisplayService flightService;
 
-    @GetMapping("/flights")
-    public ResponseEntity<PageResponse<AdminFlightDTO>> getFlightsByDepartureDate(@RequestParam LocalDate departureDate,
-            @RequestParam(defaultValue = "0") int pageNumber) {
-
-        PageResponse<AdminFlightDTO> page = flightService.getFlights(departureDate, pageNumber);
-        return ResponseEntity.ok(page);
-
-    }
-
     @PostMapping("/flights")
     public ResponseEntity<PageResponse<AdminFlightDTO>> filter(@RequestBody FlightFilterCriteria flightFilterDTO,
             @RequestParam(defaultValue = "0") int pageNumber) {

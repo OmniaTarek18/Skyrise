@@ -44,7 +44,7 @@ public class FeedbackDisplayControllerTest {
         short avg = 3;
         // mock calls
         Mockito.when(feedbackDisplayService.getAverageRating()).thenReturn(avg);
-        // where
+        // when
         ResultActions response = mockMvc.perform(get("/admin/average-rating"));
         // then
         response.andExpect(status().isOk())
@@ -57,7 +57,7 @@ public class FeedbackDisplayControllerTest {
 
         // Mock calls
         Mockito.when(feedbackDisplayService.getAll(0)).thenReturn(pageResponse);
-        // where
+        // when
         mockMvc.perform(get("/admin/feedback").param("pageNumber", "0"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalPages").value(0))
@@ -75,7 +75,7 @@ public class FeedbackDisplayControllerTest {
 
         // Mock calls
         Mockito.when(feedbackDisplayService.getAll(0)).thenReturn(pageResponse);
-        // where
+        // when
         mockMvc.perform(get("/admin/feedback").param("pageNumber", "0"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalPages").value(1))
@@ -93,7 +93,7 @@ public class FeedbackDisplayControllerTest {
         PageResponse<FeedbackDTO> pageResponse = new PageResponse<>(Collections.emptyList(), 0, 0, 0);
         Mockito.when(feedbackDisplayService.filterFeedback(criteria, 0)).thenReturn(pageResponse);
 
-        // where
+        // when
         mockMvc.perform(post("/admin/feedback")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("pageNumber", "0")

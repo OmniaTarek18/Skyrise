@@ -36,7 +36,7 @@ public class FlightSpecificationsTest {
     @BeforeEach
     void setup() {
         cleanDatabase();
-        generateDate();
+        generateData();
         firstFlightId = flights[1].getId();
     }
 
@@ -44,7 +44,7 @@ public class FlightSpecificationsTest {
     void testContainsDestinationCorrectence() {
         // given
         int expected_number_of_flights = 3;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsDestination("City5");
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -58,7 +58,7 @@ public class FlightSpecificationsTest {
     void testContainsSourceCityCorrectence() {
         // given
         int expected_number_of_flights = 4;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsSource("City2");
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -74,7 +74,7 @@ public class FlightSpecificationsTest {
         // given
         int airportId = airports[5].getId();
         int expected_number_of_flights = 3;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasArrivalAirport(airportId);
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -89,7 +89,7 @@ public class FlightSpecificationsTest {
         // given
         int airportId = airports[2].getId();
         int expected_number_of_flights = 4;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasDepartureAirport(airportId);
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -103,7 +103,7 @@ public class FlightSpecificationsTest {
     @Test
     void testContainsStatusCancelled() {
         int expected_number_of_flights = 3;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsStatus("cancelled");
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -114,7 +114,7 @@ public class FlightSpecificationsTest {
     void testContainsStatusCompleted() {
         // given
         int expected_number_of_flights = 2;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsStatus("complete");
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -127,7 +127,7 @@ public class FlightSpecificationsTest {
     void testContainsStatusInCompleted() {
         // given
         int expected_number_of_flights = 3;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsStatus("incomplete");
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -140,7 +140,7 @@ public class FlightSpecificationsTest {
     @Test
     void testContainsStatusCancel() {
         int expected_number_of_flights = 3;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsStatusCancel();
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -151,7 +151,7 @@ public class FlightSpecificationsTest {
     void testContainsStatusComplete() {
         // given
         int expected_number_of_flights = 2;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsStatusComplete();
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -164,7 +164,7 @@ public class FlightSpecificationsTest {
     void testContainsStatusIncomplete() {
         // given
         int expected_number_of_flights = 3;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.containsStatusIncomplete();
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -178,7 +178,7 @@ public class FlightSpecificationsTest {
     void testHasArrivalDateLessThan() {
         // given
         int expected_number_of_flights = 3;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasArrivalDateLessThan(LocalDate.of(2024, 10, 24));
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -192,7 +192,7 @@ public class FlightSpecificationsTest {
     void testHasAvailableSeatsByEconomyClass() {
         // given
         int expected_number_of_flights = 1;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasAvailableSeats(SeatClass.ECONOMY, 5);
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -204,7 +204,7 @@ public class FlightSpecificationsTest {
     void testHasAvailableSeatsByBusinessClass() {
         // given
         int expected_number_of_flights = 2;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasAvailableSeats(SeatClass.BUSINESS, 2);
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -217,7 +217,7 @@ public class FlightSpecificationsTest {
     void testHasDepartureDate() {
         // given
         int expected_number_of_flights = 2;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasDepartureDate(LocalDate.of(2024, 10, 12));
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -230,7 +230,7 @@ public class FlightSpecificationsTest {
     void testHasFlightTypeDirect() {
         // given
         int expected_number_of_flights = 1;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasFlightType(FlightType.DIRECT);
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -242,7 +242,7 @@ public class FlightSpecificationsTest {
     void testHasFlightTypeIndirect() {
         // given
         int expected_number_of_flights = 4;
-        // where
+        // when
         Specification<Flight> spec = FlightSpecifications.hasFlightType(FlightType.INDIRECT);
         List<Flight> list = flightRepository.findAll(spec);
         // then
@@ -299,7 +299,7 @@ public class FlightSpecificationsTest {
         airportRepository.deleteAll();
     }
 
-    private void generateDate(){
+    private void generateData() {
         // create 6 airports
         airports = new Airport[7];
         for (int i = 1; i < 7; i++)
@@ -315,7 +315,6 @@ public class FlightSpecificationsTest {
         for (int i = 1; i < 6; i++)
             flights[i] = createFlights(departureDates[i % 2], arrivalDates[i - 1], 1500, 2000,
                     availableSeats[i], availableSeats[6 - i], isCancel[i - 1]);
-
 
         // create flightlegs
         // 3 legs for flight 1 (source is City2 , destination is City5)

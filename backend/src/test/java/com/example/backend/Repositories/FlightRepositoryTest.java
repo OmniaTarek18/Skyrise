@@ -29,7 +29,7 @@ public class FlightRepositoryTest {
         int pageSize = 10;
         int pageNumber = 0;
 
-        // where
+        // when
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Flight> page = underTest.findByDepartureDate(DEPARTURE_DATE, pageable);
 
@@ -74,7 +74,7 @@ public class FlightRepositoryTest {
                 expected.add(flight);
         }
 
-        // where
+        // when
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Flight> page = underTest.findByDepartureDate(LocalDate.parse("2024-10-12"), pageable);
 
@@ -92,7 +92,7 @@ public class FlightRepositoryTest {
         int pageSize = 10;
         int pageNumber = 1;
 
-        // where
+        // when
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Flight> page = underTest.findByDepartureDate(DEPARTURE_DATE, pageable);
 

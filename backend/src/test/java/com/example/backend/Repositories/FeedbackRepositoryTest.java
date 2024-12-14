@@ -42,7 +42,7 @@ public class FeedbackRepositoryTest {
     void testGetAverageRatingWhenDatabaseIsEmpty() {
         // given
         Double expected_avg = 0.0;
-        // where
+        // when
         Double actual_avg = feedbackRepository.getAvgRating();
         // then
         Assertions.assertEquals(expected_avg, actual_avg);
@@ -61,7 +61,7 @@ public class FeedbackRepositoryTest {
         for (short i : stars)
             expected_avg += i;
         expected_avg /= stars.length;
-        // where
+        // when
         Double actual_avg = feedbackRepository.getAvgRating();
         // then
         Assertions.assertEquals(expected_avg, actual_avg);
@@ -88,7 +88,7 @@ public class FeedbackRepositoryTest {
         for (short i : stars)
             expected_avg += i;
         expected_avg /= stars.length;
-        // where
+        // when
         Double actual_avg = feedbackRepository.getAvgRating();
         // then
         Assertions.assertEquals(expected_avg, actual_avg);
@@ -123,7 +123,7 @@ public class FeedbackRepositoryTest {
                 .firstName("firstName")
                 .lastName("lastName")
                 .nationalId("nationalId")
-                .dateOfBirth(LocalDate.of(2024,12,10))
+                .dateOfBirth(LocalDate.of(2024, 12, 10))
                 .countryCode("CountryCode")
                 .phoneNumber("phoneNumber")
                 .passportNumber("PassportNumber")
