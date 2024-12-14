@@ -15,8 +15,17 @@ const SearchFlights = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-    status,
+    setFieldValue,
   } = useSearchFlightsForm(searchFlightsAPI); // Passing the user's email to the hook
+
+  useEffect(() => {
+    if (values.tripType === "one-way") {
+      setFieldValue("arrivalDate", "No arrival date for one-way");
+    }else{
+      setFieldValue("arrivalDate", "");
+    }
+  }, [values.tripType, setFieldValue]);
+
   return (
     <form className="search-flights-container" onSubmit={handleSubmit}>
       <div className="row row1">
@@ -129,7 +138,6 @@ const SearchFlights = () => {
           errorMessage={errors.arrivalDate}
           disabled={values.tripType === "one-way"}
         />
-
         <Input
           type={"number"}
           id={"passengers"}

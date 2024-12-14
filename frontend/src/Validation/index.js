@@ -121,11 +121,7 @@ export const forgetPasswordSchema = yup.object().shape({
 });
 
 export const searchFlightsSchema = yup.object().shape({
-  arrivalDate: yup.string().required("Arrival date is a required field"),/* when("tripType", {
-    is: "round-trip", // If the tripType is 'round-trip'
-    then: yup.string().required(),
-    otherwise: yup.string().notRequired(),
-  }), */
+  arrivalDate: yup.string().required("Arrival date is a required field"),
   departureDate: yup.string().required("Departure date is a required field"),
   source: yup.string().required(),
   destination: yup.string().required(),

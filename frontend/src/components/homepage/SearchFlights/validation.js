@@ -11,7 +11,6 @@ export const useSearchFlightsForm = (onSubmit) => {
       class: "economy",
       tripType: "round-trip",
     },
-
     validationSchema: searchFlightsSchema,
 
     onSubmit,

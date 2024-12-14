@@ -44,3 +44,8 @@
 .search-flights-container ::placeholder{
   color: black;
 }
+
+#arrivalDate:disabled {
+  background-color: var(--greyish-white);
+  cursor: not-allowed;
+}
