@@ -30,13 +30,12 @@
 }
 
 /* Override for .mb-3 inside .threeInputRow */
-.three-input-row .mb-3{
+.three-input-row .mb-3 {
   min-width: unset; /* Removes the min-width for this specific case */
-
 }
-.three-input-row{
-    display: flex;
-    justify-content: space-between;
+.three-input-row {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* You can still retain the specific styling for gender, first name, and last name */
@@ -46,7 +45,7 @@
 
 #firstName,
 #lastName {
-    width: 13vw;
+  width: 13vw;
 }
 
 .inputs-container legend {
@@ -54,8 +53,20 @@
 }
 
 .inputs-container fieldset {
-    border: 1px solid #ccc;
-    padding: 1em;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-  }
+  border: 1px solid #ccc;
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.ticket-form-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.ticket-form-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

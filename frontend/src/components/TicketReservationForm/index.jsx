@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTicketReservationForm } from "./validation";
-import { onSubmit } from "./api";
+import { ticketReservationAPI } from "./api";
 import { gender, specialNeeds, mealSpecification } from "./validation";
 import { countries, countryCodes } from "../signup/SignUpForm/validation";
 import Button from "../shared/Button";
 import Input from "../shared/Input";
 import "./style.css";
+const TicketForm = ({ numberOfTickets }) => {
+  const [currentTicket, setCurrentTicket] = useState(1);
+  const [tickets, setTickets] = useState([]);
 
-const TicketForm = ({numberOfTickets}) => {
   const {
     values,
     errors,
@@ -15,13 +17,25 @@ const TicketForm = ({numberOfTickets}) => {
     isSubmitting,
     handleChange,
     handleBlur,
+    resetForm,
     handleSubmit,
-  } = useTicketReservationForm(onSubmit);
+  } = useTicketReservationForm((submittedValues) => {
+    setTickets((prevTickets) => [...prevTickets, submittedValues]);
+    if (currentTicket < numberOfTickets) {
+      setCurrentTicket(currentTicket + 1);
+      resetForm();
+    } else {
+      ticketReservationAPI(tickets.concat(submittedValues));
+    }
+  });
 
   return (
     <>
-    <h1 className="ticket-reservation-heading">Ticket Reservation</h1>
-      <form className="ticket-form-container" onSubmit={handleSubmit}>
+      <h1 className="ticket-reservation-heading">Ticket Reservation</h1>
+      <h2>
+        Filling details for ticket {currentTicket} of {numberOfTickets}
+      </h2>
+      <form className={`ticket-form-container`} onSubmit={handleSubmit}>
         <div className="inputs-container">
           <fieldset className="passport-details-container">
             <legend>Passport Details</legend>
@@ -177,7 +191,9 @@ const TicketForm = ({numberOfTickets}) => {
         </div>
         <div className="button-row">
           <Button
-            btnText="Submit"
+            btnText={
+              currentTicket < numberOfTickets ? "Next Ticket" : "Submit All"
+            }
             btnColor="pink"
             disabled={isSubmitting}
             type="submit"
