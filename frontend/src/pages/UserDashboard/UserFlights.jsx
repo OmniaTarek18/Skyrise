@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { FlightCard } from "../../components/adminDashboard/Flights/FlightCard";
 import SearchFlight from "../../components/userdashboard/UserFlights/SearchFlight";
 import { fetchUserFlights } from "../../api/userFlightsAPI";
-import { Plane } from "lucide-react";
 import "./userflights.css";
-
+import FlightTicket from "../../components/userdashboard/Ticket/FlightTicket";
+import useUserAuthenticationStore from "../../store/useUserAuthenticationStore";
 const UserFlights = () => {
+  const { id, role } = useUserAuthenticationStore();
   const [flights, setFlights] = useState([]);
   const [filters, setFilters] = useState({
-    flightNumber: "",
+    userId: id,
     source: null,
     destination: null,
     departureDate: null,
     arrivalDate: null,
-    category: "all",
+    sortBy: null,
+    direction: "asc",
+    pastFlights: false,
+    recentFlights: false,
   });
   const [page, setPage] = useState(0);
   const [hasMorePages, setHasMorePages] = useState(true);
@@ -21,7 +24,7 @@ const UserFlights = () => {
   const [locations, setLocations] = useState({ from: [], to: [] });
 
   // Fetch flights with filters
-  const loadFlights = async (filters = {}, page = 0) => {
+  const loadFlights = async (filters, page = 0) => {
     try {
       const data = await fetchUserFlights(filters, page);
       setFlights(data.content || []);
@@ -33,37 +36,48 @@ const UserFlights = () => {
     }
   };
 
-  // fetch locations (sources and destinations) for the select list
   useEffect(() => {
-    const fetchLocations = async () => {
-      try {
-        const data = await fetchUserFlights({}, 0);
-        if (data.content) {
-          const uniqueSources = [...new Set(data.content.map((f) => f.source))];
-          const uniqueDestinations = [
-            ...new Set(data.content.map((f) => f.destination)),
-          ];
-          setLocations({
-            from: uniqueSources.map((src) => ({ value: src, label: src })),
-            to: uniqueDestinations.map((dest) => ({
-              value: dest,
-              label: dest,
-            })),
-          });
-        }
-      } catch (err) {
-        console.error("Error fetching locations:", err);
-      }
-    };
-    fetchLocations();
+    loadFlights(filters, 0);
   }, []);
+
+ useEffect(() => {
+   const fetchLocations = async () => {
+     try {
+       const data = await fetchUserFlights(filters, 0);
+
+       if (data.content) {
+         const uniqueSources = [
+           ...new Set(
+             data.content.map((f) => f.source.split(", ")[0]) 
+           ),
+         ];
+
+         const uniqueDestinations = [
+           ...new Set(
+             data.content.map((f) => f.destination.split(", ")[0]) 
+           ),
+         ];
+
+         setLocations({
+           from: uniqueSources.map((src) => ({
+             value: src, 
+             label: `${src}, ${data.content[0].source.split(", ")[1]}`, 
+           })),
+           to: uniqueDestinations.map((dest) => ({
+             value: dest, 
+             label: `${dest}, ${data.content[0].destination.split(", ")[1]}`, 
+           })),
+         });
+       }
+     } catch (err) {
+       console.error("Error fetching locations:", err);
+     }
+   };
+   fetchLocations();
+ }, []);
 
   const handleInputChange = (name, value) => {
     setFilters((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFilterCategory = (category) => {
-    setFilters((prev) => ({ ...prev, category }));
   };
 
   const nextPage = () => {
@@ -75,19 +89,12 @@ const UserFlights = () => {
   return (
     <div className="user-flights-container">
       <div className="content-container">
-        <div className="header">
-          <Plane className="plane-icon" />
-          <h1 className="title">Flight Tracker</h1>
-        </div>
-
-        {/* pass the locations and filters to SearchFlight */}
         <div className="search-container">
           <SearchFlight
             filters={filters}
             locations={locations}
             onInputChange={handleInputChange}
             onSearch={() => loadFlights(filters, 0)}
-            onFilterCategory={handleFilterCategory}
           />
         </div>
 
@@ -96,9 +103,9 @@ const UserFlights = () => {
             <p className="error-text">{error}</p>
           </div>
         )}
-        <div className="flight-cards">
+        <div className="flight-tickets">
           {flights.map((flight) => (
-            <FlightCard key={flight.flightId} flight={flight} />
+            <FlightTicket key={flight.flightId} {...flight} />
           ))}
         </div>
         <div className="pagination-controls">

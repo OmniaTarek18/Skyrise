@@ -11,11 +11,13 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
 public class TicketReservationController {
 
     private final TicketReservationService ticketReservationService;

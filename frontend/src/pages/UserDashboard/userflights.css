@@ -1,16 +1,14 @@
 .user-flights-container{
     align-items: center;
-}
-.title{
-    align-items: flex-start;
+    width: 100%;
 }
 
-.header {
+.flight-tickets {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 30px; 
+  justify-content: center; 
 }
-
 .plane-icon {
   width: 2rem;
   height: 2rem;
@@ -25,6 +23,8 @@
 }
 
 .search-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -36,6 +36,10 @@
   border: 1px solid #fcdcdc;
   border-radius: 0.5rem;
   padding: 1rem;
+  justify-content: center; 
+  margin-left: 250px;
+  align-items: center; 
+  text-align: center;
   margin-top:1.5rem;
   width: 60%;
   margin-bottom: 1.5rem;

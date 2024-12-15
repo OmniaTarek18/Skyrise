@@ -13,11 +13,13 @@ import com.example.backend.Services.PassengerService;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @Validated
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class PassengerController {
     private final PassengerService passengerService;
