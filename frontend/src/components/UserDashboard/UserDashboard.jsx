@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "../shared/Nav";
 import useUserAuthenticationStore from "../../store/useUserAuthenticationStore";
-
+import "./userdashboard.css";
+import UserSidebar from "./UserSidebar/UserSidebar";
+import DashboardContent from "./UserSidebar/DashboardContent";
 const UserDashboard = () => {
-  const { id, role, setUserAuthentication } = useUserAuthenticationStore();
+  const { id, role } = useUserAuthenticationStore();
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
   return (
-    <>
+    <div className="dashboard-container">
       <Nav userLoggedIn={true} />
-      <main>
-        <h1>User Dashboard</h1>
-      </main>
-    </>
+      <div className="dashboard-layout">
+        <UserSidebar
+          isCollapsed={isSidebarCollapsed}
+          setIsCollapsed={setIsSidebarCollapsed}
+        />
+        <DashboardContent isSidebarCollapsed={isSidebarCollapsed} />
+      </div>
+    </div>
   );
 };
 
