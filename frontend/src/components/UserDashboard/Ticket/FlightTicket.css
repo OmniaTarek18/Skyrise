@@ -1,0 +1,157 @@
+.ticket-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f0f2f5;
+  padding: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+@keyframes fly {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  50.1% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
+.ticket {
+  background: white;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.ticket:hover {
+  transform: translateY(-3px);
+}
+
+.ticket::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #05203c, #4ECDC4);
+}
+
+.ticket-header {
+  padding: 10px;
+  border-bottom: 2px dashed #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.airline-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo-icon {
+  font-size: 1.2em;
+  color: #4ECDC4;
+}
+
+.airline-name {
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
+}
+
+.ticket-body {
+  padding: 15px;
+}
+
+.flight-route {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.route-point {
+  color:black;
+  flex: 1;
+  text-align: center;
+}
+
+.plane-icon {
+  font-size: 1em;
+  color: #4ECDC4;
+  margin-bottom: 6px;
+}
+
+.flight-duration {
+  flex: 0.5;
+  position: relative;
+}
+
+.duration-line {
+  height: 2px;
+  background: #e0e0e0;
+  position: relative;
+}
+
+.airplane-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #05203c, #4ECDC4);
+  animation: fly 2s infinite linear;
+}
+
+.flight-info {
+  margin-top: 8px;
+}
+
+.info-label {
+  display: block;
+  color: #666;
+  font-size: 0.6em;
+  margin-bottom: 4px;
+}
+
+.info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ticket-date, .ticket-time {
+  font-size: 14px;
+  color: #000000;
+}
+
+.ticket-details {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 15px;
+  padding: 10px;
+  background: #f8f9fa;
+  color: #000000;
+  border-radius: 8px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+
+.value {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #05203c;
+}

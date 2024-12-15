@@ -17,7 +17,11 @@ export default function DashboardContent() {
   }, [navigate]);
 
   return (
+<<<<<<< Updated upstream
     <div>
+=======
+    <div className="dashboard-content">
+>>>>>>> Stashed changes
       <Routes>
 
           <Route path="user-info" element={<UserInfo />} />

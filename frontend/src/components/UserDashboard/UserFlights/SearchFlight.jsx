@@ -2,28 +2,28 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "./searchflight.css";
 
-const SearchFlight = ({
-  filters,
-  locations,
-  onInputChange,
-  onSearch,
-  onFilterCategory,
-}) => {
+const SearchFlight = ({ filters, locations, onInputChange, onSearch }) => {
   const [searchFilters, setSearchFilters] = useState({
     source: filters.source || null,
     destination: filters.destination || null,
-    sourceDate: filters.sourceDate || "",
-    destinationDate: filters.destinationDate || "",
-    category: filters.category || "all",
+    departureDate: filters.departureDate || "",
+    arrivalDate: filters.arrivalDate || "",
+    sortBy: filters.sortBy || null,
+    direction: filters.direction || "asc",
+    pastFlights: filters.pastFlights || false,
+    recentFlights: filters.recentFlights || false,
   });
 
   useEffect(() => {
     setSearchFilters({
       source: filters.source,
       destination: filters.destination,
-      sourceDate: filters.sourceDate,
-      destinationDate: filters.destinationDate,
-      category: filters.category,
+      departureDate: filters.departureDate,
+      arrivalDate: filters.arrivalDate,
+      sortBy: filters.sortBy,
+      direction: filters.direction,
+      pastFlights: filters.pastFlights,
+      recentFlights: filters.recentFlights,
     });
   }, [filters]);
 
@@ -32,20 +32,18 @@ const SearchFlight = ({
     onInputChange(key, value);
   };
 
-  const handleCategoryChange = (category) => {
-    setSearchFilters((prev) => ({ ...prev, category }));
-    onFilterCategory(category);
-  };
-
-  const handleSearch = () => {
-    onSearch();
-  };
-
-  const formatOptions = (options) =>
-    options.map((option) => ({
-      value: option,
-      label: option,
+  const handleRadioChange = (key) => {
+    setSearchFilters((prev) => ({
+      ...prev,
+      pastFlights: key === "pastFlights",
+      recentFlights: key === "recentFlights",
     }));
+    onInputChange("pastFlights", key === "pastFlights");
+    onInputChange("recentFlights", key === "recentFlights");
+  };
+
+  const formatSelectedOption = (value) =>
+    value ? { value, label: value } : null;
 
   return (
     <div className="filters">
@@ -54,15 +52,12 @@ const SearchFlight = ({
           <label className="filter-label">From</label>
           <Select
             className="select-input"
-            options={formatOptions(locations.from)}
+            options={locations.from}
             isSearchable
             isClearable
-            value={searchFilters.source}
+            value={formatSelectedOption(searchFilters.source)}
             onChange={(selectedOption) =>
-              handleChange(
-                "source",
-                selectedOption ? selectedOption.value : null
-              )
+              handleChange("source", selectedOption?.value || null)
             }
             placeholder="Select Source"
           />
@@ -71,67 +66,70 @@ const SearchFlight = ({
           <label className="filter-label">To</label>
           <Select
             className="select-input"
-            options={formatOptions(locations.to)}
+            options={locations.to}
             isSearchable
             isClearable
-            value={searchFilters.destination}
+            value={formatSelectedOption(searchFilters.destination)}
             onChange={(selectedOption) =>
-              handleChange(
-                "destination",
-                selectedOption ? selectedOption.value : null
-              )
+              handleChange("destination", selectedOption?.value || null)
             }
             placeholder="Select Destination"
           />
         </div>
         <div className="filter-item">
-          <label className="filter-label">Source Date</label>
+          <label className="filter-label">Departure Date</label>
           <input
             type="date"
             className="datepicker"
-            value={searchFilters.sourceDate}
-            onChange={(e) => handleChange("sourceDate", e.target.value)}
+            value={searchFilters.departureDate}
+            onChange={(e) => handleChange("departureDate", e.target.value)}
           />
         </div>
         <div className="filter-item">
-          <label className="filter-label">Destination Date</label>
+          <label className="filter-label">Arrival Date</label>
           <input
             type="date"
             className="datepicker"
-            value={searchFilters.destinationDate}
-            onChange={(e) => handleChange("destinationDate", e.target.value)}
+            value={searchFilters.arrivalDate}
+            onChange={(e) => handleChange("arrivalDate", e.target.value)}
           />
         </div>
       </div>
 
-      <div className="category-filters">
-        <button
-          className={`category-button ${
-            searchFilters.category === "all" ? "active" : ""
-          }`}
-          onClick={() => handleCategoryChange("all")}
-        >
-          All
-        </button>
-        <button
-          className={`category-button ${
-            searchFilters.category === "recent" ? "active" : ""
-          }`}
-          onClick={() => handleCategoryChange("recent")}
-        >
-          Recent
-        </button>
-        <button
-          className={`category-button ${
-            searchFilters.category === "past" ? "active" : ""
-          }`}
-          onClick={() => handleCategoryChange("past")}
-        >
-          Past
-        </button>
+      <div className="radio-filters">
+        <div className="radio-item">
+          <input
+            type="radio"
+            id="allFlights"
+            name="flightType"
+            checked={!searchFilters.pastFlights && !searchFilters.recentFlights}
+            onChange={() => handleRadioChange("allFlights")}
+          />
+          <label htmlFor="allFlights">All</label>
+        </div>
+        <div className="radio-item">
+          <input
+            type="radio"
+            id="pastFlights"
+            name="flightType"
+            checked={searchFilters.pastFlights}
+            onChange={() => handleRadioChange("pastFlights")}
+          />
+          <label htmlFor="pastFlights">Past Flights</label>
+        </div>
+        <div className="radio-item">
+          <input
+            type="radio"
+            id="recentFlights"
+            name="flightType"
+            checked={searchFilters.recentFlights}
+            onChange={() => handleRadioChange("recentFlights")}
+          />
+          <label htmlFor="recentFlights">Recent Flights</label>
+        </div>
       </div>
 
-      <button className="search-btn" onClick={handleSearch}>
+      <button className="search-btn" onClick={onSearch}>
         Search Flights
       </button>
     </div>

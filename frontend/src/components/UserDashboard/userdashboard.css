@@ -92,8 +92,6 @@
   padding: 2rem;
   overflow-y: auto;
   transition: all 0.3s ease;
-  background-color: #05203c;
-  color: white;
 }
 
 .usersidebar.collapsed .user-nav-link {

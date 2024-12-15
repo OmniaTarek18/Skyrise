@@ -11,11 +11,13 @@ import com.example.backend.Services.ReservationDisplayService;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class ReservationDisplayController {
     private final ReservationDisplayService reservationService;
