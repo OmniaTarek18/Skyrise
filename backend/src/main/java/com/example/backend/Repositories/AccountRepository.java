@@ -2,6 +2,7 @@ package com.example.backend.Repositories;
 
 import java.util.Optional;
 
+import com.example.backend.Enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,10 +21,18 @@ public interface AccountRepository extends JpaRepository<Account, Integer>, JpaS
 
     boolean existsByEmail(String email) ;
 
+    @Query("SELECT COUNT(a) FROM Account a WHERE a.role = :role")
+    int numberOfAdmins(@Param("role") Role role);
+
     @Transactional
     @Modifying
     @Query("UPDATE Account a SET a.role = :role WHERE a.email = :email")
     int updateRoleByEmail(@Param("email") String email, @Param("role") boolean role);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Account a WHERE a.accountId = :accountId")
+    int deleteAccountById(@Param("accountId") Integer accountId);
 
     @Modifying
     @Transactional
