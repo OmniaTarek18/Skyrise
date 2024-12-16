@@ -12,40 +12,36 @@ import Feedback from "./pages/AdminDashboard/Feedback";
 import ChangePassword from "./components/userdashboard/ChangePassword";
 import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
 import ArchivePage from "./pages/AdminDashboard/ArchivePage";
+import UserInfo from "./pages/UserDashboard/UserInfo";
+import UserFlights from "./pages/UserDashboard/UserFlights";
+import DisplayFlights from "./components/homepage/DisplayFlights";
 import "./App.css";
-import Popup from "./components/shared/Popup";
-import { useState } from "react";
-import Button from "./components/shared/Button";
-import SignUpForm from "./components/signup/SignUpForm";
+
 
 function App() {
-  const [showPopup, setShowPopup] = useState(false);
   return (
-    <>
-      <Button
-        btnColor="dark"
-        btnText={"show popup"}
-        handleClick={() => setShowPopup(true)}
-      />
-      {showPopup && <Popup onClose={() => setShowPopup(false)}><ChangePassword/></Popup>}
-    </>
-
-    // <Routes className="App">
-    //   <Route path="/" element={<Homepage />} />
-    //   <Route path="signup" element={<SignUpPage />} />
-    //   <Route path="login" element={<LogInPage />} />
-    //   <Route path="forget-password" element={<ForgetPassword />} />
-    //   <Route path="reset-password" element={<ResetPassword />} />
-    //   <Route path="admin-dashboard" element={<AdminDashboard />}>
-    //     <Route path="overview" element={<Overview />} />
-    //     <Route path="flights" element={<Flights />} />
-    //     <Route path="feedback" element={<Feedback />} />
-    //     <Route path="archive" element={<ArchivePage />} />
-    //     <Route path="change-password" element={<ChangePassword />} />
-    //     <Route path="delete-account" element={<DeleteAccount />} />
-    //   </Route>
-    //   <Route path="user-dashboard" element={<UserDashboard />} />
-    // </Routes>
+    <Routes className="App">
+      <Route path="/" element={<Homepage />} />
+      <Route path="search-flights" element={<DisplayFlights />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="login" element={<LogInPage />} />
+      <Route path="forget-password" element={<ForgetPassword />} />
+      <Route path="reset-password" element={<ResetPassword />} />
+      <Route path="admin-dashboard" element={<AdminDashboard />}>
+        <Route path="overview" element={<Overview />} />
+        <Route path="flights" element={<Flights />} />
+        <Route path="feedback" element={<Feedback />} />
+        <Route path="archive" element={<ArchivePage />} />
+        <Route path="change-password" element={<ChangePassword />} />
+        <Route path="delete-account" element={<DeleteAccount />} />
+      </Route>
+      <Route path="user-dashboard" element={<UserDashboard />} >
+        <Route path="user-info" element={<UserInfo />} />
+        <Route path="user-Flights" element={<UserFlights />} />
+        <Route path="change-password" element={<ChangePassword />} />
+        <Route path="delete-account" element={<DeleteAccount />} />
+      </Route>
+    </Routes>
   );
 }
 

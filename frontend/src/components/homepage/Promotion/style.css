@@ -1,6 +1,6 @@
 .promotion-container {
   width: 100vw;
-  height: 35vw;
+  height: 30vw;
   margin: 0;
   padding: 0;
 }
@@ -26,7 +26,7 @@
   color: var(--greyish-white);
 }
 
-.location {
+.promotion-container .location {
   font-size: 1.2vw;
   font-weight: 400;
   letter-spacing: 0%;
@@ -39,4 +39,5 @@
   font-weight: lighter;
   color: var(--greyish-white);
   letter-spacing: 0%;
+  margin-bottom: 5rem;
 }
