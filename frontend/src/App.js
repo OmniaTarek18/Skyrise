@@ -15,10 +15,19 @@ import ArchivePage from "./pages/AdminDashboard/ArchivePage";
 import UserInfo from "./pages/UserDashboard/UserInfo";
 import UserFlights from "./pages/UserDashboard/UserFlights";
 import "./App.css";
+
+import Popup from "./components/shared/Popup";
+import { useState } from "react";
+import Button from "./components/shared/Button";
+import SignUpForm from "./components/signup/SignUpForm";
+import UpgradeUser from "./pages/AdminDashboard/UpgradeUser";
+
 import DisplayFlights from "./components/homepage/DisplayFlights";
 
 
+
 function App() {
+  const [showPopup, setShowPopup] = useState(false);
   return (
     <Routes className="App">
       <Route path="/" element={<Homepage />} />

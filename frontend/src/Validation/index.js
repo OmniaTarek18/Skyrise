@@ -120,6 +120,10 @@ export const forgetPasswordSchema = yup.object().shape({
   email: emailValidation,
 });
 
+
+export const upgradeUserSchema = yup.object().shape({
+  email: emailValidation,
+});
 export const searchFlightsSchema = yup.object().shape({
   arrivalDate: yup.string().required("Arrival date is a required field"),
   departureDate: yup.string().required("Departure date is a required field"),
