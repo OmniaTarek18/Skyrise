@@ -1,30 +1,42 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { FaFilter, FaSyncAlt } from "react-icons/fa";
 import {
-  fetchFlightSearchResults,
-  fetchFlightDetails,
-} from "../../api/flightsAfterSearch";
+  PlaneTakeoff,
+  PlaneLanding,
+  Calendar,
+  Users,
+  SortAsc,
+  RefreshCcw,
+  Filter,
+  X,
+  Route,
+  Ticket, 
+} from "lucide-react";
+import { fetchFlightSearchResults } from "../../api/flightsAfterSearch";
 import UserFlight from "../../components/userdashboard/UserFlights/UserFlight";
 import "./flightdisplay.css";
 
 const FlightDisplay = () => {
-  const [flights, setFlights] = useState([]);
-  const [filters, setFilters] = useState({
+  const initialFilters = {
     departureCity: "",
     arrivalCity: "",
-    seatClass: "",
     numberOfTickets: "",
     departureDate: "",
-    sortby: "",
+    arrivalDate: "",
     flightType: "",
-    direction: "",
+    seatClass: "",
+    sortby: "",
     pageNumber: 0,
-  });
-  const [loading, setLoading] = useState(false);
+  };
+
+  const [filters, setFilters] = useState(initialFilters);
   const [showModal, setShowModal] = useState(false);
-  const [cityOptions, setCityOptions] = useState([]);
+  const [flights, setFlights] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [hasMorePages, setHasMorePages] = useState(false);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [totalFlights, setTotalFlights] = useState(0); 
+  const [isFiltersApplied, setIsFiltersApplied] = useState(false);
 
   const seatClassOptions = [
     { value: "ECONOMY", label: "Economy" },
@@ -38,103 +50,67 @@ const FlightDisplay = () => {
 
   const sortByOptions = [{ value: "price", label: "Price" }];
 
-  const directionOptions = [
-    { value: "asc", label: "Ascending" },
-    { value: "desc", label: "Descending" },
-  ];
-
-  // fetch all flights on initial page load
   const fetchFlights = async () => {
     setLoading(true);
     try {
       const flightResults = await fetchFlightSearchResults(filters);
       setFlights(flightResults.content);
       setHasMorePages(flightResults.hasMorePages);
+      setTotalFlights(flightResults.totalElements); 
 
-      // populate city options based on available fetched flight data
       const cities = [
         ...new Set([
           ...flightResults.content.map((flight) => flight.source),
           ...flightResults.content.map((flight) => flight.destination),
         ]),
       ];
-      setCityOptions(
-        cities.map((city) => ({
-          value: city,
-          label: city,
-        }))
-      );
+      setCityOptions(cities.map((city) => ({ value: city, label: city })));
+      setIsFiltersApplied(true); 
     } catch (error) {
-      console.error("error fetching flights:", error);
+      console.error("Error fetching flights:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  // fetch filtered flights based on selected filters
-  const fetchFilteredFlights = async () => {
-    setLoading(true);
-    try {
-      const flightResults = await fetchFlightSearchResults(filters);
-      setFlights(flightResults.content);
-      setHasMorePages(flightResults.hasMorePages);
-    } catch (error) {
-      console.error("error fetching the fligts:", error);
-    } finally {
-      setLoading(false);
-    }
+  const handleSelectChange = (option, field) => {
+    setFilters((prev) => ({ ...prev, [field]: option ? option.value : "" }));
   };
 
-  // fetch flight details when a flight card details button is clicked
-  const fetchFlightDetailsHandler = async (flightId) => {
-    try {
-      const flightDetails = await fetchFlightDetails(flightId);
-      console.log("flight Details:", flightDetails);
-    } catch (error) {
-      console.error("error fetching flight details:", error);
-    }
-  };
-
-  // source, destination, seat class
-  const handleSelectChange = (selectedOption, actionMeta) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [actionMeta.name]: selectedOption ? selectedOption.value : "",
-    }));
-  };
-
-  // number of tickets, departure date
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
+    setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
   // clear all filters
   const clearFilters = () => {
-    setFilters({
+    setFilters((prev) => ({
+      ...prev,
       departureCity: "",
       arrivalCity: "",
-      seatClass: "",
       numberOfTickets: "",
       departureDate: "",
-      sortby: "",
+      arrivalDate: "",
       flightType: "",
-      direction: "",
-      pageNumber: 0,
-    });
+      seatClass: "",
+      sortby: "",
+    }));
+    setIsFiltersApplied(false); 
   };
 
+  const applyFilters = () => {
+    fetchFlights();
+  };
+
+  // handle pagination when changing pages
   const handlePageChange = (direction) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      pageNumber: prevFilters.pageNumber + direction,
+    setFilters((prev) => ({
+      ...prev,
+      pageNumber: prev.pageNumber + direction,
     }));
   };
 
-  // fetch flights when the page number changes
+  // fetch flights when page number changes
   useEffect(() => {
     fetchFlights();
   }, [filters.pageNumber]);
@@ -142,187 +118,206 @@ const FlightDisplay = () => {
   return (
     <div className="flight-display">
       <button className="filter-button" onClick={() => setShowModal(true)}>
-        <FaFilter size={18} />
+        <Filter color="#007bff" size={18} /> Filter Flights
       </button>
-
       {showModal && (
-        <div className="filter-modal">
-          <div className="filter-modal-content">
-            <h2>Filter Flights</h2>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button
+              className="close-button"
+              onClick={() => setShowModal(false)}
+            >
+              <X size={24} color="#555" />
+            </button>
+            <h2 className="modal-title">Filter Flights</h2>
+
             <form>
-              <div className="filter-row">
-                <div className="filter-item">
-                  <label htmlFor="departureCity">Departure City:</label>
+              <div className="row">
+                <div className="form-group">
+                  <label>
+                    <PlaneTakeoff color="#007bff" /> Source
+                  </label>
                   <Select
-                    id="departureCity"
-                    name="departureCity"
                     options={cityOptions}
-                    onChange={(selectedOption) =>
-                      handleSelectChange(selectedOption, {
-                        name: "departureCity",
-                      })
+                    placeholder="Select Source"
+                    onChange={(option) =>
+                      handleSelectChange(option, "departureCity")
                     }
                     isClearable
-                    placeholder="Select departure city"
+                    value={
+                      filters.departureCity
+                        ? {
+                            value: filters.departureCity,
+                            label: filters.departureCity,
+                          }
+                        : null
+                    }
                   />
                 </div>
-                <div className="filter-item">
-                  <label htmlFor="arrivalCity">Arrival City:</label>
+                <div className="form-group">
+                  <label>
+                    <PlaneLanding color="#28a745" /> Destination
+                  </label>
                   <Select
-                    id="arrivalCity"
-                    name="arrivalCity"
                     options={cityOptions}
-                    onChange={(selectedOption) =>
-                      handleSelectChange(selectedOption, {
-                        name: "arrivalCity",
-                      })
+                    placeholder="Select Destination"
+                    onChange={(option) =>
+                      handleSelectChange(option, "arrivalCity")
                     }
                     isClearable
-                    placeholder="Select arrival city"
+                    value={
+                      filters.arrivalCity
+                        ? {
+                            value: filters.arrivalCity,
+                            label: filters.arrivalCity,
+                          }
+                        : null
+                    }
                   />
                 </div>
               </div>
-
-              <div className="filter-row">
-                <div className="filter-item">
-                  <label htmlFor="seatClass">Seat Class:</label>
-                  <Select
-                    id="seatClass"
-                    name="seatClass"
-                    options={seatClassOptions}
-                    value={seatClassOptions.find(
-                      (option) => option.value === filters.seatClass
-                    )}
-                    onChange={handleSelectChange}
-                    isClearable
-                    placeholder="Select seat class"
-                  />
-                </div>
-                <div className="filter-item">
-                  <label htmlFor="numberOfTickets">Number of Tickets:</label>
-                  <input
-                    type="number"
-                    id="numberOfTickets"
-                    name="numberOfTickets"
-                    min="1"
-                    value={filters.numberOfTickets}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="filter-row">
-                <div className="filter-item">
-                  <label htmlFor="departureDate">Departure Date:</label>
+              <div className="row">
+                <div className="form-group">
+                  <label>
+                    <Calendar color="#ff8800" /> Departure Date
+                  </label>
                   <input
                     type="date"
-                    id="departureDate"
                     name="departureDate"
                     value={filters.departureDate}
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="filter-item">
-                  <label htmlFor="sortby">Sort By:</label>
-                  <Select
-                    id="sortby"
-                    name="sortby"
-                    options={sortByOptions}
-                    value={sortByOptions.find(
-                      (option) => option.value === filters.sortby
-                    )}
-                    onChange={handleSelectChange}
-                    isClearable
-                    placeholder="Select sort criteria"
+                <div className="form-group">
+                  <label>
+                    <Calendar color="#ff8800" /> Arrival Date
+                  </label>
+                  <input
+                    type="date"
+                    name="arrivalDate"
+                    value={filters.arrivalDate}
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
-
-              <div className="filter-row">
-                <div className="filter-item">
-                  <label htmlFor="flightType">Flight Type:</label>
+              <div className="row">
+                <div className="form-group">
+                  <label>
+                    <Users color="#6610f2" /> Number of Tickets
+                  </label>
+                  <input
+                    type="number"
+                    name="numberOfTickets"
+                    placeholder="Enter quantity"
+                    value={filters.numberOfTickets}
+                    min="1"
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>
+                    <Route color="#20c997" /> Flight Type
+                  </label>
                   <Select
-                    id="flightType"
-                    name="flightType"
                     options={flightTypeOptions}
-                    value={flightTypeOptions.find(
-                      (option) => option.value === filters.flightType
-                    )}
-                    onChange={handleSelectChange}
-                    isClearable
-                    placeholder="Select flight type"
+                    placeholder="Select Flight Type"
+                    value={
+                      filters.flightType
+                        ? {
+                            value: filters.flightType,
+                            label: filters.flightType,
+                          }
+                        : null
+                    }
+                    onChange={(option) =>
+                      handleSelectChange(option, "flightType")
+                    }
                   />
                 </div>
-                <div className="filter-item">
-                  <label htmlFor="direction">Direction:</label>
+              </div>
+              <div className="row">
+                <div className="form-group">
+                  <label>
+                    <SortAsc color="#fd7e14" /> Sort By
+                  </label>
                   <Select
-                    id="direction"
-                    name="direction"
-                    options={directionOptions}
-                    value={directionOptions.find(
-                      (option) => option.value === filters.direction
-                    )}
-                    onChange={handleSelectChange}
-                    isClearable
-                    placeholder="Select direction"
+                    options={sortByOptions}
+                    placeholder="Sort By"
+                    value={
+                      filters.sortby
+                        ? { value: filters.sortby, label: filters.sortby }
+                        : null
+                    }
+                    onChange={(option) => handleSelectChange(option, "sortby")}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>
+                    <Ticket color="#fd7e14" /> Seat Class
+                  </label>
+                  <Select
+                    options={seatClassOptions}
+                    placeholder="Select Seat Class"
+                    value={
+                      filters.seatClass
+                        ? {
+                            value: filters.seatClass,
+                            label: filters.seatClass,
+                          }
+                        : null
+                    }
+                    onChange={(option) =>
+                      handleSelectChange(option, "seatClass")
+                    }
                   />
                 </div>
               </div>
 
-              <div className="filter-buttons-row">
+              <div className="buttons">
                 <button
                   type="button"
-                  className="apply-filters"
-                  onClick={() => {
-                    fetchFilteredFlights(); // call the function to fetch filtered flights when  apply button is clicked
-                    setShowModal(false);
-                  }}
+                  className="apply-button"
+                  onClick={applyFilters}
                 >
-                  Apply
+                  {isFiltersApplied || totalFlights > 0
+                    ? `Show ${totalFlights} Flights`
+                    : "Apply Filters"}
                 </button>
                 <button
                   type="button"
-                  className="close-modal"
-                  onClick={() => setShowModal(false)}
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  className="clear-filters"
+                  className="clear-button"
                   onClick={clearFilters}
                 >
-                  <FaSyncAlt size={14} />
+                  <RefreshCcw size={16} /> Clear
                 </button>
               </div>
             </form>
+
+            {totalFlights > 0 && (
+              <button
+                type="button"
+                className="list-flights-button"
+                onClick={() => setShowModal(false)}
+              >
+                List {totalFlights} Flights
+              </button>
+            )}
           </div>
         </div>
       )}
 
+      {/* results */}
       <div className="flight-results">
         {loading ? (
           <p>Loading flights...</p>
         ) : (
           flights.map((flight) => (
-            <UserFlight
-              key={flight.id}
-              flight={{
-                departureTime: flight.departureTime,
-                source: flight.source,
-                departureDate: flight.departureDate,
-                arrivalTime: flight.arrivalTime,
-                destination: flight.destination,
-                arrivalDate: flight.arrivalDate,
-                price: flight.economyPrice,
-              }}
-              // to do put the flight leg details on dedicated cards
-              onShowDetails={fetchFlightDetailsHandler} // pass handler to show flight legs
-            />
+            <UserFlight key={flight.id} flight={flight} />
           ))
         )}
       </div>
 
+      {/* pagination */}
       <div className="pagination-controls">
         <button
           onClick={() => handlePageChange(-1)}

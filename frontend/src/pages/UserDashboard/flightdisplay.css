@@ -1,149 +1,100 @@
-.flight-display {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-.filter-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.filter-button:hover {
-  background-color: #0056b3;
-}
-
-.filter-modal {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
 }
-
-.filter-modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.modal-content {
+  background: #fff;
+  width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   position: relative;
+  padding: 2rem;
+  animation: slideUp 0.4s ease;
 }
 
-.filter-modal h2 {
-  margin-bottom: 20px;
+.modal-title {
   text-align: center;
-}
-
-.filter-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.filter-item {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.filter-item:last-child {
-  margin-right: 0;
-}
-
-.filter-item label {
-  display: block;
-  margin-bottom: 5px;
+  font-size: 1.8rem;
   font-weight: bold;
+  margin-bottom: 1.5rem;
 }
 
-.filter-item input,
-.filter-item select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.filter-buttons-row {
-  display: flex;
-  gap: 50px; 
-  align-items: center;
-    margin-left: 80px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.apply-filters,
-.clear-filters,
-.close-modal {
-  background-color: #007bff;
-  color: white;
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
   border: none;
-  align-content: center;
-  width: 100px;
-  border-radius: 5px;
-
-  padding: 10px 15px;
   cursor: pointer;
 }
 
-.apply-filters:hover,
-.clear-filters:hover,
-.close-modal:hover {
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+input,
+.react-select__control {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.apply-button,
+.clear-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.apply-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.apply-button:hover {
   background-color: #0056b3;
 }
 
-.clear-filters {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background-color: #ff5722;
-  border-radius: 30%; 
+.clear-button {
+  background-color: #ff4757;
+  color: #fff;
 }
 
-.clear-filters:hover {
-  background-color: #d84315;
-}
-
-.flight-results {
-  margin-top: 20px;
-}
-
-.flight-card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.flight-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.flight-card p {
-  margin: 5px 0;
-}
-
-.flight-results p {
-  text-align: center;
-  font-size: 16px;
-  color: #555;
+.clear-button:hover {
+  background-color: #e84118;
 }
