@@ -1,4 +1,6 @@
+import { Masks } from "@mui/icons-material";
 import * as yup from "yup";
+import dayjs from "dayjs";
 
 var passwordRegex =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -15,6 +17,22 @@ const nationalIdRegex = /^\d{14}$/;
 
 // Passport Number validation (assuming alphanumeric with 9 characters, example format: ABC123456)
 const passportNumberRegex = /^[A-Z0-9]{9}$/;
+
+const minAgeForAccount = 18;
+const maxAgeForAccount = 90;
+const minAgeInDaysForPassengers = 7;
+
+const minDateForAccount = dayjs()
+  .subtract(maxAgeForAccount, "year")
+  .format("YYYY-MM-DD");
+
+const maxDateForAccount = dayjs()
+  .subtract(minAgeForAccount, "year")
+  .format("YYYY-MM-DD");
+
+const maxDateForPassenger = dayjs()
+  .subtract(minAgeInDaysForPassengers, "day")
+  .format("YYYY-MM-DD");
 
 const phoneNumberMessage = "Invalid phone number format";
 const nationalIdMessage = "Invalid National ID format";
@@ -34,11 +52,6 @@ const passwordValidation = yup
   .min(8)
   .matches(passwordRegex, { message: passwordMessage })
   .required(requiredMessage);
-const ageValidation = yup
-  .number()
-  .positive()
-  .integer()
-  .required(requiredMessage);
 const confirmPasswordValidation = (reference) =>
   yup
     .string()
@@ -57,7 +70,21 @@ const nationalIdValidation = yup
   .matches(nationalIdRegex, nationalIdMessage)
   .min(14)
   .required(requiredMessage);
-const dobValidation = yup.string().required(requiredMessage);
+
+const accountDobValidation = yup
+  .date()
+  .required(requiredMessage)
+  .min(minDateForAccount, `You must be younger than ${maxAgeForAccount} years`)
+  .max(maxDateForAccount, `You must be at least ${minAgeForAccount} years old`);
+
+const ticketsDobValidation = yup
+  .date()
+  .required(requiredMessage)
+  .max(
+    maxDateForPassenger,
+    `Date of Birth must be at least ${minAgeInDaysForPassengers} days ago`
+  )
+  .min(minDateForAccount, `You must be younger than ${maxAgeForAccount} years`);
 const countryCodeValidation = yup.string().required(requiredMessage);
 const phoneNumberValidation = yup
   .string()
@@ -80,7 +107,7 @@ export const signUpSchema = yup.object().shape({
   confirmPassword: confirmPasswordValidation("password"),
   nationality: nationalityValidation,
   nationalId: nationalIdValidation,
-  dateOfBirth: dobValidation,
+  dateOfBirth: accountDobValidation,
   countryCode: countryCodeValidation,
   phoneNumber: phoneNumberValidation,
   passportNumber: passportNumberValidation,
@@ -122,7 +149,7 @@ export const forgetPasswordSchema = yup.object().shape({
 
 export const ticketReservationSchema = yup.object().shape({
   nationalId: nationalIdValidation,
-  dateOfBirth: dobValidation,
+  dateOfBirth: ticketsDobValidation,
   countryCode: yup.string().notRequired(),
   phoneNumber: yup
     .string()
