@@ -13,12 +13,15 @@ import com.example.backend.Utilites.ValidateInput;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@CrossOrigin
 public class FlightSearchController {
     private final FlightSearchService flightSearchService;
 

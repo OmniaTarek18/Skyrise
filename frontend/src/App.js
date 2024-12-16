@@ -15,12 +15,14 @@ import ArchivePage from "./pages/AdminDashboard/ArchivePage";
 import UserInfo from "./pages/UserDashboard/UserInfo";
 import UserFlights from "./pages/UserDashboard/UserFlights";
 import "./App.css";
+import DisplayFlights from "./components/homepage/DisplayFlights";
 
 
 function App() {
   return (
     <Routes className="App">
       <Route path="/" element={<Homepage />} />
+      <Route path="search-flights" element={<DisplayFlights />} />
       <Route path="signup" element={<SignUpPage />} />
       <Route path="login" element={<LogInPage />} />
       <Route path="forget-password" element={<ForgetPassword />} />

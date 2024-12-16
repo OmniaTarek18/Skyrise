@@ -3,14 +3,15 @@ import { searchFlightsSchema } from "../../../Validation";
 export const useSearchFlightsForm = (onSubmit) => {
   const formik = useFormik({
     initialValues: {
-      source: "",
-      destination: "",
+      departureAirportId: "",
+      arrivalAirportId: "",
       arrivalDate: "",
       departureDate: "",
-      passengers: "",
-      class: "economy",
+      numberOfTickets: "",
+      seatClass: "ECONOMY",
       tripType: "round-trip",
     },
+
     validationSchema: searchFlightsSchema,
 
     onSubmit,

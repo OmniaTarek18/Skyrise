@@ -17,7 +17,6 @@ const Homepage = () => {
   }, [role]);
   return (
     <>
-      {console.log(role)}
       {role == "USER" && (
         <>
           {id != null ? <Nav userLoggedIn={true} /> : <Nav />}

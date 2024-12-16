@@ -9,12 +9,15 @@ import com.example.backend.Services.BookingProcess.FlightLegDisplayService;
 import com.example.backend.DTOs.BookingDTOs.FlightLegDTO;
 
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequestMapping("/flights")
 @RequiredArgsConstructor
+@CrossOrigin
 public class FlightInfoDisplayController {
     private final FlightLegDisplayService flightLegDisplayService;
 

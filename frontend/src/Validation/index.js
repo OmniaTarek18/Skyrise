@@ -123,7 +123,7 @@ export const forgetPasswordSchema = yup.object().shape({
 export const searchFlightsSchema = yup.object().shape({
   arrivalDate: yup.string().required("Arrival date is a required field"),
   departureDate: yup.string().required("Departure date is a required field"),
-  source: yup.string().required(),
-  destination: yup.string().required(),
-  passengers: yup.string().required(),
+  departureAirportId: yup.string().required(),
+  arrivalAirportId: yup.string().required(),
+  numberOfTickets: yup.string().required(),
 });

@@ -17,6 +17,8 @@ const Input = ({
   defaultSelectionText,
   options,
   disabled= false,
+  onFocus,
+  isJson = false,
 }) => {
   return (
     <div className="mb-3">
@@ -61,13 +63,19 @@ const Input = ({
           onChange={onChange}
           value={value}
           onBlur={onBlur}
+          onFocus={onFocus}
         >
           <option value=""  disabled hidden>
             {defaultSelectionText}
           </option>
-          {options.map((option, index) => (
+          {!isJson && options.map((option, index) => (
             <option key={index} value={option}>
               {option}
+            </option>
+          ))}
+          {isJson && options.map((option, index) => (
+            <option key={index} value={parseInt(option.value)}>
+              {option.label}
             </option>
           ))}
         </select>

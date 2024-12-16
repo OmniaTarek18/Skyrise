@@ -33,11 +33,11 @@
   height: 4rem;
 }
 
-#passengers{
+#numberOfTickets{
   border-radius: 0 9px 9px 0;
 }
 
-#source{
+#departureAirportId{
   border-radius: 9px 0 0 9px;
 }
 

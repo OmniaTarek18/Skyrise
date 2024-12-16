@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../shared/Input";
 import "./style.css";
 import Button from "../../shared/Button";
-import { countries } from "../../signup/SignUpForm/validation";
 import { useSearchFlightsForm } from "./validation";
-import { searchFlightsAPI } from "./api";
+import { getCountriesAndAirportsToTravelAPI } from "./api";
+import { useNavigate } from "react-router-dom";
+import useSearchFlightDetails from "../../../store/useSearchFlightDetails";
 
 const SearchFlights = () => {
+  const [countries, setCountries] = useState({});
+  const nav = useNavigate();
+  const { setSearchFlightDetails } = useSearchFlightDetails();
   const {
     values,
     errors,
@@ -16,15 +20,28 @@ const SearchFlights = () => {
     handleBlur,
     handleSubmit,
     setFieldValue,
-  } = useSearchFlightsForm(searchFlightsAPI); // Passing the user's email to the hook
+  } = useSearchFlightsForm(() => {
+    setSearchFlightDetails(values);
+    nav("./search-flights");
+  }); // Passing the user's email to the hook
 
   useEffect(() => {
     if (values.tripType === "one-way") {
       setFieldValue("arrivalDate", "No arrival date for one-way");
-    }else{
+    } else {
       setFieldValue("arrivalDate", "");
     }
   }, [values.tripType, setFieldValue]);
+
+  const countryOptions = Object.entries(countries).map(([_, country]) => ({
+    label: `${country.airportCity}, ${country.airportCountry}`,
+    value: country.id,
+  }));
+
+  const handleFocus = async () => {
+    const json = await getCountriesAndAirportsToTravelAPI();
+    setCountries(json);
+  };
 
   return (
     <form className="search-flights-container" onSubmit={handleSubmit}>
@@ -65,10 +82,10 @@ const SearchFlights = () => {
             <input
               className="form-check-input"
               type="radio"
-              name="class"
+              name="seatClass"
               id="economy"
-              value="economy"
-              checked={values.class === "economy"}
+              value="ECONOMY"
+              checked={values.seatClass === "ECONOMY"}
               onChange={handleChange}
             />
             <label className="form-check-label" htmlFor="economy">
@@ -79,10 +96,10 @@ const SearchFlights = () => {
             <input
               className="form-check-input"
               type="radio"
-              name="class"
+              name="seatClass"
               id="business"
-              value="business"
-              checked={values.class === "business"}
+              value="BUSINESS"
+              checked={values.seatClass === "BUSINESS"}
               onChange={handleChange}
             />
             <label className="form-check-label" htmlFor="business">
@@ -94,27 +111,30 @@ const SearchFlights = () => {
 
       <div className="row row2">
         <Input
-          id={"source"}
+          id={"departureAirportId"}
           selectionInput={true}
           defaultSelectionText={"Source"}
-          options={countries} // List of countries for selection
+          options={countryOptions} // List of countries for selection
           onChange={handleChange}
-          value={values.source}
+          value={values.departureAirportId}
+          onFocus={handleFocus}
           onBlur={handleBlur}
-          showError={errors.source && touched.source}
-          errorMessage={errors.source}
+          showError={errors.departureAirportId && touched.departureAirportId}
+          errorMessage={errors.departureAirportId}
+          isJson={true}
         />
-
         <Input
-          id={"destination"}
+          id={"arrivalAirportId"}
           selectionInput={true}
           defaultSelectionText={"Destination"}
-          options={countries} // List of countries for selection
+          options={countryOptions} // List of countries for selection
           onChange={handleChange}
-          value={values.destination}
+          value={values.arrivalAirportId}
           onBlur={handleBlur}
-          showError={errors.destination && touched.destination}
-          errorMessage={errors.destination}
+          showError={errors.arrivalAirportId && touched.arrivalAirportId}
+          errorMessage={errors.arrivalAirportId}
+          onFocus={handleFocus}
+          isJson={true}
         />
         <Input
           type={"date"}
@@ -140,13 +160,13 @@ const SearchFlights = () => {
         />
         <Input
           type={"number"}
-          id={"passengers"}
-          placeholder={"Passengers"}
+          id={"numberOfTickets"}
+          placeholder={"passengers"}
           onChange={handleChange}
-          value={values.passengers}
+          value={values.numberOfTickets}
           onBlur={handleBlur}
-          showError={errors.passengers && touched.passengers}
-          errorMessage={errors.passengers}
+          showError={errors.numberOfTickets && touched.numberOfTickets}
+          errorMessage={errors.numberOfTickets}
         />
         <Button
           btnText={"Search Flights"}
