@@ -1,4 +1,4 @@
-export const changePasswordAPI = async (values, actions) => {
+export const forgetPasswordAPI = async (values, actions) => {
   console.log(values); // Log form values to the console
 
   const url = `http://localhost:8080/email?email=${values.email}`;

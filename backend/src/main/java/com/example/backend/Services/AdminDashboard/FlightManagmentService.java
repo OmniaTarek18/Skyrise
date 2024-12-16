@@ -1,4 +1,4 @@
-package com.example.backend.Services;
+package com.example.backend.Services.AdminDashboard;
 
 import org.springframework.stereotype.Service;
 

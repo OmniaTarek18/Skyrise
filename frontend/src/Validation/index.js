@@ -168,4 +168,16 @@ export const ticketReservationSchema = yup.object().shape({
   gender: genderValidation,
   specialNeeds: yup.string(),
   mealSpecification: yup.string(),
+  });
+
+
+export const upgradeUserSchema = yup.object().shape({
+  email: emailValidation,
+});
+export const searchFlightsSchema = yup.object().shape({
+  arrivalDate: yup.string().required("Arrival date is a required field"),
+  departureDate: yup.string().required("Departure date is a required field"),
+  departureAirportId: yup.string().required(),
+  arrivalAirportId: yup.string().required(),
+  numberOfTickets: yup.string().required(),
 });

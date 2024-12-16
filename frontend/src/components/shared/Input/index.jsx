@@ -2,12 +2,13 @@ import React from "react";
 import "./style.css";
 
 const Input = ({
-  label,
+  label = false,
   type = "text",
+  min = 1, // used with input type number only
   id,
   placeholder = "",
   onChange,
-  value,
+  value = "",
   onBlur,
   showError = false, // Renamed for clarity
   errorMessage = null, // Customizable error message
@@ -15,22 +16,43 @@ const Input = ({
   selectionInput = false,
   defaultSelectionText,
   options,
+  disabled= false,
+  onFocus,
+  isJson = false,
 }) => {
   return (
     <div className="mb-3">
-      <label htmlFor={id} className="form-label">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className="form-label">
+          {label}
+        </label>
+      )}
       {!selectionInput && (
         <input
-          type={type}
+          type={type === "date" ? "text" : type}
           className={`form-control ${showError ? "is-invalid" : ""}`} // Add Bootstrap's `is-invalid` class conditionally
           id={id}
           placeholder={placeholder}
           onChange={onChange}
           value={value}
-          onBlur={onBlur}
+          onBlur={
+            type === "date"
+              ? (e) => {
+                  e.target.type = "text"; // Switch back to text on blur
+                  if(onBlur) onBlur(e); // Call Formik's onBlur
+                }
+              : onBlur // Directly call Formik's onBlur for other types
+          }
+          onFocus={
+            type === "date"
+              ? (e) => {
+                  e.target.type = "date"; // Switch to date picker on focus
+                }
+              : undefined // No additional behavior for other types
+          }
+          min={min}
           required={required}
+          disabled ={disabled}
         />
       )}
       {selectionInput && (
@@ -41,22 +63,24 @@ const Input = ({
           onChange={onChange}
           value={value}
           onBlur={onBlur}
+          onFocus={onFocus}
         >
-          <option value="" defaultValue disabled hidden>
+          <option value=""  disabled hidden>
             {defaultSelectionText}
           </option>
-          {options.map((option, index) => (
+          {!isJson && options.map((option, index) => (
             <option key={index} value={option}>
               {option}
             </option>
           ))}
+          {isJson && options.map((option, index) => (
+            <option key={index} value={parseInt(option.value)}>
+              {option.label}
+            </option>
+          ))}
         </select>
       )}
-      {showError && (
-        <div className="invalid-feedback">
-          {errorMessage}
-        </div>
-      )}
+      {showError && <div className="invalid-feedback">{errorMessage}</div>}
     </div>
   );
 };

@@ -34,7 +34,7 @@ const Nav = ({ userLoggedIn = false }) => {
           >
             Home
           </a>
-          <a className="nav-item nav-link" href="#">
+          <a className="nav-item nav-link" href="#promotion">
             SEARCH FLIGHTS
           </a>
           <a className="nav-item nav-link" href="#review" onClick={() => nav("/")}>

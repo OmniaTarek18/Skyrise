@@ -1,4 +1,4 @@
-package com.example.backend.Services;
+package com.example.backend.Services.AdminDashboard;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 import com.example.backend.DTOMappers.FeedbackMapper;
 import com.example.backend.DTOMappers.PageResponseMapper;
 import com.example.backend.DTOs.FeedbackDTO;
-import com.example.backend.DTOs.FeedbackFilterCriteria;
 import com.example.backend.DTOs.PageResponse;
+import com.example.backend.DTOs.AdminDashboard.FeedbackFilterCriteria;
 import com.example.backend.Entities.Feedback;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +24,7 @@ public class FeedbackDisplayService {
 
     private final FeedbackRepository feedbackRepository;
 
-    public short getAverageRating(){
+    public short getAverageRating() {
         Double averageRating = feedbackRepository.getAvgRating();
         return averageRating == null ? 0 : averageRating.shortValue();
     }
@@ -39,36 +39,34 @@ public class FeedbackDisplayService {
 
     }
 
-public PageResponse<FeedbackDTO> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber) {
-    ValidateInput.validatePageNumber(pageNumber);
+    public PageResponse<FeedbackDTO> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber) {
+        ValidateInput.validatePageNumber(pageNumber);
 
-    Specification<Feedback> spec = Specification.where(null);
+        Specification<Feedback> spec = Specification.where(null);
 
-    // add specifications based on filter criteria (only if they are not null)
-    if (feedbackFilterDTO.stars() > 0) {
-        spec = spec.and(FeedbackSpecifications.containsStars(feedbackFilterDTO.stars()));
-    }
+        // add specifications based on filter criteria (only if they are not null)
+        if (feedbackFilterDTO.stars() > 0) {
+            spec = spec.and(FeedbackSpecifications.containsStars(feedbackFilterDTO.stars()));
+        }
 
         spec = spec.and(FeedbackSpecifications.containsService(feedbackFilterDTO.service()));
 
         spec = spec.and(FeedbackSpecifications.containsComfort(feedbackFilterDTO.comfort()));
 
         spec = spec.and(FeedbackSpecifications.containsPunctuality(feedbackFilterDTO.punctuality()));
-    
 
         spec = spec.and(FeedbackSpecifications.containsCleanliness(feedbackFilterDTO.cleanliness()));
-  
+
         spec = spec.and(FeedbackSpecifications.containsFoodAndBeverage(feedbackFilterDTO.foodAndBeverage()));
-    
 
-    String sortDirection = feedbackFilterDTO.direction();
-    Sort sort = Utilities.sort(sortDirection, "dateOfCreation");
+        String sortDirection = feedbackFilterDTO.direction();
+        Sort sort = Utilities.sort(sortDirection, "dateOfCreation");
 
-    Pageable pageable = PageRequest.of(pageNumber, 10, sort );
-    
-    Page<Feedback> page = feedbackRepository.findAll(spec, pageable);
-    Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
-    return PageResponseMapper.toPageResponse(pageDTO);
-}
+        Pageable pageable = Utilities.CreatePage(pageNumber, 10, sort);
+
+        Page<Feedback> page = feedbackRepository.findAll(spec, pageable);
+        Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
+        return PageResponseMapper.toPageResponse(pageDTO);
+    }
 
 }
