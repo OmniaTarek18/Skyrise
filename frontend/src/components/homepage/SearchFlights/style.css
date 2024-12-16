@@ -29,7 +29,7 @@
 
 .search-flights-container .btn {
   width: 13%;
-  margin-top: 2.5rem;
+  margin-top: 0.6rem;
   height: 4rem;
 }
 
@@ -48,4 +48,7 @@
 #arrivalDate:disabled {
   background-color: var(--greyish-white);
   cursor: not-allowed;
+}
+.row2{
+  padding: 2rem;
 }

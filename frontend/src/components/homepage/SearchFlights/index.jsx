@@ -23,7 +23,7 @@ const SearchFlights = () => {
   } = useSearchFlightsForm(() => {
     setSearchFlightDetails(values);
     nav("./search-flights");
-  }); // Passing the user's email to the hook
+  });
 
   useEffect(() => {
     if (values.tripType === "one-way") {

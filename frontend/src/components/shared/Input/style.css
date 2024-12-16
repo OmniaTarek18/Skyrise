@@ -1,7 +1,7 @@
 .mb-3 {
   height: auto;
   width: auto;
-  min-width: 24em;
+  /* min-width: 24em; */
   margin: 0 0 0.3rem 0;
 }
 

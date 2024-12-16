@@ -1,5 +1,4 @@
 import React from "react";
-import Section from "../../shared/Section";
 import SearchFlights from "../SearchFlights";
 import "./style.css";
 
