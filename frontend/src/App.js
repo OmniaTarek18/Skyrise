@@ -9,7 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import Overview from "./pages/AdminDashboard/Overview";
 import Flights from "./pages/AdminDashboard/Flights";
 import Feedback from "./pages/AdminDashboard/Feedback";
-import ChangePassword from "./pages/AdminDashboard/ChangePassword";
+import ChangePassword from "./components/userdashboard/ChangePassword";
 import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
 import ArchivePage from "./pages/AdminDashboard/ArchivePage";
 import UserInfo from "./pages/UserDashboard/UserInfo";

@@ -4,7 +4,7 @@ import Button from "../../shared/Button";
 import Section from "../../shared/Section";
 import ResetPassword from "../../shared/ResetPassword";
 import { useForgotPasswordForm } from "./validation";
-import { changePasswordAPI } from "./api";
+import { forgetPasswordAPI } from "./api";
 import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
 import "./style.css";
 
@@ -22,7 +22,7 @@ const ForgetPassword = () => {
     handleChange,
     handleBlur,
     handleSubmit, // Formik's handleSubmit function
-  } = useForgotPasswordForm(changePasswordAPI);
+  } = useForgotPasswordForm(forgetPasswordAPI);
 
   useEffect(() => {
     if (isFirstRender.current) {

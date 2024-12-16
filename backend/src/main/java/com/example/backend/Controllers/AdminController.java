@@ -21,7 +21,6 @@ public class AdminController {
         this.adminServices = adminServices ;
     }
 
-
     @PutMapping(path = "upgrade")
     public ResponseEntity<String> upgradeUser(@RequestParam String email){
         boolean flag = adminServices.upgradeUserToAdmin(email) ;
