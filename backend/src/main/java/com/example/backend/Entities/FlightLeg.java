@@ -42,7 +42,7 @@ public class FlightLeg {
     @ManyToOne
     @JoinColumn(name = "departure_airport_id", nullable = false)
     private Airport departureAirport;
-    
+
     @Column(nullable = false)
     private LocalTime arrivalTime;
 
