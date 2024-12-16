@@ -1,0 +1,51 @@
+.search-flights-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--navy-blue);
+  margin: auto;
+  width: 70vw;
+  height: 20vh;
+  border-radius: 9px;
+  padding: 1rem 1rem 1rem 2rem;
+}
+
+.trip-type-container,
+.class-container {
+  color: var(--greyish-white);
+  padding-left: 3rem;
+}
+
+.search-flights-container .mb-3 {
+  width: 17%;
+  padding: 0.1em;
+}
+
+.search-flights-container .form-select,
+.search-flights-container .form-control {
+  height: 5rem;
+  margin: 0;
+  border-radius: 0;
+}
+
+.search-flights-container .btn {
+  width: 13%;
+  margin-top: 2.5rem;
+  height: 4rem;
+}
+
+#numberOfTickets{
+  border-radius: 0 9px 9px 0;
+}
+
+#departureAirportId{
+  border-radius: 9px 0 0 9px;
+}
+
+.search-flights-container ::placeholder{
+  color: black;
+}
+
+#arrivalDate:disabled {
+  background-color: var(--greyish-white);
+  cursor: not-allowed;
+}

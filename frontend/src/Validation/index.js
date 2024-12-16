@@ -3,8 +3,7 @@ import * as yup from "yup";
 var passwordRegex =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/
-
+var emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
 var nameRegax = /^[a-z ,.'-]+$/i;
 
@@ -28,7 +27,7 @@ const confirmPasswordMessage = "Passwords must match";
 
 const emailValidation = yup
   .string()
-  .matches( emailRegex ,emailErrorMessage)
+  .matches(emailRegex, emailErrorMessage)
   .required(requiredMessage);
 const passwordValidation = yup
   .string()
@@ -124,4 +123,11 @@ export const forgetPasswordSchema = yup.object().shape({
 
 export const upgradeUserSchema = yup.object().shape({
   email: emailValidation,
+});
+export const searchFlightsSchema = yup.object().shape({
+  arrivalDate: yup.string().required("Arrival date is a required field"),
+  departureDate: yup.string().required("Departure date is a required field"),
+  departureAirportId: yup.string().required(),
+  arrivalAirportId: yup.string().required(),
+  numberOfTickets: yup.string().required(),
 });
