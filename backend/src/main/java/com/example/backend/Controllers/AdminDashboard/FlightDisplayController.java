@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
-import com.example.backend.DTOs.AdminFlightDTO;
-import com.example.backend.DTOs.FlightFilterCriteria;
 import com.example.backend.DTOs.PageResponse;
-import com.example.backend.Services.FlightDisplayService;
+import com.example.backend.DTOs.AdminDashboard.AdminFlightDTO;
+import com.example.backend.DTOs.AdminDashboard.FlightFilterCriteria;
+import com.example.backend.Services.AdminDashboard.FlightDisplayService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;

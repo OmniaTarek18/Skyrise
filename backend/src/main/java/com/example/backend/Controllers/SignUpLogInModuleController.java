@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.backend.DTOs.LogInDTO;
-import com.example.backend.Entities.Admin;
 import com.example.backend.Entities.Customer;
 import com.example.backend.Services.SignUpLogInModuleServices;
 

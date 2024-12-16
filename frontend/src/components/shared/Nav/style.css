@@ -23,9 +23,11 @@
 }
 
 .navbar-nav {
-  margin-left: auto;
-  margin-right: 30em;
-  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin-left: 100px;
 }
 
 .nav-item:hover,

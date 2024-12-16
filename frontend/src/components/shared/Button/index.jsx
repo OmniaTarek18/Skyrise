@@ -18,7 +18,7 @@ const Button = ({ icon = null, btnText, handleClick, btnColor = "primary", type 
   // const [alert, setAlert] = useState(false);
 
   return (
-    <div>
+    <>
       {/* The button element */}
       <button
         type={type} // Set the button type (button, submit, or reset)
@@ -31,7 +31,7 @@ const Button = ({ icon = null, btnText, handleClick, btnColor = "primary", type 
         {/* Display the button text */}
         {btnText}
       </button>
-    </div>
+    </>
   );
 };
 
