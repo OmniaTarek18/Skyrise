@@ -7,7 +7,7 @@ import Button from "../shared/Button";
 import Input from "../shared/Input";
 import "./style.css";
 const TicketForm = ({ numberOfTickets }) => {
-  const [currentTicket, setCurrentTicket] = useState(1);
+  const [currentTicket, setCurrentTicket] = useState(0);
   const [tickets, setTickets] = useState([]);
 
   const {
@@ -19,23 +19,58 @@ const TicketForm = ({ numberOfTickets }) => {
     handleBlur,
     resetForm,
     handleSubmit,
+    setFieldValue,
   } = useTicketReservationForm((submittedValues) => {
-    setTickets((prevTickets) => [...prevTickets, submittedValues]);
-    if (currentTicket < numberOfTickets) {
-      setCurrentTicket(currentTicket + 1);
+    setTickets((prevTickets) => {
+      const updatedTickets = [...prevTickets];
+
+      if (updatedTickets[currentTicket]) {
+        updatedTickets[currentTicket] = submittedValues;
+      } else {
+        updatedTickets.push(submittedValues);
+      }
+      return updatedTickets;
+    });
+    if (currentTicket + 1 < numberOfTickets) {
+      editCurrentTicket();
       resetForm();
     } else {
       ticketReservationAPI(tickets.concat(submittedValues));
     }
   });
 
+  const editPreviousTicket = () => {
+    setCurrentTicket((prevTicket) => {
+      const newTicket = prevTicket - 1;
+      Object.entries(tickets[newTicket]).forEach(([key, value]) => {
+        setFieldValue(key, value === null || value === undefined ? "" : value);
+      });
+      return newTicket;
+    });
+  };
+
+  const editCurrentTicket = () => {
+    setCurrentTicket((prevTicket) => {
+      const newTicket = prevTicket + 1;
+      if (newTicket < tickets.length) {
+        Object.entries(tickets[newTicket]).forEach(([key, value]) => {
+          setFieldValue(
+            key,
+            value === null || value === undefined ? "" : value
+          );
+        });
+      }
+      return newTicket;
+    });
+  };
+
   return (
-    <>
+    <div className="ticket-container">
       <h1 className="ticket-reservation-heading">Ticket Reservation</h1>
-      <h2>
-        Filling details for ticket {currentTicket} of {numberOfTickets}
-      </h2>
-      <form className={`ticket-form-container`} onSubmit={handleSubmit}>
+      <h3 className="ticket-reservation-heading">
+        Filling details for ticket {currentTicket + 1} of {numberOfTickets}
+      </h3>
+      <form className="ticket-form-container" onSubmit={handleSubmit}>
         <div className="inputs-container">
           <fieldset className="passport-details-container">
             <legend>Passport Details</legend>
@@ -190,9 +225,19 @@ const TicketForm = ({ numberOfTickets }) => {
           </fieldset>
         </div>
         <div className="button-row">
+          {currentTicket > 0 && (
+            <Button
+              btnText={"Edit Previous Ticket"}
+              btnColor="black"
+              disabled={isSubmitting}
+              type="button"
+              handleClick={editPreviousTicket}
+            />
+          )}
+
           <Button
             btnText={
-              currentTicket < numberOfTickets ? "Next Ticket" : "Submit All"
+              currentTicket + 1 < numberOfTickets ? "Next Ticket" : "Submit All"
             }
             btnColor="pink"
             disabled={isSubmitting}
@@ -200,7 +245,7 @@ const TicketForm = ({ numberOfTickets }) => {
           />
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
