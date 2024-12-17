@@ -81,7 +81,6 @@ const UserSidebar = ({ isCollapsed, setIsCollapsed }) => {
 
       <div className="usersidebar-footer">
         <NavLink
-          to="/user-dashboard/delete-account"
           className="user-nav-link"
           onClick={() => setShowDeleteAccountPopup(true)}
         >
