@@ -282,8 +282,8 @@ const FlightDisplay = ({ searchDetails }) => {
                 <UserFlight
                   key={flight.id}
                   flight={flight}
-                  departureCity={getCityName(filters.departureAirportId)}
-                  arrivalCity={getCityName(filters.arrivalAirportId)}
+                  departureCity={getCityName(filters.departureAirportId || searchDetails.departureAirportId)}
+                  arrivalCity={getCityName(filters.arrivalAirportId || searchDetails.arrivalAirportId)}
                   onShowDetails={onShowDetails}
                 />
               ))
