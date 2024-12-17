@@ -1,13 +1,11 @@
 import axios from 'axios';
 
 export const feedbackapi = axios.create({
-    baseURL: 'http://localhost:8080/user',
+    baseURL: 'http://localhost:8080/',
 });
 
-export const fetchFlightSearchResults = async (filters) => {
+export const fetchFlightSearchResults = async (filters, pageNumber) => {
     try {
-        
-        // Create the request body
         const requestBody = {
             arrivalAirportId: filters.arrivalAirportId,
             departureAirportId: filters.departureAirportId,
@@ -18,14 +16,14 @@ export const fetchFlightSearchResults = async (filters) => {
             flightType: filters.flightType,
             direction: filters.direction,
         };
-
-        // Send the POST request with filters and pageNumber as query parameter
-        const response = await feedbackapi.post('/search', requestBody, {
-            params: { pageNumber: filters.pageNumber },
+        console.log(pageNumber, 7777777777)
+        console.log(filters)
+        const response = await feedbackapi.post('user/search', requestBody, {
+            params: { pageNumber }, 
         });
 
-        // Return the flight data from the response
-        return response.data.content;
+        console.log(response,"lllllllllllllllllllllllllllll")
+        return response.data;
     } catch (error) {
         console.error('Error fetching flight search results:', error);
         throw error;
@@ -36,6 +34,7 @@ export const fetchFlightSearchResults = async (filters) => {
 export const fetchFlightDetails = async (flightId) => {
     try {
         const response = await feedbackapi.get(`/flights/${flightId}`);
+        console.log(response,"ddddddddd")
         return response.data;
     } catch (error) {
         console.error('Error fetching flight details:', error);

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class FlightSearchController {
     private final FlightSearchService flightSearchService;
 

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @RequestMapping("/flights")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class FlightInfoDisplayController {
     private final FlightLegDisplayService flightLegDisplayService;
 

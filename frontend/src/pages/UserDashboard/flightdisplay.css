@@ -6,8 +6,6 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
-  justify-content: center;
   animation: fadeIn 0.3s ease;
 }
 .card-buttons{
@@ -25,9 +23,14 @@
   position: relative;
   padding: 2rem;
   animation: slideUp 0.4s ease;
-  margin: 0 1rem; /* Ensures the modal doesn't touch the edges on smaller screens */
+  margin: 0 1rem; 
 }
-
+.departure-date{
+  margin-left: 120px;
+  margin-right: 80px;
+  display: flex;
+  flex-direction: row;
+}
 .modal-title {
   text-align: center;
   font-size: 1.8rem;
@@ -106,4 +109,29 @@ input,
 
 .clear-button:hover {
   background-color: #e84118;
+}
+
+.after-search-filter-button{
+  width: 50px;
+  height: 50px;
+  border-radius: 1rem;
+  margin-top: 20px;
+  background-color: #0056b3;
+  border-color: white;
+}
+.after-search-flight-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  margin-left: 150px;
+  margin-right: 150px;
+  justify-content: space-between;
+}
+
+.no-flights-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }

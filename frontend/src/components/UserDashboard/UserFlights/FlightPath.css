@@ -1,0 +1,29 @@
+.flight-path2 {
+  position: relative;
+  width: 100px;
+  height: 60px;
+}
+
+.path-line {
+  width: 100%;
+  height: 100%;
+}
+
+.path-line svg {
+  width: 100%;
+  height: 100%;
+}
+
+.path-line path {
+  fill: none;
+  stroke: #05203c;
+  stroke-width: 2;
+  stroke-dasharray: 8;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
