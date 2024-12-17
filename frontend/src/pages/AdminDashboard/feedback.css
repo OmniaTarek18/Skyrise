@@ -75,6 +75,7 @@
 .feedback-card {
   flex: 1 1 calc(50% - 20px);
   box-sizing: border-box;
+  position: none;
 
 }
 

@@ -1,14 +1,17 @@
 export const deleteAccountAPI = async (id) => {
   console.log(id);
-  const url = `http://localhost:8080/deleteAccount/${id}`;
+  const url = `http://localhost:8080/delete?accountId=${id}`; // Use path parameter for id
+
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "DELETE",
+    });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-    const json = await response.json();
-    console.log(json);
+    return true;
   } catch (error) {
     console.error(error.message);
   }
+  return false;
 };
