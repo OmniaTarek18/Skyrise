@@ -12,7 +12,7 @@ import com.example.backend.Services.AirportDisplayService;
 
 
 @Controller
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AirportDisplayController {
 
     private final AirportDisplayService airportDisplayService;

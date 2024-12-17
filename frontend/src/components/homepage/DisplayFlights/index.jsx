@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "../../shared/Nav";
 import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
 import useSearchFlightDetails from "../../../store/useSearchFlightDetails";
+import FlightDisplay from "../../../pages/UserDashboard/FlightDisplay";
 
 const DisplayFlights = ({ values }) => {
   const { id, role, setUserAuthentication } = useUserAuthenticationStore();
@@ -13,7 +14,7 @@ const DisplayFlights = ({ values }) => {
   return (
     <div>
       {id != null ? <Nav userLoggedIn={true} /> : <Nav />}
-      <h1>display flights</h1>
+      <FlightDisplay searchDetails={searchFlightDetails} />
     </div>
   );
 };
