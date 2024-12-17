@@ -21,7 +21,6 @@ import { useState } from "react";
 import Button from "./components/shared/Button";
 import SignUpForm from "./components/signup/SignUpForm";
 
-
 function App() {
   return (
     <Routes className="App">

@@ -1,22 +1,23 @@
 .popup-container {
-    background-color: white;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5em 2em 2em 2em;
-    border-radius: 9px;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: fixed;
+  background-color: white;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 2em 2em 2em;
+  border-radius: 9px;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.cancel-container{
-    border: none;
-    background-color:white;
-    margin-left: auto;
-    font-size: 2rem;
+
+.cancel-container {
+  border: none;
+  background-color: white;
+  margin-left: auto;
+  font-size: 2rem;
 }

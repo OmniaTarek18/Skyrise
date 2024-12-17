@@ -55,7 +55,7 @@ const UpgradeUser = () => {
         />
         <Button
           btnText={"Continue"}
-          btnColor="pink"
+          btnColor={"dark"}
           type="submit"
           disabled={isSubmitting}
         />

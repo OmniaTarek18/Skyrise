@@ -4,15 +4,13 @@ import Button from "../../shared/Button";
 import Section from "../../shared/Section";
 import ResetPassword from "../../shared/ResetPassword";
 import { useChangePasswordForm } from "./validation";
-import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
 import "./style.css";
 import { changePasswordAPI } from "./api";
 
-const ChangePassword = ({ userEmail }) => {
+const ChangePassword = () => {
   const [page, setPage] = useState("changePassword");
   const [alert, setAlert] = useState(false);
   const isFirstRender = useRef(true);
-  const { id } = useUserAuthenticationStore();
 
   const {
     values,
@@ -20,17 +18,20 @@ const ChangePassword = ({ userEmail }) => {
     touched,
     isSubmitting,
     status,
+    setStatus,
     handleChange,
     handleBlur,
     handleSubmit,
   } = useChangePasswordForm(changePasswordAPI);
 
   useEffect(() => {
+    console.log(status);
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    if (status.status == "success") {
+    console.log(status);
+    if (status === "success") {
       setPage("continue");
     } else {
       setAlert(true);
@@ -51,7 +52,6 @@ const ChangePassword = ({ userEmail }) => {
         <form className="change-password-form" onSubmit={handleSubmit}>
           <div>
             <Section heading={"Change Password"} />
-
             <Input
               label={"Old Password"}
               type={"password"}
@@ -74,7 +74,7 @@ const ChangePassword = ({ userEmail }) => {
         </form>
       )}
 
-      {page === "continue" && <ResetPassword userEmail={userEmail} />}
+      {page === "continue" && <ResetPassword isChangePassword={true} />}
     </section>
   );
 };

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import WhiteLogo from "../../../assets/whiteLogo.svg";
 import "./sidebar.css";
 import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
+import Popup from "../../shared/Popup";
+import UpgradeUser from "../UpgradeUser";
+import DeleteAccount from "../../shared/DeleteAccount";
+import ChangePassword from "../../shared/ChangePassword";
+
 import {
   UilDashboard,
   UilPlane,
@@ -13,10 +18,14 @@ import {
   UilSignOutAlt,
   UilTrashAlt,
 } from "@iconscout/react-unicons";
+
 import Logo from "../../shared/Logo";
 
 export default function Sidebar() {
-  const { id, role, setUserAuthentication } = useUserAuthenticationStore();
+  const [showUpgradeUserPopup, setShowUpgradeUserPopup] = useState(false);
+  const [showChangePasswordPopup, setShowChangePasswordPopup] = useState(false);
+  const [showDeleteAccountPopup, setShowDeleteAccountPopup] = useState(false);
+  const {setUserAuthentication } = useUserAuthenticationStore();
   const nav = useNavigate();
 
   const logout = () => {
@@ -24,6 +33,21 @@ export default function Sidebar() {
   };
   return (
     <div className="mainSidebar">
+      {showUpgradeUserPopup && (
+        <Popup onClose={() => setShowUpgradeUserPopup(false)}>
+          <UpgradeUser />
+        </Popup>
+      )}
+      {showChangePasswordPopup && (
+        <Popup onClose={() => setShowChangePasswordPopup(false)}>
+          <ChangePassword />
+        </Popup>
+      )}
+      {showDeleteAccountPopup && (
+        <Popup onClose={() => setShowDeleteAccountPopup(false)}>
+          <DeleteAccount />
+        </Popup>
+      )}
       <div>
         <Logo color={WhiteLogo} className="logo" />
         <hr className="separator" />
@@ -66,7 +90,7 @@ export default function Sidebar() {
           </li>
           <li className="liContainer">
             <NavLink
-              to="/admin-dashboard/upgrade-user"
+              onClick={() => setShowUpgradeUserPopup(true)}
               className={({ isActive }) => (isActive ? "link active" : "link")}
             >
               <UilUser className="sidebar-icon" />
@@ -75,7 +99,7 @@ export default function Sidebar() {
           </li>
           <li className="liContainer">
             <NavLink
-              to="/admin-dashboard/change-password"
+              onClick={() => setShowChangePasswordPopup(true)}
               className={({ isActive }) => (isActive ? "link active" : "link")}
             >
               <UilKeySkeleton className="sidebar-icon" />
@@ -100,7 +124,7 @@ export default function Sidebar() {
         <hr className="separator" />
         <li className="liContainer">
           <NavLink
-            to="/admin-dashboard/delete-account"
+            onClick={() => setShowDeleteAccountPopup(true)}
             className={({ isActive }) => (isActive ? "link active" : "link")}
           >
             <UilTrashAlt className="sidebar-icon" />

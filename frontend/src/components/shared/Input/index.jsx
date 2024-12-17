@@ -74,7 +74,7 @@ const Input = ({
             </option>
           ))}
           {isJson && options.map((option, index) => (
-            <option key={index} value={parseInt(option.value)}>
+            <option key={index} value={option.value}>
               {option.label}
             </option>
           ))}
