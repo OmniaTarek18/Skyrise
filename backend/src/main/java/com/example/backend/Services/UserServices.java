@@ -1,6 +1,7 @@
 package com.example.backend.Services;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import com.example.backend.Entities.Account;
 import com.example.backend.Entities.User;
 import com.example.backend.Enums.Gender;
 import com.example.backend.Repositories.UserRepository;
+
 
 @Service
 public class UserServices {
@@ -36,4 +38,7 @@ public class UserServices {
         }
     }
 
+    public void deleteUserByAccountId(Integer accountId) {
+        this.userRepository.deleteByAccountAccountId(accountId);
+    }
 }

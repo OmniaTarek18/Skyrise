@@ -4,6 +4,9 @@ import com.example.backend.Entities.Account;
 import com.example.backend.Enums.Role;
 import com.example.backend.Repositories.AccountRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,8 @@ public class AccountServices {
 
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserServices userServices;
 
     public AccountServices(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -89,7 +94,7 @@ public class AccountServices {
     }
 
     public boolean updateAccountFromCustomerToAdmin(String email) {
-        int flag = this.accountRepository.updateRoleByEmail(email, true);
+        int flag = this.accountRepository.updateRoleByEmail(email, Role.ADMIN);
         return flag == 1;
     }
 
@@ -99,16 +104,28 @@ public class AccountServices {
             throw new IllegalArgumentException("User with the provided email does not exist.");
         }
         Account account = optionalAccount.get();
-        if (account.getRole() == Role.USER){
+        if (account.getRole() == Role.USER) {
+            this.userServices.deleteUserByAccountId(accountId);
             this.accountRepository.deleteAccountById(accountId);
-        }
-        else if(this.accountRepository.numberOfAdmins(Role.ADMIN) > 1){
+        } else if (this.accountRepository.numberOfAdmins(Role.ADMIN) > 1) {
+            this.userServices.deleteUserByAccountId(accountId);
             this.accountRepository.deleteAccountById(accountId);
-        }
-        else{
+        } else {
             throw new IllegalArgumentException("There is only one Admin");
         }
         return true;
+    }
+
+    public boolean checkPassword(Integer accountId, String password) {
+        Optional<Account> accountOptional = this.accountRepository.findAccountByAccountId(accountId);
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+            return bCryptPasswordEncoder.matches(password, account.getPassword());
+        } else {
+            System.out.println(password);
+            new EntityNotFoundException("User doesn't have an account");
+        }
+        return false;
     }
 
 }

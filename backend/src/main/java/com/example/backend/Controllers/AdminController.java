@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("admin")
-@CrossOrigin
 public class AdminController {
 
-    private final AdminServices adminServices ;
+    private final AdminServices adminServices;
 
     public AdminController(AdminServices adminServices) {
-        this.adminServices = adminServices ;
+        this.adminServices = adminServices;
     }
 
     @PutMapping(path = "upgrade")
-    public ResponseEntity<String> upgradeUser(@RequestParam String email){
-        boolean flag = adminServices.upgradeUserToAdmin(email) ;
+    public ResponseEntity<String> upgradeUser(@RequestParam String email) {
+        boolean flag = adminServices.upgradeUserToAdmin(email);
         if (flag) {
             return new ResponseEntity<>("Success", HttpStatus.OK);
         }
