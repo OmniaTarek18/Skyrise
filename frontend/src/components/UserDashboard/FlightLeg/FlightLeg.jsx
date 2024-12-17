@@ -14,10 +14,6 @@ const FlightLeg = ({
   arrivalAirportCity,
   arrivalAirportCode,
 }) => {
-  const isDayFlight =
-    parseInt(departureTime.split(":")[0]) > 6 &&
-    parseInt(departureTime.split(":")[0]) < 18;
-
   return (
     <div className="flight-leg-card">
       <div className="card-content">
