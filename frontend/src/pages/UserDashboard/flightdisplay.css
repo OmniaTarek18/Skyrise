@@ -10,14 +10,22 @@
   justify-content: center;
   animation: fadeIn 0.3s ease;
 }
+.card-buttons{
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  justify-content: center; 
+}
 .modal-content {
   background: #fff;
   width: 600px;
+  max-width: 100%;
   border-radius: 12px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   position: relative;
   padding: 2rem;
   animation: slideUp 0.4s ease;
+  margin: 0 1rem; /* Ensures the modal doesn't touch the edges on smaller screens */
 }
 
 .modal-title {
@@ -36,9 +44,10 @@
   cursor: pointer;
 }
 
-.row {
+.modal-row {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
