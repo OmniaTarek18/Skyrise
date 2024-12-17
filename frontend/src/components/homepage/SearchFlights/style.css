@@ -55,3 +55,6 @@
     background-color: var(--greyish-white);
     cursor: not-allowed;
 }
+.row2{
+  padding: 2rem;
+}

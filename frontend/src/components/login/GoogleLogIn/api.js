@@ -1,5 +1,5 @@
 export const GoogleLoginAPI = async (email) => {
-  console.log(email); // Log form values to the console
+  console.log(email);
 
   const url = `http://localhost:8080/email?email=${email}`;
   try {

@@ -10,12 +10,16 @@ import Overview from "./pages/AdminDashboard/Overview";
 import Flights from "./pages/AdminDashboard/Flights";
 import Feedback from "./pages/AdminDashboard/Feedback";
 import ChangePassword from "./pages/AdminDashboard/ChangePassword";
-import DeleteAccount from "./pages/AdminDashboard/DeleteAccount";
+import DeleteAccount from "./components/shared/DeleteAccount";
 import ArchivePage from "./pages/AdminDashboard/ArchivePage";
 import UserInfo from "./pages/UserDashboard/UserInfo";
 import UserFlights from "./pages/UserDashboard/UserFlights";
-import "./App.css";
 import DisplayFlights from "./components/homepage/DisplayFlights";
+import "./App.css";
+import Popup from "./components/shared/Popup";
+import { useState } from "react";
+import Button from "./components/shared/Button";
+import SignUpForm from "./components/signup/SignUpForm";
 
 
 function App() {

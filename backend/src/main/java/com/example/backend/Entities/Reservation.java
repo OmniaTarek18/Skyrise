@@ -27,7 +27,6 @@ import lombok.Setter;
 @IdClass(ReservationPK.class)
 @Entity
 public class Reservation {
-
     @Id
     private Integer userId;
 

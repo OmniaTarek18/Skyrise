@@ -93,4 +93,22 @@ public class AccountServices {
         return flag == 1;
     }
 
+    public boolean deleteAccount(Integer accountId) {
+        Optional<Account> optionalAccount = this.accountRepository.findAccountByAccountId(accountId);
+        if (optionalAccount.isEmpty()) {
+            throw new IllegalArgumentException("User with the provided email does not exist.");
+        }
+        Account account = optionalAccount.get();
+        if (account.getRole() == Role.USER){
+            this.accountRepository.deleteAccountById(accountId);
+        }
+        else if(this.accountRepository.numberOfAdmins(Role.ADMIN) > 1){
+            this.accountRepository.deleteAccountById(accountId);
+        }
+        else{
+            throw new IllegalArgumentException("There is only one Admin");
+        }
+        return true;
+    }
+
 }

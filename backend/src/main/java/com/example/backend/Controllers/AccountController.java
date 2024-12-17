@@ -52,4 +52,14 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
+    @PostMapping("delete")
+    public ResponseEntity<String> changePassword(@RequestParam Integer accountId) {
+        try {
+            accountServices.deleteAccount(accountId);
+            return ResponseEntity.ok().body("Account has been deleted.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }
