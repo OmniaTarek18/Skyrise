@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.example.backend.Repositories.FeedbackRepository;
 import com.example.backend.Specifications.FeedbackSpecifications;
 import com.example.backend.Utilites.Utilities;
-import com.example.backend.Utilites.ValidateInput;
 import lombok.RequiredArgsConstructor;
 import com.example.backend.DTOMappers.FeedbackMapper;
 import com.example.backend.DTOMappers.PageResponseMapper;
@@ -31,7 +30,6 @@ public class FeedbackDisplayService {
 
     public PageResponse<FeedbackDTO> getAll(int pageNumber) {
 
-        ValidateInput.validatePageNumber(pageNumber);
         Pageable pageable = PageRequest.of(pageNumber, 10);
         Page<Feedback> page = feedbackRepository.findAll(pageable);
         Page<FeedbackDTO> pageDTO = page.map(FeedbackMapper::toDTO);
@@ -40,24 +38,27 @@ public class FeedbackDisplayService {
     }
 
     public PageResponse<FeedbackDTO> filterFeedback(FeedbackFilterCriteria feedbackFilterDTO, int pageNumber) {
-        ValidateInput.validatePageNumber(pageNumber);
 
         Specification<Feedback> spec = Specification.where(null);
 
         // add specifications based on filter criteria (only if they are not null)
-        if (feedbackFilterDTO.stars() > 0) {
+        if (feedbackFilterDTO.stars() != null) 
             spec = spec.and(FeedbackSpecifications.containsStars(feedbackFilterDTO.stars()));
-        }
+        
+        if (feedbackFilterDTO.service() != null)
+            spec = spec.and(FeedbackSpecifications.containsService(feedbackFilterDTO.service()));
 
-        spec = spec.and(FeedbackSpecifications.containsService(feedbackFilterDTO.service()));
+        if (feedbackFilterDTO.comfort() != null)
+            spec = spec.and(FeedbackSpecifications.containsComfort(feedbackFilterDTO.comfort()));
 
-        spec = spec.and(FeedbackSpecifications.containsComfort(feedbackFilterDTO.comfort()));
+        if (feedbackFilterDTO.punctuality() != null)
+            spec = spec.and(FeedbackSpecifications.containsPunctuality(feedbackFilterDTO.punctuality()));
 
-        spec = spec.and(FeedbackSpecifications.containsPunctuality(feedbackFilterDTO.punctuality()));
+        if (feedbackFilterDTO.cleanliness() != null)
+            spec = spec.and(FeedbackSpecifications.containsCleanliness(feedbackFilterDTO.cleanliness()));
 
-        spec = spec.and(FeedbackSpecifications.containsCleanliness(feedbackFilterDTO.cleanliness()));
-
-        spec = spec.and(FeedbackSpecifications.containsFoodAndBeverage(feedbackFilterDTO.foodAndBeverage()));
+        if (feedbackFilterDTO.foodAndBeverage() != null)
+            spec = spec.and(FeedbackSpecifications.containsFoodAndBeverage(feedbackFilterDTO.foodAndBeverage()));
 
         String sortDirection = feedbackFilterDTO.direction();
         Sort sort = Utilities.sort(sortDirection, "dateOfCreation");
