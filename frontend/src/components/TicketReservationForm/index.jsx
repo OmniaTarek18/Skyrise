@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { useTicketReservationForm } from "./validation";
-import { ticketReservationAPI } from "./api";
+import { bookFlightAPI, ticketReservationAPI } from "./api";
 import { gender, specialNeeds, mealSpecification } from "./validation";
 import { countries, countryCodes } from "../signup/SignUpForm/validation";
 import Button from "../shared/Button";
 import Input from "../shared/Input";
+import useUserAuthenticationStore from "../../store/useUserAuthenticationStore";
 import "./style.css";
-const TicketForm = ({ numberOfTickets }) => {
+import useSearchFlightDetails from "../../store/useSearchFlightDetails";
+import { useNavigate } from "react-router-dom";
+const TicketForm = ({ numberOfTickets, flightId }) => {
   const [currentTicket, setCurrentTicket] = useState(0);
   const [tickets, setTickets] = useState([]);
-
+  const { id } = useUserAuthenticationStore();
+  const { searchFlightDetails } = useSearchFlightDetails();
+  const nav = useNavigate();
+  numberOfTickets = searchFlightDetails.numberOfTickets;
   const {
     values,
     errors,
@@ -20,7 +26,7 @@ const TicketForm = ({ numberOfTickets }) => {
     resetForm,
     handleSubmit,
     setFieldValue,
-  } = useTicketReservationForm((submittedValues) => {
+  } = useTicketReservationForm(async (submittedValues) => {
     setTickets((prevTickets) => {
       const updatedTickets = [...prevTickets];
 
@@ -35,7 +41,14 @@ const TicketForm = ({ numberOfTickets }) => {
       editCurrentTicket();
       resetForm();
     } else {
-      ticketReservationAPI(tickets.concat(submittedValues));
+      await bookFlightAPI(
+        flightId,
+        id,
+        searchFlightDetails.seatClass,
+        numberOfTickets
+      );
+      await ticketReservationAPI(tickets.concat(submittedValues), flightId, id);
+      nav("/");
     }
   });
 
@@ -65,7 +78,7 @@ const TicketForm = ({ numberOfTickets }) => {
   };
 
   return (
-    <div className="ticket-container">
+    <div className="ticket-form-container">
       <h1 className="ticket-reservation-heading">Ticket Reservation</h1>
       <h3 className="ticket-reservation-heading">
         Filling details for ticket {currentTicket + 1} of {numberOfTickets}
@@ -228,7 +241,7 @@ const TicketForm = ({ numberOfTickets }) => {
           {currentTicket > 0 && (
             <Button
               btnText={"Edit Previous Ticket"}
-              btnColor="black"
+              btnColor="dark"
               disabled={isSubmitting}
               type="button"
               handleClick={editPreviousTicket}
@@ -239,7 +252,7 @@ const TicketForm = ({ numberOfTickets }) => {
             btnText={
               currentTicket + 1 < numberOfTickets ? "Next Ticket" : "Submit All"
             }
-            btnColor="pink"
+            btnColor="light"
             disabled={isSubmitting}
             type="submit"
           />

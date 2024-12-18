@@ -30,7 +30,6 @@ const ChangePassword = () => {
       isFirstRender.current = false;
       return;
     }
-    console.log(status);
     if (status === "success") {
       setPage("continue");
     } else {

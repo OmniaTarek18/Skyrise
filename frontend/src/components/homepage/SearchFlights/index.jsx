@@ -35,7 +35,7 @@ const SearchFlights = () => {
 
   const countryOptions = Object.entries(countries).map(([_, country]) => ({
     label: `${country.airportCity}, ${country.airportCountry}`,
-    value: JSON.stringify({id:country.id, code:country.airportCode}),
+    value: country.id,
   }));
 
   const handleFocus = async () => {

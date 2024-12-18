@@ -7,10 +7,10 @@ import DashboardContent from "./UserSidebar/DashboardContent";
 const UserDashboard = () => {
   const { id, role } = useUserAuthenticationStore();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-
+  
   return (
     <div className="dashboard-container">
-      <Nav userLoggedIn={true} />
+      <Nav userLoggedIn={true} isProfile={true}/>
       <div className="dashboard-layout">
         <UserSidebar
           isCollapsed={isSidebarCollapsed}

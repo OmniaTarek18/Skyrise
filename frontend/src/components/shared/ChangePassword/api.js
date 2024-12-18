@@ -3,7 +3,7 @@ export const changePasswordAPI = async (values, actions) => {
 
   const url = `http://localhost:8080/validate?accountId=${values.id}&password=${values.password}`;
 
-  const request = await fetch(url, {
+  const request = new Request(url, {
     method: "POST",
   });
   const requestCloned = request.clone();

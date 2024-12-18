@@ -150,12 +150,12 @@ export const forgetPasswordSchema = yup.object().shape({
 export const ticketReservationSchema = yup.object().shape({
   nationalId: nationalIdValidation,
   dateOfBirth: ticketsDobValidation,
-  countryCode: yup.string().notRequired(),
+  countryCode: yup.string().required(),
   phoneNumber: yup
     .string()
     .matches(phoneNumberRegex, phoneNumberMessage)
     .min(11)
-    .notRequired(),
+    .required(),
   passportNumber: yup
     .string()
     .matches(passportNumberRegex, passportNumberMessage)
