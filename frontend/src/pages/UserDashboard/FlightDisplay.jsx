@@ -40,7 +40,7 @@ const FlightDisplay = ({ searchDetails }) => {
     new Date(searchDetails.departureDate || new Date())
   );
   const [flightDetails, setFlightDetails] = useState(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false); 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const fetchAirports = async () => {

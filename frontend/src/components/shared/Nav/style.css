@@ -1,7 +1,3 @@
-/* .navbar-nav{
-  position: fixed;
-} */
-
 .navLogo {
   margin-left: 2rem;
 }
@@ -29,6 +25,9 @@
   padding: 1rem 2rem;
   margin-left: 100px;
 }
+.nav-link{
+  transition: none;
+}
 
 .nav-item:hover,
 .active-page,
@@ -40,9 +39,15 @@
   color: var(--greyish-white);
 }
 
+.navbar-brand{
+  margin-left: 4rem;
+  width: 30vw;
+}
 
+.navbar{
+  background-color: red;
+}
 .user-registeration-container, .user-profile-container{
-  /* background-color: red; */
   display: flex;
 }
 

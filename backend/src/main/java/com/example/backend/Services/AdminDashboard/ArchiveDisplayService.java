@@ -16,7 +16,6 @@ import com.example.backend.DTOs.AdminDashboard.FlightFilterCriteria;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Specifications.FlightSpecifications;
-import com.example.backend.Utilites.ValidateInput;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,20 +25,8 @@ public class ArchiveDisplayService {
 
     private final FlightRepository flightRepository;
 
-    public PageResponse<AdminFlightDTO> getAllPastFlights(int pageNumber) {
-        ValidateInput.validatePageNumber(pageNumber);
-
-        LocalDate today = LocalDate.now();
-        Pageable pageable = PageRequest.of(pageNumber, 10);
-        Page<Flight> page = flightRepository.findByArrivalDateLessThan(today, pageable);
-        Page<AdminFlightDTO> pageDTO = page.map(AdminFlightMapper::toDTO);
-        return PageResponseMapper.toPageResponse(pageDTO);
-
-    }
-
     public PageResponse<AdminFlightDTO> filterPastFlights(FlightFilterCriteria flightFilterDTO, int pageNumber) {
 
-        ValidateInput.validatePageNumber(pageNumber);
         LocalDate today = LocalDate.now();
         Specification<Flight> spec = FlightSpecifications.hasArrivalDateLessThan(today);
 

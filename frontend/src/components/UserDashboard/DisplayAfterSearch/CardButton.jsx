@@ -2,9 +2,9 @@ import React from 'react';
 import { Plane, Calendar, MapPin } from 'lucide-react';
 import './cardbutton.css';
 
-const CardButton = ({ date, source, destination, isReturn = false }) => {
+const CardButton = ({ date, source, destination, isReturn = false, onClick}) => {
   return (
-    <button className="card-button">
+    <button className="card-button" onClick={() => onClick(date, source, destination)}>
       <div className="card-content">
         <div className="date-badge">
           <Calendar className="calendar-icon" size={16} />

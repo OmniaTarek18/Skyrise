@@ -1,10 +1,9 @@
-.signup-container .row{
+.signup-container .row {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
-/* Fieldset styling */
 .signup-container fieldset {
   border: 1px solid #ccc;
   padding: 20px;
@@ -12,7 +11,6 @@
   margin-bottom: 1rem;
 }
 
-/* Legend styling */
 .signup-container legend {
   font-size: 1.2rem;
   font-weight: bold;
@@ -29,21 +27,27 @@
   flex-wrap: wrap;
 }
 
-.button-row .btn {
-  margin-right: 2rem;
-}
-
 .signup-container .mb-3 {
   width: 42%;
-  margin: 0.5em;
-}
-
-.button-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
 }
 
 .button-row .btn {
-  margin-right: 2rem;
+  margin: 1rem 2rem 1rem 0;
+}
+
+.three-input-row {
+  display: flex;
+}
+
+.three-input-row .mb-3 {
+  width: auto;
+}
+
+.three-input-row #firstName,
+.three-input-row #lastName {
+  width: 20vw;
+}
+
+.three-input-row #gender {
+  width: 10vw;
 }

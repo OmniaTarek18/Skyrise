@@ -1,8 +1,6 @@
 package com.example.backend.Services.AdminDashboard;
 
-import java.time.LocalDate;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -26,27 +24,13 @@ public class FlightDisplayService {
 
     private final FlightRepository flightRepository;
 
-    public PageResponse<AdminFlightDTO> getFlights(LocalDate departureDate, int pageNumber) {
-
-        ValidateInput.validatePageNumber(pageNumber);
-        ValidateInput.validateDepartureDate(departureDate);
-
-        Pageable pageable = PageRequest.of(pageNumber, 10);
-        Page<Flight> page = flightRepository.findByDepartureDate(departureDate, pageable);
-        Page<AdminFlightDTO> pageDTO = page.map(AdminFlightMapper::toDTO);
-        return PageResponseMapper.toPageResponse(pageDTO);
-
-    }
-
     // dynamic filtering using specification to build our own criteria
     public PageResponse<AdminFlightDTO> filterFlights(FlightFilterCriteria flightFilterDTO, int pageNumber) {
 
         ValidateInput.validatePageNumber(pageNumber);
 
         Specification<Flight> spec = Specification.where(null);
-
-        if (flightFilterDTO.departureDate() != null)
-            spec = spec.and(FlightSpecifications.hasDepartureDate(flightFilterDTO.departureDate()));
+        spec = spec.and(FlightSpecifications.hasDepartureDate(flightFilterDTO.departureDate()));
 
         if (flightFilterDTO.source() != null)
             spec = spec.and(FlightSpecifications.containsSource(flightFilterDTO.source()));
@@ -60,7 +44,6 @@ public class FlightDisplayService {
         }
 
         Sort sort = Utilities.sort(flightFilterDTO.direction(), flightFilterDTO.sortby());
-
         Pageable pageable = Utilities.CreatePage(pageNumber, 10, sort);
 
         Page<Flight> page = flightRepository.findAll(spec, pageable);

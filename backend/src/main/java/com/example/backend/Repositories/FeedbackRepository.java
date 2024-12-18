@@ -9,6 +9,6 @@ import com.example.backend.Entities.CompositeKeys.ReservationPK;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, ReservationPK>, JpaSpecificationExecutor<Feedback> {
-    @Query("SELECT AVG(stars) FROM Feedback")
-    Double getAvgRating();    
+    @Query("SELECT COALESCE(AVG(stars), 0) FROM Feedback")
+    Double getAvgRating();
 }

@@ -1,0 +1,15 @@
+.change-password-form .mb-3{
+    margin-top: 2rem;
+}
+.change-password-form label{
+    color:black;
+    font-weight: 300;
+}
+
+.change-password-form .mb-3{
+    width: 98%;
+}
+
+.change-password-form .heading{
+    color: black;
+}

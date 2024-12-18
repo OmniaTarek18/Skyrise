@@ -20,6 +20,7 @@ const Popup = ({ onClose, children }) => {
       style={{
         backgroundColor: "rgba(0, 0, 0, 0.3)", // Semi-transparent black
         backdropFilter: "blur(1px)", // Blur effect on elements behind the div
+        zIndex: 1050,
       }}
     >
       <div className="popup-container">

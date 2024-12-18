@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import ChangePassword from "../../shared/ChangePassword";
+import DeleteAccount from "../../shared/DeleteAccount";
+import Popup from "../../shared/Popup";
 import {
   Plane,
   User,
@@ -14,20 +17,24 @@ import useUserAuthenticationStore from "../../../store/useUserAuthenticationStor
 const UserSidebar = ({ isCollapsed, setIsCollapsed }) => {
   const nav = useNavigate();
   const { setUserAuthentication } = useUserAuthenticationStore();
+  const [showChangePasswordPopup, setShowChangePasswordPopup] = useState(false);
+  const [showDeleteAccountPopup, setShowDeleteAccountPopup] = useState(false);
   const menuItems = [
     { icon: Plane, label: "Flights", path: "/user-dashboard/user-flights" },
-    { icon: User, label: "Profile", path: "/user-dashboard/user-info" },
-    {
-      icon: Lock,
-      label: "Change Password",
-      path: "/user-dashboard/change-password",
-    },
-
-
   ];
 
   return (
     <aside className={`usersidebar ${isCollapsed ? "collapsed" : ""}`}>
+      {showChangePasswordPopup && (
+        <Popup onClose={() => setShowChangePasswordPopup(false)}>
+          <ChangePassword />
+        </Popup>
+      )}
+      {showDeleteAccountPopup && (
+        <Popup onClose={() => setShowDeleteAccountPopup(false)}>
+          <DeleteAccount />
+        </Popup>
+      )}
       <div className="usersidebar-header">
         <div className="logo-container">
           {!isCollapsed && <h2>Dashboard</h2>}
@@ -53,18 +60,30 @@ const UserSidebar = ({ isCollapsed, setIsCollapsed }) => {
             {!isCollapsed && <span>{item.label}</span>}
           </NavLink>
         ))}
-
-        <a className="user-nav-link" onClick={() => {
-          setUserAuthentication(null, "USER");
-          nav("/");
-        }}>
+        <NavLink
+          className="user-nav-link"
+          onClick={() => setShowChangePasswordPopup(true)}
+        >
+          <Lock size={20} />
+          {!isCollapsed && <span>Change Password</span>}
+        </NavLink>
+        <a
+          className="user-nav-link"
+          onClick={() => {
+            setUserAuthentication(null, "USER");
+            nav("/");
+          }}
+        >
           <LogOut size={20} />
           {!isCollapsed && <span>Logout</span>}
         </a>
       </nav>
 
       <div className="usersidebar-footer">
-        <NavLink to="/user-dashboard/delete-account" className="user-nav-link">
+        <NavLink
+          className="user-nav-link"
+          onClick={() => setShowDeleteAccountPopup(true)}
+        >
           <Trash size={20} />
           {!isCollapsed && <span>Delete Account</span>}
         </NavLink>

@@ -15,12 +15,10 @@ const SignUpForm = () => {
   const [alert, setAlert] = useState(false);
   const nav = useNavigate();
   const isFirstRender = useRef(true);
-  // Handlers for updating Formik fields based on user input
   const handleEmail = (email) => setFieldValue("email", email);
   const handleFirstName = (firstName) => setFieldValue("firstName", firstName);
   const handleLastName = (lastName) => setFieldValue("lastName", lastName);
   const {setUserAuthentication} = useUserAuthenticationStore()
-  // Formik hook for form state management and validation
   const {
     values,
     errors,
@@ -35,7 +33,7 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (isFirstRender.current) {
-      isFirstRender.current = false; // Skip effect on the first render
+      isFirstRender.current = false; 
       return;
     }
     if (status.status === "success") {
@@ -57,12 +55,10 @@ const SignUpForm = () => {
           Email Or National_ID is used before!
         </div>
       )}
-      {/* Essential details section: User's nationality and ID */}
       <section className="essential-details-container">
         <fieldset className="account-details-container">
           <legend>Account Details</legend>
           <div className="row">
-            {/* Input field for nationality with selection options */}
             <Input
               label={"Nationality"}
               type={"text"}
@@ -76,7 +72,6 @@ const SignUpForm = () => {
               defaultSelectionText={"Country"}
               options={countries} // List of countries for selection
             />
-            {/* Input field for national ID */}
             <Input
               label={"National ID"}
               type={"text"}
@@ -90,7 +85,6 @@ const SignUpForm = () => {
             />
           </div>
           <div className="row">
-            {/* Input field for email address */}
             <Input
               label={"Email"}
               type={"email"}
@@ -102,7 +96,6 @@ const SignUpForm = () => {
               showError={errors.email && touched.email}
               errorMessage={errors.email}
             />
-            {/* Input field for date of birth */}
             <Input
               label={"Date of Birth"}
               type={"date"}
@@ -116,7 +109,6 @@ const SignUpForm = () => {
             />
           </div>
           <div className="row">
-            {/* Input field for password */}
             <Input
               label={"Password"}
               type={"password"}
@@ -128,7 +120,6 @@ const SignUpForm = () => {
               showError={errors.password && touched.password}
               errorMessage={errors.password}
             />
-            {/* Input field for confirming password */}
             <Input
               label={"Confirm Password"}
               type={"password"}
@@ -143,11 +134,9 @@ const SignUpForm = () => {
           </div>
         </fieldset>
 
-        {/* Contact details section: Country code and phone number */}
         <fieldset className="contact-details-container">
           <legend>Contact Details</legend>
           <div className="row">
-            {/* Input field for selecting country code */}
             <Input
               label={"Country Code"}
               type={"text"}
@@ -161,7 +150,6 @@ const SignUpForm = () => {
               defaultSelectionText={"Code"}
               options={countryCodes} // List of country codes for selection
             />
-            {/* Input field for phone number */}
             <Input
               label={"Phone Number"}
               type={"text"}
@@ -177,13 +165,11 @@ const SignUpForm = () => {
         </fieldset>
       </section>
 
-      {/* Additional details section: Personal info and passport */}
       <section className="additional-details-container">
         <h2>Additional Details</h2>
         <fieldset className="personal-info-container">
           <legend>Personal Information</legend>
           <div className="row three-input-row">
-            {/* Input field for gender selection */}
             <Input
               label={"Gender"}
               id={"gender"}
@@ -196,7 +182,6 @@ const SignUpForm = () => {
               defaultSelectionText={"your gender"}
               options={gender} // List of gender options for selection
             />
-            {/* Input field for first name */}
             <Input
               label={"First Name"}
               type={"text"}
@@ -208,7 +193,6 @@ const SignUpForm = () => {
               showError={errors.firstName && touched.firstName}
               errorMessage={errors.firstName}
             />
-            {/* Input field for last name */}
             <Input
               label={"Last Name"}
               type={"text"}
@@ -222,7 +206,6 @@ const SignUpForm = () => {
             />
           </div>
           <div className="row">
-            {/* Input field for passport number */}
             <Input
               label={"Passport Number"}
               type={"text"}
@@ -234,7 +217,6 @@ const SignUpForm = () => {
               showError={errors.passportNumber && touched.passportNumber}
               errorMessage={errors.passportNumber}
             />
-            {/* Input field for issuing country selection */}
             <Input
               label={"Issuing Country"}
               type={"text"}
@@ -254,16 +236,13 @@ const SignUpForm = () => {
         </fieldset>
       </section>
 
-      {/* Button row for submission */}
       <div className="button-row">
-        {/* Submit button for the form */}
         <Button
           btnText={"Sign up"}
           btnColor="dark"
           disabled={isSubmitting}
           type="submit"
         />
-        {/* Google SignUp button for OAuth authentication */}
         <GoogleSignUp
           handleEmail={handleEmail}
           handleFirstName={handleFirstName}

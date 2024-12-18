@@ -1,3 +1,11 @@
 .delete-account-header, .delete-account-description{
     margin: 1rem 0 1rem 0;
 }
+
+.delete-account-container h1{
+    color: black;
+}
+.delete-account-container p{
+    color:black;
+    font-weight: 300;
+}
