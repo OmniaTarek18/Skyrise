@@ -2,13 +2,7 @@ package com.example.backend.Entities;
 
 import com.example.backend.Entities.CompositeKeys.FlightLegPK;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,18 +15,16 @@ import java.time.LocalTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(FlightLegPK.class)
+//@IdClass(FlightLegPK.class)
 @Entity
 public class FlightLeg {
     @Id
+    @SequenceGenerator(name = "flight_leg_sequence", sequenceName = "flight_leg_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flight_leg_sequence")
     private Integer flightLegId;
 
-    @Id
-    private Integer flightId;
-
     @ManyToOne
-    @MapsId("flightId")
-    @JoinColumn(name = "flight_id")
+    @JoinColumn(name = "flight_id"  , nullable = false)
     private Flight flight;
 
     @ManyToOne
@@ -42,7 +34,7 @@ public class FlightLeg {
     @ManyToOne
     @JoinColumn(name = "departure_airport_id", nullable = false)
     private Airport departureAirport;
-    
+
     @Column(nullable = false)
     private LocalTime arrivalTime;
 

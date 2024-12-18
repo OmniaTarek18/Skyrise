@@ -22,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 public class Flight {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -54,4 +55,20 @@ public class Flight {
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Feedback> feedback;
+
+
+    public Flight(LocalDate arrivalDate, LocalDate departureDate, float economyPrice, float businessPrice, int availableEconomySeats, int availableBusinessSeats, boolean isCancel, List<FlightLeg> flightLegs) {
+        this.arrivalDate = arrivalDate;
+        this.departureDate = departureDate;
+        this.economyPrice = economyPrice;
+        this.businessPrice = businessPrice;
+        this.availableEconomySeats = availableEconomySeats;
+        this.availableBusinessSeats = availableBusinessSeats;
+        this.isCancel = isCancel;
+        this.flightLegs = flightLegs;
+    }
+
+    public void addFlightLeg(FlightLeg flightLeg) {
+        this.flightLegs.add(flightLeg);
+    }
 }
