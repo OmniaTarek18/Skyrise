@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.example.backend.Repositories.FeedbackRepository;
 import com.example.backend.Specifications.FeedbackSpecifications;
 import com.example.backend.Utilites.Utilities;
-import com.example.backend.Utilites.ValidateInput;
 import lombok.RequiredArgsConstructor;
 import com.example.backend.DTOMappers.FeedbackMapper;
 import com.example.backend.DTOMappers.PageResponseMapper;
@@ -43,10 +42,9 @@ public class FeedbackDisplayService {
         Specification<Feedback> spec = Specification.where(null);
 
         // add specifications based on filter criteria (only if they are not null)
-        if (feedbackFilterDTO.stars() > 0) {
+        if (feedbackFilterDTO.stars() != null) 
             spec = spec.and(FeedbackSpecifications.containsStars(feedbackFilterDTO.stars()));
-        }
-
+        
         if (feedbackFilterDTO.service() != null)
             spec = spec.and(FeedbackSpecifications.containsService(feedbackFilterDTO.service()));
 

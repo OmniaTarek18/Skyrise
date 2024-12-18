@@ -48,7 +48,7 @@ public class Flight {
     private boolean isCancel;
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<FlightLeg> flightLegs;
+    private List<FlightLeg> flightLegs ;
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;

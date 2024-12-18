@@ -22,15 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ArchiveManagementController {
     private final ArchiveDisplayService archiveDisplayService;
 
-    @GetMapping("/archive")
-    public ResponseEntity<PageResponse<AdminFlightDTO>> getAllPastFlights(
-            @RequestParam(defaultValue = "0") int pageNumber) {
-
-        ValidateInput.validatePageNumber(pageNumber);
-        PageResponse<AdminFlightDTO> page = archiveDisplayService.getAllPastFlights(pageNumber);
-        return ResponseEntity.ok(page);
-    }
-
     @PostMapping("/archive")
     public ResponseEntity<PageResponse<AdminFlightDTO>> filter(@RequestBody FlightFilterCriteria flightFilterDTO,
             @RequestParam(defaultValue = "0") int pageNumber) {

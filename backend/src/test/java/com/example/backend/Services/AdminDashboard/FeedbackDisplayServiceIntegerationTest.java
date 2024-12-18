@@ -3,30 +3,25 @@ package com.example.backend.Services.AdminDashboard;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import com.example.backend.DTOs.FeedbackDTO;
 import com.example.backend.DTOs.PageResponse;
 import com.example.backend.DTOs.AdminDashboard.FeedbackFilterCriteria;
-import com.example.backend.Entities.Account;
-import com.example.backend.Entities.Airport;
-import com.example.backend.Entities.Feedback;
-import com.example.backend.Entities.Flight;
-import com.example.backend.Entities.FlightLeg;
-import com.example.backend.Entities.User;
+import com.example.backend.Entities.*;
 import com.example.backend.Enums.Gender;
 import com.example.backend.Enums.QualityRating;
 import com.example.backend.Enums.Role;
-import com.example.backend.Repositories.AirportRepository;
-import com.example.backend.Repositories.FeedbackRepository;
-import com.example.backend.Repositories.FlightLegRepository;
-import com.example.backend.Repositories.FlightRepository;
-import com.example.backend.Repositories.UserRepository;
+import com.example.backend.Repositories.*;
 
 @SpringBootTest
+@Transactional
 public class FeedbackDisplayServiceIntegerationTest {
 
     @Autowired
@@ -34,60 +29,187 @@ public class FeedbackDisplayServiceIntegerationTest {
     @Autowired
     private FeedbackRepository feedbackRepository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private FlightRepository flightRepository;
+    @Autowired
+    private AccountRepository accountRepository;
     @Autowired
     private FlightLegRepository flightLegRepository;
     @Autowired
     private AirportRepository airportRepository;
-    @Autowired
-    private UserRepository userRepository;
 
     @BeforeEach
     void setup() {
-        cleanDatabase();
         generateData();
     }
 
     @Test
-    void testFilterFeedbackByAllFeatures(){
+    void testFilterFeedbackByAllFeaturesCorrectence() {
         // given
         QualityRating cleanliness = QualityRating.EXCELLENT;
         QualityRating comfort = QualityRating.EXCELLENT;
-        QualityRating service  = QualityRating.EXCELLENT;
+        QualityRating service = QualityRating.EXCELLENT;
         QualityRating foodAndBeverage = QualityRating.EXCELLENT;
         QualityRating punctuality = QualityRating.EXCELLENT;
         short stars = 1;
         // when
-        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service, punctuality, foodAndBeverage, cleanliness);
-        PageResponse<FeedbackDTO> page =feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
+        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service,
+                punctuality, foodAndBeverage, cleanliness);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
         // then
         Assertions.assertEquals(1, page.totalElements());
         Assertions.assertEquals((short) 1, page.content().get(0).stars());
-        Assertions.assertEquals(QualityRating.EXCELLENT, page.content().get(0).comfort());
-        Assertions.assertEquals(QualityRating.EXCELLENT, page.content().get(0).cleanliness());
-        Assertions.assertEquals(QualityRating.EXCELLENT, page.content().get(0).punctuality());
-        Assertions.assertEquals(QualityRating.EXCELLENT, page.content().get(0).foodAndBeverage());
-        Assertions.assertEquals(QualityRating.EXCELLENT, page.content().get(0).service());
+        Assertions.assertEquals(QualityRating.EXCELLENT,
+                page.content().get(0).comfort());
+        Assertions.assertEquals(QualityRating.EXCELLENT,
+                page.content().get(0).cleanliness());
+        Assertions.assertEquals(QualityRating.EXCELLENT,
+                page.content().get(0).punctuality());
+        Assertions.assertEquals(QualityRating.EXCELLENT,
+                page.content().get(0).foodAndBeverage());
+        Assertions.assertEquals(QualityRating.EXCELLENT,
+                page.content().get(0).service());
     }
 
-    private void cleanDatabase() {
-        userRepository.deleteAll();
-        feedbackRepository.deleteAll();
-        flightRepository.deleteAll();
-        flightLegRepository.deleteAll();
-        airportRepository.deleteAll();
+    @Test
+    void testFilterFeedbackWhenCleanlinesIsNull() {
+        // given
+        QualityRating cleanliness = null;
+        QualityRating comfort = QualityRating.EXCELLENT;
+        QualityRating service = QualityRating.EXCELLENT;
+        QualityRating foodAndBeverage = QualityRating.EXCELLENT;
+        QualityRating punctuality = QualityRating.EXCELLENT;
+        short stars = 1;
+        // when
+        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service,
+                punctuality, foodAndBeverage, cleanliness);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
+        // then
+        Assertions.assertEquals(1, page.totalElements());
+
     }
 
-    private Flight createFlights(LocalDate date, LocalDate arrivalDate, float economyPrice, float businessPrice,
-            int availableEconomySeats, int availableBusinessSeats, boolean isCancel) {
+    @Test
+    void testFilterFeedbackWhenComfortIsNull() {
+        // given
+        QualityRating cleanliness = QualityRating.FAIR;
+        QualityRating comfort = null;
+        QualityRating service = QualityRating.FAIR;
+        QualityRating foodAndBeverage = QualityRating.FAIR;
+        QualityRating punctuality = QualityRating.FAIR;
+        short stars = 1;
+        // when
+        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service,
+                punctuality, foodAndBeverage, cleanliness);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
+        // then
+        Assertions.assertEquals(2, page.totalElements());
+    }
+
+    @Test
+    void testFilterFeedbackWhenServiceIsNull() {
+        // given
+        QualityRating cleanliness = QualityRating.EXCELLENT;
+        QualityRating comfort = null;
+        QualityRating service = QualityRating.EXCELLENT;
+        QualityRating foodAndBeverage = QualityRating.EXCELLENT;
+        QualityRating punctuality = QualityRating.EXCELLENT;
+        short stars = 1;
+        // when
+        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service,
+                punctuality, foodAndBeverage, cleanliness);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
+        // then
+        Assertions.assertEquals(1, page.totalElements());
+    }
+
+    @Test
+    void testFilterFeedbackWhenFoodAndBeverageIsNull() {
+        // given
+        QualityRating cleanliness = QualityRating.EXCELLENT;
+        QualityRating comfort = null;
+        QualityRating service = QualityRating.EXCELLENT;
+        QualityRating foodAndBeverage = QualityRating.EXCELLENT;
+        QualityRating punctuality = QualityRating.EXCELLENT;
+        short stars = 1;
+        // when
+        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service,
+                punctuality, foodAndBeverage, cleanliness);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
+        // then
+        Assertions.assertEquals(1, page.totalElements());
+    }
+
+    @Test
+    void testFilterFeedbackWhenPunctualityIsNull() {
+        // given
+        QualityRating cleanliness = QualityRating.EXCELLENT;
+        QualityRating comfort = QualityRating.EXCELLENT;
+        QualityRating service = QualityRating.EXCELLENT;
+        QualityRating foodAndBeverage = QualityRating.EXCELLENT;
+        QualityRating punctuality = null;
+        short stars = 1;
+        // when
+        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service,
+                punctuality, foodAndBeverage, cleanliness);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
+        // then
+        Assertions.assertEquals(1, page.totalElements());
+    }
+
+    @Test
+    void testFilterFeedbackWhenStarsIsNull() {
+        // given
+        QualityRating cleanliness = QualityRating.EXCELLENT;
+        QualityRating comfort = QualityRating.EXCELLENT;
+        QualityRating service = QualityRating.EXCELLENT;
+        QualityRating foodAndBeverage = QualityRating.EXCELLENT;
+        QualityRating punctuality = QualityRating.EXCELLENT;
+        Short stars = null;
+        // when
+        FeedbackFilterCriteria feedbackFilterCriteria = new FeedbackFilterCriteria(stars, null, comfort, service,
+                punctuality, foodAndBeverage, cleanliness);
+        PageResponse<FeedbackDTO> page = feedbackDisplayService.filterFeedback(feedbackFilterCriteria, 0);
+        // then
+        Assertions.assertEquals(1, page.totalElements());
+    }
+
+    private User createUser(Account account) {
+        User user = User.builder()
+                .account(account)
+                .gender(Gender.FEMALE)
+                .firstName("firstName")
+                .lastName("lastName")
+                .nationalId("nationalId")
+                .dateOfBirth(LocalDate.of(2024, 12, 10))
+                .countryCode("CountryCode")
+                .phoneNumber("phoneNumber")
+                .passportNumber("PassportNumber")
+                .passportIssuingCountry("passportIssuingCountry")
+                .build();
+        userRepository.save(user);
+        return user;
+    }
+
+    private Account createAccount() {
+        Account account = Account.builder()
+                .email("example@gmail.com")
+                .password("password")
+                .role(Role.USER)
+                .build();
+        accountRepository.save(account);
+        return account;
+    }
+
+    private Flight createFlight() {
         Flight flight = Flight.builder()
-                .isCancel(isCancel)
-                .departureDate(date)
-                .arrivalDate(arrivalDate)
-                .economyPrice(economyPrice)
-                .businessPrice(businessPrice)
-                .availableEconomySeats(availableEconomySeats)
-                .availableBusinessSeats(availableBusinessSeats)
+                .arrivalDate(LocalDate.of(2024, 12, 5))
+                .departureDate(LocalDate.of(2024, 12, 5))
+                .availableBusinessSeats(20)
+                .availableEconomySeats(30)
+                .businessPrice(200)
+                .economyPrice(50)
                 .build();
         flightRepository.save(flight);
         return flight;
@@ -119,112 +241,64 @@ public class FeedbackDisplayServiceIntegerationTest {
         return flightLeg;
     }
 
-    private User creatUser() {
-        Account account = Account.builder()
-                .accountId(1)
-                .email("example@gmail.com")
-                .password("password")
-                .role(Role.USER)
-                .build();
-
-        User user = User.builder()
-                .userId(1)
-                .account(account)
-                .gender(Gender.FEMALE)
-                .firstName("firstName")
-                .lastName("lastName")
-                .nationalId("nationalId")
-                .dateOfBirth(LocalDate.of(2024, 12, 10))
-                .countryCode("CountryCode")
-                .phoneNumber("phoneNumber")
-                .passportNumber("PassportNumber")
-                .passportIssuingCountry("passportIssuingCountry")
-                .build();
-        userRepository.save(user);
-        return user;
-    }
-
-    private void createFeedback(User user, Flight flight, short stars, QualityRating cleanliness, QualityRating comfort,
-            QualityRating service, QualityRating punctuality, QualityRating foodAndBeverage, LocalDateTime time) {
+    private Feedback createFeedback(User user, Flight flight, short stars, QualityRating service,
+            QualityRating cleanliness, QualityRating comfort, QualityRating punctuality,
+            QualityRating foodAndBeverage) {
         Feedback feedback = Feedback.builder()
                 .user(user)
                 .flight(flight)
-                .cleanliness(QualityRating.FAIR)
-                .comfort(QualityRating.EXCELLENT)
-                .service(QualityRating.EXCELLENT)
-                .punctuality(QualityRating.EXCELLENT)
-                .foodAndBeverage(QualityRating.EXCELLENT)
+                .cleanliness(cleanliness)
+                .comfort(comfort)
+                .service(service)
+                .punctuality(punctuality)
+                .foodAndBeverage(foodAndBeverage)
                 .dateOfCreation(LocalDateTime.now())
                 .stars(stars)
                 .build();
         feedbackRepository.save(feedback);
+        return feedback;
     }
 
     private void generateData() {
-        // create 2 airports
-        Airport[] airports = new Airport[7];
-        for (int i = 1; i < 7; i++)
+        User user = createUser(createAccount());
+
+        Airport[] airports = new Airport[2];
+        for (int i = 0; i < 2; i++)
             airports[i] = createAirport("Airport" + i, "City" + i, "Country" + i, "code" + i);
 
-        // create 5 flights
         Flight[] flights = new Flight[6];
-        LocalDate departureDate = LocalDate.of(2024, 10, 20);
-        LocalDate arrivalDates = LocalDate.of(2024, 10, 18);
-
-        for (int i = 1; i < 6; i++)
-            flights[i] = createFlights(departureDate, arrivalDates, 1500, 2000,
-                    10, 20, false);
-
-        // create flightlegs
-        // one leg for each flight
-        for (int i = 1; i < 6; i++) {
-            createFlightLeg(airports[2], airports[1], LocalTime.of(12, 30), LocalTime.of(8, 0), 1, flights[i]);
-        }   // create flightlegs
-        // 3 legs for flight 1 (source is City2 , destination is City5)
-        for (int i = 2; i < 5; i++) {
-            createFlightLeg(airports[i + 1], airports[i], LocalTime.of(12, 30), LocalTime.of(8, 0), i - 1, flights[1]);
+        for (int i = 0; i < 6; i++) {
+            flights[i] = createFlight();
+            FlightLeg flightLeg = createFlightLeg(airports[1], airports[0], LocalTime.of(12, 30), LocalTime.of(8, 0), 1,
+                    flights[i]);
+            flights[i].setFlightLegs(new ArrayList<>(List.of(flightLeg)));
+            flightRepository.save(flights[i]);
         }
-        // 2 legs for flight 2 (source is City2, destination is City4)
-        for (int i = 2; i < 4; i++) {
-            createFlightLeg(airports[i + 1], airports[i], LocalTime.of(12, 30), LocalTime.of(8, 0), i - 1, flights[2]);
-        }
-        // 2 legs for flight 3 (source is City1, destination is City3)
-        for (int i = 1; i < 3; i++) {
-            createFlightLeg(airports[i + 1], airports[i], LocalTime.of(12, 30), LocalTime.of(8, 0), i, flights[3]);
-        }
-        // 4 legs for flight 4 (source is City2, destination is City5)
-        for (int i = 2; i < 5; i++) {
-            createFlightLeg(airports[i + 1], airports[i], LocalTime.of(12, 30), LocalTime.of(8, 0), i - 1, flights[4]);
-        }
-        // 1 leg for flight 5 (source is City2, destination is City5)
-        createFlightLeg(airports[5], airports[2], LocalTime.of(12, 30), LocalTime.of(8, 0), 1, flights[5]);
 
-        // create one user
-        User user = creatUser();
-
-        // create feedback
-        QualityRating[] cleanliness = { QualityRating.EXCELLENT, QualityRating.FAIR, QualityRating.POOR,
-                QualityRating.FAIR, QualityRating.EXCELLENT, QualityRating.FAIR };
-
-        QualityRating[] comfort = { QualityRating.EXCELLENT, QualityRating.POOR, QualityRating.EXCELLENT,
-                QualityRating.POOR, QualityRating.EXCELLENT, QualityRating.FAIR };
-
-        QualityRating[] service = { QualityRating.EXCELLENT, QualityRating.POOR, QualityRating.FAIR,
-                QualityRating.EXCELLENT, QualityRating.POOR, QualityRating.POOR };
-
-        QualityRating[] punctuality = { QualityRating.EXCELLENT, QualityRating.POOR, QualityRating.POOR,
-                QualityRating.FAIR, QualityRating.FAIR, QualityRating.POOR };
-
-        QualityRating[] foodAndBeverage = { QualityRating.EXCELLENT, QualityRating.FAIR, QualityRating.POOR,
-                QualityRating.FAIR, QualityRating.EXCELLENT, QualityRating.FAIR };
-
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime[] time = { now.plusDays(2), now.plusDays(1), now.plusDays(4), now.plusDays(5), now.plusDays(6) };
-        short[] stars = { 1, 2, 2, 1, 3, 4 };
-        for (int i = 1; i < 6; i++) {
-            createFeedback(user, flights[i], stars[i], cleanliness[i], comfort[i], service[i], punctuality[i],
-                    foodAndBeverage[i], time[i]);
-        }
+        Feedback[] feedback = new Feedback[6];
+        QualityRating[] cleanliness = {
+                QualityRating.EXCELLENT, QualityRating.FAIR, QualityRating.POOR,
+                QualityRating.FAIR, QualityRating.POOR, QualityRating.FAIR
+        };
+        QualityRating[] comfort = {
+                QualityRating.EXCELLENT, QualityRating.POOR, QualityRating.EXCELLENT,
+                QualityRating.POOR, QualityRating.EXCELLENT, QualityRating.FAIR
+        };
+        QualityRating[] service = {
+                QualityRating.EXCELLENT, QualityRating.FAIR, QualityRating.EXCELLENT,
+                QualityRating.EXCELLENT, QualityRating.EXCELLENT, QualityRating.FAIR
+        };
+        QualityRating[] punctuality = {
+                QualityRating.EXCELLENT, QualityRating.FAIR, QualityRating.EXCELLENT,
+                QualityRating.EXCELLENT, QualityRating.EXCELLENT, QualityRating.FAIR
+        };
+        QualityRating[] foodAndBeverage = {
+                QualityRating.EXCELLENT, QualityRating.FAIR, QualityRating.POOR,
+                QualityRating.EXCELLENT, QualityRating.EXCELLENT, QualityRating.FAIR
+        };
+        short[] stars = { 1, 1, 2, 5, 3,1 };
+        for (int i = 0; i < 6; i++)
+            feedback[i] = createFeedback(user, flights[i], stars[i], service[i], cleanliness[i], comfort[i],
+                    punctuality[i], foodAndBeverage[i]);
     }
-
 }
