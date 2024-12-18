@@ -16,7 +16,8 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -24,6 +25,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "\"user\"")
 public class User {
 
     @Id
@@ -41,7 +43,7 @@ public class User {
     private String nationalId;
 
     @Column(nullable = false)
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(nullable = false)
     private String firstName;

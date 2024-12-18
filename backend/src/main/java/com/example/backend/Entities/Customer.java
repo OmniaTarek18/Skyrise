@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class Customer {
     private String countryCode ;
     private String phoneNumber ;
     private String nationalId ;
-    private Date dateOfBirth ;
+    private LocalDate dateOfBirth ;
     private String firstName;
     private String lastName ;
     private Gender gender ;
