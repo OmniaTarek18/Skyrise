@@ -31,8 +31,6 @@ public class FeedbackServices {
     }
     public boolean addFeedback(FeedbackDTO feedbackDTO) {
 
-        System.out.println("arrived");
-
         Optional<Flight> optionalFlight = this.flightRepository.findFlightByFlightId(feedbackDTO.flightId());
         if(optionalFlight.isEmpty()){
             throw new IllegalArgumentException("There is no flight with that id");

@@ -20,7 +20,6 @@ public class AccountServicesTest {
     @Autowired
     private AccountRepository accountRepository;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Test
     void passwordChange() {
