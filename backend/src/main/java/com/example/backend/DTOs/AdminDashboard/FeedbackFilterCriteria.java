@@ -3,7 +3,7 @@ package com.example.backend.DTOs.AdminDashboard;
 import com.example.backend.Enums.QualityRating;
 
 public record FeedbackFilterCriteria(
-        short stars,
+        Short stars,
         String direction,
         QualityRating comfort,
         QualityRating service,

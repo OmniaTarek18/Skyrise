@@ -8,6 +8,7 @@ import com.example.backend.DTOs.PageResponse;
 import com.example.backend.DTOs.AdminDashboard.AdminFlightDTO;
 import com.example.backend.DTOs.AdminDashboard.FlightFilterCriteria;
 import com.example.backend.Services.AdminDashboard.ArchiveDisplayService;
+import com.example.backend.Utilites.ValidateInput;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,18 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 public class ArchiveManagementController {
-    private final ArchiveDisplayService archiveDisplayService ;
-
-    @GetMapping("/archive")
-    public ResponseEntity<PageResponse<AdminFlightDTO>> getAllPastFlights(@RequestParam(defaultValue = "0") int pageNumber) {
-        PageResponse<AdminFlightDTO> page = archiveDisplayService.getAllPastFlights(pageNumber);
-        return ResponseEntity.ok(page);
-    }
+    private final ArchiveDisplayService archiveDisplayService;
 
     @PostMapping("/archive")
     public ResponseEntity<PageResponse<AdminFlightDTO>> filter(@RequestBody FlightFilterCriteria flightFilterDTO,
             @RequestParam(defaultValue = "0") int pageNumber) {
 
+        ValidateInput.validatePageNumber(pageNumber);
         PageResponse<AdminFlightDTO> page = archiveDisplayService.filterPastFlights(flightFilterDTO, pageNumber);
         return ResponseEntity.ok(page);
 

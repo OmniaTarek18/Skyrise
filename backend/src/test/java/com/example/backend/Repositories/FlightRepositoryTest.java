@@ -4,23 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
-
 import com.example.backend.Entities.Flight;
 
 @DataJpaTest
-@EntityScan(basePackages = "com.example.backend.Repositories.FlightRepository")
-
 public class FlightRepositoryTest {
 
     @Autowired
@@ -35,7 +29,7 @@ public class FlightRepositoryTest {
         int pageSize = 10;
         int pageNumber = 0;
 
-        // where
+        // when
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Flight> page = underTest.findByDepartureDate(DEPARTURE_DATE, pageable);
 
@@ -80,7 +74,7 @@ public class FlightRepositoryTest {
                 expected.add(flight);
         }
 
-        // where
+        // when
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Flight> page = underTest.findByDepartureDate(LocalDate.parse("2024-10-12"), pageable);
 
@@ -92,12 +86,13 @@ public class FlightRepositoryTest {
 
     @Test
     @Order(3)
+    @Rollback(value = true)
     void testFindByDepartureDateWhenPageIsNotFound() {
         // given
         int pageSize = 10;
         int pageNumber = 1;
 
-        // where
+        // when
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         Page<Flight> page = underTest.findByDepartureDate(DEPARTURE_DATE, pageable);
 
