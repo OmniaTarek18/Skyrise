@@ -1,6 +1,7 @@
 package com.example.backend.Services;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -81,9 +82,16 @@ public class ReservationDisplayService {
     @Transactional
     public void updateDismissCount(Integer userId, Integer flightId, short newDismissCount) {
         Reservation reservation = reservationRepository.findByFlightIdAndUserId(flightId, userId)
-            .orElseThrow(() -> new EntityNotFoundException("reservation not found"));
+                .orElseThrow(() -> new EntityNotFoundException("reservation not found"));
         reservation.setDismissCount(newDismissCount);
         reservationRepository.save(reservation);
+    }
+    
+    public ReservationDTO getMostRecentReservation(Integer userId) {
+        return reservationRepository.findAllByUserId(userId).stream()
+                .max(Comparator.comparing(reservation -> reservation.getFlight().getDepartureDate()))
+                .map(ReservationMapper::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException("No reservations found for user with ID " + userId));
     }
 
 }
