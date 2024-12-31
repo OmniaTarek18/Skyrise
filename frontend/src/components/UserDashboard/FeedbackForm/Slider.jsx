@@ -4,9 +4,9 @@ import './Slider.css';
 
 const Slider = ({ value, onChange, label, onClear }) => {
   const options = [
-    { value: 'Poor', icon: ThumbsDown, color: '#ef4444' },
-    { value: 'Good', icon: Meh, color: '#f59e0b' },
-    { value: 'Excellent', icon: ThumbsUp, color: '#22c55e' }
+    { value: 'POOR', icon: ThumbsDown, color: '#ef4444' },
+    { value: 'FAIR', icon: Meh, color: '#f59e0b' },
+    { value: 'EXCELLENT', icon: ThumbsUp, color: '#22c55e' }
   ];
 
   const handleClick = (clickedValue) => {

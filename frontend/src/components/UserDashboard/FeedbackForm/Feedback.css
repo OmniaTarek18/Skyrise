@@ -29,13 +29,17 @@
 
 /* --- feedback-form container --- */
 .feedback-form-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 1rem auto;
   padding: 2rem;
   max-height: 80vh;
   overflow-y: auto;
   background: white;
   border-radius: 20px;
+  z-index: 9999; 
+  position: fixed; 
+  top: 10%; 
+  left: 30%;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 

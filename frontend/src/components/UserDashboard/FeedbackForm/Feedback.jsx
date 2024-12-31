@@ -66,7 +66,7 @@ const Feedback = ({ onSubmit, onClose }) => {
   return (
     <div className="feedback-form-container">
       <div className="feedback-form-header">
-        <h2 className="feedback-form-title">Flight Feedback</h2>
+        <h2 className="feedback-form-title">Last Flight Feedback</h2>
         <button
           className="reset-button"
           type="button"

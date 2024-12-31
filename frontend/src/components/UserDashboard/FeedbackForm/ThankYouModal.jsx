@@ -21,7 +21,11 @@ const ThankYouModal = ({ isOpen, onClose }) => {
       <ParticleEffect />
 
       <div className="feedback-modal-content">
-        <button className="thank-u-close-button" onClick={onClose} aria-label="Close">
+        <button
+          className="thank-u-close-button"
+          onClick={onClose}
+          aria-label="Close"
+        >
           <X size={24} />
         </button>
 
@@ -40,7 +44,7 @@ const ThankYouModal = ({ isOpen, onClose }) => {
             ))}
           </div>
           <h2>Thanks for Your Feedback!</h2>
-          <p className="main-message">Your feedback help us go higher</p>
+          <p className="main-message">Your feedback help us improve</p>
           <p className="sub-message">We appreciate your valuable comment</p>
         </div>
       </div>

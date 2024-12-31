@@ -59,7 +59,7 @@ public class ReservationDisplayService {
         if (filterDTO.pastFlights() != null && filterDTO.pastFlights()) {
             spec = spec.and(ReservationSpecifications.beforeDate("arrivalDate", LocalDate.now()));
         } 
-        else if (filterDTO.recentFlights() != null && filterDTO.recentFlights()) {
+         else if (filterDTO.recentFlights() != null && filterDTO.recentFlights()) {
             spec = spec.and(ReservationSpecifications.afterOrEqualDate("arrivalDate", LocalDate.now()));
         }
 
