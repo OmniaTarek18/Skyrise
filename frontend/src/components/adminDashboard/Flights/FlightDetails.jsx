@@ -11,8 +11,9 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { getCountriesAndAirportsToTravelAPI } from "../../homepage/SearchFlights/api";
+import { cancelFlight, updateFlight } from "../../../api/flightsAPI";
 
-const FlightDetails = ({ open, handleClose, legs }) => {
+const FlightDetails = ({ open, handleClose, legs, info }) => {
   const [flightLegs, setFlightLegs] = useState([]);
   const [locations, setLocations] = useState([]);
   const [editable, setEditable] = useState(false); // Tracks if fields are editable
@@ -28,7 +29,7 @@ const FlightDetails = ({ open, handleClose, legs }) => {
   // useEffect(() => {
   //   console.log("Updated flightLegs:", flightLegs);
   // }, [flightLegs]);
-  
+
   const fetchAirports = async () => {
     const data = await getCountriesAndAirportsToTravelAPI();
     if (data) {
@@ -48,19 +49,49 @@ const FlightDetails = ({ open, handleClose, legs }) => {
     );
   };
 
-  const handleCancel = (id) => {
+  const handleCancellation = async (flightId) => {
+    try {
+      await cancelFlight(flightId);
+      handleClose();
+    } catch (error) {
+      console.error("Failed to cancel that flight:", error);
+    }
+  };
+  const handleUpdateFlight = async (flightId) => {
+    try {
+      console.log(flightLegs)
+      const body = {
+        id: flightId,
+        arrivalDate: info.arrivalDate,
+        departureDate: info.departureDate,
+        flightLegs: flightLegs.map((leg) => ({
+          flightLegId: leg.flightLegId,
+          departureTime: leg.departureTime,
+          arrivalTime: leg.arrivalTime,
+          departureAirportId: leg.departureAirportId,
+          arrivalAirportId: leg.arrivalAirportId,
+        })),
+      };
+      console.log(body);
+      await updateFlight(body);
+      handleClose();
+    } catch (error) {
+      console.error("Failed to update that flight:", error);
+    }
+  };
+  const handleCancel = () => {
     if (window.confirm("Are you sure you want to cancel this flight ?")) {
       // fetch api and cancel the flight
+      handleCancellation(legs[0].flightId);
     }
   };
 
   const toggleEditable = () => {
-    if(editable){
+    if (editable) {
       // fetch api to save
-      console.log(flightLegs)
+      handleUpdateFlight(legs[0].flightId);
     }
     setEditable(!editable);
-    
   };
 
   if (!open) return null;

@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import ForgetPassword from "./components/login/ForgetPassword";
 import ResetPassword from "./components/shared/ResetPassword";
 import Homepage from "./components/homepage/Homepage";
-import UserDashboard from "./components/userdashboard/UserDashboard";
+import UserDashboard from "./components/UserDashboard/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import Overview from "./pages/AdminDashboard/Overview";
 import Flights from "./pages/AdminDashboard/Flights";

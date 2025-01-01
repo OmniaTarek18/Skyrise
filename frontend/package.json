@@ -9,6 +9,7 @@
     "@mui/icons-material": "^6.1.9",
     "@mui/material": "^6.1.9",
     "@react-oauth/google": "^0.12.1",
+    "@stomp/stompjs": "^7.0.0",
     "@stripe/react-stripe-js": "^3.1.1",
     "@stripe/stripe-js": "^5.4.0",
     "@testing-library/jest-dom": "^5.17.0",
@@ -34,6 +35,7 @@
     "react-router-dom": "^7.0.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.3",
+    "sockjs-client": "^1.6.1",
     "web-vitals": "^2.1.4",
     "yup": "^1.5.0",
     "zustand": "^5.0.2"

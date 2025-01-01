@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Plane } from "lucide-react";
 import "./flightcard.css";
 import InfoButton from "./InfoButton";
 
 export const FlightCard = ({ flight, statusStyle }) => {
+  
   const isCancelled = flight.isCancelled;
+  console.log(flight, "flight")
   return (
     <div className="flight-card">
       <div className="flight-header-info-icon d-flex justify-content-between align-items-center">
@@ -18,7 +20,15 @@ export const FlightCard = ({ flight, statusStyle }) => {
             {isCancelled ? "Cancelled" : flight.status}
           </span>
         </div>
-        <InfoButton id={flight.flightNumber} />
+        {!isCancelled && (
+          <InfoButton
+            id={flight.flightNumber}
+            info={{
+              departureDate: flight.departureDate,
+              arrivalDate: flight.arrivalDate,
+            }}
+          />
+        )}
       </div>
       <div className="flight-card-header">
         <div className="flight-card-left">

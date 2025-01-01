@@ -20,7 +20,6 @@ import com.example.backend.Repositories.ReservationRepository;
 import com.example.backend.Repositories.UserRepository;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @SpringBootTest
 @Transactional

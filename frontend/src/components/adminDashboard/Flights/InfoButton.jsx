@@ -12,11 +12,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import FlightDetails from "./FlightDetails";
 import { fetchFlightDetails } from "../../../api/flightsAfterSearch";
 
-
-const InfoButton = ({id}) => {
+const InfoButton = ({ id, info }) => {
   const [open, setOpen] = useState(false);
-  const [flightId, setFlightId] = useState(id)
-  const [legs, setLegs] = useState(null)
+  const [flightId, setFlightId] = useState(id);
+  const [legs, setLegs] = useState(null);
 
   const onShowDetails = async (flightId) => {
     try {
@@ -24,7 +23,6 @@ const InfoButton = ({id}) => {
       console.log(details);
       setLegs(details);
       setOpen(true);
-
     } catch (error) {
       console.error("Error fetching flight details:", error);
     }
@@ -54,6 +52,7 @@ const InfoButton = ({id}) => {
         open={open}
         handleClose={handleClose}
         legs={legs}
+        info={info}
       />
     </div>
   );
