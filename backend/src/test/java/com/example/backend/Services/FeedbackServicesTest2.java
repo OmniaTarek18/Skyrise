@@ -2,17 +2,13 @@ package com.example.backend.Services;
 
 import com.example.backend.DTOs.FeedbackDTO;
 import com.example.backend.Entities.Account;
-import com.example.backend.Entities.Feedback;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Entities.User;
 import com.example.backend.Enums.Gender;
 import com.example.backend.Enums.QualityRating;
 import com.example.backend.Enums.Role;
 import com.example.backend.Repositories.*;
-import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
 @Transactional
-public class FeedbackServicesTest {
+public class FeedbackServicesTest2 {
 
     @Autowired
     private FeedbackRepository feedbackRepository;
