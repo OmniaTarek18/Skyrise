@@ -1,5 +1,11 @@
 export const ticketReservationAPI = async (values, flightId, id) => {
   console.log(JSON.stringify(values));
+  if (values.specialNeeds == "") {
+    values.specialNeeds = null;
+  }
+  if (values.mealSpecification == "") {
+    values.mealSpecification = null;
+  }
   const url = `http://localhost:8080/user/passengers?flightId=${flightId}&userId=${id}`;
 
   try {
@@ -13,9 +19,11 @@ export const ticketReservationAPI = async (values, flightId, id) => {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+    return true;
   } catch (error) {
     console.error(error.message);
   }
+  return false;
 };
 
 export const bookFlightAPI = async (
@@ -45,7 +53,9 @@ export const bookFlightAPI = async (
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+    return true;
   } catch (error) {
     console.error(error.message);
   }
+  return false;
 };

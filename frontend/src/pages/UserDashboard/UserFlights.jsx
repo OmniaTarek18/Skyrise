@@ -40,41 +40,37 @@ const UserFlights = () => {
     loadFlights(filters, 0);
   }, []);
 
- useEffect(() => {
-   const fetchLocations = async () => {
-     try {
-       const data = await fetchUserFlights(filters, 0);
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const data = await fetchUserFlights(filters, 0);
 
-       if (data.content) {
-         const uniqueSources = [
-           ...new Set(
-             data.content.map((f) => f.source.split(", ")[0]) 
-           ),
-         ];
+        if (data.content) {
+          const uniqueSources = [
+            ...new Set(data.content.map((f) => f.source.split(", ")[0])),
+          ];
 
-         const uniqueDestinations = [
-           ...new Set(
-             data.content.map((f) => f.destination.split(", ")[0]) 
-           ),
-         ];
+          const uniqueDestinations = [
+            ...new Set(data.content.map((f) => f.destination.split(", ")[0])),
+          ];
 
-         setLocations({
-           from: uniqueSources.map((src) => ({
-             value: src, 
-             label: `${src}, ${data.content[0].source.split(", ")[1]}`, 
-           })),
-           to: uniqueDestinations.map((dest) => ({
-             value: dest, 
-             label: `${dest}, ${data.content[0].destination.split(", ")[1]}`, 
-           })),
-         });
-       }
-     } catch (err) {
-       console.error("Error fetching locations:", err);
-     }
-   };
-   fetchLocations();
- }, []);
+          setLocations({
+            from: uniqueSources.map((src) => ({
+              value: src,
+              label: `${src}, ${data.content[0].source.split(", ")[1]}`,
+            })),
+            to: uniqueDestinations.map((dest) => ({
+              value: dest,
+              label: `${dest}, ${data.content[0].destination.split(", ")[1]}`,
+            })),
+          });
+        }
+      } catch (err) {
+        console.error("Error fetching locations:", err);
+      }
+    };
+    fetchLocations();
+  }, []);
 
   const handleInputChange = (name, value) => {
     setFilters((prev) => ({ ...prev, [name]: value }));

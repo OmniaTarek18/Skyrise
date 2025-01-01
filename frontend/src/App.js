@@ -1,6 +1,6 @@
 import LogInPage from "./components/login/LogInPage";
 import SignUpPage from "./components/signup/SignUpPage";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ForgetPassword from "./components/login/ForgetPassword";
 import ResetPassword from "./components/shared/ResetPassword";
 import Homepage from "./components/homepage/Homepage";
@@ -16,14 +16,13 @@ import UserFlights from "./pages/UserDashboard/UserFlights";
 import DisplayFlights from "./components/homepage/DisplayFlights";
 import "./App.css";
 import Popup from "./components/shared/Popup";
-import TicketReservationForm from "./components/TicketReservationForm"
+import TicketReservationForm from "./components/TicketReservationForm";
 import { useState } from "react";
+import PaymentForm from "./components/PaymentForm";
+import Button from "./components/shared/Button";
+
 function App() {
-    const [showTicketReservation, setShowTicketReservation] = useState(false);
   return (
-    // <Popup onClose={() => setShowTicketReservation(false)}>
-    //       {/* <TicketReservationForm numberOfTickets={1}/> */}
-    //     </Popup>
     <Routes className="App">
       <Route path="/" element={<Homepage />} />
       <Route path="search-flights" element={<DisplayFlights />} />
