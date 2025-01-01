@@ -52,8 +52,4 @@ public class Reservation {
 
     @OneToMany(mappedBy = "reservation")
     private List<Passenger> passengers;
-
-    @Column(nullable = false)
-    private short dismissCount;
-
 }

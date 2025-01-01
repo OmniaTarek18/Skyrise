@@ -8,7 +8,6 @@ import com.example.backend.Enums.SeatClass;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
 
 public record ReservationDTO(
     @NotNull(message = "Flight id cannot be null.")
@@ -30,8 +29,6 @@ public record ReservationDTO(
     @NotNull(message = "Seat class cannot be null.")
     SeatClass seatclass,
     @Positive(message = "Reserved seats cannot be null.")
-    int reservedSeats,
-    @PositiveOrZero(message = "Dismiss count cannot be negative.") 
-    short dismissCount
+    int reservedSeats
     ) {
 }
