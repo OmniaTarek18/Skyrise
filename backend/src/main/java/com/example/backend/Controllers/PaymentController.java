@@ -2,6 +2,7 @@ package com.example.backend.Controllers;
 
 import com.example.backend.Entities.Payment;
 import com.example.backend.Services.PaymentServices;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,16 +14,13 @@ import javax.swing.text.html.HTML;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("payment")
 public class PaymentController {
 
 
     private final PaymentServices paymentServices;
 
-
-    public  PaymentController(PaymentServices paymentServices) {
-        this.paymentServices = paymentServices;
-    }
 
     @PostMapping
     public ResponseEntity<String> pay(@RequestBody Payment payment) throws Exception {
