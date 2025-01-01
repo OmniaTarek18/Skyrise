@@ -6,10 +6,12 @@ import { countries, countryCodes } from "../signup/SignUpForm/validation";
 import Button from "../shared/Button";
 import Input from "../shared/Input";
 import useUserAuthenticationStore from "../../store/useUserAuthenticationStore";
-import "./style.css";
 import useSearchFlightDetails from "../../store/useSearchFlightDetails";
 import { useNavigate } from "react-router-dom";
-const TicketForm = ({ numberOfTickets, flightId }) => {
+import PaymentForm from "../PaymentForm";
+import "./style.css";
+const TicketForm = ({ numberOfTickets, flightId, flightPrice }) => {
+  const [showPayment, setShowPayment] = useState(false);
   const [currentTicket, setCurrentTicket] = useState(0);
   const [tickets, setTickets] = useState([]);
   const { id } = useUserAuthenticationStore();
@@ -48,7 +50,8 @@ const TicketForm = ({ numberOfTickets, flightId }) => {
         numberOfTickets
       );
       await ticketReservationAPI(tickets.concat(submittedValues), flightId, id);
-      nav("/");
+      // nav("/");
+      setShowPayment(true);
     }
   });
 
@@ -77,7 +80,9 @@ const TicketForm = ({ numberOfTickets, flightId }) => {
     });
   };
 
-  return (
+  return showPayment ? (
+    <PaymentForm price={flightPrice * numberOfTickets}/>
+  ) : (
     <div className="ticket-form-container">
       <h1 className="ticket-reservation-heading">Ticket Reservation</h1>
       <h3 className="ticket-reservation-heading">
@@ -124,6 +129,7 @@ const TicketForm = ({ numberOfTickets, flightId }) => {
                 label="Date of Birth"
                 type="date"
                 id="dateOfBirth"
+                placeholder="Enter your Date of Birth"
                 onChange={handleChange}
                 value={values.dateOfBirth}
                 onBlur={handleBlur}
