@@ -2,6 +2,8 @@ package com.example.backend.Services;
 
 import java.time.LocalDate;
 import org.springframework.stereotype.Service;
+
+import com.example.backend.DTOs.UserNameDTO;
 import com.example.backend.Entities.Account;
 import com.example.backend.Entities.User;
 import com.example.backend.Enums.Gender;
@@ -38,5 +40,10 @@ public class UserServices {
 
     public void deleteUserByAccountId(Integer accountId) {
         this.userRepository.deleteByAccountAccountId(accountId);
+    }
+    
+    public UserNameDTO getUserName(Integer userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return new UserNameDTO(user.getFirstName(), user.getLastName());
     }
 }
