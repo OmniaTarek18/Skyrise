@@ -54,5 +54,8 @@ public class Flight {
     private List<Reservation> reservations;
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payment> payments;
+
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Feedback> feedback;
 }

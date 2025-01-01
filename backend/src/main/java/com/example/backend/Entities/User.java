@@ -59,6 +59,9 @@ public class User {
     private List<Reservation> reservations;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payment> payments;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
