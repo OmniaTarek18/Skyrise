@@ -12,7 +12,7 @@ const UserFlight = ({flight, departureCity, arrivalCity, onShowDetails }) => {
     <div className="search-flight-card">
       {showTicketReservation && (
         <Popup onClose={() => setShowTicketReservation(false)}>
-          <TicketReservationForm flightId={flight.id}/>
+          <TicketReservationForm flightId={flight.id} flightPrice={flight.price}/>
         </Popup>
       )}
       <div className="flight-section">
