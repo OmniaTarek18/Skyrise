@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,11 @@ import com.example.backend.DTOs.NotificationDTO;
 import com.example.backend.DTOs.PageResponse;
 import com.example.backend.Entities.Flight;
 import com.example.backend.Entities.Notification;
+import com.example.backend.Enums.Status;
 import com.example.backend.Repositories.FlightRepository;
 import com.example.backend.Repositories.NotificationRepository;
 import com.example.backend.Repositories.UserRepository;
+import com.example.backend.Utilites.Utilities;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -54,5 +57,15 @@ public class NotificationService {
         userIds.forEach(userId -> messagingTemplate.convertAndSend("/topic/user-" + userId, dto));
 
         return true;
+    }
+
+    public void markAsRead(Integer userId, Integer notificationId, int numOfNotifications) {
+        Sort sort = Utilities.sort("desc", "notificationId");
+        Pageable pageable = PageRequest.of(0, numOfNotifications, sort);
+        List<Notification> notifications = notificationRepository.findByUserId(userId, pageable).getContent();
+        notifications.forEach(notification -> {
+            notification.setStatus(Status.SEEN);
+        });
+        notificationRepository.saveAll(notifications);
     }
 }

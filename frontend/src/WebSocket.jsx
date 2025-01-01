@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Stomp } from '@stomp/stompjs';
 
-const WebSocketTest = () => {
+const WebSocket = (userId) => {
     useEffect(() => {
         const socketUrl = 'http://localhost:8080/notifications';
         const socket = new WebSocket(socketUrl);
@@ -12,7 +12,7 @@ const WebSocketTest = () => {
             () => {
                 console.log('Connected to WebSocket');
 
-                stompClient.subscribe('/topic/user-2', (message) => {
+                stompClient.subscribe(`/topic/user-${userId}`, (message) => {
                     console.log('Received message:', JSON.parse(message.body));
                 });
             },
@@ -29,4 +29,4 @@ const WebSocketTest = () => {
     return <div>WebSocket Test Component</div>;
 };
 
-export default WebSocketTest;
+export default WebSocket;

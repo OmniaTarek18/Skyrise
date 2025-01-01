@@ -41,3 +41,15 @@ export const fetchFlightDetails = async (flightId) => {
         throw error;
     }
 };
+export const getNotification = async (userId, pageNum) => {
+    try {
+        const response = await feedbackapi.get(`notifications/${userId}`,{
+            params: { pageNum }, 
+        });
+        console.log(response,"ddddddddd")
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching notifications:', error);
+        throw error;
+    }
+};
