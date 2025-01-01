@@ -22,7 +22,6 @@ public class ReservationMapper {
                 entity.getFlight().getArrivalDate(), 
                 last.getArrivalTime(), 
                 entity.getSeatClass(), 
-                entity.getReservedSeats(),
-                entity.getDismissCount());
+                entity.getReservedSeats());
     }
 }
