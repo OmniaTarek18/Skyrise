@@ -1,0 +1,237 @@
+/* --- keyframes --- */
+@keyframes selectPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes loading {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* --- close button --- */
+.feedback-form-close-button {
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-form-close-button:hover {
+  background: rgba(0, 0, 0, 0.2);
+  transform: rotate(90deg);
+}
+
+/* --- feedback-form container --- */
+.feedback-form-container {
+  max-width: 700px;
+  margin: 1rem auto;
+  padding: 2rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 20px;
+  z-index: 9999; 
+  position: fixed; 
+  top: 10%; 
+  left: 30%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* feedback-form header */
+.feedback-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.feedback-form-title {
+  color: #2d3748;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* reset button */
+.reset-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 50px;
+  margin-left: 10px;
+  padding: 0.5rem 2rem;
+  background: #f1f5f9;
+  color: #64748b;
+  border: none;
+  border-radius: 6px;
+}
+
+.reset-button:hover {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* --- feedback-form  --- */
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- slider section --- */
+.slider-section {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.slider-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.slider-option {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  padding: 0.75rem;
+  text-align: center;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.slider-option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.slider-option span {
+  display: block;
+  font-weight: 500;
+}
+
+.slider-option.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  transform: scale(1.05);
+  animation: selectPop 0.3s ease-out;
+}
+
+/* --- comment section --- */
+.comments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comments-section textarea {
+  width: 95%;
+  min-height: 120px;
+  padding: 0.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.comments-section textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* --- clear for comment --- */
+.clear-option {
+  padding: 0.25rem 0.75rem;
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.clear-option:hover {
+  background: #fecaca;
+  transform: scale(1.05);
+}
+
+/* --- submit button --- */
+.submit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.submit-button:hover:not(.disabled) {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.submit-button.disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.submit-button.submitting {
+  background: #2563eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button.submitting::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: loading 1.5s infinite;
+}
+
+.send-icon {
+  transition: transform 0.3s ease;
+}
+
+.submit-button:hover:not(.disabled) .send-icon {
+  transform: translateX(4px);
+}
+
+/* --- labels --- */
+label {
+  display: block;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}

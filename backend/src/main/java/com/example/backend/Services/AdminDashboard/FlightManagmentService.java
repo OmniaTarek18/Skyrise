@@ -46,7 +46,7 @@ public class FlightManagmentService {
 
             List<Integer> userIds = getReservationUserIds(flight);
             String message = message(flight.getDepartureDate(), source, destination, true);
-            NotificationDTO notification = new NotificationDTO(null, flight.getId(), MessageTitle.CANCELLED, message, Status.UNSEEN);
+            NotificationDTO notification = new NotificationDTO(null, null, flight.getId(), MessageTitle.CANCELLED, message, Status.UNSEEN);
             notificationService.addNotificationToConcernedUsers(notification, userIds);
         } else
             throw new EntityNotFoundException("Flight doesn't exist");
@@ -79,7 +79,7 @@ public class FlightManagmentService {
             if (isChanged) {
                 flightRepository.save(flight);
                 List<Integer> userIds = getReservationUserIds(flight);
-                NotificationDTO notification = new NotificationDTO(null, flight.getId(), MessageTitle.UPDATED, message, Status.UNSEEN);
+                NotificationDTO notification = new NotificationDTO(null, null, flight.getId(), MessageTitle.UPDATED, message, Status.UNSEEN);
                 notificationService.addNotificationToConcernedUsers(notification, userIds);
             } else
                 throw new IllegalArgumentException("No changes made");

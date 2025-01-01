@@ -23,9 +23,9 @@ export const cancelFlight = async (flightId) => {
     }
 };
 
-export const updateFlight = async (flightId, body) => {
+export const updateFlight = async (body) => {
     try {
-        await flightsApi.put(`/flights/update/${flightId}`, body);
+        await flightsApi.put(`/flights/update`, body);
     } catch (error) {
         console.error('Error updating flight:', error);
         throw error;

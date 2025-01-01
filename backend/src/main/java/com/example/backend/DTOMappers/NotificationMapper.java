@@ -12,6 +12,7 @@ public class NotificationMapper {
     
     public static NotificationDTO toDTO(Notification notification) {
         return new NotificationDTO(
+            notification.getNotificationId(),
             notification.getUserId(),
             notification.getFlight().getId(),
             notification.getTitle(),

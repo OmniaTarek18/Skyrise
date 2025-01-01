@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Filter } from "lucide-react";
 import { fetchFlightSearchResults } from "../../api/flightsAfterSearch";
-import UserFlight from "../../components/userdashboard/UserFlights/UserFlight";
+import UserFlight from "../../components/UserDashboard/UserFlights/UserFlight";
 import "./flightdisplay.css";
 import { getCountriesAndAirportsToTravelAPI } from "../../components/homepage/SearchFlights/api";
-import CardButton from "../../components/userdashboard/DisplayAfterSearch/CardButton";
-import FilterModal from "../../components/userdashboard/DisplayAfterSearch/FilterModal";
+import CardButton from "../../components/UserDashboard/DisplayAfterSearch/CardButton";
+import FilterModal from "../../components/UserDashboard/DisplayAfterSearch/FilterModal";
 import { Timeline } from "../../components/adminDashboard/Flights/Timeline";
 import { fetchFlightDetails } from "../../api/flightsAfterSearch";
-import DetailsPopup from "../../components/userdashboard/DisplayAfterSearch/DetailsPopup";
+import DetailsPopup from "../../components/UserDashboard/DisplayAfterSearch/DetailsPopup";
 const FlightDisplay = ({ searchDetails }) => {
   const initialFilters = {
     arrivalAirportId: null,

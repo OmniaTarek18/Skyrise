@@ -1,15 +1,61 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import Logo from "../Logo";
 import BlueLogo from "../../../assets/blueLogo.svg";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import useUserAuthenticationStore from "../../../store/useUserAuthenticationStore";
+import { getNotification } from "../../../api/flightsAfterSearch"; // Adjust the path as necessary
 import { MdLogout } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import Notification from "../../UserDashboard/Notification";
+import { Stomp } from "@stomp/stompjs";
 
 const Nav = ({ userLoggedIn = false, isProfile = false }) => {
   const nav = useNavigate();
   const { setUserAuthentication } = useUserAuthenticationStore();
+  const { id, role } = useUserAuthenticationStore();
+  const [notifications, setNotifications] = useState([]);
+
+  const handleGetNotifications = async (id, pageNum) => {
+    try {
+      const data = await getNotification(id, pageNum);
+      setNotifications((prev) => [...prev, ...data.content]);
+      return data.content;
+    } catch (error) {
+      console.error("Failed to get notifications:", error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetNotifications(id, 0);
+    const socketUrl = "http://localhost:8080/notifications";
+    const socket = new WebSocket(socketUrl);
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect(
+      { withCredentials: true }, // Ensure credentials are sent
+      () => {
+        console.log("Connected to WebSocket");
+
+        stompClient.subscribe(`/topic/user-${id}`, (message) => {
+          console.log("Received message:", JSON.parse(message.body));
+          const newNotification = JSON.parse(message.body);
+          setNotifications((prevNotifications) => [
+            newNotification,
+            ...prevNotifications,
+          ]);
+        });
+      },
+      (error) => {
+        console.error("Connection failed:", error);
+      }
+    );
+
+    return () => {
+      if (stompClient) stompClient.disconnect();
+    };
+  }, []);
   return (
     <nav className="nav-container navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" onClick={() => nav("/")}>
@@ -57,13 +103,15 @@ const Nav = ({ userLoggedIn = false, isProfile = false }) => {
           >
             ABOUT US
           </a>
-          <a
-            className="nav-item nav-link"
-            href="#footer"
-            onClick={() => nav("/")}
-          >
-            CONTACT US
-          </a>
+          {userLoggedIn && (
+            <Notification
+              number={
+                notifications.filter((obj) => obj.status === "UNSEEN").length
+              }
+              init={notifications}
+              onClick={handleGetNotifications}
+            />
+          )}
           {userLoggedIn ? (
             <div className="user-profile-container">
               <a
@@ -84,7 +132,7 @@ const Nav = ({ userLoggedIn = false, isProfile = false }) => {
                   setUserAuthentication(null, "USER");
                   nav("/");
                 }}
-                style={{ paddingRight: "1.2rem"}}
+                style={{ paddingRight: "1.2rem" }}
               >
                 <MdLogout
                   style={{ fontSize: "20px", margin: "0 0.5rem 0.2rem 0.5rem" }}
