@@ -4,6 +4,7 @@ import com.example.backend.Enums.MessageTitle;
 import com.example.backend.Enums.Status;
 
 public record NotificationDTO(
+    Integer notificationId,
     Integer userId, 
     Integer flightId,
     MessageTitle title, 

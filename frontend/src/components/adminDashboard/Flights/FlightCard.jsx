@@ -4,6 +4,7 @@ import "./flightcard.css";
 import InfoButton from "./InfoButton";
 
 export const FlightCard = ({ flight, statusStyle }) => {
+  
   const isCancelled = flight.isCancelled;
   console.log(flight, "flight")
   return (

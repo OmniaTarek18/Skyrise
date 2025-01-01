@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.backend.DTOs.AdminDashboard.FlightUpdateDTO;
 import com.example.backend.Services.AdminDashboard.FlightManagmentService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -34,7 +35,7 @@ public class FlightManagementController {
     }
 
     @PutMapping("/flights/update")
-    public ResponseEntity<String> updateFlight(@RequestBody FlightUpdateDTO flightDTO) {
+    public ResponseEntity<String> updateFlight(@Valid @RequestBody FlightUpdateDTO flightDTO) {
         flightManagmentService.updateFlight(flightDTO);
         return ResponseEntity.ok("The flight has been updated successfully.");
     }
