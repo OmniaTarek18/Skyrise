@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.example.backend.Enums.QualityRating;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+@Builder
 public record FeedbackDTO(
         Integer userId,
         Integer flightId,
