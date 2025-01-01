@@ -18,11 +18,42 @@ public class PaymentServices {
 
 
     public boolean pay(Payment payment) throws Exception {
+
+        if(!validCreditCardNumber( payment.getCreditCardNumber())){
+            throw new IllegalArgumentException("Credit Card Number Isn't Valid");
+        }
+
         try {
             this.paymentRepository.save(payment);
             return true;
         } catch (Exception e) {
             throw new Exception(e);
         }
+    }
+
+    private boolean validCreditCardNumber(String creditCardNumber){
+        creditCardNumber = creditCardNumber.replaceAll("[^\\d]", "");
+
+        if (creditCardNumber.length() < 13 || creditCardNumber.length() > 19) {
+            return false;
+        }
+
+        int sum = 0;
+        boolean shouldDouble = false;
+
+        for (int i = creditCardNumber.length() - 1; i >= 0; i--) {
+            int digit = Character.getNumericValue(creditCardNumber.charAt(i));
+
+            if (shouldDouble) {
+                digit *= 2;
+                if (digit > 9) {
+                    digit -= 9;
+                }
+            }
+
+            sum += digit;
+            shouldDouble = !shouldDouble;
+        }
+        return sum % 10 == 0;
     }
 }
