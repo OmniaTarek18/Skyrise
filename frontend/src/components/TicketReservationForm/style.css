@@ -41,12 +41,12 @@
 }
 
 #gender {
-  width: 9vw;
+  width: none;
 }
 
 #firstName,
 #lastName {
-  width: 13vw;
+  width: none;
 }
 
 .inputs-container legend {
