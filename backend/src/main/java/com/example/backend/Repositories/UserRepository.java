@@ -1,6 +1,5 @@
 package com.example.backend.Repositories;
 
-import com.example.backend.Entities.Flight;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

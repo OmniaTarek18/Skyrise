@@ -1,0 +1,105 @@
+.slider-section {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.slider-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.slider-label {
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.slider-options {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.slider-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.slider-option.selected {
+  border-color: var(--highlight-color);
+  background: color-mix(in srgb, var(--highlight-color) 10%, white);
+  transform: scale(1.05);
+  animation: selectBounce 0.5s cubic-bezier(0.36, 0, 0.66, 1.54);
+}
+
+.slider-option.selected .slider-icon {
+  color: var(--highlight-color);
+  animation: iconPop 0.5s cubic-bezier(0.36, 0, 0.66, 1.54) forwards,
+             iconFloat 2s ease-in-out infinite;
+}
+
+.slider-option.selected::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, 
+              rgba(255,255,255,0.8) 0%,
+              transparent 70%);
+  animation: shine 2s infinite;
+}
+
+.slider-icon {
+  transition: all 0.3s ease;
+}
+
+.slider-option span {
+  font-weight: 500;
+  color: #475569;
+}
+
+@keyframes selectBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes iconPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3) rotate(15deg); }
+  100% { transform: scale(1.1); }
+}
+
+@keyframes iconFloat {
+  0% { transform: translateY(0) scale(1.1); }
+  50% { transform: translateY(-5px) scale(1.15); }
+  100% { transform: translateY(0) scale(1.1); }
+}
+
+@keyframes shine {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+  100% { opacity: 0; transform: scale(0.5); }
+}

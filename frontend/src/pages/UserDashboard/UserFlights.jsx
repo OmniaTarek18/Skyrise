@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import SearchFlight from "../../components/UserDashboard/UserFlights/SearchFlight";
+import SearchFlight from "../../components/userdashboard/UserFlights/SearchFlight";
 import { fetchUserFlights } from "../../api/userFlightsAPI";
 import "./userflights.css";
-import FlightTicket from "../../components/UserDashboard/Ticket/FlightTicket";
+import FlightTicket from "../../components/userdashboard/Ticket/FlightTicket";
 import useUserAuthenticationStore from "../../store/useUserAuthenticationStore";
 const UserFlights = () => {
   const { id, role } = useUserAuthenticationStore();

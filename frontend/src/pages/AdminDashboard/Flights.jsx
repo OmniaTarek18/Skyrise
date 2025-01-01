@@ -133,6 +133,7 @@ const Flights = () => {
                 economySeatsAvailable: flight.availableEconomySeats,
                 businessPrice: flight.businessPrice,
                 businessSeatsAvailable: flight.availableBusinessSeats,
+                isCancelled: flight.isCancel
               }}
             />
           ))

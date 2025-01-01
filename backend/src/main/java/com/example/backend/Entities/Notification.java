@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
@@ -30,6 +31,7 @@ public class Notification {
     private Integer userId;
 
     @Id 
+    @GeneratedValue(generator = "increment")
     private Integer notificationId;
 
     @ManyToOne
@@ -45,4 +47,8 @@ public class Notification {
 
     @Column(nullable = false)
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
 }

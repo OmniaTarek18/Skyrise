@@ -1,4 +1,4 @@
-package com.example.backend.Entities;
+package com.example.backend.DTOs;
 
 import com.example.backend.Enums.Gender;
 import lombok.AllArgsConstructor;

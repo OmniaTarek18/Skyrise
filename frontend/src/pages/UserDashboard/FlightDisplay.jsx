@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Filter } from "lucide-react";
 import { fetchFlightSearchResults } from "../../api/flightsAfterSearch";
-import UserFlight from "../../components/UserDashboard/UserFlights/UserFlight";
+import UserFlight from "../../components/userdashboard/UserFlights/UserFlight";
 import "./flightdisplay.css";
 import { getCountriesAndAirportsToTravelAPI } from "../../components/homepage/SearchFlights/api";
-import CardButton from "../../components/UserDashboard/DisplayAfterSearch/CardButton";
-import FilterModal from "../../components/UserDashboard/DisplayAfterSearch/FilterModal";
+import CardButton from "../../components/userdashboard/DisplayAfterSearch/CardButton";
+import FilterModal from "../../components/userdashboard/DisplayAfterSearch/FilterModal";
 import { Timeline } from "../../components/adminDashboard/Flights/Timeline";
 import { fetchFlightDetails } from "../../api/flightsAfterSearch";
-import DetailsPopup from "../../components/UserDashboard/DisplayAfterSearch/DetailsPopup";
+import DetailsPopup from "../../components/userdashboard/DisplayAfterSearch/DetailsPopup";
 const FlightDisplay = ({ searchDetails }) => {
   const initialFilters = {
     arrivalAirportId: null,
@@ -96,15 +96,15 @@ const FlightDisplay = ({ searchDetails }) => {
       filters.arrivalAirportId = arrivalAirportId;
       filters.departureAirportId = departureAirportId;
       console.log(filters.departureAirportId, "kkkkkkkk");
-      setCurrentDate(new Date(date)); 
-      setPageNumber(0); 
+      setCurrentDate(new Date(date));
+      setPageNumber(0);
     }
   };
 
   const handlePageChange = (direction) => {
     setPageNumber((prevPage) => {
       const newPage = prevPage + direction;
-      const totalPages = Math.ceil(totalFlights / 10); 
+      const totalPages = Math.ceil(totalFlights / 10);
       if (newPage >= 0 && newPage < totalPages) {
         return newPage;
       }
@@ -137,7 +137,7 @@ const FlightDisplay = ({ searchDetails }) => {
 
       const flightResults = await fetchFlightSearchResults(
         { ...requestBody },
-        pageNumber 
+        pageNumber
       );
 
       if (flightResults.content && flightResults.content.length > 0) {
@@ -179,14 +179,14 @@ const FlightDisplay = ({ searchDetails }) => {
   const applyFilters = (closeModal = false) => {
     fetchFlights();
     setPageNumber(0);
-    setIsFiltersChanged(false); 
-    setIsFiltersApplied(true); 
+    setIsFiltersChanged(false);
+    setIsFiltersApplied(true);
     setCardButtonLocation({
       source: filters.departureAirportId || searchDetails.departureAirportId,
       destination: filters.arrivalAirportId || searchDetails.arrivalAirportId,
     });
     if (closeModal) {
-      setShowModal(false); 
+      setShowModal(false);
     }
   };
 
@@ -196,18 +196,18 @@ const FlightDisplay = ({ searchDetails }) => {
 
   const handleDateChange = (newDate) => {
     setCurrentDate(newDate);
-    setPageNumber(0); 
+    setPageNumber(0);
   };
-    const onShowDetails = async (flightId) => {
-      try {
-        const details = await fetchFlightDetails(flightId);
-        console.log(details,"pppppppppppeeeeeeeeeeeeeeeeeeeee")
-        setFlightDetails(details);
-        setIsPopupOpen(true); 
-      } catch (error) {
-        console.error("Error fetching flight details:", error);
-      }
-    };
+  const onShowDetails = async (flightId) => {
+    try {
+      const details = await fetchFlightDetails(flightId);
+      console.log(details, "pppppppppppeeeeeeeeeeeeeeeeeeeee");
+      setFlightDetails(details);
+      setIsPopupOpen(true);
+    } catch (error) {
+      console.error("Error fetching flight details:", error);
+    }
+  };
   const departureDate = searchDetails.departureDate;
   const returnDate = searchDetails.arrivalDate;
 
@@ -220,14 +220,14 @@ const FlightDisplay = ({ searchDetails }) => {
             date={departureDate}
             source={getCityName(location.source)}
             destination={getCityName(location.destination)}
-            onClick={handleCardButtonClick} 
+            onClick={handleCardButtonClick}
           />
           <CardButton
             date={returnDate}
             source={getCityName(location.destination)}
             destination={getCityName(location.source)}
             isReturn={true}
-            onClick={handleCardButtonClick} 
+            onClick={handleCardButtonClick}
           />
         </div>
       )}
@@ -282,8 +282,13 @@ const FlightDisplay = ({ searchDetails }) => {
                 <UserFlight
                   key={flight.id}
                   flight={flight}
-                  departureCity={getCityName(filters.departureAirportId || searchDetails.departureAirportId)}
-                  arrivalCity={getCityName(filters.arrivalAirportId || searchDetails.arrivalAirportId)}
+                  departureCity={getCityName(
+                    filters.departureAirportId ||
+                      searchDetails.departureAirportId
+                  )}
+                  arrivalCity={getCityName(
+                    filters.arrivalAirportId || searchDetails.arrivalAirportId
+                  )}
                   onShowDetails={onShowDetails}
                 />
               ))
@@ -312,7 +317,7 @@ const FlightDisplay = ({ searchDetails }) => {
       <DetailsPopup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
-        legs={flightDetails} 
+        legs={flightDetails}
       />
     </div>
   );

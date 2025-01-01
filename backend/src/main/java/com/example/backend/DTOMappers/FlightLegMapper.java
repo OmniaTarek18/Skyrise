@@ -11,11 +11,13 @@ public class FlightLegMapper {
         return new FlightLegDTO(
                 entity.getFlightId(),
                 entity.getFlightLegId(),
+                departureAiport.getId(),
                 entity.getDepartureTime(),
                 departureAiport.getAirportName(),
                 departureAiport.getAirportCountry(),
                 departureAiport.getAirportCity(),
                 departureAiport.getAirportCode(),
+                arrivalAiport.getId(),
                 entity.getArrivalTime(),
                 arrivalAiport.getAirportName(),
                 arrivalAiport.getAirportCountry(),

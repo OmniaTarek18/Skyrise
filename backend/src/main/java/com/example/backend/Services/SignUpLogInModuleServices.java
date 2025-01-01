@@ -7,10 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.backend.DTOs.Admin;
+import com.example.backend.DTOs.Customer;
 import com.example.backend.DTOs.LogInDTO;
 import com.example.backend.Entities.Account;
-import com.example.backend.Entities.Admin;
-import com.example.backend.Entities.Customer;
 import com.example.backend.Entities.User;
 import com.example.backend.Enums.Role;
 

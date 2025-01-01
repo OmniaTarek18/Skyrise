@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding: 0rem 1rem;
 }
 
 .flight-header-info {
@@ -13,6 +14,8 @@
   display: flex;
   gap: 1rem;
   align-items: center;
+  margin-bottom: 2rem;
+
 }
 
 .flight-number {
@@ -41,12 +44,12 @@
 .flight-times {
   display: flex;
   gap: 2rem;
+  font-weight: 600;
   align-items: center;
 }
 
 .flight-card-right {
-  text-align: right;
-  margin-top: 1rem;
+  text-align: center;
 }
 
 .flight-price {
@@ -56,9 +59,9 @@
 }
 
 .seats-available {
-  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: 1rem;
   color: #6b7280;
-  margin-top: 0.25rem;
 }
 
 .flight-time {
@@ -66,13 +69,13 @@
 }
 
 .time {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1rem;
+  color: #6b7280;
 }
 
 .location {
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .flight-path {
