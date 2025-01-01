@@ -73,7 +73,7 @@ const FlightDetails = ({ open, handleClose, legs, info }) => {
         })),
       };
       console.log(body);
-      await updateFlight(flightId, body);
+      await updateFlight(body);
       handleClose();
     } catch (error) {
       console.error("Failed to update that flight:", error);
@@ -145,6 +145,7 @@ const FlightDetails = ({ open, handleClose, legs, info }) => {
                     )
                   }
                   fullWidth
+                  type="time"
                   style={{ marginBottom: "10px" }}
                   disabled={!editable}
                 />
@@ -181,6 +182,7 @@ const FlightDetails = ({ open, handleClose, legs, info }) => {
                       e.target.value
                     )
                   }
+                  type="time"
                   fullWidth
                   style={{ marginBottom: "10px" }}
                   disabled={!editable}
