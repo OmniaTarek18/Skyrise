@@ -3,12 +3,15 @@ import com.stripe.Stripe;
 import com.stripe.model.PaymentIntent;
 import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Profile("!test")
 public class StripeService {
 
     @Value("${stripe.secret.key}")
