@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.example.backend.DTOs.AdminDashboard.FlightAddDTO;
 import com.example.backend.DTOs.NotificationDTO;
 import com.example.backend.DTOs.AdminDashboard.FlightUpdateDTO;
 import com.example.backend.Entities.Flight;
@@ -85,6 +86,18 @@ public class FlightManagmentService {
                 throw new IllegalArgumentException("No changes made");
         } else
             throw new EntityNotFoundException("Flight doesn't exist");
+    }
+
+    public void addFlight(FlightAddDTO flightDTO) {
+        Flight flight = new Flight();
+        flight.setArrivalDate(flightDTO.arrivalDate());
+        flight.setDepartureDate(flightDTO.departureDate());
+        flight.setEconomyPrice(flightDTO.economyPrice());
+        flight.setBusinessPrice(flightDTO.businessPrice());
+        flight.setAvailableEconomySeats(flightDTO.availableEconomySeats());
+        flight.setAvailableBusinessSeats(flightDTO.availableBusinessSeats());
+        flightRepository.save(flight);
+        flightLegManagementService.addFlightLegs(flightDTO.flightLegs(), flight.getId());
     }
 
     private String message(LocalDate departureDate, String source, String destination, boolean cancel) {
