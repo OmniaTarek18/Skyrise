@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,9 +28,9 @@ public class NotificationController {
         return ResponseEntity.ok(notifications);
     }
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<String> markAsRead(@PathVariable Integer userId, @RequestParam Integer notificationId, @RequestParam int numOfNotifications) {
-        notificationService.markAsRead(userId, notificationId, numOfNotifications);
-        return ResponseEntity.ok("Marked as read");
-    }
+    // @PutMapping("/{userId}")
+    // public ResponseEntity<String> markAsRead(@PathVariable Integer userId, @RequestParam Integer notificationId, @RequestParam int numOfNotifications) {
+    //     notificationService.markAsRead(userId, notificationId, numOfNotifications);
+    //     return ResponseEntity.ok("Marked as read");
+    // }
 }
