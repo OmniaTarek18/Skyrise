@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,8 @@ import com.stripe.exception.StripeException;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/payment")
-public class PaymentController {
+@Profile("!test")
+public class StripeController {
 
     @Autowired
     private StripeService stripeService;
@@ -36,4 +38,3 @@ public class PaymentController {
         }
     }
 }
-
